@@ -106,6 +106,7 @@ class CruiseController extends Controller
         "ship_code" => "SSQ",
         "cruise_array" => array(
           array(
+            "cruise_id" => "SQ03170625",
             "departure_date" => "06/25/2017",
             "cheapest_cabin" => array(
               "cc" => 5,
@@ -116,6 +117,7 @@ class CruiseController extends Controller
             ),
           ),
           array(
+            "cruise_id" => "SQ02170628",
             "departure_date" => "06/28/2017",
             "cheapest_cabin" => array(
               "cc" => 5,
@@ -126,6 +128,7 @@ class CruiseController extends Controller
             ),
           ),
           array(
+            "cruise_id" => "SQ02171013",
             "departure_date" => "10/13/2017",
             "cheapest_cabin" => array(
               "cc" => 5,
@@ -136,6 +139,7 @@ class CruiseController extends Controller
             ),
           ),
           array(
+            "cruise_id" => "SQ03171015",
             "departure_date" => "10/15/2017",
             "cheapest_cabin" => array(
               "cc" => 5,
@@ -157,6 +161,7 @@ class CruiseController extends Controller
         "ship_code" => "SSR",
         "cruise_array" => array(
           array(
+            "cruise_id" => "SR02170628",
             "departure_date" => "06/28/2017",
             "cheapest_cabin" => array(
               "cc" => 5,
@@ -167,6 +172,7 @@ class CruiseController extends Controller
             ),
           ),
           array(
+            "cruise_id" => "SR01170630",
             "departure_date" => "06/30/2017",
             "cheapest_cabin" => array(
               "cc" => 5,
@@ -177,6 +183,7 @@ class CruiseController extends Controller
             ),
           ),
           array(
+            "cruise_id" => "SR01170701",
             "departure_date" => "07/01/2017",
             "cheapest_cabin" => array(
               "cc" => 5,
@@ -198,6 +205,7 @@ class CruiseController extends Controller
         "ship_code" => "SSQ",
         "cruise_array" => array(
           array(
+            "cruise_id" => "SQ03170625",
             "departure_date" => "06/25/2017",
             "cheapest_cabin" => array(
               "cc" => 5,
@@ -208,6 +216,7 @@ class CruiseController extends Controller
             ),
           ),
           array(
+            "cruise_id" => "SQ02170628",
             "departure_date" => "06/28/2017",
             "cheapest_cabin" => array(
               "cc" => 5,
@@ -218,6 +227,7 @@ class CruiseController extends Controller
             ),
           ),
           array(
+            "cruise_id" => "SQ02171013",
             "departure_date" => "10/13/2017",
             "cheapest_cabin" => array(
               "cc" => 5,
@@ -228,6 +238,7 @@ class CruiseController extends Controller
             ),
           ),
           array(
+            "cruise_id" => "SQ03171015",
             "departure_date" => "10/15/2017",
             "cheapest_cabin" => array(
               "cc" => 5,
@@ -341,10 +352,35 @@ class CruiseController extends Controller
 
 
 
+
+  // return a max of 10 itineraries
+
+  // if user is logged in
+  // get user home country
+  // get a list of unique (iten_code + ship code) items
+  // show only iten who's departure port same as user's country
+
+
   public function get_home_itineraries()
   {
     $output_data = array(
-      
+
+      array(
+        "iten_code" => "03N TWKEL-TWKEL",
+        "iten_name" => "4 Days 3 Nights Keelung",
+        "ship_code" => "SSQ",
+      ),
+      array(
+        "iten_code" => "02N MYPEN-MYPEN",
+        "iten_name" => "3 Days 2 Nights Antwerp",
+        "ship_code" => "SSR",
+      ),
+      array(
+        "iten_code" => "03N TWKEL-TWKEL",
+        "iten_name" => "4 Days 3 Nights Keelung",
+        "ship_code" => "SSQ",
+      ),
+
     );
 
     $output_json = json_encode($output_data);
@@ -353,10 +389,36 @@ class CruiseController extends Controller
   }
 
   
+
+
+
+  // return a max of 10 itineraries
+
+  // get a list of unique (iten_code + ship code) items
+  // 
+  // sort
+  // by date of departure
+  // we will have a CMS to 'curate' or choose which itinerary will display first on a non-logged in user
+  
+  
   public function get_home_itineraries_nonmember()
   {
     $output_data = array(
-      
+      array(
+        "iten_code" => "03N TWKEL-TWKEL",
+        "iten_name" => "4 Days 3 Nights Keelung",
+        "ship_code" => "SSQ",
+      ),
+      array(
+        "iten_code" => "02N MYPEN-MYPEN",
+        "iten_name" => "3 Days 2 Nights Antwerp",
+        "ship_code" => "SSR",
+      ),
+      array(
+        "iten_code" => "03N TWKEL-TWKEL",
+        "iten_name" => "4 Days 3 Nights Keelung",
+        "ship_code" => "SSQ",
+      ),
     );
 
     $output_json = json_encode($output_data);
@@ -364,11 +426,28 @@ class CruiseController extends Controller
     return $output_json;
   }
 
+
+
+
+
+
+  // for pax 1, it won't have cc_cash_added or gp_cash_added
   
   public function get_best_redeemable_cruise()
   {
     $output_data = array(
       
+      "iten_code" => "03N TWKEL-TWKEL",
+      "iten_name" => "4 Days 3 Nights Keelung",
+      "ship_code" => "SSQ",
+
+      "cruise_id" => "SQ03170625",
+      "departure_date" => "06/25/2017",
+      "cheapest_cabin" => array(
+        "cc" => 5,
+        "gp" => 100,
+        "cash" => 100,
+      ),
     );
 
     $output_json = json_encode($output_data);
@@ -376,11 +455,72 @@ class CruiseController extends Controller
     return $output_json;
   }
 
+
+
+
+  // parameter = cruise_id
+  // get (iten_code, ship, pax) from table of unique itineraries
+  // get price using (iten_code, ship, pax) and the xtopia parsed csv
+  // arrange from lowest full cash price to highest
   
   public function get_cabin_prices()
   {
     $output_data = array(
-      
+      array(
+        "cabin_type_code" => "CB",                  // get the corresponding name in front end static variables (in english,traditional chinese & simplified chinese)
+        "price" => array(
+          "cc" => 5,
+          "cc_cash_added" => 0,
+          "gp" => 100,
+          "gp_cash_added" => 0,
+          "cash" => 100,
+        ),
+      ),
+
+      array(
+        "cabin_type_code" => "CA",
+        "price" => array(
+          "cc" => 6,
+          "cc_cash_added" => 0,
+          "gp" => 120,
+          "gp_cash_added" => 0,
+          "cash" => 120,
+        ),
+      ),
+
+      array(
+        "cabin_type_code" => "BA",
+        "price" => array(
+          "cc" => 7,
+          "cc_cash_added" => 0,
+          "gp" => 140,
+          "gp_cash_added" => 0,
+          "cash" => 140,
+        ),
+      ),
+
+      array(
+        "cabin_type_code" => "AC",
+        "price" => array(
+          "cc" => 9,
+          "cc_cash_added" => 0,
+          "gp" => 180,
+          "gp_cash_added" => 0,
+          "cash" => 180,
+        ),
+      ),
+
+      array(
+        "cabin_type_code" => "AB",
+        "price" => array(
+          "cc" => 10,
+          "cc_cash_added" => 0,
+          "gp" => 200,
+          "gp_cash_added" => 0,
+          "cash" => 200,
+        ),
+      ),
+
     );
 
     $output_json = json_encode($output_data);
@@ -399,7 +539,16 @@ class CruiseController extends Controller
   public function get_home_cruise_details()
   {
     $output_data = array(
-      
+
+      "event_content" => array(
+
+      ),
+      "additional_content" => array(
+        
+      ),
+      "itinerary_content" => array(
+        
+      ),
     );
 
     $output_json = json_encode($output_data);

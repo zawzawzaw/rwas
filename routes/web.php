@@ -60,6 +60,7 @@ Route::resource('cabin_inventory', 'CabinInventoryController');
 Route::get('/user/get', 'UserController@get_user');
 Route::get('/user/create', 'UserController@create_user');
 Route::get('/user/edit', 'UserController@edit_user');
+Route::get('/user/login', 'UserController@login_user');
 
 
 

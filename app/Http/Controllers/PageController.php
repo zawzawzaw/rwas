@@ -8,12 +8,64 @@ class PageController extends Controller
 {
 
 
+  // home page content of logged in member
+  // without booking
   
   public function get_home_content()
   {
     
     $output_data = array(
-      
+
+      "deal_content" => array(
+
+        // only the copy text, actual best redeemable cruise must be retrieved from /cruise/get_best_redeemable_cruise
+        "best_redeemable_cruise_copy" => array(
+          "title" => "You can redeem a free cruise",
+          "learn_more_cta_link" => "Find out more",
+        ),
+
+        "latest_news" => array(
+          "title" => "What's happening",
+          "learn_more_cta_copy" => "Find out more",
+        ),
+        "promotion_array" => array(
+          array(
+            "title" => "Hot Deal 1",
+            "copy" => "",
+            "promotion_id" => "12341234",
+          ),
+          array(
+            "title" => "Hot Deal 2",
+            "copy" => "",
+            "promotion_id" => "12341234",
+          ),
+          array(
+            "title" => "Hot Deal 3",
+            "copy" => "",
+            "promotion_id" => "12341234",
+          ),
+        ),
+      ),
+
+      "membership_content" => array(
+        "title" => "",
+        "copy" => "",
+        "learn_more_cta_copy" => "Find out more",
+        "learn_more_cta_link" => "https://www.google.com.sg",
+      ),
+
+      "ship_content" => array(
+        "ship_array" => array(
+          array(
+            "name" => "Ship 01",
+            "ship_code" => "SSQ",
+          ),
+          array(
+            "name" => "Ship 02",
+            "ship_code" => "SSS",
+          ),
+        ),
+      ),
     );
 
     $output_json = json_encode($output_data);
@@ -21,7 +73,9 @@ class PageController extends Controller
     return $output_json;
   }
 
-  
+
+  // home page content of non-logged in users
+
   public function get_home_content_nonmember()
   {
     $output_data = array(
@@ -83,14 +137,8 @@ class PageController extends Controller
           ),
         ),
         "cta_array" => array(
-          array(
-            "copy" => "Read more",
-            "url" => "https://www.google.com.sg",
-          ),
-          array(
-            "copy" => "Join now",
-            "url" => "https://www.google.com.sg",
-          ),
+          "read_more_copy" => "Read more",
+          "join_now_copy" => "Join now",
         ),
       ),
       "ship_content" => array(
@@ -98,19 +146,16 @@ class PageController extends Controller
           array(
             "name" => "Ship 01",
             "ship_code" => "SSQ",
-            "url" => "",
           ),
           array(
             "name" => "Ship 02",
             "ship_code" => "SSS",
-            "url" => "",
           ),
         ),
       ),
       "faq_content" => array(
         "title" => "Have more questions?",
         "join_cta_copy" => "Join Now",
-        "join_cta_link" => "https://www.google.com.sg",
       ),
     );
   

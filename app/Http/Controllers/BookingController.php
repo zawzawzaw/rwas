@@ -10,18 +10,13 @@ class BookingController extends Controller
 
   public function book_cruise()
   {
-      
-    $output_data = array(
-      
-    );
 
-    $output_json = json_encode($output_data);
-
-    return $output_json;
+    return 'success';
   }
   
   public function get_booking_details()
   {
+    
     $output_data = array(
       
     );
