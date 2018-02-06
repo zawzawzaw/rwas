@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
 use App\Cabin;
 
 class CruiseController extends Controller
@@ -286,11 +287,12 @@ class CruiseController extends Controller
   public function get_valid_search_parameters()
   {
       $list = Cabin::query();
-      $list->select('departure_date', 'departure_port');
+      $list->select(DB::raw('DATE_FORMAT(departure_date, "%m/%Y") as mon_year'), DB::raw('departure_port as port'));
+      $list->distinct();
       $list->where('cabin_available', '>', 0);
       $list->groupBy('itinerary_code');
       $list->orderBy('departure_date', 'ASC');
-      $list = $list->get();
+      $list = $list->get()->toArray();
       return response()->json($list);
   }
 
