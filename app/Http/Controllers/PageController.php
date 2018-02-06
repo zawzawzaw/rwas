@@ -86,21 +86,21 @@ class PageController extends Controller
             "subtitle" => "Find out membership benefits",
             "image" => "",
             "image_tablet" => "",
-            "image_mobile" => "",
+            "image_mobile" => "http://52.77.205.209/api/public/temp_images/home/banner-image-01-mobile.png",
           ),
           array(
-            "title" => "Plan a cruise trip with genting rewards at sea",
+            "title" => "Plan a cruise trip with genting rewards at sea 2",
             "subtitle" => "Find out membership benefits",
             "image" => "",
             "image_tablet" => "",
-            "image_mobile" => "",
+            "image_mobile" => "http://52.77.205.209/api/public/temp_images/home/banner-image-02-mobile.png",
           ),
           array(
-            "title" => "Plan a cruise trip with genting rewards at sea",
+            "title" => "Plan a cruise trip with genting rewards at sea 3",
             "subtitle" => "Find out membership benefits",
             "image" => "",
             "image_tablet" => "",
-            "image_mobile" => "",
+            "image_mobile" => "http://52.77.205.209/api/public/temp_images/home/banner-image-03-mobile.png",
           ),
         ),
       ),
@@ -108,31 +108,31 @@ class PageController extends Controller
         "title" => "Membership benefits & how to use",
         "item_array" => array(
           array(
-            "icon" => "absoluteurl/icon-01.png",
+            "icon" => "http://52.77.205.209/api/public/temp_images/home/icon-01.png",
             "title" => "Benefit 1",
           ),
           array(
-            "icon" => "absoluteurl/icon-02.png",
+            "icon" => "http://52.77.205.209/api/public/temp_images/home/icon-02.png",
             "title" => "Benefit 2",
           ),
           array(
-            "icon" => "absoluteurl/icon-03.png",
+            "icon" => "http://52.77.205.209/api/public/temp_images/home/icon-03.png",
             "title" => "Benefit 3",
           ),
           array(
-            "icon" => "absoluteurl/icon-04.png",
+            "icon" => "http://52.77.205.209/api/public/temp_images/home/icon-01.png",
             "title" => "Benefit 4",
           ),
           array(
-            "icon" => "absoluteurl/icon-05.png",
+            "icon" => "http://52.77.205.209/api/public/temp_images/home/icon-02.png",
             "title" => "Save",
           ),
           array(
-            "icon" => "absoluteurl/icon-06.png",
+            "icon" => "http://52.77.205.209/api/public/temp_images/home/icon-03.png",
             "title" => "Spend",
           ),
           array(
-            "icon" => "absoluteurl/icon-07.png",
+            "icon" => "http://52.77.205.209/api/public/temp_images/home/icon-01.png",
             "title" => "Enjoy",
           ),
         ),
@@ -155,6 +155,20 @@ class PageController extends Controller
       ),
       "faq_content" => array(
         "title" => "Have more questions?",
+        "link_array" => array(
+          array(
+            "copy" => "FAQ",
+            "url" => "http://www.google.com",
+          ),
+          array(
+            "copy" => "RWAS Membership",
+            "url" => "http://www.google.com",
+          ),
+          array(
+            "copy" => "Contact",
+            "url" => "http://www.google.com",
+          ),
+        ),
         "join_cta_copy" => "Join Now",
       ),
     );
