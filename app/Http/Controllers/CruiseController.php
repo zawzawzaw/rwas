@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Cabin;
+
 class CruiseController extends Controller
 {
 
@@ -283,75 +285,14 @@ class CruiseController extends Controller
   
   public function get_valid_search_parameters()
   {
-    $output_data = array(
-      array(
-        "port" => "TWKEL",
-        "mon_year" => "06/2017",
-      ),
-      array(
-        "port" => "TWKEL",
-        "mon_year" => "10/2017",
-      ),
-      array(
-        "port" => "MYPEN",
-        "mon_year" => "06/2017",
-      ),
-      array(
-        "port" => "MYPEN",
-        "mon_year" => "07/2017",
-      ),
-      array(
-        "port" => "TWKEL",
-        "mon_year" => "08/2017",
-      ),
-      array(
-        "port" => "SGSIN",
-        "mon_year" => "09/2017",
-      ),
-      array(
-        "port" => "MYPEN",
-        "mon_year" => "11/2017",
-      ),
-      array(
-        "port" => "MYPEN",
-        "mon_year" => "05/2017",
-      ),
-      array(
-        "port" => "SGSIN",
-        "mon_year" => "10/2017",
-      ),
-      array(
-        "port" => "CNNSA",
-        "mon_year" => "08/2017",
-      ),
-      array(
-        "port" => "CNNSA",
-        "mon_year" => "09/2017",
-      ),
-      array(
-        "port" => "CNSHA",
-        "mon_year" => "07/2017",
-      ),
-      array(
-        "port" => "JPOSA",
-        "mon_year" => "09/2017",
-      ),
-
-
-      // and so on and so forth ...
-
-    );
-
-    $output_json = json_encode($output_data);
-
-    return $output_json;
+      $list = Cabin::query();
+      $list->select('departure_date', 'departure_port');
+      $list->where('cabin_available', '>', 0);
+      $list->groupBy('itinerary_code');
+      $list->orderBy('departure_date', 'ASC');
+      $list = $list->get();
+      return response()->json($list);
   }
-
-  
-
-
-
-
 
   // return a max of 10 itineraries
 

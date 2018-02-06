@@ -58,6 +58,7 @@ class UpdateCsvData extends Command
                     }
 
                     $port = explode('-', $csvLine[4]);
+                    $night = substr($csvLine[2], 2,2);
                     $res = [
                         'ship_code' => $csvLine[0],
                         'departure_date' => date("Y-m-d" , strtotime($csvLine[1])),
@@ -70,7 +71,8 @@ class UpdateCsvData extends Command
                         'cabin_sold' => $csvLine[8],
                         'cabin_available' => $csvLine[9],
                         'pax_count' => $csvLine[10],
-                        'itinerary_code' => substr($csvLine[2], 2,2)."N ".$csvLine[4],
+                        // 'itenerary_name' => ($night+1)."Days ".$night."Night ".$csvLine[4],
+                        'itinerary_code' => $night."N ".$csvLine[4],
                         'departure_port' => $port[0],
                         'arrival_port' => $port[1]
                     ];
