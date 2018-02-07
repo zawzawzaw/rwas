@@ -3,7 +3,12 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Cabin;
+
+use DB;
+
+use App\Models\Cabin;
+use App\Models\Cruise;
+use App\Models\SeawareCsv;
 
 class UpdateCsvData extends Command
 {
@@ -45,8 +50,12 @@ class UpdateCsvData extends Command
 
         if ($headers['http_code'] === 200 and $headers['download_content_length'] < 1024*1024) {
             if (download($url, $path)){
-
+                
+                DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+                SeawareCsv::truncate();
+                Cruise::truncate();
                 Cabin::truncate();
+                DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
                 $handle = fopen(storage_path('csv/Seaware.CSV'), "r");
                 $header = true;
@@ -71,13 +80,31 @@ class UpdateCsvData extends Command
                         'cabin_sold' => $csvLine[8],
                         'cabin_available' => $csvLine[9],
                         'pax_count' => $csvLine[10],
-                        // 'itenerary_name' => ($night+1)."Days ".$night."Night ".$csvLine[4],
+                        'day' => $night+1,
+                        'night' => $night,
+                        'itenerary_name' => ($night+1)."Days ".$night."Night ".$csvLine[4],
                         'itinerary_code' => $night."N ".$csvLine[4],
                         'departure_port' => $port[0],
                         'arrival_port' => $port[1]
                     ];
 
-                    Cabin::create($res);
+                    SeawareCsv::create($res);
+                }
+
+                $cruise = SeawareCsv::select('cruise_id', 'ship_code', 'departure_date', 'week_day', 'sector', 'day', 'night', 'itenerary_name', 'itinerary_code', 'departure_port', 'arrival_port')->groupBy('cruise_id')->get()->toArray();
+                Cruise::insert($cruise);
+                $cabinCruise = Cruise::select('id', 'cruise_id')->get();;
+                foreach($cabinCruise as $cc){
+                    $cab = SeawareCsv::select(
+                        DB::raw($cc->id.' as cruise'),
+                        'cabin_category',
+                        'cabin_group',
+                        'cabin_blocked',
+                        'cabin_sold',
+                        'cabin_available',
+                        'pax_count'
+                    )->where('cruise_id', $cc->cruise_id)->get()->toArray();
+                    Cabin::insert($cab);
                 }
             }else{
                 $this->info("Faild to download csv");

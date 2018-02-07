@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DB;
-use App\Cabin;
+use App\Models\SeawareCsv;
 
 class CruiseController extends Controller
 {
@@ -286,7 +286,7 @@ class CruiseController extends Controller
   
   public function get_valid_search_parameters()
   {
-      $list = Cabin::query();
+      $list = SeawareCsv::query();
       $list->select(DB::raw('DATE_FORMAT(departure_date, "%m/%Y") as mon_year'), DB::raw('departure_port as port'));
       $list->distinct();
       $list->where('cabin_available', '>', 0);
