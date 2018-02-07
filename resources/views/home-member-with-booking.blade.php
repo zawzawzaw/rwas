@@ -48,15 +48,13 @@
             .title {
                 font-size: 84px;
             }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
+            .subtitle {
                 font-size: 12px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                color: #636b6f;
             }
 
             .m-b-md {
@@ -79,16 +77,12 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Home Page
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="subtitle">
+                    as non-member
                 </div>
+                
             </div>
         </div>
     </body>

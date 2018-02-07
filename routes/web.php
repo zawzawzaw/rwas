@@ -12,8 +12,90 @@
 */
 
 Route::get('/', function () {
-  return view('welcome');
+  // return view('welcome');
+  return view('home-nonmember');
+
+  // if logged in without booking
+  // return view('home-member-without-booking');
+  
+  // if logged in with booking
+  // return view('home-member-with-booking');
+  
 });
+
+
+
+
+
+Route::get('/redeem', function () { return view('redeem/primary-search'); });
+Route::get('/redeem/cabin', function () { return view('redeem/cabin-type-rates'); });
+Route::get('/redeem/summary', function () { return view('redeem/summary'); });
+
+
+
+Route::get('/checkout/guest-details', function () { return view('checkout/summary'); });
+Route::get('/checkout/payment', function () { return view('checkout/payment'); });
+Route::get('/checkout/thank-you', function () { return view('checkout/thank-you'); });
+
+Route::get('/register', function () { return view('register'); });
+
+
+// if user is logged in
+Route::get('/account', function () { return view('account/dashboard'); });
+Route::get('/account/edit-profile', function () { return view('account/edit-profile'); });
+Route::get('/account/transaction-history', function () { return view('account/transaction-history'); });
+Route::get('/account/booking-history', function () { return view('account/booking-history'); });
+
+
+//    ____ _____  _  _____ ___ ____
+//   / ___|_   _|/ \|_   _|_ _/ ___|
+//   \___ \ | | / _ \ | |  | | |
+//    ___) || |/ ___ \| |  | | |___
+//   |____/ |_/_/   \_\_| |___\____|
+//
+
+
+
+Route::get('/membership', function () { return view('static/membership'); });
+Route::get('/membership/overview', function () { return view('static/membership-overview'); });
+Route::get('/membership/how-to-redeem', function () { return view('static/membership-how-to-redeem'); });
+Route::get('/faq', function () { return view('static/faq'); });
+Route::get('/contact', function () { return view('static/welcome'); });
+
+// Route::get('/ship-detail', function () { 
+//   return view('welcome');
+// });
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::get('xtopia', function () {
     // return view('welcome');
@@ -29,8 +111,6 @@ Route::get('seaware', 'SoapController@show');
 Route::get('fetch_seaware_csv', 'FetchSeawareCsvController@index');
 
 Route::resource('cabin_inventory', 'CabinInventoryController');
-
-
 
 
 
