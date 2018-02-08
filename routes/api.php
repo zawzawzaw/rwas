@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'cruise'], function(){
+    Route::get('get_valid_search_parameters', 'CruiseController@get_valid_search_parameters');
+});
