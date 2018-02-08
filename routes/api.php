@@ -19,4 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'cruise'], function(){
     Route::get('get_valid_search_parameters', 'CruiseController@get_valid_search_parameters');
+    Route::get('get_home_itineraries', 'CruiseController@get_home_itineraries');
+    Route::get('get_itineraries', 'CruiseController@get_itineraries');
 });
