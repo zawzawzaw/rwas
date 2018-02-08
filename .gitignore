@@ -14,3 +14,4 @@ yarn-error.log
 notes.md
 .DS_Store
 **/.DS_Store
+*.pem
