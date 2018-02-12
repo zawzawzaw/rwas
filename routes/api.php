@@ -30,7 +30,7 @@ Route::group(['prefix' => 'seaware/test'], function(){
     Route::get('OTA_CruiseFareAvailRQ', 'Test\\SeawareApiTest@otaCruiseFareAvail');
     Route::get('OTA_CruiseCategoryAvailRQ', 'Test\\SeawareApiTest@otaCruiseCategoryAvail');
     Route::get('OTA_CruiseCabinAvailRQ', 'Test\\SeawareApiTest@otaCruiseCabinAvailRQ');
-    Route::get('OTA_CruisePriceBookingRQ', 'Test\\SeawareApiTest@otaCruiseCabinAvailRQ');
-    Route::get('OTA_CruiseBookRQ', 'Test\\SeawareApiTest@otaCruiseCabinAvailRQ');
+    Route::get('OTA_CruisePriceBookingRQ', 'Test\\SeawareApiTest@otaCruisePriceBookingRQ');
+    Route::get('OTA_CruiseBookRQ', 'Test\\SeawareApiTest@otaCruiseBookRQ');
     Route::get('OTA_CruiseBookingDocumentRQ', 'Test\\SeawareApiTest@otaCruiseBookingDocumentRQ');
 });
