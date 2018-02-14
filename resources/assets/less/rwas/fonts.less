@@ -1,0 +1,763 @@
+
+
+
+//    ____  _        _ __   _______ _    ___ ____    ____ ___ ____  ____  _        _ __   __
+//   |  _ \| |      / \\ \ / /  ___/ \  |_ _|  _ \  |  _ \_ _/ ___||  _ \| |      / \\ \ / /
+//   | |_) | |     / _ \\ V /| |_ / _ \  | || |_) | | | | | |\___ \| |_) | |     / _ \\ V /
+//   |  __/| |___ / ___ \| | |  _/ ___ \ | ||  _ <  | |_| | | ___) |  __/| |___ / ___ \| |
+//   |_|   |_____/_/   \_\_| |_|/_/   \_\___|_| \_\ |____/___|____/|_|   |_____/_/   \_\_|
+//
+
+
+
+.playfair-display-regular{
+  font-family: 'Playfair Display', "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.playfair-display-regular-italic{
+  font-family: 'Playfair Display', "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.playfair-display-bold{
+  font-family: 'Playfair Display', "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-style: normal;
+  font-weight: 700;
+}
+
+
+/*
+.playfair-display-regular when (@is_mac){
+  -webkit-font-smoothing : antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.playfair-display-regular-italic when (@is_mac){
+  -webkit-font-smoothing : antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.playfair-display-bold when (@is_mac){
+  -webkit-font-smoothing : antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*/
+
+
+//    ____  ____   _____  _____ __  __    _      _   _  _____     ___
+//   |  _ \|  _ \ / _ \ \/ /_ _|  \/  |  / \    | \ | |/ _ \ \   / / \
+//   | |_) | |_) | | | \  / | || |\/| | / _ \   |  \| | | | \ \ / / _ \
+//   |  __/|  _ <| |_| /  \ | || |  | |/ ___ \  | |\  | |_| |\ V / ___ \
+//   |_|   |_| \_\\___/_/\_\___|_|  |_/_/   \_\ |_| \_|\___/  \_/_/   \_\
+//
+
+
+.proxima-nova-regular{
+  font-family: "proxima-nova", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.proxima-nova-semibold{
+  font-family: "proxima-nova", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.proxima-nova-bold{
+  font-family: "proxima-nova", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+}
+
+
+
+
+
+
+// mac font fix
+// makes fonts look thinner
+
+body.is-mac {
+  -webkit-font-smoothing : antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+  
+
+
+
+
+
+
+
+
+
+//    ____ _______   ___     _____
+//   / ___|_   _\ \ / / |   | ____|
+//   \___ \ | |  \ V /| |   |  _|
+//    ___) || |   | | | |___| |___
+//   |____/ |_|   |_| |_____|_____|
+//
+
+.body-font(@multiplier: 1){
+  .proxima-nova-regular;
+  font-size: 16px * @multiplier;
+  line-height: 19px * @multiplier;
+}
+
+
+.body-font-bold(@multiplier: 1){
+  .proxima-nova-semibold;
+  font-size: 16px * @multiplier;
+  line-height: 19px * @multiplier;
+}
+
+.body-font-italic(@multiplier: 1){
+}
+
+
+
+
+.body-font-mobile(@multiplier: 1){
+  .proxima-nova-regular;
+  // font-size: 13px * @multiplier;
+  // line-height: 20px * @multiplier;
+
+  font-size: 13px * @multiplier;
+  line-height: 18px * @multiplier;
+}
+
+.body-font-bold-mobile(@multiplier: 1){
+  .proxima-nova-semibold;
+  // font-size: 13px * @multiplier;
+  // line-height: 20px * @multiplier;
+
+  font-size: 13px * @multiplier;
+  line-height: 18px * @multiplier;
+}
+
+.body-font-italic-mobile(@multiplier: 1){
+
+}
+
+
+
+
+
+.body-font-large-screen(@multiplier: 1){
+  .proxima-nova-regular;
+  font-size: 18px * @multiplier;
+  line-height: 22px * @multiplier;
+}
+
+.body-font-bold-large-screen(@multiplier: 1){
+  .proxima-nova-semibold;
+  font-size: 18px * @multiplier;
+  line-height: 22px * @multiplier;
+}
+
+.body-font-italic-large-screen(@multiplier: 1){
+
+}
+
+
+
+
+
+
+
+
+
+.h1-style(@multiplier: 1){
+  .playfair-display-regular;
+  font-size: 53px * @multiplier;
+  line-height: 64px * @multiplier;
+}
+.h1-style-mobile(@multiplier: 1){
+  .playfair-display-regular;
+  font-size: 29px * @multiplier;
+  line-height: 36px * @multiplier;
+}
+
+
+
+
+.h2-style(@multiplier: 1){
+  .playfair-display-regular;
+  font-size: 47px * @multiplier;
+  line-height: 56px * @multiplier;
+}
+.h2-style-italic(@multiplier: 1){
+  .playfair-display-regular-italic;
+  font-size: 47px * @multiplier;
+  line-height: 56px * @multiplier;
+}
+
+
+.h2-style-mobile(@multiplier: 1){
+  .playfair-display-regular;
+  font-size: 23px * @multiplier;
+  line-height: 32px * @multiplier;
+}
+.h2-style-italic-mobile(@multiplier: 1){
+  .playfair-display-regular-italic;
+  font-size: 23px * @multiplier;
+  line-height: 32px * @multiplier;
+}
+
+
+.h3-style(@multiplier: 1){
+  .playfair-display-bold;
+  font-size: 25px  * @multiplier;
+  line-height: 30px * @multiplier;
+}
+.h3-style-mobile(@multiplier: 1){
+  .playfair-display-bold;
+  font-size: 19px  * @multiplier;      // looks off by 1 px
+  line-height: 21px * @multiplier;
+
+}
+
+
+.h4-style(@multiplier: 1){
+  .proxima-nova-bold;
+  font-size: 16px * @multiplier;
+  line-height: 19px * @multiplier;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.h4-style-mobile(@multiplier: 1){
+  .proxima-nova-bold;
+  font-size: 10px * @multiplier;
+  line-height: 16px * @multiplier;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+
+.h5-style(@multiplier: 1){
+  .proxima-nova-bold;
+  font-size: 19px * @multiplier;
+  line-height: 23px * @multiplier;
+  letter-spacing: -0.025em;
+}
+
+.h6-style(@multiplier: 1){
+  .playfair-display-bold;
+  font-size: 16px  * @multiplier;
+  line-height: 19px * @multiplier;
+}
+
+.h6-style-mobile(@multiplier: 1){
+  .playfair-display-regular;
+  // font-size: 13px  * @multiplier;      // too small
+  font-size: 14px  * @multiplier;
+  line-height: 19px * @multiplier;
+}
+
+
+
+
+// hahahahaha no h7
+.h7-style(@multiplier: 1){
+  .playfair-display-regular;
+  font-size: 20px * @multiplier;
+  line-height: 24px * @multiplier;
+}
+
+
+.h8-style(@multiplier: 1){
+  .proxima-nova-semibold;
+  font-size: 13px;
+  line-height: 19px;
+  text-align: left;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+
+//    _____  _    ____ ____
+//   |_   _|/ \  / ___/ ___|
+//     | | / _ \| |  _\___ \
+//     | |/ ___ \ |_| |___) |
+//     |_/_/   \_\____|____/
+//
+
+body{
+  .body-font;
+  color: @off-black;
+}
+
+h1, h2, h3{
+  color: @dark-grey;
+}
+h4, h5{
+  color: @grey;
+}
+h6{
+  color: @dark-grey;
+}
+
+
+
+h1{
+  .h1-style;
+  a{
+    .h1-style;
+    display: block;
+  }
+}
+h2{
+  .h2-style;
+  a{
+    .h2-style;
+    display: block;
+  }
+}
+h3{
+  .h3-style;
+  a{
+    .h3-style;
+    display: block;
+  }
+}
+
+
+
+h4{
+  .h4-style;
+  a{
+    .h4-style;
+    display: block;
+  }
+}
+h5{
+  .h5-style;
+  a{
+    .h5-style;
+    display: block;
+  }
+}
+h6{
+  .h6-style;
+  a{
+    .h6-style;
+    display: block;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+// TABLET PORTRAIT
+@media only screen and (max-width: 991px) {
+  body{
+    .body-font-mobile;
+  }
+  h1{
+    .h1-style-mobile;
+    a{
+      .h1-style-mobile;
+    }
+  }
+
+  h2{
+    .h2-style-mobile;
+    a{
+      .h2-style-mobile;
+    }
+  }
+
+  h3{
+    .h3-style-mobile;
+    a{
+      .h3-style-mobile;
+    }
+  }
+  h6{
+    .h6-style-mobile;
+    a{
+      .h6-style-mobile;
+    }
+  }
+
+}
+
+
+
+p{
+  strong{
+    .body-font-bold;
+  }
+  b{
+    .body-font-bold;
+  }
+}
+
+// TABLET PORTRAIT
+@media only screen and (max-width: 991px) {
+  p{
+    strong{
+      .body-font-bold-mobile;
+    }
+    b{
+      .body-font-bold-mobile;
+    }
+  }
+}
+
+
+a{
+  color: @off-black;
+
+  &:link,
+  &:visited{
+    color: @off-black;
+  }
+
+  &:hover,
+  &:active{
+    color: @dark-grey;
+  }
+}
+
+
+
+//    ____  _____ _____ _   _   _ _   _____    ____ ___  ______   __
+//   |  _ \| ____|  ___/ \ | | | | | |_   _|  / ___/ _ \|  _ \ \ / /
+//   | | | |  _| | |_ / _ \| | | | |   | |   | |  | | | | |_) \ V /
+//   | |_| | |___|  _/ ___ \ |_| | |___| |   | |__| |_| |  __/ | |
+//   |____/|_____|_|/_/   \_\___/|_____|_|    \____\___/|_|    |_|
+//
+
+.default-copy{
+  p{
+    .body-font;
+
+    strong{
+      .body-font-bold;
+    }
+    b{
+      .body-font-bold;
+    }
+    i{
+      .body-font-italic;
+    }
+    sup{
+      .body-font(0.8);
+      position: relative;
+      top: -3px;
+    }
+
+    .lines{
+      .opacity(0);
+      // height: 22px;
+      // max-height: 0;
+      // padding-top: 0px;
+      // overflow: hidden;
+    }
+    .chars{
+      .opacity(0);
+    }
+  }
+
+
+  h3{
+    .lines{
+      .opacity(0);
+      height: 30px;
+      padding-top: 0px;
+      overflow: hidden;
+      max-height: 0;
+    }
+    .chars{
+      .opacity(0);
+    }
+  }
+
+
+  li{
+    .body-font;
+    strong{
+      .body-font-bold;
+    }
+    b{
+      .body-font-bold;
+    }
+    i{
+      .body-font-italic;
+    }
+    a{
+      .body-font-bold;
+      color: @off-black;
+      .transition-in-single (color, 0.3s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.08s + 0.05s);
+
+      &:hover{
+        color: @dark-grey;
+        .transition-in-single (color, 0.2s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.06s);
+      }
+    }
+  }
+
+  h4{
+    .proxima-nova-regular;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-transform: none;
+    color: @off-black;
+  }
+  h6{
+    .h7-style;
+    color: @off-black;
+  }
+  
+  h6{
+    .lines{
+      // .opacity(0);
+      // height: 24px;
+      // padding-top: 0px;
+      // overflow: hidden;
+      // max-height: 0;
+    }
+    .chars{
+      .opacity(0);
+    }
+  }
+
+  // LARGE SCREEN
+  @media only screen and (min-width: 1400px) {
+
+    p{
+      .body-font-large-screen;
+
+      strong{
+        .body-font-bold-large-screen;
+      }
+      b{
+        .body-font-bold-large-screen;
+      }
+      i{
+        .body-font-italic-large-screen;
+      }
+      sup{
+        .body-font-large-screen(0.8);
+        top: -4px;
+      }
+      .lines{
+        // height: 22px;
+        // max-height: 0;
+      }
+    }
+
+    li{
+      .body-font-large-screen;
+      strong{
+        .body-font-bold-large-screen;
+      }
+      b{
+        .body-font-bold-large-screen;
+      }
+      i{
+        .body-font-italic-large-screen;
+      }
+      a{
+        .body-font-bold-large-screen;
+      }
+    }
+
+  }
+
+
+
+  // TABLET PORTRAIT
+  @media only screen and (max-width: 991px) {
+    p{
+      .body-font-mobile;
+
+      strong{
+        .body-font-bold-mobile;
+      }
+      b{
+        .body-font-bold-mobile;
+      }
+      i{
+        .body-font-italic-mobile;
+      }
+      sup{
+        .body-font-mobile(0.8);
+        top: -4px;
+      }
+      .lines{
+        // height: 20px;
+        // max-height: 0;
+      }
+    }
+
+    li{
+      .body-font-mobile;
+      strong{
+        .body-font-bold-mobile;
+      }
+      b{
+        .body-font-bold-mobile;
+      }
+      i{
+        .body-font-italic-mobile;
+      }
+      a{
+        .body-font-bold-mobile;
+      }
+    }
+  }
+
+
+
+  p + p{
+    padding-top: 19px;
+  }
+  // TABLET PORTRAIT
+  @media only screen and (max-width: 991px) {
+    p + p{
+      padding-top: 20px;
+    }
+  }
+
+
+  h3 + h4{
+    padding-top: 6px;
+  }
+
+  h3 + p {
+    padding-top: 14px;
+  }
+  h4 + p {
+    padding-top: 14px;
+  }
+
+
+  h1 + p{
+
+  }
+
+  h2 + p{
+    
+  }
+
+
+  ul{
+    li{
+      position: relative;
+      padding-left: 14px;
+
+      margin-bottom: 10px;
+
+      // TABLET PORTRAIT
+      @media only screen and (max-width: 991px) {
+        padding-left: 10px;
+      }
+
+
+      &:before{
+        .fa;
+        font-size: 5px;
+        line-height: 25px;
+        content: "\f111";
+
+        .display-inline-block;
+        position: absolute;
+        top: 0px;
+        // left: 3px + 4px;
+        /// left: 11px;
+        left: 0px;
+
+        @media only screen and (max-width: 1280px) {
+          line-height: 25px * 0.9;
+        }
+        // TABLET PORTRAIT
+        @media only screen and (max-width: 991px) {
+          font-size: 4px;
+          line-height: 20px;
+        }
+      }
+
+      /*
+      &:last-child{
+        margin-bottom: 0px;
+      }
+      */
+    }
+  }
+
+
+
+  ol{
+    counter-reset: ol-counter;
+
+    // padding-top: 24px;
+    // padding-bottom: 24px;
+
+    li{
+      position: relative;
+      padding-left: 16px;
+
+      margin-bottom: 24px;
+
+      &:before{
+        .body-font-bold;
+
+        @media only screen and (max-width: 1280px) {
+          .body-font-bold(0.9);
+        }
+        // TABLET PORTRAIT
+        @media only screen and (max-width: 991px) {
+          .body-font-bold-mobile;
+        }
+
+        color: @off-black;
+        content: counter(ol-counter);
+        counter-increment: ol-counter;
+        display: block;
+
+        .display-inline-block;
+        position: absolute;
+        top: 0px;
+        // left: 3px + 4px;
+        /// left: 11px;
+        left: 0px;
+      }
+    }
+
+    &.last-version{
+      padding-bottom: 0px;
+      li{
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  
+
+}
+
+
+
+
+
+
+// TABLET PORTRAIT
+@media only screen and (max-width: 991px) {
+  .default-copy{
+
+  }
+}

@@ -1,0 +1,165 @@
+
+//    ____   ___  _   _   _    ____  _____    ____ _____  _
+//   / ___| / _ \| | | | / \  |  _ \| ____|  / ___|_   _|/ \
+//   \___ \| | | | | | |/ _ \ | |_) |  _|   | |     | | / _ \
+//    ___) | |_| | |_| / ___ \|  _ <| |___  | |___  | |/ ___ \
+//   |____/ \__\_\\___/_/   \_\_| \_\_____|  \____| |_/_/   \_\
+//
+
+.square-cta{
+
+  .proxima-nova-regular;
+  font-size: 13px;
+  line-height: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  color: @white !important;
+
+  .display-inline-block;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  padding-left: 17px;
+  padding-right: 17px;
+
+  .transition-in-single (background-color, 0.3s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.1s);
+  background-color: @dark-grey !important;
+
+  // button reset
+  outline: none;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  
+  &:hover,
+  &:focus{
+
+    // color: @white !important;
+
+    .transition-in-single (background-color, 0.2s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.2s);
+    color: @white !important;
+    background-color: @light-grey !important;
+  }
+
+
+
+  // TABLET PORTRAIT
+  @media only screen and (max-width: 991px) {
+
+    // font-size: 11px;
+
+    letter-spacing: 0.1em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    padding-left: 30px;
+    padding-right: 30px;
+
+    &:hover,
+    &:focus{
+      // color: @white;
+      color: @white !important;
+      background-color: @light-grey !important;
+    }
+
+  } // TABLET PORTRAIT
+}
+
+
+
+.square-cta.large-version{
+
+  font-size: 14px;
+  padding-top: 23px;
+  padding-bottom: 20px;
+}
+
+.square-cta.full-width-version{
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+//       _    ____  ____   _____        __
+//      / \  |  _ \|  _ \ / _ \ \      / /
+//     / _ \ | |_) | |_) | | | \ \ /\ / /
+//    / ___ \|  _ <|  _ <| |_| |\ V  V /
+//   /_/   \_\_| \_\_| \_\\___/  \_/\_/
+//
+
+.arrow-cta{
+
+  // .body-font;
+  .body-font-bold;
+  font-size: 14px;
+
+  text-transform: uppercase;
+  // color: @red !important;
+  // color: @dark-grey !important;
+  // color: @navy-blue !important;
+  /// color: @off-black !important;
+  
+  color: @navy-blue !important;
+  letter-spacing: 0.05em;
+
+  position: relative;
+  .display-inline-block;
+  padding-right: 16px;
+
+
+  .transition-in-single (color, 0.3s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.1s);
+
+  &:before{
+    .fa;
+    // content: "\f0a9";  // .fa-arrow-circle-right
+    content: "\f105"; // .fa-angle-right
+    display: block;
+
+    font-size: 15px;
+    line-height: 20px;
+
+    position: absolute;
+    top: -1px;
+    right: 0px;
+  }
+
+
+  &:hover{
+    color: @light-grey !important;
+  }
+
+
+  // TABLET PORTRAIT
+  @media only screen and (max-width: 991px) {
+    // .body-font-mobile;
+    .body-font-bold-mobile;
+    color: @off-black !important;
+
+    font-size: 10px;
+    line-height: 18px;
+    letter-spacing: 0.05em;
+
+    padding-right: 10px;
+
+    &:before{
+      top: -1px;
+      right: 0px;
+      font-size: 10px;
+      line-height: 18px;
+    }
+  }
+
+}
+
