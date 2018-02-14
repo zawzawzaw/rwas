@@ -13,13 +13,13 @@
 
 Route::get('/', function () {
   // return view('welcome');
-  return view('home-nonmember');
+  return view('pages/home-nonmember');
 
   // if logged in without booking
-  // return view('home-member-without-booking');
+  // return view('pages/home-member-without-booking');
   
   // if logged in with booking
-  // return view('home-member-with-booking');
+  // return view('pages/home-member-with-booking');
   
 });
 
@@ -27,24 +27,24 @@ Route::get('/', function () {
 
 
 
-Route::get('/redeem', function () { return view('redeem/primary-search'); });
-Route::get('/redeem/cabin', function () { return view('redeem/cabin-type-rates'); });
-Route::get('/redeem/summary', function () { return view('redeem/summary'); });
+Route::get('/redeem', function () { return view('pages/redeem/primary-search'); });
+Route::get('/redeem/cabin', function () { return view('pages/redeem/cabin-type-rates'); });
+Route::get('/redeem/summary', function () { return view('pages/redeem/summary'); });
 
 
 
-Route::get('/checkout/guest-details', function () { return view('checkout/summary'); });
-Route::get('/checkout/payment', function () { return view('checkout/payment'); });
-Route::get('/checkout/thank-you', function () { return view('checkout/thank-you'); });
+Route::get('/checkout/guest-details', function () { return view('pages/checkout/summary'); });
+Route::get('/checkout/payment', function () { return view('pages/checkout/payment'); });
+Route::get('/checkout/thank-you', function () { return view('pages/checkout/thank-you'); });
 
-Route::get('/register', function () { return view('register'); });
+Route::get('/register', function () { return view('pages/account/register'); });
 
 
 // if user is logged in
-Route::get('/account', function () { return view('account/dashboard'); });
-Route::get('/account/edit-profile', function () { return view('account/edit-profile'); });
-Route::get('/account/transaction-history', function () { return view('account/transaction-history'); });
-Route::get('/account/booking-history', function () { return view('account/booking-history'); });
+Route::get('/account', function () { return view('pages/account/dashboard'); });
+Route::get('/account/edit-profile', function () { return view('pages/account/edit-profile'); });
+Route::get('/account/transaction-history', function () { return view('pages/account/transaction-history'); });
+Route::get('/account/booking-history', function () { return view('pages/account/booking-history'); });
 
 
 //    ____ _____  _  _____ ___ ____
@@ -56,11 +56,11 @@ Route::get('/account/booking-history', function () { return view('account/bookin
 
 
 
-Route::get('/membership', function () { return view('static/membership'); });
-Route::get('/membership/overview', function () { return view('static/membership-overview'); });
-Route::get('/membership/how-to-redeem', function () { return view('static/membership-how-to-redeem'); });
-Route::get('/faq', function () { return view('static/faq'); });
-Route::get('/contact', function () { return view('static/welcome'); });
+Route::get('/membership', function () { return view('pages/static/membership'); });
+Route::get('/membership/overview', function () { return view('pages/static/membership-overview'); });
+Route::get('/membership/how-to-redeem', function () { return view('pages/static/membership-how-to-redeem'); });
+Route::get('/faq', function () { return view('pages/static/faq'); });
+Route::get('/contact', function () { return view('pages/static/welcome'); });
 
 // Route::get('/ship-detail', function () { 
 //   return view('welcome');
