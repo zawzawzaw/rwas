@@ -38,6 +38,7 @@ Route::get('/checkout/payment', function () { return view('checkout/payment'); }
 Route::get('/checkout/thank-you', function () { return view('checkout/thank-you'); });
 
 Route::get('/register', function () { return view('register'); });
+Route::get('/login', function () { return view('account/login'); });
 
 
 // if user is logged in
