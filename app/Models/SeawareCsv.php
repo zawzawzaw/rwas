@@ -19,6 +19,9 @@ class SeawareCsv extends Model
         'cabin_sold',
         'cabin_available',
         'pax_count',
+        'day',
+        'night',
+        'itenerary_name',
         'itinerary_code',
         'departure_port',
         'arrival_port'
