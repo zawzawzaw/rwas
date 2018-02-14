@@ -145,22 +145,6 @@ body.is-mac {
 
 
 
-.body-font-large-screen(@multiplier: 1){
-  .proxima-nova-regular;
-  font-size: 18px * @multiplier;
-  line-height: 22px * @multiplier;
-}
-
-.body-font-bold-large-screen(@multiplier: 1){
-  .proxima-nova-semibold;
-  font-size: 18px * @multiplier;
-  line-height: 22px * @multiplier;
-}
-
-.body-font-italic-large-screen(@multiplier: 1){
-
-}
-
 
 
 
@@ -260,6 +244,7 @@ body.is-mac {
 
 
 
+
 // hahahahaha no h7
 .h7-style(@multiplier: 1){
   .playfair-display-regular;
@@ -276,6 +261,9 @@ body.is-mac {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+
+
+
 
 
 //    _____  _    ____ ____
@@ -456,31 +444,6 @@ a{
       position: relative;
       top: -3px;
     }
-
-    .lines{
-      .opacity(0);
-      // height: 22px;
-      // max-height: 0;
-      // padding-top: 0px;
-      // overflow: hidden;
-    }
-    .chars{
-      .opacity(0);
-    }
-  }
-
-
-  h3{
-    .lines{
-      .opacity(0);
-      height: 30px;
-      padding-top: 0px;
-      overflow: hidden;
-      max-height: 0;
-    }
-    .chars{
-      .opacity(0);
-    }
   }
 
 
@@ -507,77 +470,7 @@ a{
     }
   }
 
-  h4{
-    .proxima-nova-regular;
-    font-size: 16px;
-    line-height: 19px;
-    letter-spacing: 0em;
-    text-transform: none;
-    color: @off-black;
-  }
-  h6{
-    .h7-style;
-    color: @off-black;
-  }
   
-  h6{
-    .lines{
-      // .opacity(0);
-      // height: 24px;
-      // padding-top: 0px;
-      // overflow: hidden;
-      // max-height: 0;
-    }
-    .chars{
-      .opacity(0);
-    }
-  }
-
-  // LARGE SCREEN
-  @media only screen and (min-width: 1400px) {
-
-    p{
-      .body-font-large-screen;
-
-      strong{
-        .body-font-bold-large-screen;
-      }
-      b{
-        .body-font-bold-large-screen;
-      }
-      i{
-        .body-font-italic-large-screen;
-      }
-      sup{
-        .body-font-large-screen(0.8);
-        top: -4px;
-      }
-      .lines{
-        // height: 22px;
-        // max-height: 0;
-      }
-    }
-
-    li{
-      .body-font-large-screen;
-      strong{
-        .body-font-bold-large-screen;
-      }
-      b{
-        .body-font-bold-large-screen;
-      }
-      i{
-        .body-font-italic-large-screen;
-      }
-      a{
-        .body-font-bold-large-screen;
-      }
-    }
-
-  }
-
-
-
   // TABLET PORTRAIT
   @media only screen and (max-width: 991px) {
     p{
@@ -679,9 +572,7 @@ a{
         /// left: 11px;
         left: 0px;
 
-        @media only screen and (max-width: 1280px) {
-          line-height: 25px * 0.9;
-        }
+        
         // TABLET PORTRAIT
         @media only screen and (max-width: 991px) {
           font-size: 4px;
@@ -714,9 +605,6 @@ a{
       &:before{
         .body-font-bold;
 
-        @media only screen and (max-width: 1280px) {
-          .body-font-bold(0.9);
-        }
         // TABLET PORTRAIT
         @media only screen and (max-width: 991px) {
           .body-font-bold-mobile;

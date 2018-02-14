@@ -1,89 +1,143 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout.master')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+  <article id="account-register-form-section">
+    <div class="container-fluid has-breakpoint">
 
-            .full-height {
-                height: 100vh;
-            }
+      <div class="row">
+        <div class="col-md-6 col-md-push-3">
+          <h1>Sign Up</h1>
+        </div>
+      </div> <!-- row -->
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
 
-            .position-ref {
-                position: relative;
-            }
+      <div class="row">
+        <div class="col-md-10 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+          <form id="account-register-form" 
+            class="default-form simple-form-check-02"
+            method="post"
+            action="{{url('/user/create')}}">
 
-            .content {
-                text-align: center;
-            }
+            <div class="row">
+              <div class="col-md-2">
 
-            .title {
-                font-size: 84px;
-            }
-            .subtitle {
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-                color: #636b6f;
-            }
+                <div class="form-group">
+                  <label>Title</label>
+                  <div class="manic-dropdown">
+                    <select name="title">
+                      <option value="">Select one</option>
+                      <option value="MR">Mr.</option>
+                      <option value="MISS">Ms.</option>
+                      <option value="MRS">Mrs.</option>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+                    </select>
+                  </div>
                 </div>
-            @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Home Page
-                </div>
-                <div class="subtitle">
-                    as non-member
+              </div>
+              <div class="col-md-4">
+
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" name="first_name">
                 </div>
                 
+              </div>
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" name="last_name">
+                </div>
+
+              </div>
+            </div> <!-- row -->
+
+            <div class="row">
+              <div class="col-md-3">
+
+                <div class="form-group">
+                  <label>Preferred Language</label>
+                  <div class="manic-dropdown">
+                    <select name="preferred_language">
+                      <option value="">Select one</option>
+                      <option value="EN">ENGLISH</option>
+                      <option value="ZT">繁體中文</option>
+                      <option value="ZH">简体中文</option>
+                    </select>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="col-md-3">
+
+                <div class="form-group">
+                  <label>Preferred Currency (?)</label>
+                  <div class="manic-dropdown">
+                    <select name="currency_code">
+                      <option value="">Select one</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                    </select>
+                  </div>
+                </div>
+
+              </div>
             </div>
-        </div>
-    </body>
-</html>
+
+            <div class="row">
+              <div class="col-md-8"></div>
+              <div class="col-md-4">
+                <div class="cta-container">
+                  
+                  <a href="javascript:void(0);" class="square-cta large-version full-width-version form-check-submit-btn">Submit</a>
+
+                </div>
+              </div>
+            </div> <!-- row -->
+
+
+  <div class="space100"></div>
+
+  
+  
+  
+  chinese_title
+  chinese_last_name
+  chinese_first_name
+  gender
+  date_of_birth
+  nationality
+  email
+  mobile_number
+  doc_type
+  doc_no
+  doc_country
+  doc_issue_date
+  doc_expiry_date
+  address_language_code
+  address_description
+  address_line_01
+  address_line_02
+  address_line_03
+  address_city
+  address_state
+  address_country
+  address_postal_code
+
+          </form> <!-- account-register-form -->
+
+        </div> <!-- col -->
+      </div> <!-- row -->
+
+    </div> <!-- container-fluid -->
+  </article>
+
+
+
+{{-- content --}}
+@endsection

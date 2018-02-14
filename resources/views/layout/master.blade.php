@@ -12,15 +12,7 @@
     @section('preloader')
       @include('includes.preloader')
     @show
-
-    <div id="page-preloader">
-      <div id="page-preloader-line-01"></div>
-      <div id="page-preloader-line-02">
-        <div class="line-a"></div>
-        <div class="line-b"></div>
-      </div>
-    </div>
-
+    
     @section('mobile-header')
       @include('includes.mobile-header')
     @show

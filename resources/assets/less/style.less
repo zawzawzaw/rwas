@@ -8,14 +8,15 @@
 @import "lib/manic-dropdown.less";
 
 
-@is_mac: false;
-
-
 @black: #000000;
 @white: #ffffff;
 
+
+
+
+
 @off-white: #f1f2f2;
-@off-black: #3b3b3b;
+@off-black: #3b3b3b;      // this is used as body font color
 
 
 
@@ -44,36 +45,28 @@
 
 
 // video js
-@import (inline) "../libs/videojs_new/video-js.min.css";
+// @import (inline) "../libs/videojs_new/video-js.min.css";
 
 // slick
 @import (inline) "../libs/slick-carousel/slick/slick.css";
 
-// odometer js plugin
-@import (inline) "../libs/odometer/themes/odometer-theme-default.css";
+@import "rwas/fonts.less";
+@import "rwas/general.less";
+@import "rwas/images.less";
 
-
-@import "tma/fonts.less";
-@import "tma/general.less";
-@import "tma/images.less";
-
-@import "tma/buttons.less";
-@import "tma/form.less";
+@import "rwas/buttons.less";
+@import "rwas/form.less";
 
 
 
 
-// @import "tma/mobile_header.less";
-// @import "tma/mobile_footer.less";
 
+// @import "rwas/header_desktop.less";
+// @import "rwas/header_mobile.less";
 
-
-@import "tma/header_desktop.less";
-@import "tma/header_mobile.less";
-
-@import "tma/footer_desktop.less";
-@import "tma/footer_mobile.less";
-@import "tma/sidebar_desktop.less";
+// @import "rwas/footer_desktop.less";
+// @import "rwas/footer_mobile.less";
+// @import "rwas/sidebar_desktop.less";
 
 
 
@@ -84,20 +77,8 @@
 //   |_| /_/   \_\____|_____|____/
 //
 
-@import "tma/page/page_default.less";
-
-// the complicated about page
-@import "tma/page/page_about.less";
-@import "tma/page/page_about/banner.less";
-@import "tma/page/page_about/whatwedo.less";
-@import "tma/page/page_about/about.less";
-@import "tma/page/page_about/process.less";
-@import "tma/page/page_about/testimonial.less";
-@import "tma/page/page_about/mice_academy.less";
-@import "tma/page/page_about/contact.less";
-
-
-
+// @import "rwas/page/page_default.less";
+@import "rwas/page/page_account_register.less";
 
 
 

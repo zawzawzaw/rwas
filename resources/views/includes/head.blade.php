@@ -8,20 +8,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui"/>
 
-<?php 
-/*
 
-<?php $is_debug = false; ?>
-<?php if ($is_debug == true): ?>
-  <link rel="stylesheet" type="text/css" href="css/critical_style.css">
-<?php else: ?>
+@if( config('rwas.is_debug') )
+  <link rel="stylesheet" type="text/css" href="{{asset('css/critical_style.css')}}">
+
+@else
   <style type="text/css">
-      <?php require_once('css/critical_style.css'); ?>
+    <?php // require_once(asset('css/critical_style.css')); ?>
   </style>
-<?php endif; ?>
-
-*/
-?>
+@endif
 
 
 <!--[if lt IE 9]>

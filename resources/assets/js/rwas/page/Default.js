@@ -1,4 +1,4 @@
-goog.provide('tma.page.Default');
+goog.provide('rwas.page.Default');
 
 goog.require('goog.events.Event');
 goog.require('goog.events.EventTarget');
@@ -6,10 +6,9 @@ goog.require('goog.events.EventTarget');
 goog.require('manic.page.Page');
 goog.require('manic.ui.BoxItem');
 
-goog.require('tma.component.SidebarDesktop');
-goog.require('tma.component.SidebarTitle');
-goog.require('tma.component.HeaderMobile');
-goog.require('tma.component.FooterContactMobile');
+goog.require('rwas.component.HeaderMobile');
+goog.require('rwas.component.HeaderDesktop');
+
 
 
 /**
@@ -18,10 +17,10 @@ goog.require('tma.component.FooterContactMobile');
  * @constructor
  * @extends {manic.page.Page}
  */
-tma.page.Default = function(options, element) {
+rwas.page.Default = function(options, element) {
 
   manic.page.Page.call(this, options);
-  this.options = $.extend(this.options, tma.page.Default.DEFAULT, options);
+  this.options = $.extend(this.options, rwas.page.Default.DEFAULT, options);
 
 
   /*
@@ -44,28 +43,18 @@ tma.page.Default = function(options, element) {
 
   
 
-  /**
-   * @type {tma.component.SidebarDesktop}
-   */
-  this.sidebar_desktop = null;
+  
 
   /**
-   * @type {tma.component.SidebarTitle}
-   */
-  this.sidebar_title = null;
-
-  /**
-   * @type {tma.component.HeaderMobile}
+   * @type {rwas.component.HeaderMobile}
    */
   this.header_mobile = null;
 
-
   /**
-   * @type {tma.component.FooterContactMobile}
+   * @type {rwas.component.HeaderDesktop}
    */
-  this.footer_contact_mobile = null;
-  
-  
+  this.header_desktop = null;
+
 
 
   /**
@@ -91,16 +80,16 @@ tma.page.Default = function(options, element) {
   }
 
 
-  // console.log('tma.page.Default: init');
+  // console.log('rwas.page.Default: init');
 };
-goog.inherits(tma.page.Default, manic.page.Page);
+goog.inherits(rwas.page.Default, manic.page.Page);
 
 
 /**
  * like jQuery options
  * @const {object}
  */
-tma.page.Default.DEFAULT = {
+rwas.page.Default.DEFAULT = {
 };
 
 
@@ -112,55 +101,18 @@ tma.page.Default.DEFAULT = {
 //
 
 
-tma.page.Default.prototype.init = function() {
-  tma.page.Default.superClass_.init.call(this);
+rwas.page.Default.prototype.init = function() {
+  rwas.page.Default.superClass_.init.call(this);
 
-  this.create_sidebar_desktop();
-  this.create_sidebar_title();
+  
   this.create_header_mobile();
-  this.create_footer_contact_mobile();
+  this.create_header_desktop();
   
 
-  /*
-  if ($('#desktop-header').length != 0) {
-    this.desktop_header = new rippledot.component.DesktopHeader({}, $('#desktop-header'));
-  }
-  if ($('#desktop-sidebar').length != 0) {
-    this.desktop_sidebar = new rippledot.component.DesktopSidebar({}, $('#desktop-sidebar'));
-  }
 
-  if ($('#desktop-aside').length != 0) {
-    this.desktop_aside = new rippledot.component.DesktopAside({}, $('#desktop-aside'));
-  }
+  // this.update_page_layout(); // needed by sidebar desktop ?
 
-
-  if ($('#mobile-header').length != 0 && $('#mobile-header-expand-container').length != 0){
-    this.mobile_header = new rippledot.component.MobileHeader({}, $('#mobile-header'));
-
-    this.mobile_header.update_layout();
-
-    goog.events.listen(this.mobile_header, rippledot.component.MobileHeader.ON_CLOSE_MENU, function(event){
-
-      this.update_page_layout();
-      
-    }.bind(this));
-
-    
-
-    
-    
-
-  }
-  
-
-  this.create_box_item();
-  */
-
-
-
-  this.update_page_layout(); // needed by sidebar desktop ?
-
-  // console.log('tma.page.Default: init');
+  console.log('rwas.page.Default: init');
 
 };
 
@@ -174,97 +126,26 @@ tma.page.Default.prototype.init = function() {
 //    \____|_| \_\_____/_/   \_\_| |_____|
 //
 
-tma.page.Default.prototype.create_sidebar_desktop = function(){
-
-  
-  
-  if ($('#sidebar-desktop-container').length != 0) {
-    this.sidebar_desktop = new tma.component.SidebarDesktop({}, $('#sidebar-desktop-container'));
-
-    this.sidebar_desktop.animate_in();
-
-    goog.events.listen(this.sidebar_desktop, tma.component.SidebarDesktop.ON_CLICK, this.on_sidebar_desktop_click.bind(this));
-
-  }  
-};
-
-// to override :D
-tma.page.Default.prototype.on_sidebar_desktop_click = function(event){
-
-};
-
-tma.page.Default.prototype.create_sidebar_title = function(){
-  
-  if ($('#sidebar-title-desktop-container').length != 0) {
-    this.sidebar_title = new tma.component.SidebarTitle({}, $('#sidebar-title-desktop-container'));
-  }
-  
-
-};
 
 
-tma.page.Default.prototype.create_header_mobile = function(){
+
+rwas.page.Default.prototype.create_header_mobile = function(){
   
   if ($('#header-mobile').length != 0) {
-    this.header_mobile = new tma.component.HeaderMobile({}, $('#header-mobile'));
-    this.header_mobile.page = this;
-
-    this.header_mobile.update_layout();
-
-    goog.events.listen(this.header_mobile, tma.component.HeaderMobile.ON_OPEN, function(event){
-
-    }.bind(this));
-
-    goog.events.listen(this.header_mobile, tma.component.HeaderMobile.ON_CLOSE, function(event){
-      
-    }.bind(this));
-    
+    this.header_mobile = new rwas.component.HeaderMobile({}, $('#header-mobile'));
   }
 
 };
 
-tma.page.Default.prototype.create_footer_contact_mobile = function(){
 
-  if ($('#footer-contact-form-mobile-container').length != 0) {
-
-    this.footer_contact_mobile = new tma.component.FooterContactMobile({}, $('#footer-contact-form-mobile-container'));
-    this.footer_contact_mobile.page = this;
-
-    
-
-    // footer contact us open
-    $('#footer-mobile-cta-contact-us-btn').click(function(event){
-
-      if (this.footer_contact_mobile.is_open == true) {
-        $('#footer-mobile-cta-contact-us-btn').html('Contact us');
-        this.footer_contact_mobile.close_contact();
-
-      } else {
-        $('#footer-mobile-cta-contact-us-btn').html('Close');
-        this.footer_contact_mobile.open_contact();
-
-      }
-
-    }.bind(this));
-
-
-    // menu contact us open
-    $('#header-mobile-contact-us-menu-link').click(function(event){
-
-      event.preventDefault();
-
-      // close the menu
-      this.header_mobile.close_menu();
-
-      // open the close
-      $('#footer-mobile-cta-contact-us-btn').html('Close');
-      this.footer_contact_mobile.open_contact();
-
-    }.bind(this));
-
-
+rwas.page.Default.prototype.create_header_desktop = function(){
+  
+  if ($('#header-desktop').length != 0) {
+    this.header_desktop = new rwas.component.HeaderDesktop({}, $('#header-desktop'));
   }
+
 };
+
 
   
 
@@ -282,8 +163,8 @@ tma.page.Default.prototype.create_footer_contact_mobile = function(){
  * @override
  * @inheritDoc
  */
-tma.page.Default.prototype.update_page_layout = function(){
-  tma.page.Default.superClass_.update_page_layout.call(this);
+rwas.page.Default.prototype.update_page_layout = function(){
+  rwas.page.Default.superClass_.update_page_layout.call(this);
 
   if (manic.IS_ACTUAL_MOBILE == true) {
     this.body.addClass('actual-mobile-version');
@@ -291,40 +172,21 @@ tma.page.Default.prototype.update_page_layout = function(){
     this.body.removeClass('actual-mobile-version');
   }
 
-
-
-  if (this.sidebar_desktop != null) {
-    this.sidebar_desktop.update_layout();
-  }
-
-  if (this.sidebar_title != null) {
-    this.sidebar_title.update_layout();
-  }
-  
+  /*
   if (this.header_mobile != null) {
     this.header_mobile.update_layout();
   }
-
-  if (this.footer_contact_mobile != null) {
-    this.footer_contact_mobile.update_layout();
-  }
+  */
 
   
+
   /*
-  if (manic.IS_MOBILE_HEADER == false) {
-
-  } else {
-
-  }
-  */
- 
-
-
   // update mobile header min height
   // if (manic.IS_MOBILE && goog.isDefAndNotNull(this.mobile_header)) {
   if (manic.IS_ACTUAL_MOBILE && goog.isDefAndNotNull(this.mobile_header)) {
     this.mobile_header.update_layout();
   }
+  */
 
 
 
@@ -375,8 +237,8 @@ tma.page.Default.prototype.update_page_layout = function(){
  * @override
  * @inheritDoc
  */
-tma.page.Default.prototype.scroll_to_target = function(str_param, str_param_2, str_param_3) {
-  tma.page.Default.superClass_.scroll_to_target.call(this, str_param, str_param_2, str_param_3);
+rwas.page.Default.prototype.scroll_to_target = function(str_param, str_param_2, str_param_3) {
+  rwas.page.Default.superClass_.scroll_to_target.call(this, str_param, str_param_2, str_param_3);
   
 
   
@@ -386,8 +248,8 @@ tma.page.Default.prototype.scroll_to_target = function(str_param, str_param_2, s
  * @override
  * @inheritDoc
  */
-tma.page.Default.prototype.on_scroll_to_no_target = function() {
-  tma.page.Default.superClass_.on_scroll_to_no_target.call(this);
+rwas.page.Default.prototype.on_scroll_to_no_target = function() {
+  rwas.page.Default.superClass_.on_scroll_to_no_target.call(this);
 
   
 }
@@ -395,4 +257,4 @@ tma.page.Default.prototype.on_scroll_to_no_target = function() {
 
 
 
-goog.exportSymbol('tma.page.Default', tma.page.Default);
+goog.exportSymbol('rwas.page.Default', rwas.page.Default);

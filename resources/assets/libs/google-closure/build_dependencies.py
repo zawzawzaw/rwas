@@ -18,8 +18,8 @@ subprocess.Popen([
   '--root_with_prefix=../../js/manic/ui ../../../../../js/manic/ui/',
   '--root_with_prefix=../../js/manic/util ../../../../../js/manic/util/',
   '--root_with_prefix=../../js/manic/video ../../../../../js/manic/video/',
-  '--root_with_prefix=../../js/tma/page ../../../../../js/tma/page/',
-  '--root_with_prefix=../../js/tma/page/about ../../../../../js/tma/page/about/',
-  '--root_with_prefix=../../js/tma/component ../../../../../js/tma/component/',
+  '--root_with_prefix=../../js/rwas/page ../../../../../js/rwas/page/',
+  '--root_with_prefix=../../js/rwas/section ../../../../../js/rwas/section/',
+  '--root_with_prefix=../../js/rwas/component ../../../../../js/rwas/component/',
   '--output_file=../../js/google-closure-dependency-list.js'
   ], shell=True);
