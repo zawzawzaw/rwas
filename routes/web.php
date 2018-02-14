@@ -38,15 +38,19 @@ Route::get('/checkout/payment', function () { return view('pages/checkout/paymen
 Route::get('/checkout/thank-you', function () { return view('pages/checkout/thank-you'); });
 
 
-Route::get('/register', function () { return view('pages/account/register'); });
-Route::get('/login', function () { return view('pages/account/login'); });
-
+Route::group(['middleware' => 'nonAuthDrs'], function() {
+  Route::get('/register', function () { return view('pages/account/register'); });
+  Route::get('/login', function () { return view('pages/account/login'); })->name('user.login.view');
+  Route::post('/user/login', 'V1\\UserController@login')->name('user.login');
+});
 
 // if user is logged in
-Route::get('/account', function () { return view('pages/account/dashboard'); });
-Route::get('/account/edit-profile', function () { return view('pages/account/edit-profile'); });
-Route::get('/account/transaction-history', function () { return view('pages/account/transaction-history'); });
-Route::get('/account/booking-history', function () { return view('pages/account/booking-history'); });
+Route::group(['middleware' => 'authDrs'], function() {
+  Route::get('/account', function () { return view('pages/account/dashboard'); })->name('user.account');
+  Route::get('/account/edit-profile', function () { return view('pages/account/edit-profile'); });
+  Route::get('/account/transaction-history', function () { return view('pages/account/transaction-history'); });
+  Route::get('/account/booking-history', function () { return view('pages/account/booking-history'); });
+});
 
 
 //    ____ _____  _  _____ ___ ____

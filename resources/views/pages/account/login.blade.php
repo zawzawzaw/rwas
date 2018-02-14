@@ -10,57 +10,13 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-            .full-height {
-                height: 100vh;
-            }
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-            .subtitle {
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-                color: #636b6f;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -74,15 +30,99 @@
                     @endauth
                 </div>
             @endif
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Login</div>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Account
+                        <div class="panel-body">
+                            <form class="form-horizontal" method="POST" action="{{ route('user.login') }}">
+                                {{ csrf_field() }}
+
+                                <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
+                                    <label for="id" class="col-md-4 control-label">User ID</label>
+
+                                    <div class="col-md-6">
+                                        <input id="id" type="text" class="form-control" name="id" value="{{ old('id') }}" required autofocus>
+
+                                        @if ($errors->has('id'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('id') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <label for="password" class="col-md-4 control-label">Password</label>
+
+                                    <div class="col-md-6">
+                                        <input id="password" type="password" class="form-control" name="password" required>
+
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group{{ $errors->has('cid') ? ' has-error' : '' }}">
+                                    <label for="cid" class="col-md-4 control-label">Cid</label>
+
+                                    <div class="col-md-6">
+                                        <input id="cid" type="text" class="form-control" name="cid" value="{{ old('cid') }}" required>
+
+                                        @if ($errors->has('cid'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('cid') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('pin') ? ' has-error' : '' }}">
+                                    <label for="pin" class="col-md-4 control-label">Pin</label>
+
+                                    <div class="col-md-6">
+                                        <input id="pin" type="text" class="form-control" name="pin" value="{{ old('pin') }}" required>
+
+                                        @if ($errors->has('pin'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('pin') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-4">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="showErr" {{ old('showErr') ? 'checked' : '' }}> Show Error
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-md-8 col-md-offset-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            Login
+                                        </button>
+                                        @if ($errors->has('customErr'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('customErr') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="subtitle">
-                    login
-                </div>
-                
             </div>
         </div>
     </body>

@@ -114,12 +114,30 @@ class DrsApiTestController extends Controller
         return response()->json($result);
     }
 
-    public function apiAutoUAPinCreate(){
-        
+    public function apiAutoUAPinCreate(Request $request){
+        $input = $request->only(
+            'paraDrsID',
+            'paraDrsPwd',
+            'paraCid',
+            'paraPIN'
+        );
+    
+        $result = $this->curlRequest($this->buildXMLContent($input), $this->rootUrl.'API_AutoUA_PINCreate', true);
+    
+        return response()->json($result);
     }
 
-    public function apiAutoUAPinVerify(){
+    public function apiAutoUAPinVerify(Request $request){
+        $input = $request->only(
+            'paraDrsID',
+            'paraDrsPwd',
+            'paraCid',
+            'paraPIN'
+        );
 
+        $result = $this->curlRequest($this->buildXMLContent($input), $this->rootUrl.'API_AutoUA_PINVerify', true);
+
+        return response()->json($result);
     }
 
     public function apiAutoUASetPF(Request $request)
