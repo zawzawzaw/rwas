@@ -1,6 +1,5 @@
 @extends('layout.master')
 
-
 @section('content')
 
 <p>content for home page</p>

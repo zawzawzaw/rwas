@@ -13,13 +13,13 @@
 
 Route::get('/', function () {
   // return view('welcome');
-  return view('pages/home-nonmember');
+  return view('pages/home/home-nonmember');
 
   // if logged in without booking
-  // return view('pages/home-member-without-booking');
+  // return view('pages/home/home-member-without-booking');
   
   // if logged in with booking
-  // return view('pages/home-member-with-booking');
+  // return view('pages/home/home-member-with-booking');
   
 });
 
