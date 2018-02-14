@@ -8,16 +8,17 @@ class Cruise extends Model
 {
     protected $table = 'cruise';
     protected $fillable = [
-        'ship_code',
+        'itinerary',
         'departure_date',
         'cruise_id',
         'week_day', 
-        'sector',
-        'day',
-        'night',
-        'itenerary_name',
-        'itinerary_code',
-        'departure_port',
-        'arrival_port'
     ];
+    
+    public function cabins() {
+        return $this->hasMany('App\Models\Cabin', 'cruise', 'id');
+    }
+
+    public function itinerary() {
+        return $this->hasOne('App\Models\Itinerary', 'id', 'itinerary');
+    }
 }

@@ -8,6 +8,7 @@ use DB;
 
 use App\Models\Cabin;
 use App\Models\Cruise;
+use App\Models\Itinerary;
 use App\Models\SeawareCsv;
 
 class UpdateCsvData extends Command
@@ -54,6 +55,7 @@ class UpdateCsvData extends Command
                 DB::statement('SET FOREIGN_KEY_CHECKS=0;');
                 SeawareCsv::truncate();
                 Cruise::truncate();
+                Itinerary::truncate();
                 Cabin::truncate();
                 DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
@@ -82,7 +84,7 @@ class UpdateCsvData extends Command
                         'pax_count' => $csvLine[10],
                         'day' => $night+1,
                         'night' => $night,
-                        'itenerary_name' => ($night+1)."Days ".$night."Night ".$csvLine[4],
+                        'itenerary_name' => ($night+1)."Days ".((int) $night)."Night ".$csvLine[4],
                         'itinerary_code' => $night."N ".$csvLine[4],
                         'departure_port' => $port[0],
                         'arrival_port' => $port[1]
@@ -91,8 +93,14 @@ class UpdateCsvData extends Command
                     SeawareCsv::create($res);
                 }
 
-                $cruise = SeawareCsv::select('cruise_id', 'ship_code', 'departure_date', 'week_day', 'sector', 'day', 'night', 'itenerary_name', 'itinerary_code', 'departure_port', 'arrival_port')->groupBy('cruise_id')->get()->toArray();
-                Cruise::insert($cruise);
+                $itinerary = SeawareCsv::select('ship_code', 'sector', 'day', 'night', DB::raw('"'.date("Y-m-d H:i:s").'" as created_at'), DB::raw('"'.date("Y-m-d H:i:s").'" as updated_at'), DB::raw('itenerary_name as itin_name'), DB::raw('itinerary_code as itin_code'), 'departure_port', 'arrival_port')->groupBy('ship_code', 'itinerary_code')->get()->toArray();
+                Itinerary::insert($itinerary);
+                $itin = Itinerary::get();
+
+                foreach($itin as $i) {
+                    $cruise = SeawareCsv::select(DB::raw($i->id." as itinerary"), 'cruise_id', 'week_day', 'departure_date', DB::raw('"'.date("Y-m-d H:i:s").'" as created_at'), DB::raw('"'.date("Y-m-d H:i:s").'" as updated_at'))->where('ship_code', $i->ship_code)->where('itinerary_code', $i->itin_code)->groupBy('cruise_id')->get()->toArray();
+                    Cruise::insert($cruise);
+                }
                 $cabinCruise = Cruise::select('id', 'cruise_id')->get();;
                 foreach($cabinCruise as $cc){
                     $cab = SeawareCsv::select(
