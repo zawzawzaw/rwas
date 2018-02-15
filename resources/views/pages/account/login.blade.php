@@ -69,34 +69,6 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group{{ $errors->has('cid') ? ' has-error' : '' }}">
-                                    <label for="cid" class="col-md-4 control-label">Cid</label>
-
-                                    <div class="col-md-6">
-                                        <input id="cid" type="text" class="form-control" name="cid" value="{{ old('cid') }}" required>
-
-                                        @if ($errors->has('cid'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('cid') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group{{ $errors->has('pin') ? ' has-error' : '' }}">
-                                    <label for="pin" class="col-md-4 control-label">Pin</label>
-
-                                    <div class="col-md-6">
-                                        <input id="pin" type="text" class="form-control" name="pin" value="{{ old('pin') }}" required>
-
-                                        @if ($errors->has('pin'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('pin') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-4">
                                         <div class="checkbox">

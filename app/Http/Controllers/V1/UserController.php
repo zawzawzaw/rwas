@@ -15,8 +15,6 @@ class UserController extends Controller
         $validator = Validator::make($input, [
             'id' => 'required',
             'password' => 'required',
-            'cid' => 'required',
-            'pin' => 'required',
             'showErr' => 'nullable'
         ]);
 
@@ -25,10 +23,10 @@ class UserController extends Controller
         }
 
         $parameter = [
-            'paraDrsID' => $input['id'],
-            'paraDrsPwd' => $input['password'],
-            'paraCid' => $input['cid'],
-            'paraPIN' => $input['pin']
+            'paraDrsID' => 'MANIC',
+            'paraDrsPwd' => 'MANIC',
+            'paraCid' => $input['id'],
+            'paraPIN' => $input['password']
         ];
 
         $result = $this->curlRequest($this->buildDrsXMLContent($parameter), $this->drsUrl.'API_AutoUA_PINVerify', true);
