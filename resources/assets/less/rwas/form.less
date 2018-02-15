@@ -395,6 +395,43 @@
 
 
 
+
+
+  .checkbox{
+    position: relative;
+    padding-left: 30px;
+
+    label{
+      .body-font;
+      letter-spacing: 0;
+      text-transform: none;
+      color: @dark-grey;
+    }
+
+    input[type="checkbox"]{
+      display: none;
+    }
+
+    input[type="checkbox"] + span{
+      display: block;
+      .untick-icon;
+      position: absolute;
+      top: -10px;
+      left: -10px;
+
+      cursor: pointer;
+
+      .transition-in(0.1s);
+    }
+    label{
+    }
+
+    input[type=checkbox]:checked + span{
+      .tick-icon;
+    }
+
+  }
+
 } // .default-form
 
 
@@ -421,18 +458,20 @@
       height: 18px;
 
       position: absolute;
-      top: 18px;
-      right: -26px;
+      // top: 18px;
+      // right: -26px;
+      top: 3px;
+      left: -19px;
 
       .opacity(0);
       .fade-out;
 
       // TABLET PORTRAIT
-      @media only screen and (max-width: 991px) {
-        top: 8px;
-        right: -19px;
-        .fade-out(0s);
-      }
+      // @media only screen and (max-width: 991px) {
+      //   top: 8px;
+      //   right: -19px;
+      //   .fade-out(0s);
+      // }
 
     } 
     &:before{
