@@ -18,3 +18,7 @@ notes.md
 
 /public/css/style.css
 /public/css/critical_style.css
+
+/.docker
+docker-compose.yml
+Dockerfile-php-fpm
