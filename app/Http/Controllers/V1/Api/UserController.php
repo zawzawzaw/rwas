@@ -26,6 +26,27 @@ class UserController extends Controller
         $input['paraDrsPwd'] = $this->drsPwd;
 
         $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
+        
+        $points = [
+            'cc' => [],
+            'gp' => []
+        ];
+
+        foreach($result->Point->Item as $p) {
+            switch (strtolower($p->Type)) {
+                case 'sp':
+                    $points['gp'] = floor($p->Balance);
+                    break;
+                
+                case 'lp':
+                    $points['cc'] = floor($p->Balance);
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+        }
 
         $output_data = array(
             "details" => array(
@@ -35,7 +56,7 @@ class UserController extends Controller
                 "home_country_name" => $result->CustomerAddressCountry,
                 "home_currency" => $result->CustomerCurrencyCode,
             ),
-            "points" => $result->Point->Item,
+            "points" => $points,
             "tier" => array(
                 "tier_code" => $result->CustomerTypeCode,
                 "tier_name" => $result->CustomerTypeDescription,
