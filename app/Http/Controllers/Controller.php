@@ -12,10 +12,14 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected $drsUrl;
+    protected $drsID;
+    protected $drsPwd;
 
     public function __construct()
     {
         $this->drsUrl = "http://52.77.149.78/DRSAPI_DEV/Service.asmx/";
+        $this->drsID = "MANIC";
+        $this->drsPwd = "MANIC";
     }
 
     public function curlRequest($xmlContent, $url, $isPost=false, $parse=true)
