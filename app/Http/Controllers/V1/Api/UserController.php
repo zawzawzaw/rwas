@@ -19,7 +19,7 @@ class UserController extends Controller
             'paraCid' => 29,
             'paraWorkGroup' => "MEML",
             'paraEnquiryCurrCode' => "US",
-            'paraLoadDefaultDRSifNoUA' => "1paint"
+            'paraLoadDefaultDRSifNoUA' => "1"
         ];
 
         $input['paraDrsID'] = $this->drsID;
