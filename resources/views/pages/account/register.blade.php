@@ -86,7 +86,7 @@
                     <select name="gender" class="required">
                       <option value="">Select one</option>
                       <option value="M">M</option>
-                      <option value="F">F.</option>
+                      <option value="F">F</option>
                     </select>
                   </div>
                 </div>
@@ -97,7 +97,7 @@
                 <!-- pending -->
                 <div class="form-group simple-date-version">
                   <div class="page-default-calendar-bg"></div>
-                  <label>Date of Birth</label>
+                  <label>Date of Birth*</label>
                   <div class="manic-calendar">
                     <input name="date_of_birth" type="text" class="form-control page-default-calendar" placeholder="DD/MM/YYYY">
                     <div class="calendar-icon"></div>
@@ -350,10 +350,10 @@
 
                       <option value="Business owner/Partner">Business owner/Partner</option>
                       <option value="Other office worker">Other office worker</option>
-                      <option value="Others">Others</option>
                       <option value="Professional / Technical">Professional / Technical</option>
                       <option value="Retired,unemployed,housewife,student">Retired,unemployed,housewife,student</option>
                       <option value="Senior/Executive management">Senior/Executive management</option>
+                      <option value="Others">Others</option>
                       
                     </select>
                   </div>
