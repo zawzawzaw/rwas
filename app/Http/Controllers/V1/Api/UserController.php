@@ -7,40 +7,44 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function login(Request $request)
+    public function get_user(Request $request)
     {
-        $input = $request->only('id', 'password', 'cid', 'pin', 'showErr');
-        $validator = Validator::make($input, [
-            'id' => 'required',
-            'password' => 'required',
-            'showErr' => 'nullable'
-        ]);
-
-        if($validator->fails()){
-           return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $parameter = [
-            'paraDrsID' => 'MANIC',
-            'paraDrsPwd' => 'MANIC',
-            'paraCid' => $input['id'],
-            'paraPIN' => $input['password']
+        // $input = $request->only(
+            // 'paraCid',
+        //     'paraWorkGroup',
+        //     'paraEnquiryCurrCode',
+        //     'paraLoadDefaultDRSifNoUA'
+        // );
+        $input = [
+            'paraCid' => 29,
+            'paraWorkGroup' => "MEML",
+            'paraEnquiryCurrCode' => "US",
+            'paraLoadDefaultDRSifNoUA' => "1paint"
         ];
 
-        $result = $this->curlRequest($this->buildDrsXMLContent($parameter), $this->drsUrl.'API_AutoUA_PINVerify', true);
+        $input['paraDrsID'] = $this->drsID;
+        $input['paraDrsPwd'] = $this->drsPwd;
 
-        if($result->errCode){
-            if(isset($input['showErr']) && is_null($input['showErr'])==false){
-                echo "<pre>";
-                print_r($result);
-                echo "</pre>";
-                die();
-            }
-            $validator->errors()->add('customErr', 'Wrong id, password, cid or pin!');
-            return redirect()->back()->withErrors($validator)->withInput();
-        }else{
-            $request->session()->put('drsAuth', 1);
-            return redirect()->route('user.account');
-        }
+        $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
+
+        $output_data = array(
+            "details" => array(
+                "name" => $result->CustomerName,
+                "membership_id" => $result->CustomerID,
+                "home_country_code" => "SG",
+                "home_country_name" => $result->CustomerAddressCountry,
+                "home_currency" => $result->CustomerCurrencyCode,
+            ),
+            "points" => $result->Point->Item,
+            "tier" => array(
+                "tier_code" => $result->CustomerTypeCode,
+                "tier_name" => $result->CustomerTypeDescription,
+                "tier_points" => 88,
+                "tier_points_max" => 500,
+            ),
+            "current_bookings" => 2,
+        );
+
+        return response()->json($output_data);
     }
 }
