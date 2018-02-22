@@ -7,16 +7,10 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function get_user(Request $request)
+    public function get_user(Request $request, $return=false, $web=false)
     {
-        // $input = $request->only(
-            // 'paraCid',
-        //     'paraWorkGroup',
-        //     'paraEnquiryCurrCode',
-        //     'paraLoadDefaultDRSifNoUA'
-        // );
         $input = [
-            'paraCid' => 29,
+            'paraCid' => $web ? $request->session()->get('drsUserID') : $request->input('paraCid'),
             'paraWorkGroup' => "MEML",
             'paraEnquiryCurrCode' => "US",
             'paraLoadDefaultDRSifNoUA' => "1"
@@ -26,7 +20,11 @@ class UserController extends Controller
         $input['paraDrsPwd'] = $this->drsPwd;
 
         $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
-        
+
+        if(isset($result->errCode)){
+            return response()->json($result);
+        }
+
         $points = [
             'cc' => [],
             'gp' => []
@@ -65,6 +63,10 @@ class UserController extends Controller
             ),
             "current_bookings" => 2,
         );
+        
+        if($return){
+            return $output_data;
+        }
 
         return response()->json($output_data);
     }

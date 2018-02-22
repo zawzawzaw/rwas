@@ -80,7 +80,10 @@
                     Account
                 </div>
                 <div class="subtitle">
-                    dashboard
+                    Name: {{ $info['details']['name'] }}<br/>
+                    GP: {{ $info['points']['gp'] }}<br/>
+                    CC: {{ $info['points']['cc'] }}<br/>
+                    Tier: {{ $info['tier']['tier_points'] }}<br/>
                 </div>
                 
             </div>
