@@ -23,6 +23,10 @@ Route::group(['prefix' => 'cruise'], function(){
     Route::get('get_itineraries', 'CruiseController@get_itineraries');
 });
 
+Route::group(['prefix' => 'user'], function(){
+    Route::get('get', 'V1\\Api\\UserController@get_user');
+});
+
 Route::group(['prefix' => 'seaware/test'], function(){
     Route::get('merchentlogin', 'Test\\SeawareApiTest@merchantLogin');
     Route::get('merchentsession', 'Test\\SeawareApiTest@retriveMerchent');
