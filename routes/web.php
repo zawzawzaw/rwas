@@ -165,9 +165,9 @@ Route::get('/page/get_home_content', 'PageController@get_home_content');
 Route::get('/page/get_home_content_nonmember', 'PageController@get_home_content_nonmember');
 Route::get('/page/get_registration_content', 'PageController@get_registration_content');
 
-Route::get('/page/en/get_registration_content', 'PageControllerTest@get_registration_content');
-Route::get('/page/zh-hans/get_registration_content', 'PageControllerTest@get_registration_content_chinese_simplified');
-Route::get('/page/zh-hant/get_registration_content', 'PageControllerTest@get_registration_content_chinese_traditional');
+Route::get('/page/en/get_registration_content', 'PageController@get_registration_content');
+Route::get('/page/zh-hans/get_registration_content', 'PageController@get_registration_content_chinese_simplified');
+Route::get('/page/zh-hant/get_registration_content', 'PageController@get_registration_content_chinese_traditional');
 
 
 
