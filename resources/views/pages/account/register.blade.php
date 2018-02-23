@@ -1,7 +1,11 @@
 @extends('layout.master')
 
 @section('content')
-
+  
+  <div class="under-construction-disclaimer">
+    a functionality demo <br>
+    this is NOT the design
+  </div>
 
   <article id="account-register-form-section">
     <div class="container-fluid has-breakpoint">

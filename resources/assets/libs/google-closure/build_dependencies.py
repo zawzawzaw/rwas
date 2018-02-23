@@ -21,5 +21,6 @@ subprocess.Popen([
   '--root_with_prefix=../../js/rwas/page ../../../../../js/rwas/page/',
   '--root_with_prefix=../../js/rwas/section ../../../../../js/rwas/section/',
   '--root_with_prefix=../../js/rwas/component ../../../../../js/rwas/component/',
+  '--root_with_prefix=../../js/rwas/model ../../../../../js/rwas/model/',
   '--output_file=../../js/google-closure-dependency-list.js'
   ], shell=True);

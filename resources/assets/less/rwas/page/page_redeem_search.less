@@ -1,0 +1,167 @@
+#redeem-search-header-section{
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+  background: #dddddd;
+
+} // #redeem-search-header-section
+
+#redeem-search-header{
+
+} // #redeem-search-header
+
+#redeem-search-header-title{
+  margin-bottom: 40px;
+} // #redeem-search-header-title
+
+
+
+#itinerary-search-form{
+  margin-bottom: 20px;
+
+  .form-group{
+    margin-bottom: 0;
+  }
+
+  .cta-container{
+    padding-top: 29px;
+
+    .square-cta{
+      padding-top: 19px;
+      padding-bottom: 15px;
+    }
+  }
+} // #itinerary-search-form
+
+#redeem-search-header-expanded{
+
+  background: #cccccc;
+
+  .redeem-search-options{
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  p{
+    color: @off-black;
+    cursor: pointer;
+    // .display-inline-block;
+
+    // margin-right: 15px;
+
+    &:hover{
+      color: @light-grey-2;
+    }
+
+    &.selected{
+      color: #ff0000;
+    }
+
+    &.disabled{
+      color: #cccccc;
+      cursor: default;
+    }
+
+
+  }
+
+
+  .form-group{
+    margin-bottom: 10px;
+
+    &:last-child{
+      margin-bottom: 0px;
+    }
+
+    label{
+      .body-font;
+      .display-inline-block;
+      width: 50px;
+      margin-right: 10px;
+    }
+  }
+
+  .number{
+    width: 70px;
+    height: 20px;
+
+    .display-inline-block;
+    position: relative;
+
+    .number-add,
+    .number-minus{
+      position: absolute;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+
+      cursor: pointer;
+
+      &:after{
+        .fa;
+        font-size: 16px;
+        line-height: 20px;
+        color: @off-black;
+      }
+      &:hover{
+        &:after{
+          color: @light-grey-2;
+        }
+      }
+    }
+
+    .number-add{
+      right: 0;
+
+      &:after{
+        content: "\f055"; // .fa-plus-circle
+      }
+    }
+
+
+    .number-minus{
+      left: 0;
+
+      &:after{
+        content: "\f056"; // .fa-minus-circle
+      }
+    }
+
+    .number-value{
+      .body-font-bold;
+      text-align: center;
+
+      position: absolute;
+      top: 0;
+      left: 20px;
+      right: 20px;
+    }
+  } // number
+
+} // #redeem-search-header-expanded
+
+
+
+
+
+
+
+
+
+//    ____  _____ ____  _   _ _   _____ ____
+//   |  _ \| ____/ ___|| | | | | |_   _/ ___|
+//   | |_) |  _| \___ \| | | | |   | | \___ \
+//   |  _ <| |___ ___) | |_| | |___| |  ___) |
+//   |_| \_\_____|____/ \___/|_____|_| |____/
+//
+
+#redeem-search-result-section{
+
+} // #redeem-search-result-section
+
+#redeem-search-result{
+
+} // #redeem-search-result

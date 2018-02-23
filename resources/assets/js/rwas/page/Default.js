@@ -10,6 +10,11 @@ goog.require('rwas.component.HeaderMobile');
 goog.require('rwas.component.HeaderDesktop');
 
 
+goog.require('rwas.component.CruiseSearch');
+goog.require('rwas.model.API');
+
+
+
 
 /**
  * The Default Page constructor
@@ -63,6 +68,12 @@ rwas.page.Default = function(options, element) {
   this.box_item_array = [];
 
 
+  /**
+   * @type {rwas.model.API}
+   */
+  this.rwas_api = null;
+
+
 
 
   // min height variables
@@ -104,10 +115,13 @@ rwas.page.Default.DEFAULT = {
 rwas.page.Default.prototype.init = function() {
   rwas.page.Default.superClass_.init.call(this);
 
-  
+  this.create_model();
   this.create_header_mobile();
   this.create_header_desktop();
   
+
+
+  this.create_redeem_search_header();
 
 
   // this.update_page_layout(); // needed by sidebar desktop ?
@@ -127,7 +141,9 @@ rwas.page.Default.prototype.init = function() {
 //
 
 
-
+rwas.page.Default.prototype.create_model = function(){
+  this.rwas_api = rwas.model.API.get_instance();
+};
 
 rwas.page.Default.prototype.create_header_mobile = function(){
   
@@ -147,8 +163,49 @@ rwas.page.Default.prototype.create_header_desktop = function(){
 };
 
 
+
+
+//    ____  _____ ____  _____ _____ __  __
+//   |  _ \| ____|  _ \| ____| ____|  \/  |
+//   | |_) |  _| | | | |  _| |  _| | |\/| |
+//   |  _ <| |___| |_| | |___| |___| |  | |
+//   |_| \_\_____|____/|_____|_____|_|  |_|
+//
+
+
+
+
+rwas.page.Default.prototype.create_redeem_search_header = function(){
   
 
+  if ($('#redeem-search-header-section').length != 0) {
+    
+
+    /**
+     * @type {rwas.component.CruiseSearch}
+     */
+    this.cruise_search = null;
+
+    this.cruise_search = new rwas.component.CruiseSearch({
+    }, $('#redeem-search-header-section'));
+
+    this.rwas_api.cruise_get_valid_search_parameters();
+
+    // actually you don't need this here, put it in the component :P
+
+    goog.events.listen(this.rwas_api, rwas.model.API.CRUISE_GET_VALID_SEARCH_PARAMETERS_COMPLETE, function(event){
+
+      // console.log('the call has finished');
+      // console.log(this.rwas_api.cruise_valid_search_parameters);
+      
+      this.cruise_search.set_data(this.rwas_api.cruise_valid_search_parameters);
+
+    }.bind(this));
+
+  } // if
+  
+
+};
 
 
 //    _        _ __   _____  _   _ _____
