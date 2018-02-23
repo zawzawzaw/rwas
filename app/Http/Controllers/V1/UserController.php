@@ -43,6 +43,7 @@ class UserController extends Controller
         }else{
             $request->session()->put('drsAuth', 1);
             $request->session()->put('drsUserID', $input['id']);
+
             return redirect()->route('user.account');
         }
     }
