@@ -44,7 +44,7 @@
 
                       <div class="form-group">
                         <label>Pax</label>
-                        <input type="text" name="pax">
+                        <input type="text" name="pax" value="AA">
                       </div>
 
                     </div>

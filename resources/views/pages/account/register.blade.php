@@ -834,8 +834,8 @@
               <p>pin - pin create</p>
               <p>pin_confirm - pin create</p>
               <p>date_of_birth, change date format from DD/MM/YYYY (input) to YYYY-MM-DD (to submit to drs)</p>
-              <p>doc_issue_date, change date format from DD/MM/YYYY (input) to DD-MM-YYYY (to submit to drs)</p>
-              <p>doc_expiry_date, change date format from DD/MM/YYYY (input) to DD-MM-YYYY (to submit to drs)</p>
+              <p>doc_issue_date, change date format from DD/MM/YYYY (input) to YYYY-MM-DD (to submit to drs)</p>
+              <p>doc_expiry_date, change date format from DD/MM/YYYY (input) to YYYY-MM-DD (to submit to drs)</p>
               <div class="space30"></div>
 
               <h5>parameters that might be missing:</h5>
