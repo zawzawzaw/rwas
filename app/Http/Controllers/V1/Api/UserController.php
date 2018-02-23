@@ -7,16 +7,10 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function get_user(Request $request)
+    public function get_user(Request $request, $return=false, $web=false)
     {
-        // $input = $request->only(
-            // 'paraCid',
-        //     'paraWorkGroup',
-        //     'paraEnquiryCurrCode',
-        //     'paraLoadDefaultDRSifNoUA'
-        // );
         $input = [
-            'paraCid' => 29,
+            'paraCid' => $web ? $request->session()->get('drsUserID') : $request->input('paraCid'),
             'paraWorkGroup' => "MEML",
             'paraEnquiryCurrCode' => "US",
             'paraLoadDefaultDRSifNoUA' => "1"
@@ -27,6 +21,31 @@ class UserController extends Controller
 
         $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
 
+        if(isset($result->errCode)){
+            return response()->json($result);
+        }
+
+        $points = [
+            'cc' => [],
+            'gp' => []
+        ];
+
+        foreach($result->Point->Item as $p) {
+            switch (strtolower($p->Type)) {
+                case 'sp':
+                    $points['gp'] = floor($p->Balance);
+                    break;
+                
+                case 'lp':
+                    $points['cc'] = floor($p->Balance);
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+        }
+
         $output_data = array(
             "details" => array(
                 "name" => $result->CustomerName,
@@ -35,7 +54,7 @@ class UserController extends Controller
                 "home_country_name" => $result->CustomerAddressCountry,
                 "home_currency" => $result->CustomerCurrencyCode,
             ),
-            "points" => $result->Point->Item,
+            "points" => $points,
             "tier" => array(
                 "tier_code" => $result->CustomerTypeCode,
                 "tier_name" => $result->CustomerTypeDescription,
@@ -44,6 +63,10 @@ class UserController extends Controller
             ),
             "current_bookings" => 2,
         );
+        
+        if($return){
+            return $output_data;
+        }
 
         return response()->json($output_data);
     }

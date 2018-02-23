@@ -46,7 +46,7 @@ Route::group(['middleware' => 'nonAuthDrs'], function() {
 
 // if user is logged in
 Route::group(['middleware' => 'authDrs'], function() {
-  Route::get('/account', function () { return view('pages/account/dashboard'); })->name('user.account');
+  Route::get('/account', 'V1\\UserController@account')->name('user.account');
   Route::get('/account/edit-profile', function () { return view('pages/account/edit-profile'); });
   Route::get('/account/transaction-history', function () { return view('pages/account/transaction-history'); });
   Route::get('/account/booking-history', function () { return view('pages/account/booking-history'); });
