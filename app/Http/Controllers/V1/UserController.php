@@ -51,6 +51,6 @@ class UserController extends Controller
     public function account(Request $request)
     {
         $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true);
-        return view('pages/account/dashboard')->withInfo($info);
+        return view('pages/account/dashboard')->withInfo($info['data'])->withRaw($info['raw']);
     }
 }

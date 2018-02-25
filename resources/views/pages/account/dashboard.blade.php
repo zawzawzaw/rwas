@@ -81,12 +81,23 @@
                 </div>
                 <div class="subtitle">
                     Name: {{ $info['details']['name'] }}<br/>
+                    Membership id: {{ $info['details']['membership_id'] }}<br/>
+                    Country Code: {{ $info['details']['home_country_code'] }}<br/>
+                    Country Name: {{ $info['details']['home_country_name'] }}<br/>
+                    Currency: {{ $info['details']['home_currency'] }}<br/>
                     GP: {{ $info['points']['gp'] }}<br/>
                     CC: {{ $info['points']['cc'] }}<br/>
-                    Tier: {{ $info['tier']['tier_points'] }}<br/>
+                    Tier code: {{ $info['tier']['tier_code'] }}<br/>
+                    Tier name: {{ $info['tier']['tier_name'] }}<br/>
+                    Tier points: {{ $info['tier']['tier_points'] }}<br/>
+                    Tier points max: {{ $info['tier']['tier_points_max'] }}<br/>
+                    Booking: {{ $info['current_bookings'] }}<br/>
                 </div>
-                
             </div>
         </div>
+        <pre class="raw">
+            Raw Output
+            {!! print_r($raw) !!}
+        </pre>
     </body>
 </html>

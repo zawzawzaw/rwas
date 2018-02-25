@@ -65,7 +65,10 @@ class UserController extends Controller
         );
         
         if($return){
-            return $output_data;
+            return [
+                'data' => $output_data,
+                'raw' => $result
+            ];
         }
 
         return response()->json($output_data);
