@@ -14,12 +14,20 @@ class Controller extends BaseController
     protected $drsUrl;
     protected $drsID;
     protected $drsPwd;
+    protected $DRSWORKGROUP;
+    protected $DRSCARDTYPE;
+    protected $DRSCURRCODE;
+    protected $DRSADDRGOMELANGCODE;
 
     public function __construct()
     {
         $this->drsUrl = "http://52.77.149.78/DRSAPI_DEV/Service.asmx/";
         $this->drsID = "MANIC";
         $this->drsPwd = "MANIC";
+        $this->DRSWORKGROUP = "MEML";
+        $this->DRSCARDTYPE = "5";
+        $this->DRSCURRCODE = "US";
+        $this->DRSADDRGOMELANGCODE = "EN";
     }
 
     public function curlRequest($xmlContent, $url, $isPost=false, $parse=true)

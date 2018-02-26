@@ -26,6 +26,7 @@ Route::group(['prefix' => 'cruise'], function(){
 Route::group(['prefix' => 'user'], function(){
     Route::get('get', 'V1\\Api\\UserController@get_user');
     Route::post('login_ajax', 'V1\\Api\\UserController@login');
+    Route::post('register', 'V1\\Api\\UserController@register');
 });
 
 Route::group(['prefix' => 'seaware/test'], function(){

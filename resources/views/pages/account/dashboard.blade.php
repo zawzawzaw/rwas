@@ -89,15 +89,30 @@
                     CC: {{ $info['points']['cc'] }}<br/>
                     Tier code: {{ $info['tier']['tier_code'] }}<br/>
                     Tier name: {{ $info['tier']['tier_name'] }}<br/>
-                    Tier points: {{ $info['tier']['tier_points'] }}<br/>
-                    Tier points max: {{ $info['tier']['tier_points_max'] }}<br/>
-                    Booking: {{ $info['current_bookings'] }}<br/>
+                    Tier points: {{ $info['tier']['tier_points'] }}<br/><br/>
+                    Preferred Language: {{ $raw->CustomerPreferredLanguage }}<br/>
+                    Date Of Birth: {{ $raw->CustomerDateOfBirth }}<br/>
+                    Type: {{ $raw->CustomerTypeDescription }}<br/>
+                    Region Code: {{ $raw->CustomerRegionCode }}<br/>
+                    Country: {{ $raw->CustomerNAT }}<br/>
+                    Passport No: {{ $raw->CustomerICPassportNo }}<br/>
+                    Passport Type: {{ $raw->CustomerICPassportType }}<br/>
+                    Passport Country: {{ $raw->CustomerICPassportCountry }}<br/>
+                    Address 1: {{ $raw->CustomerAddressLine1 }}<br/>
+                    Address 2: {{ $raw->CustomerAddressLine2 }}<br/>
+                    Address 3: {{ $raw->CustomerAddressLine3 }}<br/>
+                    Address City: {{ $raw->CustomerAddressCity }}<br/>
+                    Address State: {{ $raw->CustomerAddressState->{0} }}<br/>
+                    Address Postal Code: {{ $raw->CustomerAddressPostCode }}<br/>
+                    Address Country: {{ $raw->CustomerAddressCountry }}<br/><br/>
+                    Loyalty Point Balance: {{ $raw->LoyaltyPointBalance }}<br/>
+                    E Cash Balance: {{ $raw->CashECashBalance }}<br/>
                 </div>
             </div>
         </div>
-        <pre class="raw">
+        <!-- <pre class="raw">
             Raw Output
             {!! print_r($raw) !!}
-        </pre>
+        </pre> -->
     </body>
 </html>
