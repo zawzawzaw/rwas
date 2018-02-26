@@ -25,14 +25,34 @@ manic.ui.NewFormCheck = function(options, element) {
   this.has_submitted = false;
 
   /**
+   * @type {String}
+   */
+  this.submit_result = '';
+
+  /**
    * @type {Array.<manic.ui.NewFormCheckItem>}
    */
   this.item_array = [];
+
+  /**
+   * @type {String}
+   */
+  this.form_data = '';
+
+  /**
+   * @type {Array}
+   */
+  this.form_data_object = [];
 
 
   this.is_ajax_version = false;
   if (this.element.hasClass('ajax-version')) {
     this.is_ajax_version = true;
+  }
+
+  this.is_api_version = false;
+  if (this.element.hasClass('api-version')) {
+    this.is_api_version = true;
   }
 
   this.element.data('manic.ui.NewFormCheck', this);
@@ -70,18 +90,28 @@ manic.ui.NewFormCheck.DEFAULT = {
 };
 
 /**
- * CLASSNAME Event Constant
+ * NewFormCheck Event Constant
  * @const
  * @type {string}
  */
-manic.ui.NewFormCheck.EVENT_01 = '';
+manic.ui.NewFormCheck.ON_AJAX_SENDING_START = 'on_ajax_sending_start';
 
 /**
- * CLASSNAME Event Constant
+ * NewFormCheck Event Constant
  * @const
  * @type {string}
  */
-manic.ui.NewFormCheck.EVENT_02 = '';
+manic.ui.NewFormCheck.ON_AJAX_SENDING_COMPLETE = 'on_ajax_sending_complete';
+
+
+/**
+ * NewFormCheck Event Constant
+ * @const
+ * @type {string}
+ */
+manic.ui.NewFormCheck.ON_FORM_SUBMIT = 'on_form_submit';
+
+
 
 
 //    ____  ____  _____     ___  _____ _____
@@ -153,33 +183,56 @@ manic.ui.NewFormCheck.prototype.check_if_form_valid = function() {
 };
 
 manic.ui.NewFormCheck.prototype.send_ajax = function() {
-  var form_data = this.element.serialize();
+  this.form_data = this.element.serialize();
+  // this.form_data_object = this.element.serializeArray();
 
-  $.ajax({
-    type: this.element.attr('method'),      // get or post
-    async: false,
-    cache: false,
-    data: form_data,
-    url: this.action_url,
-    complete: function(event){
+  // https://stackoverflow.com/questions/2276463/how-can-i-get-form-data-with-javascript-jquery
+  this.form_data_object = this.element.serializeArray().reduce(function(obj, item) {
+    obj[item.name] = item.value;
+    return obj;
+  }, {});
 
-      console.log('on_send_ajax_complete');
-      // console.log(event);
-      console.log(event.responseText);
+  console.log(this.form_data_object);
+  // var form_data = this.element.serialize();
+  
+  
+  if (this.is_api_version == true) {
 
-      this.element.removeClass('form-error-version');
-      this.element.removeClass('sending-version');
+    this.dispatchEvent(new goog.events.Event(manic.ui.NewFormCheck.ON_FORM_SUBMIT));
 
+  } else {
 
+    $.ajax({
+      type: this.element.attr('method'),      // get or post
+      async: false,
+      cache: false,
+      data: this.form_data,
+      url: this.action_url,
+      complete: function(event){
 
-      if(event.responseText == 'success') {
-        this.element.addClass('sent-version');
-      } else {
-        this.element.addClass('server-error-version');
-      }
+        console.log('on_send_ajax_complete');
+        // console.log(event);
+        console.log(event.responseText);
 
-    }.bind(this)
-  });
+        this.element.removeClass('form-error-version');
+        this.element.removeClass('sending-version');
+
+        this.submit_result = event.responseText;
+        this.dispatchEvent(new goog.events.Event(manic.ui.NewFormCheck.ON_AJAX_SENDING_COMPLETE));
+
+        if(event.responseText == 'success') {
+          this.element.addClass('sent-version');
+        } else {
+          this.element.addClass('server-error-version');
+        }
+
+      }.bind(this)
+    });
+
+    this.dispatchEvent(new goog.events.Event(manic.ui.NewFormCheck.ON_AJAX_SENDING_START));
+  }
+
+  
 };
 manic.ui.NewFormCheck.prototype.public_method_03 = function() {};
 manic.ui.NewFormCheck.prototype.public_method_04 = function() {};
@@ -203,7 +256,8 @@ manic.ui.NewFormCheck.prototype.on_form_submit = function(event) {
 
   this.check_if_form_valid();
 
-
+  // removed this for now
+  /*
   if (this.has_submitted == true) {
     // subsequent submits
     return_value = false;
@@ -212,6 +266,7 @@ manic.ui.NewFormCheck.prototype.on_form_submit = function(event) {
     this.element.addClass('submitted-version');
     return false;   // end check
   }
+  */
 
 
 

@@ -9,7 +9,7 @@
 //    \____\___/|_|  |_|_|  |_|\___/|_| \_|
 //
 
-.number{
+.number-plus-minus{
   width: 70px;
   height: 20px;
 
@@ -65,7 +65,7 @@
     left: 20px;
     right: 20px;
   }
-} // number
+} // .number-plus-minus
 
 
 
@@ -201,9 +201,134 @@
 //
 
 #redeem-search-result-section{
-
+  padding-top: 50px;
+  padding-bottom: 50px;
 } // #redeem-search-result-section
 
 #redeem-search-result{
 
 } // #redeem-search-result
+
+
+
+
+//    ___ _____ _____ __  __
+//   |_ _|_   _| ____|  \/  |
+//    | |  | | |  _| | |\/| |
+//    | |  | | | |___| |  | |
+//   |___| |_| |_____|_|  |_|
+//
+
+.redeem-search-result-item{
+  background: #eeeeee;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+
+  .item-header{
+    padding-bottom: 18px;
+    border-bottom: 1px solid #999999;
+    margin-bottom: 22px;
+
+    p{
+      .h4-style;
+    }
+    .itinerary-name{
+
+    }
+    .ship-name{
+      text-align: right;
+    }
+
+  }
+  .item-content{
+    h4{
+      font-size: 13px;
+      line-height: 16px;
+      margin-bottom: 8px;
+    }
+  }
+
+  .item-date-container{
+    background: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    // padding-bottom: 22px;
+  }
+
+
+  .item-date{
+    // margin-bottom: 30px;
+    margin-bottom: 15px;
+
+    cursor: pointer;
+
+    .item-date-header{
+      background: #cccccc;
+      padding-left: 8px;
+      padding-right: 5px;
+      padding-top: 4px;
+      padding-bottom: 6px;
+      .transition-in(0.3s);
+
+      h6{
+
+      }
+    }
+
+    .item-date-price{
+      padding-left: 8px;
+      padding-right: 5px;
+
+      padding-top: 10px;
+      padding-bottom: 6px;
+
+      background: #ffffff;
+      .transition-in(0.3s);
+
+      p{
+        .body-font;
+        margin-bottom: 3px;
+      }
+      .price{
+        span{
+          .display-inline-block;
+        }
+
+        .number{
+          .body-font-bold;
+          font-size: 26px;
+          line-height: 32px;
+          margin-right: 4px;
+        }
+        .currency{
+          .body-font;
+          text-transform: uppercase;
+          font-size: 14px;
+          line-height: 20px;
+
+          margin-right: 4px;
+          padding-top: 10px;
+        }
+      }
+    }
+
+    &:hover{
+      .item-date-header{
+        background: #bbbbbb;
+      }
+      .item-date-price{
+        background: #cccccc;
+      }
+
+    }
+
+  } // .item-date
+}
+
+
+
+
