@@ -106,6 +106,7 @@ class CruiseController extends Controller
             $query->select('id', 'itinerary', 'cruise_id', 'departure_date');
             $query->orderBy('departure_date', 'ASC');
         }]);
+        return $list;
         $list = $list->paginate(6)->toArray();
         $res = [];
         foreach($list['data'] as $fl){

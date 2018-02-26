@@ -552,7 +552,7 @@ class SeawareApiTest extends Controller
                 <CruiseLine ShipCode="WDR"/>
                 </SelectedSailing>
                 <Currency CurrencyCode="USD"/>
-                <SelectedCategory FareCode="RWCC B2M" PricedCategoryCode="CD" WaitlistIndicator="false"/>
+                <SelectedCategory FareCode="RWCC B2M" PricedCategoryCode="BDS" WaitlistIndicator="false"/>
             </SailingInfo>
             <ReservationInfo>
                 <GuestDetails>

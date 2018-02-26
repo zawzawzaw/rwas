@@ -103,16 +103,16 @@ Route::get('/contact', function () { return view('pages/static/welcome'); });
 
 
 
-Route::get('xtopia', function () {
-    // return view('welcome');
-  return 'xtopia';
-});
+// Route::get('xtopia', function () {
+//     // return view('welcome');
+//   return 'xtopia';
+// });
 
-Route::get('drs', function() {
-  return 'drs';
-});
+// Route::get('drs', function() {
+//   return 'drs';
+// });
 
-Route::get('seaware', 'SoapController@show');
+// Route::get('seaware', 'SoapController@show');
 
 Route::get('fetch_seaware_csv', 'FetchSeawareCsvController@index');
 
