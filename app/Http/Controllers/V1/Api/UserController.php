@@ -254,4 +254,90 @@ class UserController extends Controller
     
         return response()->json($regResult);
     }
+    
+    public function update(Request $request)
+    {
+        $input = $request->only(
+            'paraCid',
+            'paraEmail',
+            'paraHOME',
+            'paraBusiness',
+            'paraMOBILE',
+            'paraSMS',
+            'paraAdd1',
+            'paraAdd2',
+            'paraAdd3',
+            'paraCity',
+            'paraState',
+            'paraCountry',
+            'paraPostcode',
+            'paraPreLanguage',
+            'PF1Field',
+            'PF1Value',
+            'PF2Field',
+            'PF2Value',
+            'PF3Field',
+            'PF3Value',
+            'PF4Field',
+            'PF4Value',
+            'PF5Field',
+            'PF5Value',
+            'PF6Field',
+            'PF6Value',
+            'PF7Field',
+            'PF7Value',
+            'PF8Field',
+            'PF8Value',
+            'PF9Field',
+            'PF9Value',
+            'PF10Field',
+            'PF10Value'
+        );
+
+        $update = [
+            'paraDrsID' => $this->drsID,
+            'paraDrsPwd' => $this->drsPwd,
+            'paraDRSWorkgroup' => $this->DRSWORKGROUP,
+            'paraCardTypeCode' => $this->DRSCARDTYPE,
+            'paraCid' => $input['paraCid'],
+            'paraEmail' => $input['paraEmail'],
+            'paraHOME' => $input['paraHOME'],
+            'paraBusiness' => $input['paraBusiness'],
+            'paraMOBILE' => $input['paraMOBILE'],
+            'paraSMS' => $input['paraSMS'],
+            'paraAdd1' => $input['paraAdd1'],
+            'paraAdd2' => $input['paraAdd2'],
+            'paraAdd3' => $input['paraAdd3'],
+            'paraCity' => $input['paraCity'],
+            'paraState' => $input['paraState'],
+            'paraCountry' => $input['paraCountry'],
+            'paraPostcode' => $input['paraPostcode'],
+            'paraPreLanguage' => 'EN',
+            'paraCurrCode' => $this->DRSCURRCODE,
+            'PF1Field' => 'OCC',
+            'PF1Value' => $input['PF1Value'],
+            'PF2Field' => 'BIZ2',
+            'PF2Value' => $input['PF2Value'],
+            'PF3Field' => 'SPEP',
+            'PF3Value' => $input['PF3Value'],
+            'PF4Field' => 'GRA',
+            'PF4Value' => $input['PF4Value'],
+            'PF5Field' => 'COM',
+            'PF5Value' => $input['PF5Value'],
+            'PF6Field' => 'OA',
+            'PF6Value' => $input['PF6Value'],
+            'PF7Field' => 'CTLD',
+            'PF7Value' => $input['PF7Value'],
+            'PF8Field' => 'CTRP',
+            'PF8Value' => $input['PF8Value'],
+            'PF9Field' => '',
+            'PF9Value' => '',
+            'PF10Field' => '',
+            'PF10Value' => ''
+        ];
+
+        $result = $this->curlRequest($this->buildDrsXMLContent($update), $this->drsUrl.'API_EditCustomerV2', true);
+
+        return response()->json($result);
+    }
 }

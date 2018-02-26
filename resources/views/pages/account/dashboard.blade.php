@@ -93,6 +93,10 @@
                     Preferred Language: {{ $raw->CustomerPreferredLanguage }}<br/>
                     Date Of Birth: {{ $raw->CustomerDateOfBirth }}<br/>
                     Type: {{ $raw->CustomerTypeDescription }}<br/>
+                    Email: {{ $raw->EmailAddress }}<br/>
+                    @foreach($raw->Contact->ContactSection->Cust_Contact as $contact)
+                    {{ $contact->Type }}: {{ $contact->ContactNo}}<br/>
+                    @endforeach
                     Region Code: {{ $raw->CustomerRegionCode }}<br/>
                     Country: {{ $raw->CustomerNAT }}<br/>
                     Passport No: {{ $raw->CustomerICPassportNo }}<br/>
