@@ -34,10 +34,11 @@ goog.addDependency('../../../../../js/manic/util/JsonImagePreloaderMobile.js', [
 goog.addDependency('../../../../../js/manic/util/JsonParser.js', ['manic.util.JsonParser'], ['goog.events.Event', 'goog.events.EventTarget']);
 goog.addDependency('../../../../../js/manic/util/StringUtil.js', ['manic.util.StringUtil'], ['goog.events.Event', 'goog.events.EventTarget']);
 goog.addDependency('../../../../../js/manic/video/VideoJSPlayer.js', ['manic.video.VideoJSPlayer'], ['goog.events.Event', 'goog.events.EventTarget']);
-goog.addDependency('../../../../../js/rwas/component/CruiseSearch.js', ['rwas.component.CruiseSearch'], ['goog.events.Event', 'goog.events.EventTarget']);
+goog.addDependency('../../../../../js/rwas/component/CruiseSearch.js', ['rwas.component.CruiseSearch', 'rwas.component.CruiseSearchDataItem', 'rwas.component.CruiseSearchNumber'], ['goog.events.Event', 'goog.events.EventTarget', 'rwas.model.API']);
+goog.addDependency('../../../../../js/rwas/component/CruiseSearchResult.js', ['rwas.component.CruiseSearchResult'], ['goog.events.Event', 'goog.events.EventTarget', 'rwas.model.API']);
 goog.addDependency('../../../../../js/rwas/component/HeaderDesktop.js', ['rwas.component.HeaderDesktop'], ['goog.events.Event', 'goog.events.EventTarget']);
 goog.addDependency('../../../../../js/rwas/component/HeaderMobile.js', ['rwas.component.HeaderMobile'], ['goog.events.Event', 'goog.events.EventTarget']);
 goog.addDependency('../../../../../js/rwas/model/API.js', ['rwas.model.API'], ['goog.events.Event', 'goog.events.EventTarget', 'rwas.model.Constants']);
 goog.addDependency('../../../../../js/rwas/model/Constants.js', ['rwas.model.Constants'], []);
-goog.addDependency('../../../../../js/rwas/page/Default.js', ['rwas.page.Default'], ['goog.events.Event', 'goog.events.EventTarget', 'manic.page.Page', 'manic.ui.BoxItem', 'rwas.component.CruiseSearch', 'rwas.component.HeaderDesktop', 'rwas.component.HeaderMobile', 'rwas.model.API']);
+goog.addDependency('../../../../../js/rwas/page/Default.js', ['rwas.page.Default'], ['goog.events.Event', 'goog.events.EventTarget', 'manic.page.Page', 'manic.ui.BoxItem', 'rwas.component.CruiseSearch', 'rwas.component.CruiseSearchResult', 'rwas.component.HeaderDesktop', 'rwas.component.HeaderMobile', 'rwas.model.API']);
 goog.addDependency('../../../../../js/rwas/section/Sample.js', ['rwas.section.Sample'], ['goog.events.Event', 'goog.events.EventTarget']);

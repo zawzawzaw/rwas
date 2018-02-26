@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\V1\Api;
 
+use Validator;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -79,8 +81,7 @@ class UserController extends Controller
         $input = $request->only('id', 'password', 'cid', 'pin', 'showErr');
         $validator = Validator::make($input, [
             'id' => 'required',
-            'password' => 'required',
-            'showErr' => 'nullable'
+            'password' => 'required'
         ]);
 
         if($validator->fails()){
@@ -106,8 +107,8 @@ class UserController extends Controller
             $validator->errors()->add('customErr', 'Wrong id, password, cid or pin!');
             return 'fail';
         }else{
-            $request->session()->put('drsAuth', 1);
-            $request->session()->put('drsUserID', $input['id']);
+            // $request->session()->put('drsAuth', 1);
+            // $request->session()->put('drsUserID', $input['id']);
             return 'success';
         }
     }

@@ -21,6 +21,13 @@ rwas.model.API = function() {
    * @type {Array}
    */
   this.cruise_valid_search_parameters = [];
+
+
+  /**
+   * @type {Array}
+   */
+  this.cruise_itineraries = [];                         // the current result of cruise/get_itineraries
+
   
   console.log('rwas.model.API: init');
 };
@@ -41,11 +48,34 @@ rwas.model.API.instance_ = null;
  */
 rwas.model.API.BASE_URL = 'http://52.77.205.209/api/public/'
 
+
+
+/**
+ * @const
+ * @type {string}
+ */
+rwas.model.API.CRUISE_GET_VALID_SEARCH_PARAMETERS_START = 'cruise_get_valid_search_parameters_start';
+
 /**
  * @const
  * @type {string}
  */
 rwas.model.API.CRUISE_GET_VALID_SEARCH_PARAMETERS_COMPLETE = 'cruise_get_valid_search_parameters_complete';
+
+
+
+
+/**
+ * @const
+ * @type {string}
+ */
+rwas.model.API.CRUISE_GET_ITINERARIES_START = 'cruise_get_iteniraries_start';
+
+/**
+ * @const
+ * @type {string}
+ */
+rwas.model.API.CRUISE_GET_ITINERARIES_COMPLETE = 'cruise_get_iteniraries_complete';
 
 
 
@@ -101,7 +131,8 @@ rwas.model.API.prototype.cruise_get_valid_search_parameters = function() {
   // todo
   // save data in cookies (cache)
   // expires in 1 hr
-  
+    
+  this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_VALID_SEARCH_PARAMETERS_START));
 
   var target_url = rwas.model.API.BASE_URL + 'cruise/get_valid_search_parameters';
 
@@ -130,17 +161,78 @@ rwas.model.API.prototype.cruise_get_valid_search_parameters = function() {
 
       }
 
-      
-
       this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_VALID_SEARCH_PARAMETERS_COMPLETE));
 
     }.bind(this)
   });
 
 };
-rwas.model.API.prototype.cruise_get_itineraries = function() {
+
+
+/**
+ * @param  {String} port_param [description]
+ * @param  {String} date_param [description]
+ * @param  {String} pax_param  [description]
+ */
+rwas.model.API.prototype.cruise_get_itineraries = function(port_param, date_param, pax_param) {
+
+  console.log(
+    {
+      'port': port_param,
+      'date': date_param,
+      'pax': pax_param
+    }
+  );
 
   // 'cruise/get_itineraries'
+  
+  this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_ITINERARIES_START));
+
+  var target_url = rwas.model.API.BASE_URL + 'cruise/get_itineraries';
+
+  $.ajax({
+    'url': target_url,
+    'method': 'GET',
+    'data': {
+      'port': port_param,
+      'date': date_param,
+      'pax': pax_param
+    },
+    'dataType': 'json',
+    'success': function( result ) {
+      var data_array = result;
+
+      this.cruise_itineraries = data_array;
+
+      
+      // parse it a little
+      var item = null;
+      var ship_data = null;
+
+      for (var i = 0, l=this.cruise_itineraries['data'].length; i < l; i++) {
+
+        item = this.cruise_itineraries['data'][i];
+
+        ship_data = rwas.model.Constants.get_ship_data(item['ship_code']);
+
+        if (ship_data != null) {
+          item['ship_name'] = ship_data['en'];                // for english
+        }
+      }
+
+      console.log('this.cruise_itineraries');
+      console.log(this.cruise_itineraries);
+      
+
+      this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_ITINERARIES_COMPLETE));
+
+    }.bind(this)
+  });
+
+  
+
+
+
 
 };
 

@@ -5,6 +5,8 @@ goog.provide('rwas.component.CruiseSearchNumber');
 goog.require('goog.events.Event');
 goog.require('goog.events.EventTarget');
 
+goog.require('rwas.model.API');
+
 
 
 /**
@@ -35,10 +37,20 @@ rwas.component.CruiseSearch = function(options, element) {
   this.selected_pax = '';
 
 
-  this.selected_port_txt = $('#itinerary-search-form input[name="departure_port"]');
-  this.selected_date_txt = $('#itinerary-search-form input[name="date"]');
-  this.selected_pax_txt  = $('#itinerary-search-form input[name="pax"]');
-    
+  this.selected_port_txt = this.element.find('#itinerary-search-form input[name="port"]');
+  this.selected_date_txt = this.element.find('#itinerary-search-form input[name="date"]');
+  this.selected_pax_txt  = this.element.find('#itinerary-search-form input[name="pax"]');
+  
+  /**
+   * @type {rwas.model.API}
+   */
+  this.rwas_api = null;
+
+
+  /**
+   * @type {manic.ui.NewFormCheck}
+   */
+  this.search_form_check = null;
 
 
 
@@ -67,8 +79,10 @@ rwas.component.CruiseSearch = function(options, element) {
   this.data_array = [];
 
 
+  this.create_api();
   this.create_form_change();
   this.create_number_clicks();
+  this.create_form_check();
   
 
 
@@ -108,6 +122,24 @@ rwas.component.CruiseSearch.EVENT_02 = '';
 //   |_|   |_| \_\___|  \_/_/   \_\_| |_____|
 //
 
+
+
+rwas.component.CruiseSearch.prototype.create_api = function() {
+
+  this.rwas_api = rwas.model.API.get_instance();
+
+
+  this.rwas_api.cruise_get_valid_search_parameters();
+
+  goog.events.listen(this.rwas_api, rwas.model.API.CRUISE_GET_VALID_SEARCH_PARAMETERS_COMPLETE, function(event){
+
+    // console.log('the call has finished');
+    // console.log(this.rwas_api.cruise_valid_search_parameters);
+    
+    this.set_data(this.rwas_api.cruise_valid_search_parameters);
+
+  }.bind(this));
+};
 
 rwas.component.CruiseSearch.prototype.create_click = function() {
 
@@ -221,6 +253,37 @@ rwas.component.CruiseSearch.prototype.on_number_update = function(event) {
   
 
 };
+
+rwas.component.CruiseSearch.prototype.create_form_check = function(event) {
+
+  if (this.element.find('#itinerary-search-form').length != 0) {
+    this.search_form_check = this.element.find('#itinerary-search-form').data('manic.ui.NewFormCheck');
+
+    goog.events.listen(this.search_form_check, manic.ui.NewFormCheck.ON_FORM_SUBMIT, function(event){
+      var data = this.search_form_check.form_data_object;
+      var port = data['port'];
+      var date = data['date'];
+      var pax = data['pax'];
+      
+      this.rwas_api.cruise_get_itineraries(port, date, pax);
+    }.bind(this));
+
+  }
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -481,17 +544,7 @@ rwas.component.CruiseSearch.prototype.public_method_06 = function() {};
 //   |_____|  \_/  |_____|_| \_| |_| |____/
 //
 
-/**
- * @param {object} event
- */
-rwas.component.CruiseSearch.prototype.on_event_handler_01 = function(event) {
-};
 
-/**
- * @param {object} event
- */
-rwas.component.CruiseSearch.prototype.on_event_handler_02 = function(event) {
-};
 
 /**
  * @param {object} event

@@ -549,7 +549,7 @@
               <div class="col-md-6">
 
                 <div class="form-group">
-                  <label>Country</label>
+                  <label>Country*</label>
                   <div class="manic-dropdown">
                     <select name="address_country">
                       <option value="">Select one</option>

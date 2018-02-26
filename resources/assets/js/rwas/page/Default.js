@@ -11,6 +11,7 @@ goog.require('rwas.component.HeaderDesktop');
 
 
 goog.require('rwas.component.CruiseSearch');
+goog.require('rwas.component.CruiseSearchResult');
 goog.require('rwas.model.API');
 
 
@@ -76,6 +77,25 @@ rwas.page.Default = function(options, element) {
 
 
 
+
+
+
+
+  /**
+   * @type {rwas.component.CruiseSearch}
+   */
+  this.cruise_search = null;
+
+  /**
+   * @type {rwas.component.CruiseSearchResult}
+   */
+  this.cruise_search_result = null;
+
+
+
+
+
+
   // min height variables
   this.is_page_min_height = false;
   this.is_page_min_height_mobile = false;
@@ -115,13 +135,15 @@ rwas.page.Default.DEFAULT = {
 rwas.page.Default.prototype.init = function() {
   rwas.page.Default.superClass_.init.call(this);
 
-  this.create_model();
+  this.create_api();
   this.create_header_mobile();
   this.create_header_desktop();
   
 
 
   this.create_redeem_search_header();
+  this.create_redeem_search_result();
+
 
 
   // this.update_page_layout(); // needed by sidebar desktop ?
@@ -141,7 +163,7 @@ rwas.page.Default.prototype.init = function() {
 //
 
 
-rwas.page.Default.prototype.create_model = function(){
+rwas.page.Default.prototype.create_api = function(){
   this.rwas_api = rwas.model.API.get_instance();
 };
 
@@ -179,31 +201,24 @@ rwas.page.Default.prototype.create_redeem_search_header = function(){
   
 
   if ($('#redeem-search-header-section').length != 0) {
-    
-
-    /**
-     * @type {rwas.component.CruiseSearch}
-     */
-    this.cruise_search = null;
 
     this.cruise_search = new rwas.component.CruiseSearch({
     }, $('#redeem-search-header-section'));
 
-    this.rwas_api.cruise_get_valid_search_parameters();
-
-    // actually you don't need this here, put it in the component :P
-
-    goog.events.listen(this.rwas_api, rwas.model.API.CRUISE_GET_VALID_SEARCH_PARAMETERS_COMPLETE, function(event){
-
-      // console.log('the call has finished');
-      // console.log(this.rwas_api.cruise_valid_search_parameters);
-      
-      this.cruise_search.set_data(this.rwas_api.cruise_valid_search_parameters);
-
-    }.bind(this));
 
   } // if
   
+
+};
+
+rwas.page.Default.prototype.create_redeem_search_result = function(){
+
+  if ($('#redeem-search-result-section').length != 0) {
+
+    this.cruise_search_result = new rwas.component.CruiseSearchResult({
+    }, $('#redeem-search-result-section'));
+
+  }
 
 };
 
