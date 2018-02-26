@@ -98,15 +98,22 @@ class CruiseController extends Controller
 
     */
 
-    public function get_itineraries()
+    public function get_itineraries(Request $request)
     {
         $list = Itinerary::query();
         $list->select('id', DB::raw('itin_code as iten_code'), DB::raw('itin_name as iten_name'), 'ship_code');
-        $list->with(['cruise' => function($query) {
-            $query->select('id', 'itinerary', 'cruise_id', 'departure_date');
+        $list->with(['cruise' => function($query) use ($request){
+            $query->select('id', 'itinerary', 'cruise_id', 'departure_date', DB::raw('DATE_FORMAT(departure_date, "%m/%Y") as filterDate'));
             $query->orderBy('departure_date', 'ASC');
+            if(is_null($request->input('date'))==false){
+                $query->whereRaw("DATE_FORMAT(departure_date, '%m/%Y')='".$request->input('date')."'");
+            }
         }]);
-        return $list;
+        
+        if(is_null($request->input('port'))===false) {
+            $list->where('departure_port', $request->input('port'));
+        }
+
         $list = $list->paginate(6)->toArray();
         $res = [];
         foreach($list['data'] as $fl){
@@ -133,9 +140,10 @@ class CruiseController extends Controller
         }
         return response()->json([
             'pagination' => [
-                'to' => $list['to'],
-                'from' => $list['from'],
-                'total' => $list['total']
+                'to' => (int) $list['to'],
+                'from' => (int) $list['from'],
+                'total' => (int) $list['total'],
+                'page' => (int) $list['current_page']
             ],
             'data' => $res
         ]);
