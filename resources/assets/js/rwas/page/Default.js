@@ -12,6 +12,7 @@ goog.require('rwas.component.HeaderDesktop');
 
 goog.require('rwas.component.CruiseSearch');
 goog.require('rwas.component.CruiseSearchResult');
+goog.require('rwas.component.UserRegisterForm');
 goog.require('rwas.model.API');
 
 
@@ -144,6 +145,7 @@ rwas.page.Default.prototype.init = function() {
   this.create_redeem_search_header();
   this.create_redeem_search_result();
 
+  this.create_register_form();
 
 
   // this.update_page_layout(); // needed by sidebar desktop ?
@@ -220,6 +222,29 @@ rwas.page.Default.prototype.create_redeem_search_result = function(){
 
   }
 
+};
+
+
+//    _   _ ____  _____ ____
+//   | | | / ___|| ____|  _ \
+//   | | | \___ \|  _| | |_) |
+//   | |_| |___) | |___|  _ <
+//    \___/|____/|_____|_| \_\
+//
+
+rwas.page.Default.prototype.create_register_form = function(){
+
+  /**
+   * @type {rwas.component.UserRegisterForm}
+   */
+  this.user_registration_form = null;
+
+  if ($('#account-register-form-section').length != 0) {
+
+    this.user_registration_form = new rwas.component.UserRegisterForm({
+    }, $('#account-register-form-section'));
+
+  }
 };
 
 

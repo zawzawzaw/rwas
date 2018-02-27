@@ -59,3 +59,14 @@ manic.util.StringUtil.is_email = function(email_param) {
   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email_param);
 };
+
+
+
+/**
+ * @type {function}
+ * @param  {string} str_param
+ * @return {string}
+ */
+manic.util.StringUtil.html_encode = function(str_param){
+  return String(str_param).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+};

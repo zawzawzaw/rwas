@@ -3,7 +3,7 @@
 @section('content')
 
   <div class="under-construction-disclaimer">
-    a functionality demo <br>
+    A functionality demo <br>
     this is NOT the design
   </div>
 
@@ -45,7 +45,7 @@
                     <div class="col-md-4">
 
                       <div class="form-group">
-                        <label>Date (Year & Month)</label>
+                        <label>Month & Year</label>
                         <input type="text" name="date">
                       </div>
 
@@ -103,7 +103,7 @@
                     <div id="redeem-search-valid-pax">
 
                       <div class="form-group">
-                        <label>adult</label>
+                        <label>Adult</label>
                         <div class="number-plus-minus" id="redeem-search-valid-pax-adult">
                           <div class="number-minus"></div>
                           <div class="number-value">2</div>
@@ -112,7 +112,7 @@
                       </div>
 
                       <div class="form-group">
-                        <label>child</label>
+                        <label>Child</label>
                         <div class="number-plus-minus" id="redeem-search-valid-pax-child">
                           <div class="number-minus"></div>
                           <div class="number-value">0</div>
@@ -121,7 +121,7 @@
                       </div>
 
                       <div class="form-group">
-                        <label>infant</label>
+                        <label>Infant</label>
                         <div class="number-plus-minus" id="redeem-search-valid-pax-infant">
                           <div class="number-minus"></div>
                           <div class="number-value">0</div>

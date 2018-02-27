@@ -56,6 +56,7 @@ class UserController extends Controller
 
     public function editProfile(Request $request)
     {
-        return view('pages/account/edit-profile');
+        $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true);
+        return view('pages/account/edit-profile')->withInfo($info['data']);
     }
 }

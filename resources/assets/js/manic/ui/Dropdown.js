@@ -7,6 +7,8 @@ goog.require('goog.math.Box');
 goog.require('goog.events.Event');
 goog.require('goog.events.EventTarget');
 
+goog.require('manic.util.StringUtil');
+
 /**
  * The Dropdown constructor
  * @param {object} options The object extendable like jquery plugins
@@ -85,12 +87,15 @@ manic.ui.Dropdown = function(options, element) {
   for (var i = 0, l=arr.length; i < l; i++) {
     temp_item = $(arr[i]);
     value = '';
-    label = temp_item.html();
+    // label = temp_item.html();
+    label = temp_item.text();
+    // label = manic.util.StringUtil.html_decode(label);
 
     if (goog.isDef(temp_item.attr('value'))) {
       value = temp_item.attr('value');
     } else {
-      value = temp_item.html();
+      // value = temp_item.html();
+      value = temp_item.text();
     }
     
     if (value == this.current_value) {
@@ -106,8 +111,10 @@ manic.ui.Dropdown = function(options, element) {
       this.label_array[this.label_array.length] = label;
       this.value_array[this.value_array.length] = value;
     }
-    
   }
+
+  console.log('this.label_array');
+  console.log(this.label_array)
 
   if (this.initial_label == null && this.options['initial_label'] != '') {
     this.initial_label = '' + this.options['initial_label'];

@@ -28,6 +28,11 @@ rwas.model.API = function() {
    */
   this.cruise_itineraries = [];                         // the current result of cruise/get_itineraries
 
+  /**
+   * @type {Array}
+   */
+  this.user_registered = {};                         // the current result of user/register
+
   
   console.log('rwas.model.API: init');
 };
@@ -80,6 +85,23 @@ rwas.model.API.CRUISE_GET_ITINERARIES_COMPLETE = 'cruise_get_iteniraries_complet
 
 
 
+
+
+/**
+ * @const
+ * @type {string}
+ */
+rwas.model.API.USER_REGISTER_START = 'cruise_get_iteniraries_start';
+
+/**
+ * @const
+ * @type {string}
+ */
+rwas.model.API.USER_REGISTER_COMPLETE = 'cruise_get_iteniraries_complete';
+
+
+
+
 /**
  * Singleton lazy initializer.
  * @return {!rwas.model.API} Singleton.
@@ -102,7 +124,44 @@ rwas.model.API.get_instance = function() {
 //    \___/|____/|_____|_| \_\
 //
 
-rwas.model.API.prototype.user_method_01 = function() {};
+/**
+ * @param  {Object} data_param
+ */
+rwas.model.API.prototype.user_register = function(data_param) {
+
+
+  console.log('rwas.model.API: user_register');
+  
+
+  this.dispatchEvent(new goog.events.Event(rwas.model.API.USER_REGISTER_START));
+
+  var target_url = rwas.model.API.BASE_URL + 'api/user/register';
+
+  $.ajax({
+    'url': target_url,
+    'method': 'POST',
+    'data': data_param,
+    'dataType': 'json',
+    'success': function( result ) {
+      var data_array = result;
+
+      this.user_registered = data_array;
+
+
+      if (goog.isDefAndNotNull(this.user_registered.MemberID)) {
+
+        alert('User Created: ' + this.user_registered.MemberID);
+      }
+      
+      console.log('result');
+      console.log(result)
+
+      this.dispatchEvent(new goog.events.Event(rwas.model.API.USER_REGISTER_COMPLETE));
+
+    }.bind(this)
+  });
+
+};
 rwas.model.API.prototype.user_method_02 = function() {};
 
 
@@ -127,6 +186,8 @@ rwas.model.API.prototype.page_method_02 = function() {};
 
 
 rwas.model.API.prototype.cruise_get_valid_search_parameters = function() {
+
+  console.log('rwas.model.API: cruise_get_valid_search_parameters');
 
   // todo
   // save data in cookies (cache)
@@ -175,6 +236,8 @@ rwas.model.API.prototype.cruise_get_valid_search_parameters = function() {
  * @param  {String} pax_param  [description]
  */
 rwas.model.API.prototype.cruise_get_itineraries = function(port_param, date_param, pax_param) {
+
+  console.log('rwas.model.API: cruise_get_itineraries');
 
   console.log(
     {
