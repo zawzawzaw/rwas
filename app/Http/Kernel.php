@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'authDrs' => \App\Http\Middleware\UserAuthCheck::class,
         'nonAuthDrs' => \App\Http\Middleware\UserNonAuthCheck::class,
+        'sessionMiddleware' => \Illuminate\Session\Middleware\StartSession::class,
     ];
 }

@@ -103,15 +103,15 @@ class CruiseController extends Controller
         $list = Itinerary::query();
         $list->select('id', DB::raw('itin_code as iten_code'), DB::raw('itin_name as iten_name'), 'ship_code');
         
-        $list->with(['cruise' => function($query) { 
+        $list->with(['cruise' => function($query) use ($request){ 
             $query->select('id', 'itinerary', 'cruise_id', 'departure_date', DB::raw('DATE_FORMAT(departure_date, "%m/%Y") as filterDate'));
-        }]);
-
-        $list->whereHas('cruise', function($query) use ($request){
-            $query->orderBy('departure_date', 'ASC');
             if(is_null($request->input('date'))==false){
                 $query->whereRaw("DATE_FORMAT(departure_date, '%m/%Y')='".$request->input('date')."'");
             }
+            $query->orderBy('departure_date', 'ASC');
+        }]);
+
+        $list->whereHas('cruise', function($query) use ($request){
         });
         
         if(is_null($request->input('port'))===false) {
