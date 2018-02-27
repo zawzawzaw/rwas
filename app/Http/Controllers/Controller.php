@@ -79,8 +79,11 @@ class Controller extends BaseController
             "0": "  "
         },
         */
-        $result = str_replace("\n", '', $result); // remove new lines
-        $result = str_replace("\r", '', $result); // remove carriage returns
+        
+        // $result = str_replace("\n", '', $result); // remove new lines
+        // $result = str_replace("\r", '', $result); // remove carriage returns
+        
+        
         // return $this->SimpleXML2ArrayWithCDATASupport($result);
 
         $result = simplexml_load_string($result);

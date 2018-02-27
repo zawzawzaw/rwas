@@ -33,6 +33,11 @@ rwas.model.API = function() {
    */
   this.user_registered = {};                         // the current result of user/register
 
+  /**
+   * @type {Array}
+   */
+  this.user_profile_updated = {};                         // the current result of user/update-profile
+
   
   console.log('rwas.model.API: init');
 };
@@ -91,13 +96,26 @@ rwas.model.API.CRUISE_GET_ITINERARIES_COMPLETE = 'cruise_get_iteniraries_complet
  * @const
  * @type {string}
  */
-rwas.model.API.USER_REGISTER_START = 'cruise_get_iteniraries_start';
+rwas.model.API.USER_REGISTER_START = 'user_register_start';
 
 /**
  * @const
  * @type {string}
  */
-rwas.model.API.USER_REGISTER_COMPLETE = 'cruise_get_iteniraries_complete';
+rwas.model.API.USER_REGISTER_COMPLETE = 'user_register_complete';
+
+
+/**
+ * @const
+ * @type {string}
+ */
+rwas.model.API.USER_UPDATE_PROFILE_START = 'user_update_profile_start';
+
+/**
+ * @const
+ * @type {string}
+ */
+rwas.model.API.USER_UPDATE_PROFILE_COMPLETE = 'user_update_profile_complete';
 
 
 
@@ -147,9 +165,8 @@ rwas.model.API.prototype.user_register = function(data_param) {
 
       this.user_registered = data_array;
 
-
+      // this should be inside the form that created it
       if (goog.isDefAndNotNull(this.user_registered.MemberID)) {
-
         alert('User Created: ' + this.user_registered.MemberID);
       }
       
@@ -162,6 +179,45 @@ rwas.model.API.prototype.user_register = function(data_param) {
   });
 
 };
+
+/**
+ * @param  {Object} data_param
+ */
+rwas.model.API.prototype.user_update_profile = function(data_param) {
+
+  console.log('rwas.model.API: user_update_profile');
+  
+
+  this.dispatchEvent(new goog.events.Event(rwas.model.API.USER_UPDATE_PROFILE_START));
+
+  var target_url = rwas.model.API.BASE_URL + 'api/user/update-profile';
+
+  $.ajax({
+    'url': target_url,
+    'method': 'POST',
+    'data': data_param,
+    'dataType': 'json',
+    'success': function( result ) {
+      var data_array = result;
+
+      this.user_profile_updated = data_array;
+
+      console.log('result');
+      console.log(result);
+
+      alert('profile has been updated (window will now refresh)');
+
+      // this should be inside the form
+      window.location.reload();
+
+      this.dispatchEvent(new goog.events.Event(rwas.model.API.USER_UPDATE_PROFILE_COMPLETE));
+
+    }.bind(this)
+  });
+
+};
+
+
 rwas.model.API.prototype.user_method_02 = function() {};
 
 

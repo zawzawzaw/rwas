@@ -56,7 +56,7 @@
                 </div>
 
               </div>
-              <div class="col-md-10">
+              <div class="col-md-4">
 
                 <div class="form-group">
                   <label>Name</label>
@@ -64,40 +64,16 @@
                 </div>
                 
               </div>
-            </div> <!-- row -->
-
-
-
-            <!--
-                ___ ____
-               / _ \___ \
-              | | | |__) |
-              | |_| / __/
-               \___/_____|
-
-            -->
-
-            <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-2">
 
                 <div class="form-group">
-                  <label>Gender</label>
-                  <p>{{ $info['profile']['gender'] }}</p>
-                </div>
-
-              </div>
-              <div class="col-md-4">
-
-                <!-- pending -->
-                <div class="form-group simple-date-version">
-                  <div class="page-default-calendar-bg"></div>
                   <label>Date of Birth</label>
                   <p>{{ $info['profile']['date_of_birth'] }}</p>
                 </div>
 
               </div>
 
-              <div class="col-md-5">
+              <div class="col-md-2">
 
                 <div class="form-group">
                   <label>Nationality</label>
@@ -105,7 +81,19 @@
                 </div>
 
               </div>
+              <div class="col-md-2">
+
+                <div class="form-group">
+                  <label>Gender</label>
+                  <p>{{ $info['profile']['gender'] }}</p>
+                </div>
+
+              </div>
             </div> <!-- row -->
+
+
+            <hr>
+            <div class="space30"></div>
 
 
 
@@ -268,93 +256,14 @@
                 </div>
                 
               </div>
-              <div class="col-md-2">
+              <div class="col-md-6">
 
                 <div class="form-group">
                   <label>Mobile*</label>
-
-                  <div class="manic-dropdown">
-                    <select name="mobile_country" class="required">
-                      <option value="">Select one</option>
-
-                      <option value="86">MAINLAND CHINA</option>
-                      <option value="852">HONG KONG SPECIAL ADMINSTRATIVE REGION</option>
-                      <option value="62">INDONESIA</option>
-                      <option value="60">MALAYSIA</option>
-                      <option value="65">SINGAPORE</option>
-                      <option value="886">TAIWAN</option>
-                      <option value="66">THAILAND</option>
-                      <option value="00">CANADA</option>
-                      <option value="01">USA</option>
-                      <option value="06">MALDIVES</option>
-                      <option value="07">RUSSIA</option>
-                      <option value="20">EGYPT</option>
-                      <option value="21">ALGERIA</option>
-                      <option value="23">MAURITIUS</option>
-                      <option value="26">ZIMBABWE</option>
-                      <option value="27">SOUTH AFRICA</option>
-                      <option value="31">NETHERLANDS</option>
-                      <option value="32">BELGIUM</option>
-                      <option value="33">FRANCE</option>
-                      <option value="34">SPAIN</option>
-                      <option value="35">MALTA</option>
-                      <option value="36">HUNGARY</option>
-                      <option value="39">ITALY</option>
-                      <option value="40">ROMANIA</option>
-                      <option value="41">SWITZERLAND</option>
-                      <option value="43">AUSTRIA</option>
-                      <option value="44">UNITED KINGDOM</option>
-                      <option value="45">DENMARK</option>
-                      <option value="46">SWEDEN</option>
-                      <option value="47">NORWAY</option>
-                      <option value="48">POLAND</option>
-                      <option value="49">GERMANY</option>
-                      <option value="50">HONDURAS</option>
-                      <option value="51">PORTUGAL</option>
-                      <option value="52">MEXICO</option>
-                      <option value="53">MACAU SPECIAL ADMINISTRATIVE REGION</option>
-                      <option value="54">ARGENTINA</option>
-                      <option value="55">BRAZIL</option>
-                      <option value="56">CHILE</option>
-                      <option value="58">FINLAND</option>
-                      <option value="61">AUSTRALIA</option>
-                      <option value="63">PHILIPPINES</option>
-                      <option value="64">NEW ZEALAND</option>
-                      <option value="66">THAILAND</option>
-                      <option value="67">BRUNEI</option>
-                      <option value="72">IRELAND</option>
-                      <option value="75">PAPUA N. GUINEA</option>
-                      <option value="78">PUERTO RICO</option>
-                      <option value="80">KOREA</option>
-                      <option value="81">JAPAN</option>
-                      <option value="84">VIETNAM</option>
-                      <option value="89">BANGLADESH</option>
-                      <option value="90">NAURU</option>
-                      <option value="91">INDIA</option>
-                      <option value="92">PAKISTAN</option>
-                      <option value="94">SRI LANKA</option>
-                      <option value="95">MYANMAR</option>
-                      <option value="96">SAUDI ARABIA AND KUWAIT</option>
-                      <option value="97">UAE</option>
-                      <option value="98">IRAN</option>
-                      <option value="855">CAMBODIA</option>
-                      
-                    </select>
-                  </div>
-
-                      
+                  <input type="text" name="mobile" class="required" value="{{ $info['profile']['mobile'] }}">
                 </div>
 
               </div>
-              <div class="col-md-4">
-
-                <div class="form-group">
-                  <label>&nbsp;</label>
-                  <input type="text" name="mobile_number" class="required">
-                </div>
-
-              </div>
-  
             </div> <!-- row -->
 
 
@@ -398,9 +307,8 @@
 
                 <div class="form-group">
                   <label>Country*</label>
-                  <p>{{ $info['profile']['address_country'] }}</p>
-                  
-                  <div class="manic-dropdown">
+
+                  <div class="manic-dropdown" data-initial-value="{{ $info['profile']['address_country'] }}">
                     <select name="address_country" class="required">
                       <option value="">Select one</option>
 
@@ -475,8 +383,7 @@
 
                 <div class="form-group">
                   <label>State / Province*</label>
-                  <p></p>
-                  <input type="text" name="address_state" class="required" value="">
+                  <input type="text" name="address_state" class="required" value="{{ $info['profile']['address_state'] }}">
                 </div>
                 
               </div>
@@ -564,6 +471,8 @@
             </div> <!-- row -->
 
           </form> <!-- account-register-form -->
+
+          <div class="space100"></div>
 
         </div> <!-- col -->
       </div> <!-- row -->

@@ -849,6 +849,8 @@
 
           </form> <!-- account-register-form -->
 
+          <div class="space100"></div>
+
         </div> <!-- col -->
       </div> <!-- row -->
 

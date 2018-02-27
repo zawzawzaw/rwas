@@ -67,25 +67,29 @@ class UserController extends Controller
                 'date_of_birth' => $result->CustomerDateOfBirth,
                 'nationality' => $result->CustomerNAT,
 
-                // to hard to read
-                // 'doc_type' => $result->CustomerCurrencyCode,
-                // 'doc_no' => $result->CustomerCurrencyCode,
-                // 'doc_country' => $result->CustomerCurrencyCode,
-                // 'doc_issue_date' => $result->CustomerCurrencyCode,
-                // 'doc_expiry_date' => $result->CustomerCurrencyCode,
-
+                // must read the preference flags to see which one it is
                 // 'occupation' => $result->CustomerCurrencyCode,
                 // 'nature_of_business' => $result->CustomerCurrencyCode,
                 
+                'occupation' => 'sample',
+                'nature_of_business' => 'sample',
+                
                 'email' => $result->EmailAddress,
 
+                // please fix this for me
+                'mobile' => '88888888',    
                 // 'mobile' => Contact->ContactSection->Cust_Contact //,
                 
                 'address_line_01' => $result->CustomerAddressLine1,
                 'address_line_02' => $result->CustomerAddressLine2,
                 'address_line_03' => $result->CustomerAddressLine3,
                 'address_country' => $result->CustomerAddressCountry,
-                'address_state' => $result->CustomerAddressState,
+
+                // all the value here must return an empty string if the xml tag is empty
+                // 'address_state' => $result->CustomerAddressState,
+                // currently this returns an array with 0
+                'address_state' => '',
+
                 'address_city' => $result->CustomerAddressCity,
                 'address_postal_code' => $result->CustomerAddressPostCode,
                 
