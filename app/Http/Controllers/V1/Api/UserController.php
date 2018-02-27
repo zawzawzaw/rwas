@@ -50,11 +50,46 @@ class UserController extends Controller
 
         $output_data = array(
             "details" => array(
+                "title" => $result->CustomerTitle,
                 "name" => $result->CustomerName,
                 "membership_id" => $result->CustomerID,
-                "home_country_code" => "SG",
+
+                // useful for specifying which translation to use on login
+                'preferred_language' => $result->CustomerPreferredLanguage,
+
+                "home_country_region_code" => $result->CustomerRegionCode,
                 "home_country_name" => $result->CustomerAddressCountry,
                 "home_currency" => $result->CustomerCurrencyCode,
+            ),
+            "profile" => array(
+
+                'gender' => $result->CustomerGender,
+                'date_of_birth' => $result->CustomerDateOfBirth,
+                'nationality' => $result->CustomerNAT,
+
+                // to hard to read
+                // 'doc_type' => $result->CustomerCurrencyCode,
+                // 'doc_no' => $result->CustomerCurrencyCode,
+                // 'doc_country' => $result->CustomerCurrencyCode,
+                // 'doc_issue_date' => $result->CustomerCurrencyCode,
+                // 'doc_expiry_date' => $result->CustomerCurrencyCode,
+
+                // 'occupation' => $result->CustomerCurrencyCode,
+                // 'nature_of_business' => $result->CustomerCurrencyCode,
+                
+                'email' => $result->EmailAddress,
+
+                // 'mobile' => Contact->ContactSection->Cust_Contact //,
+                
+                'address_line_01' => $result->CustomerAddressLine1,
+                'address_line_02' => $result->CustomerAddressLine2,
+                'address_line_03' => $result->CustomerAddressLine3,
+                'address_country' => $result->CustomerAddressCountry,
+                'address_state' => $result->CustomerAddressState,
+                'address_city' => $result->CustomerAddressCity,
+                'address_postal_code' => $result->CustomerAddressPostCode,
+                
+
             ),
             "points" => $points,
             "tier" => array(

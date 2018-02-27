@@ -47,7 +47,7 @@
 
                 <div class="form-group">
                   <label>Name</label>
-                  <p>insert user's name here</p>
+                  <p>{{ $info['details']['name'] }}</p>
                 </div>
                 
               </div>
@@ -540,7 +540,7 @@
                 </div>
               </div>
             </div> <!-- row -->
-            
+
           </form> <!-- account-register-form -->
 
         </div> <!-- col -->
