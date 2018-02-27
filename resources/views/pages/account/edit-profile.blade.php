@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                   <label>Title</label>
-                  <p>insert user's title here</p>
+                  <p>{{ $info['details']['title'] }}</p>
                 </div>
 
               </div>
@@ -69,7 +69,7 @@
 
                 <div class="form-group">
                   <label>Gender</label>
-                  <p>M</p>
+                  <p>{{ $info['profile']['gender'] }}</p>
                 </div>
 
               </div>
@@ -79,7 +79,7 @@
                 <div class="form-group simple-date-version">
                   <div class="page-default-calendar-bg"></div>
                   <label>Date of Birth</label>
-                  <p>insert dob here</p>
+                  <p>{{ $info['profile']['date_of_birth'] }}</p>
                 </div>
 
               </div>
@@ -88,7 +88,7 @@
 
                 <div class="form-group">
                   <label>Nationality</label>
-                  <p>insert nationality here</p>
+                  <p>{{ $info['profile']['nationality'] }}</p>
                 </div>
 
               </div>
@@ -246,7 +246,7 @@
 
                 <div class="form-group">
                   <label>Email address*</label>
-                  <input type="text" name="email" class="required only-email">
+                  <input type="text" name="email" class="required only-email" value="{{ $info['profile']['email'] }}">
                 </div>
                 
               </div>
@@ -356,9 +356,9 @@
 
                 <div class="form-group">
                   <label>Address*</label>
-                  <input type="text" name="address_line_01" class="required">
-                  <input type="text" name="address_line_02">
-                  <input type="text" name="address_line_03">
+                  <input type="text" name="address_line_01" class="required" value="{{ $info['profile']['address_line_01'] }}">
+                  <input type="text" name="address_line_02" value="{{ $info['profile']['address_line_02'] }}">
+                  <input type="text" name="address_line_03" value="{{ $info['profile']['address_line_03'] }}">
                 </div>
                 
               </div>
@@ -380,6 +380,8 @@
 
                 <div class="form-group">
                   <label>Country*</label>
+                  <p>{{ $info['profile']['address_country'] }}</p>
+                  
                   <div class="manic-dropdown">
                     <select name="address_country" class="required">
                       <option value="">Select one</option>
@@ -455,7 +457,8 @@
 
                 <div class="form-group">
                   <label>State / Province*</label>
-                  <input type="text" name="address_state" class="required">
+                  <p></p>
+                  <input type="text" name="address_state" class="required" value="">
                 </div>
                 
               </div>
@@ -477,7 +480,7 @@
 
                 <div class="form-group">
                   <label>City*</label>
-                  <input type="text" name="address_city" class="required">
+                  <input type="text" name="address_city" class="required" value="">
                 </div>
 
               </div>
@@ -485,7 +488,7 @@
 
                 <div class="form-group">
                   <label>Post code*</label>
-                  <input type="text" name="address_postal_code" class="required">
+                  <input type="text" name="address_postal_code" class="required" value="">
                 </div>
 
               </div>
@@ -506,6 +509,7 @@
 
                 <div class="form-group">
                   <label>Preferred language</label>
+                  <p></p>
                   <div class="manic-dropdown">
                     <select name="preferred_language">
                       <option value="">Select one</option>

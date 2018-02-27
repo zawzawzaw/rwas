@@ -58,9 +58,9 @@
                   <h4>Raw Data</h4>
 
                   <pre>
-                    @php
-                    print_r(json_decode(json_encode($raw), true));
-                    @endphp
+@php
+print_r(json_encode($raw, JSON_PRETTY_PRINT));
+@endphp
                   </pre>
 
                 </div>
@@ -101,8 +101,9 @@
               -->
 
             </div>
-          </div>
+          </div> <!-- account-dashboard-content -->
 
+          <div class="space100"></div>
           
 
         </div> <!-- col -->
