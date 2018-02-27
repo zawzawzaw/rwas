@@ -133,7 +133,7 @@ class UserController extends Controller
             ];
         }
 
-        return response()->json([$result]);
+        return response()->json($result);
     }
 
     public function login(Request $request)
