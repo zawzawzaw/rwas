@@ -1,103 +1,78 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout.master')
 
-        <title>Laravel</title>
+@section('content')
+  
+  <div class="under-construction-disclaimer">
+    A functionality demo <br>
+    this is NOT the design
+  </div>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+  <article id="account-login-section">
+    <div class="container-fluid has-breakpoint">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
+      <div class="row">
+        <div class="col-md-6 col-md-push-3">
+          <h1>Login</h1>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Login</div>
+      </div> <!-- row -->
 
-                        <div class="panel-body">
-                            <form class="form-horizontal" method="POST" action="{{ route('user.login') }}">
-                                {{ csrf_field() }}
 
-                                <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
-                                    <label for="id" class="col-md-4 control-label">User ID</label>
+      <div class="row">
+        <div class="col-md-8 col-md-push-2 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
 
-                                    <div class="col-md-6">
-                                        <input id="id" type="text" class="form-control" name="id" value="{{ old('id') }}" required autofocus>
+            
+          <form id="account-login-form" method="POST" action="{{ route('user.login') }}" class="default-form simple-form-check">
+              {{ csrf_field() }}
 
-                                        @if ($errors->has('id'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('id') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
+              <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
+                <label>Member ID</label>
+                <input type="text" class="required" name="id" value="{{ old('id') }}" autofocus>
 
-                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <label for="password" class="col-md-4 control-label">Password</label>
+                @if ($errors->has('id'))
+                  <span class="help-block">
+                    <strong>{{ $errors->first('id') }}</strong>
+                  </span>
+                @endif
+              </div>
 
-                                    <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control" name="password" required>
+              <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                <label>Pin</label>
+                <input type="password" class="required" name="password">
 
-                                        @if ($errors->has('password'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                
-                                <!-- 
-                                <div class="form-group">
-                                    <div class="col-md-6 col-md-offset-4">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="showErr" {{ old('showErr') ? 'checked' : '' }}> Show Error
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                 -->
-                                
-                                <div class="form-group">
-                                    <div class="col-md-8 col-md-offset-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            Login
-                                        </button>
-                                        @if ($errors->has('customErr'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('customErr') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+                @if ($errors->has('password'))
+                  <span class="help-block">
+                    <strong>{{ $errors->first('password') }}</strong>
+                  </span>
+                @endif
+              </div>
+
+              <div class="cta-container">
+                <a href="javascript:void(0);" class="square-cta large-version full-width-version form-check-submit-btn">Login</a>
+
+                @if ($errors->has('customErr'))
+                  <span class="help-block">
+                    <strong>{{ $errors->first('customErr') }}</strong>
+                  </span>
+                @endif
+              </div>
+
+          </form>
+
+
+          <div class="space100"></div>
+
+          
+          <p>If Member ID: '29' and Pin '222222' doesn't work, open <a href="http://52.77.205.209/drs_reset_user_29.php" target="_blank" style="text-decoration: underline !important;">this link</a> in a new tab and try again</p>
+          
+
+        </div> <!-- col -->
+      </div> <!-- row -->
+
+    </div> <!-- container-fluid -->
+  </article>
+
+
+
+{{-- content --}}
+
+@endsection

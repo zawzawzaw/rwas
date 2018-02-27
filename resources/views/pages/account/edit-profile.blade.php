@@ -20,6 +20,19 @@
       <div class="row">
         <div class="col-md-10 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
 
+<div style="display: none;">
+  <pre>
+  @php
+  print_r(json_encode($info, JSON_PRETTY_PRINT));
+  @endphp
+  </pre>
+  <div class="space100"></div>
+</div>
+
+
+
+
+
           <form id="account-edit-user-form" 
             class="default-form simple-form-check-02 ajax-version api-version"
             method="post"
@@ -105,6 +118,7 @@
 
             -->
 
+            <!-- 
             <div class="row">
               <div class="col-md-3">
 
@@ -131,7 +145,9 @@
 
               </div>
               
-            </div> <!-- row -->
+            </div>
+            -->
+            <!-- row -->
 
 
 
@@ -144,6 +160,7 @@
 
             -->
 
+            <!-- 
             <div class="row">
               <div class="col-md-6">
 
@@ -161,7 +178,8 @@
                 </div>
 
               </div>
-            </div> <!-- row -->
+            </div>
+            -->
 
 
 
@@ -480,7 +498,7 @@
 
                 <div class="form-group">
                   <label>City*</label>
-                  <input type="text" name="address_city" class="required" value="">
+                  <input type="text" name="address_city" class="required" value="{{ $info['profile']['address_city'] }}">
                 </div>
 
               </div>
@@ -488,7 +506,7 @@
 
                 <div class="form-group">
                   <label>Post code*</label>
-                  <input type="text" name="address_postal_code" class="required" value="">
+                  <input type="text" name="address_postal_code" class="required" value="{{ $info['profile']['address_postal_code'] }}">
                 </div>
 
               </div>

@@ -146,6 +146,45 @@ class UserController extends Controller
         }
     }
 
+
+
+
+    public function login_json_output(Request $request)
+    {        
+        $input = $request->only('id', 'password', 'cid', 'pin', 'showErr');
+        $validator = Validator::make($input, [
+            'id' => 'required',
+            'password' => 'required'
+        ]);
+
+        if($validator->fails()){
+           return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $parameter = [
+            'paraDrsID' => 'MANIC',
+            'paraDrsPwd' => 'MANIC',
+            'paraCid' => $input['id'],
+            'paraPIN' => $input['password']
+        ];
+
+        $result = $this->curlRequest($this->buildDrsXMLContent($parameter), $this->drsUrl.'API_AutoUA_PINVerify', true);
+
+        if(isset($result->errCode)){
+            // if(isset($input['showErr']) && is_null($input['showErr'])==false){
+            //     echo "<pre>";
+            //     print_r($result);
+            //     echo "</pre>";
+            //     die();
+            // }
+            $validator->errors()->add('customErr', 'Wrong id, password, cid or pin!');
+            return json_encode(array('message' => 'fail'));
+        }else{
+            return json_encode(array('message' => 'success'));
+        }
+    }
+
+
     public function register(Request $request)
     {
         $input = $request->only(
