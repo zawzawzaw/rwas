@@ -48,6 +48,34 @@ class UserController extends Controller
             }
         }
 
+        $mobile = "";
+
+        foreach($result->Contact->ContactSection->Cust_Contact as $con){
+            if(strtolower($con->Type)==="mobile"){
+                $mobile = $con->ContactNo;
+                break;
+            }
+        }
+
+        $occupation = "";
+        $nature_of_business = "";
+
+        foreach($result->PreferenceFlagList->WorkGroup->PreferenceFlag->PF as $pf){
+            switch (strtolower($pf->Field)) {
+                case 'occ':
+                    $occupation = $pf->Value;
+                    break;
+                
+                case 'biz2':
+                    $nature_of_business = $pf->Value;
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+        }
+
         $output_data = array(
             "details" => array(
                 "title" => $result->CustomerTitle,
@@ -71,14 +99,14 @@ class UserController extends Controller
                 // 'occupation' => $result->CustomerCurrencyCode,
                 // 'nature_of_business' => $result->CustomerCurrencyCode,
                 
-                'occupation' => 'sample',
-                'nature_of_business' => 'sample',
+                'occupation' => $occupation,
+                'nature_of_business' => $nature_of_business,
                 
                 'email' => $result->EmailAddress,
 
                 // please fix this for me
-                'mobile' => '88888888',    
-                // 'mobile' => Contact->ContactSection->Cust_Contact //,
+                // 'mobile' => '88888888',    
+                'mobile' => $mobile,
                 
                 'address_line_01' => $result->CustomerAddressLine1,
                 'address_line_02' => $result->CustomerAddressLine2,
@@ -105,7 +133,7 @@ class UserController extends Controller
             ];
         }
 
-        return response()->json($result);
+        return response()->json([$result]);
     }
 
     public function login(Request $request)

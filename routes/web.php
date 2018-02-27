@@ -48,6 +48,7 @@ Route::group(['middleware' => 'nonAuthDrs'], function() {
 Route::group(['middleware' => 'authDrs'], function() {
   Route::get('/account', 'V1\\UserController@account')->name('user.account');
   Route::get('/account/edit-profile', 'V1\\UserController@editProfile');
+  Route::post('/account/edit-profile', 'V1\\Api\\UserController@update');
   Route::get('/account/transaction-history', function () { return view('pages/account/transaction-history'); });
   Route::get('/account/booking-history', function () { return view('pages/account/booking-history'); });
 });
