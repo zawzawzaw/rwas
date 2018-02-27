@@ -30,6 +30,33 @@ class Controller extends BaseController
         $this->DRSADDRGOMELANGCODE = "EN";
     }
 
+    /*
+    // https://stackoverflow.com/questions/2726487/simplexmlelement-to-php-array
+    public function SimpleXML2ArrayWithCDATASupport($xml){
+
+        $array = (array)$xml;
+
+        if (count($array) == 0) {
+            $array = (string)$xml;  
+        }
+
+        if (is_array($array)) {
+            //recursive Parser
+            foreach ($array as $key => $value){
+                if (is_object($value)) {
+                    if(strpos(get_class($value),"SimpleXML")!==false){
+                            $array[$key] = $this->SimpleXML2ArrayWithCDATASupport($value);
+                    }
+                } else {
+                    $array[$key] = $this->SimpleXML2ArrayWithCDATASupport($value);
+                }
+            }
+        }
+
+        return $array;
+    }
+    */
+
     public function curlRequest($xmlContent, $url, $isPost=false, $parse=true)
     {
         $ch = curl_init();
@@ -47,8 +74,22 @@ class Controller extends BaseController
             return $result;
         }
 
+        /*
+         "address_state": {
+            "0": "  "
+        },
+        */
+        
+        // $result = str_replace("\n", '', $result); // remove new lines
+        // $result = str_replace("\r", '', $result); // remove carriage returns
+        
+        
+        // return $this->SimpleXML2ArrayWithCDATASupport($result);
+
         $result = simplexml_load_string($result);
         return json_decode(json_encode($result));
+        
+        
     }
 
     public function buildDrsXMLContent($data)

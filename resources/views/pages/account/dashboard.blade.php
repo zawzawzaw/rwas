@@ -65,41 +65,6 @@ print_r(json_encode($raw, JSON_PRETTY_PRINT));
 
                 </div>
               </div>
-
-              
-              <!-- 
-              <p>
-                Country Region Code: {{ $info['details']['home_country_region_code'] }}<br/>
-                Country Name: {{ $info['details']['home_country_name'] }}<br/>
-                Currency: {{ $info['details']['home_currency'] }}<br/>
-                
-
-
-                
-                Preferred Language: {{ $raw->CustomerPreferredLanguage }}<br/>
-                Date Of Birth: {{ $raw->CustomerDateOfBirth }}<br/>
-                Type: {{ $raw->CustomerTypeDescription }}<br/>
-                Email: {{ $raw->EmailAddress }}<br/>
-                @foreach($raw->Contact->ContactSection->Cust_Contact as $contact)
-                {{ $contact->Type }}: {{ $contact->ContactNo}}<br/>
-                @endforeach
-                Region Code: {{ $raw->CustomerRegionCode }}<br/>
-                Country: {{ $raw->CustomerNAT }}<br/>
-                Passport No: {{ $raw->CustomerICPassportNo }}<br/>
-                Passport Type: {{ $raw->CustomerICPassportType }}<br/>
-                Passport Country: {{ $raw->CustomerICPassportCountry }}<br/>
-                Address 1: {{ $raw->CustomerAddressLine1 }}<br/>
-                Address 2: {{ $raw->CustomerAddressLine2 }}<br/>
-                Address 3: {{ $raw->CustomerAddressLine3 }}<br/>
-                Address City: {{ $raw->CustomerAddressCity }}<br/>
-                Address State: {{ $raw->CustomerAddressState->{0} }}<br/>
-                Address Postal Code: {{ $raw->CustomerAddressPostCode }}<br/>
-                Address Country: {{ $raw->CustomerAddressCountry }}<br/><br/>
-                Loyalty Point Balance: {{ $raw->LoyaltyPointBalance }}<br/>
-                E Cash Balance: {{ $raw->CashECashBalance }}<br/>
-              </p>
-              -->
-
             </div>
           </div> <!-- account-dashboard-content -->
 

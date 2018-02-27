@@ -13,6 +13,7 @@ goog.require('rwas.component.HeaderDesktop');
 goog.require('rwas.component.CruiseSearch');
 goog.require('rwas.component.CruiseSearchResult');
 goog.require('rwas.component.UserRegisterForm');
+goog.require('rwas.component.UserUpdateProfileForm');
 goog.require('rwas.model.API');
 
 
@@ -93,6 +94,21 @@ rwas.page.Default = function(options, element) {
   this.cruise_search_result = null;
 
 
+  
+
+
+  /**
+   * @type {rwas.component.UserRegisterForm}
+   */
+  this.user_registration_form = null;
+
+  /**
+   * @type {rwas.component.UserUpdateProfileForm}
+   */
+  this.user_update_profile_form = null;
+
+
+
 
 
 
@@ -146,6 +162,7 @@ rwas.page.Default.prototype.init = function() {
   this.create_redeem_search_result();
 
   this.create_register_form();
+  this.create_update_profile_form();
 
 
   // this.update_page_layout(); // needed by sidebar desktop ?
@@ -234,10 +251,7 @@ rwas.page.Default.prototype.create_redeem_search_result = function(){
 
 rwas.page.Default.prototype.create_register_form = function(){
 
-  /**
-   * @type {rwas.component.UserRegisterForm}
-   */
-  this.user_registration_form = null;
+
 
   if ($('#account-register-form-section').length != 0) {
 
@@ -245,6 +259,19 @@ rwas.page.Default.prototype.create_register_form = function(){
     }, $('#account-register-form-section'));
 
   }
+};
+
+rwas.page.Default.prototype.create_update_profile_form = function(){
+
+  
+
+  if ($('#account-edit-user-form-section').length != 0) {
+
+    this.user_update_profile_form = new rwas.component.UserUpdateProfileForm({
+    }, $('#account-edit-user-form-section'));
+
+  }
+  
 };
 
 

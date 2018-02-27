@@ -39,7 +39,8 @@ goog.addDependency('../../../../../js/rwas/component/CruiseSearchResult.js', ['r
 goog.addDependency('../../../../../js/rwas/component/HeaderDesktop.js', ['rwas.component.HeaderDesktop'], ['goog.events.Event', 'goog.events.EventTarget']);
 goog.addDependency('../../../../../js/rwas/component/HeaderMobile.js', ['rwas.component.HeaderMobile'], ['goog.events.Event', 'goog.events.EventTarget']);
 goog.addDependency('../../../../../js/rwas/component/UserRegisterForm.js', ['rwas.component.UserRegisterForm'], ['goog.events.Event', 'goog.events.EventTarget']);
+goog.addDependency('../../../../../js/rwas/component/UserUpdateProfileForm.js', ['rwas.component.UserUpdateProfileForm'], ['goog.events.Event', 'goog.events.EventTarget']);
 goog.addDependency('../../../../../js/rwas/model/API.js', ['rwas.model.API'], ['goog.events.Event', 'goog.events.EventTarget', 'rwas.model.Constants']);
 goog.addDependency('../../../../../js/rwas/model/Constants.js', ['rwas.model.Constants'], []);
-goog.addDependency('../../../../../js/rwas/page/Default.js', ['rwas.page.Default'], ['goog.events.Event', 'goog.events.EventTarget', 'manic.page.Page', 'manic.ui.BoxItem', 'rwas.component.CruiseSearch', 'rwas.component.CruiseSearchResult', 'rwas.component.HeaderDesktop', 'rwas.component.HeaderMobile', 'rwas.component.UserRegisterForm', 'rwas.model.API']);
+goog.addDependency('../../../../../js/rwas/page/Default.js', ['rwas.page.Default'], ['goog.events.Event', 'goog.events.EventTarget', 'manic.page.Page', 'manic.ui.BoxItem', 'rwas.component.CruiseSearch', 'rwas.component.CruiseSearchResult', 'rwas.component.HeaderDesktop', 'rwas.component.HeaderMobile', 'rwas.component.UserRegisterForm', 'rwas.component.UserUpdateProfileForm', 'rwas.model.API']);
 goog.addDependency('../../../../../js/rwas/section/Sample.js', ['rwas.section.Sample'], ['goog.events.Event', 'goog.events.EventTarget']);

@@ -67,6 +67,17 @@ manic.ui.Dropdown = function(options, element) {
   if(this.current_value == null){
     this.current_value = '';
   }
+
+  if (goog.isDefAndNotNull(this.element.attr('data-initial-value'))) {
+
+    var target_value = this.element.attr('data-initial-value');
+    var target_option = this.select_element.find('option[value="' + target_value + '"]');
+    if (target_option.length != 0) {
+      this.current_value = this.element.attr('data-initial-value')
+      this.select_element.val(this.current_value);
+    }
+  }
+
   //console.log('this.current_value: ' + this.current_value);
 
   this.initial_value = this.current_value;

@@ -67,29 +67,26 @@ class UserController extends Controller
                 'date_of_birth' => $result->CustomerDateOfBirth,
                 'nationality' => $result->CustomerNAT,
 
-                // to hard to read
-                // 'doc_type' => $result->CustomerCurrencyCode,
-                // 'doc_no' => $result->CustomerCurrencyCode,
-                // 'doc_country' => $result->CustomerCurrencyCode,
-                // 'doc_issue_date' => $result->CustomerCurrencyCode,
-                // 'doc_expiry_date' => $result->CustomerCurrencyCode,
-
+                // must read the preference flags to see which one it is
                 // 'occupation' => $result->CustomerCurrencyCode,
                 // 'nature_of_business' => $result->CustomerCurrencyCode,
                 
+                'occupation' => 'sample',
+                'nature_of_business' => 'sample',
+                
                 'email' => $result->EmailAddress,
 
+                // please fix this for me
+                'mobile' => '88888888',    
                 // 'mobile' => Contact->ContactSection->Cust_Contact //,
                 
                 'address_line_01' => $result->CustomerAddressLine1,
                 'address_line_02' => $result->CustomerAddressLine2,
                 'address_line_03' => $result->CustomerAddressLine3,
                 'address_country' => $result->CustomerAddressCountry,
-                'address_state' => $result->CustomerAddressState->{0},
+                'address_state' => $result->CustomerAddressState,
                 'address_city' => $result->CustomerAddressCity,
-                'address_postal_code' => $result->CustomerAddressPostCode,
-                
-
+                'address_postal_code' => $result->CustomerAddressPostCode, 
             ),
             "points" => $points,
             "tier" => array(
@@ -145,6 +142,45 @@ class UserController extends Controller
             return 'success';
         }
     }
+
+
+
+
+    public function login_json_output(Request $request)
+    {        
+        $input = $request->only('id', 'password', 'cid', 'pin', 'showErr');
+        $validator = Validator::make($input, [
+            'id' => 'required',
+            'password' => 'required'
+        ]);
+
+        if($validator->fails()){
+           return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $parameter = [
+            'paraDrsID' => 'MANIC',
+            'paraDrsPwd' => 'MANIC',
+            'paraCid' => $input['id'],
+            'paraPIN' => $input['password']
+        ];
+
+        $result = $this->curlRequest($this->buildDrsXMLContent($parameter), $this->drsUrl.'API_AutoUA_PINVerify', true);
+
+        if(isset($result->errCode)){
+            // if(isset($input['showErr']) && is_null($input['showErr'])==false){
+            //     echo "<pre>";
+            //     print_r($result);
+            //     echo "</pre>";
+            //     die();
+            // }
+            $validator->errors()->add('customErr', 'Wrong id, password, cid or pin!');
+            return json_encode(array('message' => 'fail'));
+        }else{
+            return json_encode(array('message' => 'success'));
+        }
+    }
+
 
     public function register(Request $request)
     {
@@ -295,8 +331,7 @@ class UserController extends Controller
         $input = $request->only(
             'paraCid',
             'email',
-            'mobile_country',
-            'mobile_number',
+            'mobile',
             'address_line_01',
             'address_line_02',
             'address_line_03',
@@ -318,7 +353,7 @@ class UserController extends Controller
             'paraEmail' => (String) $input['email'],
             'paraHOME' => (String) '',
             'paraBUSINESS' => (String) '',
-            'paraMOBILE' => (String) '+'.$input['mobile_country'].$input['mobile_number'],
+            'paraMOBILE' => (String) '+'.$input['mobile'],
             'paraSMS' => (String) '',
             'paraAdd1' => (String) $input['address_line_01'],
             'paraAdd2' => (String) $input['address_line_02'],
