@@ -51,6 +51,7 @@ Route::group(['middleware' => 'authDrs'], function() {
   Route::post('/account/edit-profile', 'V1\\Api\\UserController@update');
   Route::get('/account/transaction-history', function () { return view('pages/account/transaction-history'); });
   Route::get('/account/booking-history', function () { return view('pages/account/booking-history'); });
+  Route::any('/account/logout', 'V1\\UserController@logout');
 });
 
 

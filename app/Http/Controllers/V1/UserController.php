@@ -48,6 +48,14 @@ class UserController extends Controller
         }
     }
 
+    public function logout(Request $request)
+    {
+        $request->session()->pull('drsAuth', 'default');
+        $request->session()->pull('drsUserID', 'default');
+
+        return redirect()->route('user.account');
+    }
+
     public function account(Request $request)
     {
         $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true);
