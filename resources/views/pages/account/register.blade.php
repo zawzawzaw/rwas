@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                   <label>Title*</label>
-                  <div class="manic-dropdown">
+                  <div class="manic-dropdown" id="register-title-dropdown">
                     <select name="title" class="required">
                       <option value="">Select one</option>
                       <option value="MR">Mr.</option>
@@ -84,7 +84,7 @@
 
                 <div class="form-group">
                   <label>Gender*</label>
-                  <div class="manic-dropdown">
+                  <div class="manic-dropdown" id="register-gender-dropdown">
                     <select name="gender" class="required">
                       <option value="">Select one</option>
                       <option value="M">M</option>
@@ -376,7 +376,7 @@
                       <option value="Financial Services - Other">Financial Services - Other</option>
                       <option value="General Business/Self Employed">General Business/Self Employed</option>
                       <option value="Government/Public Sector">Government/Public Sector</option>
-                      
+
                       <!-- <option value="Hospitality & Tourism">Hospitality & Tourism</option> -->
                       
                       <option value="Non-Profit/Charity Organization">Non-Profit/Charity Organization</option>
@@ -655,7 +655,7 @@
 
                 <div class="form-group">
                   <label>Post code*</label>
-                  <input type="text" name="address_postal_code" class="required">
+                  <input type="text" name="address_postal_code" class="required only-numbers">
                 </div>
 
               </div>
