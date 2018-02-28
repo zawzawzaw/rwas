@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\V1;
 
+use Cookie;
 use Validator;
 
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class UserController extends Controller
         }else{
             $request->session()->put('drsAuth', 1);
             $request->session()->put('drsUserID', $input['id']);
-
+            Cookie::queue("drsUserID", $input['id'], 172000);
             return redirect()->route('user.account');
         }
     }
@@ -52,7 +53,7 @@ class UserController extends Controller
     {
         $request->session()->pull('drsAuth', 'default');
         $request->session()->pull('drsUserID', 'default');
-
+        Cookie::queue("drsUserID", "1", -172000);
         return redirect()->route('user.account');
     }
 
