@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'authDrs' => \App\Http\Middleware\UserAuthCheck::class,
         'nonAuthDrs' => \App\Http\Middleware\UserNonAuthCheck::class,
         'sessionMiddleware' => \Illuminate\Session\Middleware\StartSession::class,
+        'encryptCookies' => \App\Http\Middleware\EncryptCookies::class,
     ];
 }

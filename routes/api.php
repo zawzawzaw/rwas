@@ -28,8 +28,8 @@ Route::group(['prefix' => 'user'], function(){
     Route::post('login_ajax', 'V1\\Api\\UserController@login');
     Route::post('login_ajax_json', 'V1\\Api\\UserController@login_json_output');
     Route::post('register', 'V1\\Api\\UserController@register');
-    Route::group(['middleware' => 'sessionMiddleware'], function(){
-        Route::post('update-profile', 'V1\\Api\\UserController@update');
+    Route::group(['middleware' => ['encryptCookies', 'sessionMiddleware']], function(){
+        Route::any('update-profile', 'V1\\Api\\UserController@update');
     });
 });
 

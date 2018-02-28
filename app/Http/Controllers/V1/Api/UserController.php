@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\V1\Api;
 
+use Cookie;
 use Validator;
 
 use Illuminate\Http\Request;
@@ -372,16 +373,22 @@ class UserController extends Controller
             'nature_of_business'
         );
 
+        $mobile = $input['mobile'];
+
+        if(!empty($mobile) && strpos($mobile, "+")===false){
+            $mobile = "+".$mobile;
+        }
+        
         $update = [
             'paraDrsID' => $this->drsID,
             'paraDrsPwd' => $this->drsPwd,
             'paraDRSWorkgroup' => $this->DRSWORKGROUP,
             'paraCardTypeCode' => '99',
-            'paraCid' => is_null($request->session()->get('drsUserID'))===false ? $request->session()->get('drsUserID') : $request->input('paraCid'),
+            'paraCid' => is_null(Cookie::get('drsUserID'))===false ? Cookie::get('drsUserID') : $request->input('paraCid'),
             'paraEmail' => (String) $input['email'],
             'paraHOME' => (String) '',
             'paraBUSINESS' => (String) '',
-            'paraMOBILE' => (String) '+'.$input['mobile'],
+            'paraMOBILE' => (String) $input['mobile'],
             'paraSMS' => (String) '',
             'paraAdd1' => (String) $input['address_line_01'],
             'paraAdd2' => (String) $input['address_line_02'],
