@@ -205,10 +205,10 @@ rwas.model.API.prototype.user_update_profile = function(data_param) {
       console.log('result');
       console.log(result);
 
-      alert('profile has been updated (window will now refresh)');
+      alert('profile has been updated');
 
       // this should be inside the form
-      window.location.reload();
+      // window.location.reload();
 
       this.dispatchEvent(new goog.events.Event(rwas.model.API.USER_UPDATE_PROFILE_COMPLETE));
 
