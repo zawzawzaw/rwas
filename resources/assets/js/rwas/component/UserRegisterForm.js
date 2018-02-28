@@ -33,6 +33,7 @@ rwas.component.UserRegisterForm = function(options, element) {
   this.create_api();
   this.create_form_check();
   
+  this.create_temporary_date_pickers();
 
 
   console.log('rwas.component.UserRegisterForm: init');
@@ -100,7 +101,19 @@ rwas.component.UserRegisterForm.prototype.create_form_check = function() {
       console.log('the data that is to be submitted');
       console.log(data);
 
-      this.rwas_api.user_register(data);
+
+
+      
+      
+      if (data['pin'].length != 6) {
+        alert('pin must be 6 digits');
+
+      } else if (data['pin'] != data['pin_confirm']) {
+        alert('pin must match');
+        
+      } else {
+        this.rwas_api.user_register(data);
+      }
 
       /*
       var data = this.search_form_check.form_data_object;
@@ -117,6 +130,95 @@ rwas.component.UserRegisterForm.prototype.create_form_check = function() {
 
 };
 
+rwas.component.UserRegisterForm.prototype.create_temporary_date_pickers = function() {
+    
+  var date_of_birth_txt = this.element.find('#account-register-form input[name="date_of_birth"]');
+  var doc_issue_date_txt = this.element.find('#account-register-form input[name="doc_issue_date"]');
+  var doc_expiry_date_txt = this.element.find('#account-register-form input[name="doc_expiry_date"]');
+
+
+
+  if (date_of_birth_txt.length != 0) {
+    date_of_birth_txt.datepicker({
+
+      'changeMonth': true,
+      'changeYear': true,
+
+      'maxDate': '-18Y',
+
+      // minDate: -20, maxDate: "+1M +10D"
+      
+
+      // 'minDate': 0,
+      'dateFormat': 'dd/mm/yy',
+      'altFormat': 'dd/mm/yy',
+      'dayNamesMin': [ "S", "M", "T", "W", "T", "F", "S" ],
+      'altField': this.item_txt,
+      'onSelect': function(event){
+
+      }.bind(this)
+    });
+
+  }
+
+
+  if (doc_issue_date_txt.length != 0) {
+    doc_issue_date_txt.datepicker({
+
+      'changeMonth': true,
+      'changeYear': true,
+
+      'maxDate': 0,
+
+      'dateFormat': 'dd/mm/yy',
+      'altFormat': 'dd/mm/yy',
+      'dayNamesMin': [ "S", "M", "T", "W", "T", "F", "S" ],
+      'altField': this.item_txt,
+      'onSelect': function(event){
+
+      }.bind(this)
+    });
+
+  }
+
+  if (doc_expiry_date_txt.length != 0) {
+    doc_expiry_date_txt.datepicker({
+
+      'changeMonth': true,
+      'changeYear': true,
+
+      'minDate': 0,
+
+      // 'maxDate': '-18Y',
+      // minDate: -20, maxDate: "+1M +10D"
+
+      // 'minDate': 0,
+      'dateFormat': 'dd/mm/yy',
+      'altFormat': 'dd/mm/yy',
+      'dayNamesMin': [ "S", "M", "T", "W", "T", "F", "S" ],
+      'altField': this.item_txt,
+      'onSelect': function(event){
+
+      }.bind(this)
+    });
+
+  }
+  
+
+  /*
+  this.item_datepicker.datepicker({
+    // dateFormat: 'dd-mm-yyyy',
+    'minDate': 0,
+    'dateFormat': 'dd/mm/yy',
+    'altFormat': 'dd/mm/yy',
+    'dayNamesMin': [ "S", "M", "T", "W", "T", "F", "S" ],
+    'altField': this.item_txt,
+    'onSelect': this.on_datepicker_select.bind(this)
+  });
+  */
+
+};
+
 
 //    ____  ____  _____     ___  _____ _____
 //   |  _ \|  _ \|_ _\ \   / / \|_   _| ____|
@@ -127,7 +229,7 @@ rwas.component.UserRegisterForm.prototype.create_form_check = function() {
 
 
 
-rwas.component.UserRegisterForm.prototype.private_method_02 = function() {};
+
 rwas.component.UserRegisterForm.prototype.private_method_03 = function() {};
 rwas.component.UserRegisterForm.prototype.private_method_04 = function() {};
 rwas.component.UserRegisterForm.prototype.private_method_05 = function() {};
