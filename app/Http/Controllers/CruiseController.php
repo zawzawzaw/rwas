@@ -112,6 +112,9 @@ class CruiseController extends Controller
         }]);
 
         $list->whereHas('cruise', function($query) use ($request){
+            if(is_null($request->input('date'))==false){
+                $query->whereRaw("DATE_FORMAT(departure_date, '%m/%Y')='".$request->input('date')."'");
+            }
         });
         
         if(is_null($request->input('port'))===false) {
@@ -136,6 +139,7 @@ class CruiseController extends Controller
                     ),
                 ];
             }
+            // if(!empty())
             $res[] = [
                 'iten_code' => $fl['iten_code'],
                 'iten_name' => $fl['iten_name'],

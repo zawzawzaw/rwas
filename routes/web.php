@@ -115,9 +115,9 @@ Route::get('/contact', function () { return view('pages/static/welcome'); });
 
 // Route::get('seaware', 'SoapController@show');
 
-Route::get('fetch_seaware_csv', 'FetchSeawareCsvController@index');
+// Route::get('fetch_seaware_csv', 'FetchSeawareCsvController@index');
 
-Route::resource('cabin_inventory', 'CabinInventoryController');
+// Route::resource('cabin_inventory', 'CabinInventoryController');
 
 
 
@@ -144,10 +144,10 @@ Route::resource('cabin_inventory', 'CabinInventoryController');
 
 // calls related to user data
 
-Route::get('/user/get', 'UserController@get_user');
-Route::get('/user/create', 'UserController@create_user');
-Route::get('/user/edit', 'UserController@edit_user');
-Route::get('/user/login', 'UserController@login_user');
+// Route::get('/user/get', 'UserController@get_user');
+// Route::get('/user/create', 'UserController@create_user');
+// Route::get('/user/edit', 'UserController@edit_user');
+// Route::get('/user/login', 'UserController@login_user');
 
 
 
