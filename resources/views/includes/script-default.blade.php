@@ -46,6 +46,10 @@
   <script type="text/javascript" src="{{url('../resources/assets/libs/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js')}}"></script>
   <script type="text/javascript" src="{{url('../resources/assets/libs/slick-carousel/slick/slick.min.js')}}"></script>
 
+  <!-- Date Picker -->
+  <script type="text/javascript" src="{{url('../resources/assets/libs/jquery-ui-multidatepicker/jquery-ui.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('../resources/assets/libs/jquery-ui-multidatepicker/jquery-ui.multidatespicker.js')}}"></script>
+  
   <!-- Google Closure -->
   <script type="text/javascript" src="{{url('../resources/assets/libs/google-closure/closure-library/closure/goog/base.js')}}"></script>
   <script type="text/javascript" src="{{url('../resources/assets/js/google-closure-dependency-list.js')}}"></script>

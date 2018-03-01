@@ -361,53 +361,53 @@ rwas.model.Constants.PORT_DATA = [
 rwas.model.Constants.SHIP_DATA = [
 
   {
-    'ship_code': "GDR",
-    'ship_code_drs': "Genting Dream",
-    'en:': "Genting Dream",
-    'zh-Hans': "云顶梦号",
-    'zh-Hant': "雲頂夢號"
+    'ship_code': 'GDR',
+    'ship_code_drs': 'Genting Dream',
+    'en': 'Genting Dream',
+    'zh-Hans': '云顶梦号',
+    'zh-Hant': '雲頂夢號'
   },
   {
-    'ship_code': "WDR",
-    'ship_code_drs': "World Dream",
-    'en:': "World Dream",
-    'zh-Hans': "世界梦号",
-    'zh-Hant': "世界夢號"
+    'ship_code': 'WDR',
+    'ship_code_drs': 'World Dream',
+    'en': 'World Dream',
+    'zh-Hans': '世界梦号',
+    'zh-Hant': '世界夢號'
   },
   {
-    'ship_code': "SPC",
-    'ship_code_drs': "SPC ex Hong Kong",
-    'en:': "Star Pisces",
-    'zh-Hans': "双鱼星号",
-    'zh-Hant': "雙魚星號"
+    'ship_code': 'SPC',
+    'ship_code_drs': 'SPC ex Hong Kong',
+    'en': 'Star Pisces',
+    'zh-Hans': '双鱼星号',
+    'zh-Hant': '雙魚星號'
   },
   {
-    'ship_code': "SSQ",
-    'ship_code_drs': "SSQ ex Taiwan",
-    'en': "SuperStar Aquarius",
-    'zh-Hans': "宝瓶星号",
-    'zh-Hant': "寶瓶星號"
+    'ship_code': 'SSQ',
+    'ship_code_drs': 'SSQ ex Taiwan',
+    'en': 'SuperStar Aquarius',
+    'zh-Hans': '宝瓶星号',
+    'zh-Hant': '寶瓶星號'
   },
   {
-    'ship_code': "SXG",
-    'ship_code_drs': "SSG ex Singapore",
-    'en': "SuperStar Gemini",
-    'zh-Hans': "双子星号",
-    'zh-Hant': "雙子星號"
+    'ship_code': 'SXG',
+    'ship_code_drs': 'SSG ex Singapore',
+    'en': 'SuperStar Gemini',
+    'zh-Hans': '双子星号',
+    'zh-Hant': '雙子星號'
   },
   {
-    'ship_code': "SSR",
-    'ship_code_drs': "SSR ex Penang",
-    'en': "SuperStar Libra",
-    'zh-Hans': "天秤星号",
-    'zh-Hant': "天秤星號"
+    'ship_code': 'SSR',
+    'ship_code_drs': 'SSR ex Penang',
+    'en': 'SuperStar Libra',
+    'zh-Hans': '天秤星号',
+    'zh-Hant': '天秤星號'
   },
   {
-    'ship_code': "SSV",
-    'ship_code_drs': "SSV ex Nansha",
-    'en': "SuperStar Virgo",
-    'zh-Hans': "处女星号",
-    'zh-Hant': "處女星號"
+    'ship_code': 'SSV',
+    'ship_code_drs': 'SSV ex Nansha',
+    'en': 'SuperStar Virgo',
+    'zh-Hans': '处女星号',
+    'zh-Hant': '處女星號'
   }
 ]; // SHIP_DATA
 

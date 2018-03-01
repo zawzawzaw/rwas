@@ -30,9 +30,24 @@ rwas.component.UserRegisterForm = function(options, element) {
 
 
 
+  /**
+   * @type {manic.ui.Dropdown}
+   */
+  this.title_dropdown = null;
+
+  /**
+   * @type {manic.ui.Dropdown}
+   */
+  this.gender_dropdown = null;
+
+
+
+
+
   this.create_api();
   this.create_form_check();
   
+  this.create_temporary_date_pickers();
 
 
   console.log('rwas.component.UserRegisterForm: init');
@@ -100,7 +115,19 @@ rwas.component.UserRegisterForm.prototype.create_form_check = function() {
       console.log('the data that is to be submitted');
       console.log(data);
 
-      this.rwas_api.user_register(data);
+
+
+      
+      
+      if (data['pin'].length != 6) {
+        alert('pin must be 6 digits');
+
+      } else if (data['pin'] != data['pin_confirm']) {
+        alert('pin must match');
+
+      } else {
+        this.rwas_api.user_register(data);
+      }
 
       /*
       var data = this.search_form_check.form_data_object;
@@ -117,6 +144,158 @@ rwas.component.UserRegisterForm.prototype.create_form_check = function() {
 
 };
 
+rwas.component.UserRegisterForm.prototype.create_temporary_date_pickers = function() {
+    
+  var date_of_birth_txt = this.element.find('#account-register-form input[name="date_of_birth"]');
+  var doc_issue_date_txt = this.element.find('#account-register-form input[name="doc_issue_date"]');
+  var doc_expiry_date_txt = this.element.find('#account-register-form input[name="doc_expiry_date"]');
+
+
+
+  if (date_of_birth_txt.length != 0) {
+    date_of_birth_txt.datepicker({
+
+      'changeMonth': true,
+      'changeYear': true,
+
+      'maxDate': '-18Y',
+
+      //'yearRange': "c-20:c+20",
+      'yearRange': "c-90:c",
+
+      // minDate: -20, maxDate: "+1M +10D"
+      
+
+      // 'minDate': 0,
+      'dateFormat': 'dd/mm/yy',
+      'altFormat': 'dd/mm/yy',
+      'dayNamesMin': [ "S", "M", "T", "W", "T", "F", "S" ],
+      'altField': this.item_txt,
+      'onSelect': function(event){
+
+        var date_of_birth_txt = this.element.find('#account-register-form input[name="date_of_birth"]');
+        date_of_birth_txt.trigger('blur');
+
+      }.bind(this)
+    });
+
+  }
+
+
+  if (doc_issue_date_txt.length != 0) {
+    doc_issue_date_txt.datepicker({
+
+      'changeMonth': true,
+      'changeYear': true,
+
+      'maxDate': 0,
+      'yearRange': "c-30:c",
+
+      'dateFormat': 'dd/mm/yy',
+      'altFormat': 'dd/mm/yy',
+      'dayNamesMin': [ "S", "M", "T", "W", "T", "F", "S" ],
+      'altField': this.item_txt,
+      'onSelect': function(event){
+
+      }.bind(this)
+    });
+
+  }
+
+  if (doc_expiry_date_txt.length != 0) {
+    doc_expiry_date_txt.datepicker({
+
+      'changeMonth': true,
+      'changeYear': true,
+
+      'minDate': 0,
+      'yearRange': "c:c+30",
+
+      // 'maxDate': '-18Y',
+      // minDate: -20, maxDate: "+1M +10D"
+
+      // 'minDate': 0,
+      'dateFormat': 'dd/mm/yy',
+      'altFormat': 'dd/mm/yy',
+      'dayNamesMin': [ "S", "M", "T", "W", "T", "F", "S" ],
+      'altField': this.item_txt,
+      'onSelect': function(event){
+
+      }.bind(this)
+    });
+
+  }
+  
+
+  /*
+  this.item_datepicker.datepicker({
+    // dateFormat: 'dd-mm-yyyy',
+    'minDate': 0,
+    'dateFormat': 'dd/mm/yy',
+    'altFormat': 'dd/mm/yy',
+    'dayNamesMin': [ "S", "M", "T", "W", "T", "F", "S" ],
+    'altField': this.item_txt,
+    'onSelect': this.on_datepicker_select.bind(this)
+  });
+  */
+  
+
+
+  
+
+  if (this.element.find('#register-title-dropdown').length != 0) {
+    this.title_dropdown = this.element.find('#register-title-dropdown').data('manic.ui.Dropdown');
+  }
+  
+  if (this.element.find('#register-gender-dropdown').length != 0) {
+    this.gender_dropdown = this.element.find('#register-gender-dropdown').data('manic.ui.Dropdown');
+  }
+
+
+  if (this.title_dropdown != null && this.gender_dropdown != null) {
+
+
+    goog.events.listen(this.title_dropdown, manic.ui.Dropdown.ON_CHANGE, function(event){
+
+      if (this.title_dropdown.current_value == 'MR') {
+        this.gender_dropdown.set_value('M');
+      } else if (this.title_dropdown.current_value == 'MS') {
+        this.gender_dropdown.set_value('F');
+      } else if (this.title_dropdown.current_value == 'MDM') {
+        this.gender_dropdown.set_value('F');
+      }
+      
+    }.bind(this));
+
+    goog.events.listen(this.gender_dropdown, manic.ui.Dropdown.ON_CHANGE, function(event){
+
+      if (this.gender_dropdown.current_value == 'F') {
+
+        if (this.title_dropdown.current_value == 'MR') {
+          this.title_dropdown.set_value('MS');
+        }
+        
+      } else if (this.gender_dropdown.current_value == 'M') {
+
+        if (this.title_dropdown.current_value == 'MS') {
+          this.title_dropdown.set_value('MR');
+        } else if (this.title_dropdown.current_value == 'MDM') {
+          this.title_dropdown.set_value('MR');
+        }
+
+      }
+
+    }.bind(this));
+    
+  }
+
+
+  
+  
+  
+
+};
+
 
 //    ____  ____  _____     ___  _____ _____
 //   |  _ \|  _ \|_ _\ \   / / \|_   _| ____|
@@ -127,7 +306,7 @@ rwas.component.UserRegisterForm.prototype.create_form_check = function() {
 
 
 
-rwas.component.UserRegisterForm.prototype.private_method_02 = function() {};
+
 rwas.component.UserRegisterForm.prototype.private_method_03 = function() {};
 rwas.component.UserRegisterForm.prototype.private_method_04 = function() {};
 rwas.component.UserRegisterForm.prototype.private_method_05 = function() {};

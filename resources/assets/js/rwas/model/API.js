@@ -160,6 +160,11 @@ rwas.model.API.prototype.user_register = function(data_param) {
     'method': 'POST',
     'data': data_param,
     'dataType': 'json',
+    'error': function( result ) {
+      
+      alert(JSON.stringify(result));
+
+    },
     'success': function( result ) {
       var data_array = result;
 
@@ -336,7 +341,10 @@ rwas.model.API.prototype.cruise_get_itineraries = function(port_param, date_para
 
         if (ship_data != null) {
           item['ship_name'] = ship_data['en'];                // for english
+        } else {
+          console.log('this is the ship code ' + item['ship_code']);
         }
+
       }
 
       console.log('this.cruise_itineraries');

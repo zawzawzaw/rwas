@@ -180,62 +180,7 @@
 
             -->
 
-            <div class="row">
-              <div class="col-md-6">
-
-                <div class="form-group">
-                  <label>Occupation</label>
-                  <div class="manic-dropdown">
-                    <select name="occupation">
-                      <option value="">Select one</option>
-
-                      <option value="Business owner/Partner">Business owner/Partner</option>
-                      <option value="Other office worker">Other office worker</option>
-                      <option value="Professional / Technical">Professional / Technical</option>
-                      <option value="Retired,unemployed,housewife,student">Retired,unemployed,housewife,student</option>
-                      <option value="Senior/Executive management">Senior/Executive management</option>
-                      <option value="Others">Others</option>
-                      
-                    </select>
-                  </div>
-                </div>
-
-              </div>
-              <div class="col-md-6">
-
-                <div class="form-group">
-                  <label>Nature of business</label>
-                  <div class="manic-dropdown">
-                    <select name="nature_of_business">
-                      <option value="">Select one</option>
-
-                      <option value="Agriculture, Mining & Forestry">Agriculture, Mining & Forestry</option>
-                      <option value="Construction/Transpo/Comm/Utililities">Construction/Transpo/Comm/Utililities</option>
-                      <option value="Financial Services - Banking, Insurance">Financial Services - Banking, Insurance</option>
-                      <option value="Financial Services - Other">Financial Services - Other</option>
-                      <option value="General Business/Self Employed">General Business/Self Employed</option>
-                      <option value="Government/Public Sector">Government/Public Sector</option>
-                      <option value="Hospitality & Tourism">Hospitality & Tourism</option>
-                      <option value="Non-Profit/Charity Organization">Non-Profit/Charity Organization</option>
-                      <option value="Others/None">Others/None</option>
-                      <option value="Professional Services:Law,Accounting">Professional Services:Law,Accounting</option>
-                      <option value="Professional Services:Others">Professional Services:Others</option>
-                      <option value="Real Estate">Real Estate</option>
-                      <option value="Manufacturing:Defense Goods">Manufacturing:Defense Goods</option>
-                      <option value="Trading Business:Defense Goods">Trading Business:Defense Goods</option>
-                      <option value="Trading Business:Import/Export">Trading Business:Import/Export</option>
-                      <option value="Manufacturing:Jewelry/Precious Metals">Manufacturing:Jewelry/Precious Metals</option>
-                      <option value="Trading Business:Jewelry/Precious Metals">Trading Business:Jewelry/Precious Metals</option>
-                      <option value="Trading Business:Others">Trading Business:Others</option>
-                      <option value="Manufacturing:Others">Manufacturing:Others</option>
-                      
-                    </select>
-                  </div>
-                </div>
-                
-              </div>
-            </div> <!-- row -->
-
+            
 
 
             <!--
@@ -260,7 +205,7 @@
 
                 <div class="form-group">
                   <label>Mobile*</label>
-                  <input type="text" name="mobile" class="required" value="{{ $info['profile']['mobile'] }}">
+                  <input type="text" name="mobile" class="required only-numbers" value="{{ $info['profile']['mobile'] }}">
                 </div>
 
               </div>

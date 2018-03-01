@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                   <label>Title*</label>
-                  <div class="manic-dropdown">
+                  <div class="manic-dropdown" id="register-title-dropdown">
                     <select name="title" class="required">
                       <option value="">Select one</option>
                       <option value="MR">Mr.</option>
@@ -84,7 +84,7 @@
 
                 <div class="form-group">
                   <label>Gender*</label>
-                  <div class="manic-dropdown">
+                  <div class="manic-dropdown" id="register-gender-dropdown">
                     <select name="gender" class="required">
                       <option value="">Select one</option>
                       <option value="M">M</option>
@@ -119,8 +119,8 @@
                     <select name="nationality" class="required">
                       <option value="">Select one</option>
 
-                      <option value="MAINLAND CHINA">MAINLAND CHINA</option>
-                      <option value="HONG KONG SPECIAL ADMINSTRATIVE REGION">HONG KONG SPECIAL ADMINSTRATIVE REGION</option>
+                      <option value="CHINA">CHINA</option>
+                      <option value="HONG KONG">HONG KONG</option>
                       <option value="INDONESIA">INDONESIA</option>
                       <option value="MALAYSIA">MALAYSIA</option>
                       <option value="SINGAPORE">SINGAPORE</option>
@@ -154,7 +154,7 @@
                       <option value="HONDURAS">HONDURAS</option>
                       <option value="PORTUGAL">PORTUGAL</option>
                       <option value="MEXICO">MEXICO</option>
-                      <option value="MACAU SPECIAL ADMINISTRATIVE REGION">MACAU SPECIAL ADMINISTRATIVE REGION</option>
+                      <option value="MACAU">MACAU SPECIAL ADMINISTRATIVE REGION</option>
                       <option value="ARGENTINA">ARGENTINA</option>
                       <option value="BRAZIL">BRAZIL</option>
                       <option value="CHILE">CHILE</option>
@@ -230,8 +230,8 @@
                     <select name="doc_country">
                       <option value="">Select one</option>
 
-                      <option value="MAINLAND CHINA">MAINLAND CHINA</option>
-                      <option value="HONG KONG SPECIAL ADMINSTRATIVE REGION">HONG KONG SPECIAL ADMINSTRATIVE REGION</option>
+                      <option value="CHINA">CHINA</option>
+                      <option value="HONG KONG">HONG KONG</option>
                       <option value="INDONESIA">INDONESIA</option>
                       <option value="MALAYSIA">MALAYSIA</option>
                       <option value="SINGAPORE">SINGAPORE</option>
@@ -265,7 +265,7 @@
                       <option value="HONDURAS">HONDURAS</option>
                       <option value="PORTUGAL">PORTUGAL</option>
                       <option value="MEXICO">MEXICO</option>
-                      <option value="MACAU SPECIAL ADMINISTRATIVE REGION">MACAU SPECIAL ADMINISTRATIVE REGION</option>
+                      <option value="MACAU">MACAU SPECIAL ADMINISTRATIVE REGION</option>
                       <option value="ARGENTINA">ARGENTINA</option>
                       <option value="BRAZIL">BRAZIL</option>
                       <option value="CHILE">CHILE</option>
@@ -369,13 +369,16 @@
                     <select name="nature_of_business">
                       <option value="">Select one</option>
 
-                      <option value="Agriculture, Mining & Forestry">Agriculture, Mining & Forestry</option>
+                      <!-- <option value="Agriculture, Mining & Forestry">Agriculture, Mining & Forestry</option> -->
+                      
                       <option value="Construction/Transpo/Comm/Utililities">Construction/Transpo/Comm/Utililities</option>
                       <option value="Financial Services - Banking, Insurance">Financial Services - Banking, Insurance</option>
                       <option value="Financial Services - Other">Financial Services - Other</option>
                       <option value="General Business/Self Employed">General Business/Self Employed</option>
                       <option value="Government/Public Sector">Government/Public Sector</option>
-                      <option value="Hospitality & Tourism">Hospitality & Tourism</option>
+
+                      <!-- <option value="Hospitality & Tourism">Hospitality & Tourism</option> -->
+                      
                       <option value="Non-Profit/Charity Organization">Non-Profit/Charity Organization</option>
                       <option value="Others/None">Others/None</option>
                       <option value="Professional Services:Law,Accounting">Professional Services:Law,Accounting</option>
@@ -426,8 +429,8 @@
                     <select name="mobile_country" class="required">
                       <option value="">Select one</option>
 
-                      <option value="86">MAINLAND CHINA</option>
-                      <option value="852">HONG KONG SPECIAL ADMINSTRATIVE REGION</option>
+                      <option value="86">CHINA</option>
+                      <option value="852">HONG KONG</option>
                       <option value="62">INDONESIA</option>
                       <option value="60">MALAYSIA</option>
                       <option value="65">SINGAPORE</option>
@@ -551,8 +554,8 @@
                     <select name="address_country" class="required">
                       <option value="">Select one</option>
 
-                      <option value="MAINLAND CHINA">MAINLAND CHINA</option>
-                      <option value="HONG KONG SPECIAL ADMINSTRATIVE REGION">HONG KONG SPECIAL ADMINSTRATIVE REGION</option>
+                      <option value="CHINA">CHINA</option>
+                      <option value="HONG KONG">HONG KONG</option>
                       <option value="INDONESIA">INDONESIA</option>
                       <option value="MALAYSIA">MALAYSIA</option>
                       <option value="SINGAPORE">SINGAPORE</option>
@@ -586,7 +589,7 @@
                       <option value="HONDURAS">HONDURAS</option>
                       <option value="PORTUGAL">PORTUGAL</option>
                       <option value="MEXICO">MEXICO</option>
-                      <option value="MACAU SPECIAL ADMINISTRATIVE REGION">MACAU SPECIAL ADMINISTRATIVE REGION</option>
+                      <option value="MACAU">MACAU SPECIAL ADMINISTRATIVE REGION</option>
                       <option value="ARGENTINA">ARGENTINA</option>
                       <option value="BRAZIL">BRAZIL</option>
                       <option value="CHILE">CHILE</option>
@@ -652,7 +655,7 @@
 
                 <div class="form-group">
                   <label>Post code*</label>
-                  <input type="text" name="address_postal_code" class="required">
+                  <input type="text" name="address_postal_code" class="required only-numbers">
                 </div>
 
               </div>
