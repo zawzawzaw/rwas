@@ -1,86 +1,144 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout.master')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+  <div class="under-construction-disclaimer">
+    A functionality demo <br>
+    this is NOT the design
+  </div>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+  <article id="redeem-cabin-type-header-section">
+    <div class="container-fluid has-breakpoint">
+      <div class="row">
+        <div class="col-md-12">
 
-            .full-height {
-                height: 100vh;
-            }
+          <div id="redeem-cabin-type-header">
+            <div class="row">
+              <div class="col-md-4">
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-            .subtitle {
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-                color: #636b6f;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+                <div id="redeem-cabin-type-header-itinerary-info">
+                  <p>6 Days 5 Nights</p>
+                  <p>Hongkong-Hongkong</p>
                 </div>
-            @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Booking Summary
+              </div>
+              <div class="col-md-3">
+
+                <div id="redeem-cabin-type-header-ship-info">
+                  <p>Ship Info.</p>
+                  <p>World Dream</p>
                 </div>
+
+              </div>
+              <div class="col-md-2">
+
+                <div id="redeem-cabin-type-header-ship-logo">
+                  <p>insert logo</p>
+                </div>
+
+              </div>
+              <div class="col-md-3">
                 
+                <div id="redeem-cabin-type-header-departure-date">
+                  <p>Departure Date.</p>
+                  <p>21 feb 2018</p>
+                </div>
+
+              </div>
             </div>
+          </div> <!-- redeem-cabin-type-header -->
+
+
+
+        </div> <!-- col-md-12 -->
+      </div> <!-- row -->
+    </div> <!-- container-fluid -->
+  </article> <!-- redeem-cabin-type-header-section -->
+
+
+
+  <article id="redeem-cabin-type-selected-section">
+    <div class="container-fluid has-breakpoint">
+      <div class="row">
+        <div class="col-md-12">
+
+          <div id="redeem-cabin-type-selected">
+            <div class="row">
+              <div class="col-md-3">
+
+                <p>2 pax</p>
+
+              </div>
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-6">
+                    <p>Cabin Type</p>
+                  </div>
+                  <div class="col-md-6">
+                    <p>Redemption Rate</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <p>Oceanviews (window) stateroom</p>
+                  </div>
+                  <div class="col-md-6">
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
-    </body>
-</html>
+      </div>
+    </div>
+  </article> <!-- redeem-cabin-type-selected-section -->
+
+
+
+  <!--
+     _____ ___   ___ _____ _____ ____
+    |  ___/ _ \ / _ \_   _| ____|  _ \
+    | |_ | | | | | | || | |  _| | |_) |
+    |  _|| |_| | |_| || | | |___|  _ <
+    |_|   \___/ \___/ |_| |_____|_| \_\
+
+  -->
+
+  <article id="redeem-cabin-type-footer-section">
+    <div class="container-fluid has-breakpoint">
+      <div class="row">
+        <div class="col-md-8">
+
+          <div id="redeem-cabin-type-subsequent-cabin-form-container">
+            <div id="redeem-cabin-type-subsequent-cabin-form">
+              <p>Your are eligable for 1 subsequent cabin redemption</p>
+              <p>No of pax for the subsequent cabin</p>
+
+              <div class="row">
+                <p>pax form</p>
+                <p>submit button</p>
+              </div>
+            </div> <!-- redeem-cabin-type-subsequent-cabin-form -->
+          </div> <!-- redeem-cabin-type-subsequent-cabin-form-container -->
+
+        </div>
+        <div class="col-md-4">
+
+          <div id="redeem-cabin-type-checkout-cta-container">
+            
+            <a href="{{url('/checkout')}}" class="square-cta large-version full-width-version" id="redeem-cabin-type-checkout-cta">Proceed To Checkout</a>
+            <!-- <a href="javascript:void(0);" class="square-cta large-version full-width-version" id="redeem-cabin-type-checkout-cta">Proceed To Checkout</a> -->
+
+          </div> <!-- redeem-cabin-type-checkout-cta-container -->
+
+        </div>
+      </div>
+    </div>
+  </article> <!-- redeem-cabin-type-footer-section -->
+
+
+{{-- content --}}
+@endsection
