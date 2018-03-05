@@ -33,9 +33,15 @@ Route::get('/redeem/summary', function () { return view('pages/redeem/summary');
 
 
 
-Route::get('/checkout/guest-details', function () { return view('pages/checkout/summary'); });
+Route::get('/checkout', function () { return view('pages/checkout/details-main'); });
+Route::get('/checkout/details-guest', function () { return view('pages/checkout/details-guest'); });
+Route::get('/checkout/details-summary', function () { return view('pages/checkout/details-summary'); });
+
 Route::get('/checkout/payment', function () { return view('pages/checkout/payment'); });
 Route::get('/checkout/thank-you', function () { return view('pages/checkout/thank-you'); });
+
+
+
 
 
 Route::group(['middleware' => 'nonAuthDrs'], function() {
