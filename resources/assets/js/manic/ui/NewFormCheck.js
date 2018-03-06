@@ -373,6 +373,22 @@ manic.ui.NewFormCheckItem = function(options, element) {
   this.is_required = this.element.hasClass('required');
   this.is_only_email = this.element.hasClass('only-email');
   this.is_only_numbers = this.element.hasClass('only-numbers');
+  this.is_only_alpha = this.element.hasClass('only-alpha');
+  this.is_only_alpha_space = this.element.hasClass('only-alpha-and-space');
+
+  this.is_only_alphanumeric = this.element.hasClass('only-alphanumeric');
+  this.is_only_alphanumeric_space = this.element.hasClass('only-alphanumeric-and-space');
+
+  this.is_only_string_length = this.element.hasClass('only-string-length');
+  this.is_only_string_length_length = 0;
+
+  if (this.is_only_string_length == true) {
+    this.is_only_string_length_length = this.element.attr('data-string-length');
+    this.is_only_string_length_length = parseInt(this.is_only_string_length_length);
+  }
+
+
+
 
   this.has_check = false;
 
@@ -517,6 +533,43 @@ manic.ui.NewFormCheckItem.STRING_ONLY_EMAIL = ' must be a valid email address';
  */
 manic.ui.NewFormCheckItem.STRING_ONLY_NUMBERS = ' must be all numbers';
 
+/**
+ * Form Check Constant
+ * @type {string}
+ */
+manic.ui.NewFormCheckItem.STRING_ONLY_ALPHANUMERIC = ' must be alphanumeric';
+
+/**
+ * Form Check Constant
+ * @type {string}
+ */
+manic.ui.NewFormCheckItem.STRING_ONLY_ALPHANUMERIC_AND_SPACE = ' must be alphanumeric and space';
+
+
+/**
+ * Form Check Constant
+ * @type {string}
+ */
+manic.ui.NewFormCheckItem.STRING_ONLY_ALPHA = ' must be alphabet';
+
+/**
+ * Form Check Constant
+ * @type {string}
+ */
+manic.ui.NewFormCheckItem.STRING_ONLY_ALPHA_AND_SPACE = ' must be alphabet and space';
+
+
+/**
+ * Form Check Constant
+ * @type {string}
+ */
+manic.ui.NewFormCheckItem.STRING_LENGTH = ' must be a certain length';
+
+
+
+
+
+
 
 //    ____  ____  _____     ___  _____ _____
 //   |  _ \|  _ \|_ _\ \   / / \|_   _| ____|
@@ -603,6 +656,69 @@ manic.ui.NewFormCheckItem.prototype.check_if_valid = function() {
 
     }
   }
+
+  if (this.is_only_alphanumeric == true) {
+    if (this.validate_alpha_numberic(value) == true) {
+      // true
+      
+    } else {
+      this.is_valid = false;
+      this.add_error(manic.ui.NewFormCheckItem.STRING_ONLY_ALPHANUMERIC)
+    }
+  }
+  
+
+  if (this.is_only_alphanumeric_space == true) {
+    if (this.validate_alpha_numberic_and_space(value) == true) {
+      // true
+      
+    } else {
+      this.is_valid = false;
+      this.add_error(manic.ui.NewFormCheckItem.STRING_ONLY_ALPHANUMERIC_AND_SPACE)
+    }
+  }
+
+
+
+
+  if (this.is_only_alpha == true) {
+    if (this.validate_alpha(value) == true) {
+      // true
+      
+    } else {
+      this.is_valid = false;
+      this.add_error(manic.ui.NewFormCheckItem.STRING_ONLY_ALPHA);
+    }
+  }
+
+  if (this.is_only_alpha_space == true) {
+    if (this.validate_alpha_and_space(value) == true) {
+      // true
+      
+    } else {
+      this.is_valid = false;
+      this.add_error(manic.ui.NewFormCheckItem.STRING_ONLY_ALPHA_AND_SPACE);
+    }
+  }
+
+
+
+  if (this.is_only_string_length == true) {
+    var temp_str = '' + value;
+    var temp_str_length = temp_str.length;
+
+    if (temp_str_length == this.is_only_string_length_length) {
+      // true
+
+    } else {
+      this.is_valid = false;
+      this.add_error(manic.ui.NewFormCheckItem.STRING_LENGTH)
+    }
+  }
+
+  
+
+
 
 
   // final check
@@ -728,6 +844,46 @@ manic.ui.NewFormCheckItem.prototype.validate_numbers = function(numbers) {
   var re = /^[0-9]+$/;  
   return re.test(numbers);
 };
+
+/**
+ * @param  {string} numbers
+ * @return {boolean}         [description]
+ */
+manic.ui.NewFormCheckItem.prototype.validate_alpha_numberic = function(numbers) {
+  var re = /^[0-9a-zA-Z]+$/;
+  return re.test(numbers);
+};
+
+/**
+ * @param  {string} numbers
+ * @return {boolean}         [description]
+ */
+manic.ui.NewFormCheckItem.prototype.validate_alpha_numberic_and_space = function(numbers) {
+  var re = /^[0-9a-zA-Z ]+$/;
+  return re.test(numbers);
+};
+
+
+
+
+/**
+ * @param  {string} numbers
+ * @return {boolean}         [description]
+ */
+manic.ui.NewFormCheckItem.prototype.validate_alpha = function(numbers) {
+  var re = /^[a-zA-Z]+$/;
+  return re.test(numbers);
+};
+
+/**
+ * @param  {string} numbers
+ * @return {boolean}         [description]
+ */
+manic.ui.NewFormCheckItem.prototype.validate_alpha_and_space = function(numbers) {
+  var re = /^[a-zA-Z ]+$/;
+  return re.test(numbers);
+};
+
 
 
 /**
