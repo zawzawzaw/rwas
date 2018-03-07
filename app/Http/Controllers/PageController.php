@@ -181,77 +181,156 @@ class PageController extends Controller
 
   
   
+  //    _____ ____ ___ _____
+  //   | ____|  _ \_ _|_   _|
+  //   |  _| | | | | |  | |
+  //   | |___| |_| | |  | |
+  //   |_____|____/___| |_|
+  //  
 
-  
-  
-
-
-
-
-  public function get_registration_content()
+  public function get_edit_content()
   {
     $output_data = array(
-
-      "title_data" => array(
-        "name" => "Title*",
+      "occupation_data" => array(
+        "name" => "Occupation",
         "placeholder" => "Select one",
         "options" => array(
           array(
-            "label" => "Mr.",
-            "value" => "MR",
+            "label" => "Business owner/Partner",
+            "value" => "Business owner/Partner",
           ),
           array(
-            "label" => "Ms.",
-            "value" => "MS",
+            "label" => "Other office worker",
+            "value" => "Other office worker",
           ),
           array(
-            "label" => "Mdm.",
-            "value" => "MDM",
+            "label" => "Professional / Technical",
+            "value" => "Professional / Technical",
+          ),
+          array(
+            "label" => "Retired,unemployed,housewife,student",
+            "value" => "Retired,unemployed,housewife,student",
+          ),
+          array(
+            "label" => "Senior/Executive management",
+            "value" => "Senior/Executive management",
+          ),
+          array(
+            "label" => "Others",
+            "value" => "Others",
+          ),
+
+        ),
+      ),
+
+      "nature_of_business_data" => array(
+        "name" => "Nature of business",
+        "placeholder" => "Select one",
+        "options" => array(
+          array(
+            "label" => "Agriculture, Mining & Forestry",
+            "value" => "Agriculture, Mining & Forestry",
+          ),
+          array(
+            "label" => "Construction/Transpo/Comm/Utililities",
+            "value" => "Construction/Transpo/Comm/Utililities",
+          ),
+          array(
+            "label" => "Financial Services - Banking, Insurance",
+            "value" => "Financial Services - Banking, Insurance",
+          ),
+          array(
+            "label" => "Financial Services - Other",
+            "value" => "Financial Services - Other",
+          ),
+          array(
+            "label" => "General Business/Self Employed",
+            "value" => "General Business/Self Employed",
+          ),
+          array(
+            "label" => "Government/Public Sector",
+            "value" => "Government/Public Sector",
+          ),
+          array(
+            "label" => "Hospitality & Tourism",
+            "value" => "Hospitality & Tourism",
+          ),
+          array(
+            "label" => "Non-Profit/Charity Organization",
+            "value" => "Non-Profit/Charity Organization",
+          ),
+          array(
+            "label" => "Others/None",
+            "value" => "Others/None",
+          ),
+          array(
+            "label" => "Professional Services:Law,Accounting",
+            "value" => "Professional Services:Law,Accounting",
+          ),
+          array(
+            "label" => "Professional Services:Others",
+            "value" => "Professional Services:Others",
+          ),
+          array(
+            "label" => "Real Estate",
+            "value" => "Real Estate",
+          ),
+          array(
+            "label" => "Manufacturing:Defense Goods",
+            "value" => "Manufacturing:Defense Goods",
+          ),
+          array(
+            "label" => "Trading Business:Defense Goods",
+            "value" => "Trading Business:Defense Goods",
+          ),
+          array(
+            "label" => "Trading Business:Import/Export",
+            "value" => "Trading Business:Import/Export",
+          ),
+          array(
+            "label" => "Manufacturing:Jewelry/Precious Metals",
+            "value" => "Manufacturing:Jewelry/Precious Metals",
+          ),
+          array(
+            "label" => "Trading Business:Jewelry/Precious Metals",
+            "value" => "Trading Business:Jewelry/Precious Metals",
+          ),
+          array(
+            "label" => "Trading Business:Others",
+            "value" => "Trading Business:Others",
+          ),
+          array(
+            "label" => "Manufacturing:Others",
+            "value" => "Manufacturing:Others",
           ),
         ),
       ),
 
-      "first_name_data" => array(
-        "name" => "First Name*",
+      "email_data" => array(
+        "name" => "Email address*",
         "placeholder" => "",
       ),
 
-      "last_name_data" => array(
-        "name" => "Last Name*",
+      "mobile_data" => array(
+        "name" => "Mobile*",
+        "placeholder" => "",
+      ),
+      "address_line_01_data" => array(
+        "name" => "Address*",
         "placeholder" => "",
       ),
 
-      "gender_data" => array(
-        "name" => "Gender*",
+      "address_country_data" => array(
+        "name" => "Country",
         "placeholder" => "Select one",
         "options" => array(
           array(
-            "label" => "M",
-            "value" => "M",
+            "label" => "CHINA",
+            "value" => "CHINA",
           ),
           array(
-            "label" => "F",
-            "value" => "F",
-          ),
-        ),
-      ),
-
-      "date_of_birth_data" => array(
-        "name" => "Date of Birth*",
-        "placeholder" => "DD/MM/YYYY",
-      ),
-
-      "nationality_data" => array(
-        "name" => "Nationality*",
-        "placeholder" => "Select one",
-        "options" => array(
-          array(
-            "label" => "MAINLAND CHINA",
-            "value" => "MAINLAND CHINA",
-          ),
-          array(
-            "label" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
-            "value" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
+            "label" => "HONG KONG",
+            "value" => "HONG KONG",
           ),
           array(
             "label" => "INDONESIA",
@@ -387,7 +466,385 @@ class PageController extends Controller
           ),
           array(
             "label" => "MACAU SPECIAL ADMINISTRATIVE REGION",
-            "value" => "MACAU SPECIAL ADMINISTRATIVE REGION",
+            "value" => "MACAU",
+          ),
+          array(
+            "label" => "ARGENTINA",
+            "value" => "ARGENTINA",
+          ),
+          array(
+            "label" => "BRAZIL",
+            "value" => "BRAZIL",
+          ),
+          array(
+            "label" => "CHILE",
+            "value" => "CHILE",
+          ),
+          array(
+            "label" => "FINLAND",
+            "value" => "FINLAND",
+          ),
+          array(
+            "label" => "AUSTRALIA",
+            "value" => "AUSTRALIA",
+          ),
+          array(
+            "label" => "PHILIPPINES",
+            "value" => "PHILIPPINES",
+          ),
+          array(
+            "label" => "NEW ZEALAND",
+            "value" => "NEW ZEALAND",
+          ),
+          array(
+            "label" => "THAILAND",
+            "value" => "THAILAND",
+          ),
+          array(
+            "label" => "BRUNEI",
+            "value" => "BRUNEI",
+          ),
+          array(
+            "label" => "IRELAND",
+            "value" => "IRELAND",
+          ),
+          array(
+            "label" => "PAPUA N. GUINEA",
+            "value" => "PAPUA N. GUINEA",
+          ),
+          array(
+            "label" => "PUERTO RICO",
+            "value" => "PUERTO RICO",
+          ),
+          array(
+            "label" => "KOREA",
+            "value" => "KOREA",
+          ),
+          array(
+            "label" => "JAPAN",
+            "value" => "JAPAN",
+          ),
+          array(
+            "label" => "VIETNAM",
+            "value" => "VIETNAM",
+          ),
+          array(
+            "label" => "BANGLADESH",
+            "value" => "BANGLADESH",
+          ),
+          array(
+            "label" => "NAURU",
+            "value" => "NAURU",
+          ),
+          array(
+            "label" => "INDIA",
+            "value" => "INDIA",
+          ),
+          array(
+            "label" => "PAKISTAN",
+            "value" => "PAKISTAN",
+          ),
+          array(
+            "label" => "SRI LANKA",
+            "value" => "SRI LANKA",
+          ),
+          array(
+            "label" => "MYANMAR",
+            "value" => "MYANMAR",
+          ),
+          array(
+            "label" => "SAUDI ARABIA AND KUWAIT",
+            "value" => "SAUDI ARABIA AND KUWAIT",
+          ),
+          array(
+            "label" => "UAE",
+            "value" => "UAE",
+          ),
+          array(
+            "label" => "IRAN",
+            "value" => "IRAN",
+          ),
+          array(
+            "label" => "CAMBODIA",
+            "value" => "CAMBODIA",
+          ),
+        ),
+      ),
+
+      "address_state_data" => array(
+        "name" => "State / Province*",
+        "placeholder" => "",
+      ),
+
+      "address_city_data" => array(
+        "name" => "City*",
+        "placeholder" => "",
+      ),
+
+      "address_postal_code_data" => array(
+        "name" => "Post code*",
+        "placeholder" => "",
+      ),
+
+      "preferred_language_data" => array(
+        "name" => "Preferred language",
+        "placeholder" => "Select one",
+        "options" => array(
+          array(
+            "label" => "ENGLISH",
+            "value" => "EN",
+          ),
+          array(
+            "label" => "繁體中文",
+            "value" => "ZT",
+          ),
+          array(
+            "label" => "简体中文",
+            "value" => "ZH",
+          ),
+        ),
+      ),
+
+      "head_of_state_data" => array(
+        "name" => "Head of state, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "placeholder" => "",
+      ),
+
+      "subscribe_to_gra_data" => array(
+        "name" => "Subscribe to Genting Rewards Alliance updates, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "placeholder" => "",
+      ),
+
+      "privacy_policy_data" => array(
+        "name" => "Privacy policy, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "placeholder" => "",
+      ),
+
+      "promo_permission_data" => array(
+        "name" => "Promo permission, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "placeholder" => "",
+      ),
+
+
+    );
+  
+
+    $output_json = json_encode($output_data);
+
+    return $output_json;
+  }
+
+  
+  
+
+  //    ____  _____ ____ ___ ____ _____ ____      _  _____ ___ ___  _   _
+  //   |  _ \| ____/ ___|_ _/ ___|_   _|  _ \    / \|_   _|_ _/ _ \| \ | |
+  //   | |_) |  _|| |  _ | |\___ \ | | | |_) |  / _ \ | |  | | | | |  \| |
+  //   |  _ <| |__| |_| || | ___) || | |  _ <  / ___ \| |  | | |_| | |\  |
+  //   |_| \_\_____\____|___|____/ |_| |_| \_\/_/   \_\_| |___\___/|_| \_|
+  //
+
+
+  public function get_registration_content()
+  {
+    $output_data = array(
+
+      "title_data" => array(
+        "name" => "Title*",
+        "placeholder" => "Select one",
+        "options" => array(
+          array(
+            "label" => "Mr.",
+            "value" => "MR",
+          ),
+          array(
+            "label" => "Ms.",
+            "value" => "MS",
+          ),
+          array(
+            "label" => "Mdm.",
+            "value" => "MDM",
+          ),
+        ),
+      ),
+
+      "first_name_data" => array(
+        "name" => "First Name*",
+        "placeholder" => "",
+      ),
+
+      "last_name_data" => array(
+        "name" => "Last Name*",
+        "placeholder" => "",
+      ),
+
+      "gender_data" => array(
+        "name" => "Gender*",
+        "placeholder" => "Select one",
+        "options" => array(
+          array(
+            "label" => "M",
+            "value" => "M",
+          ),
+          array(
+            "label" => "F",
+            "value" => "F",
+          ),
+        ),
+      ),
+
+      "date_of_birth_data" => array(
+        "name" => "Date of Birth*",
+        "placeholder" => "DD/MM/YYYY",
+      ),
+
+      "nationality_data" => array(
+        "name" => "Nationality*",
+        "placeholder" => "Select one",
+        "options" => array(
+          array(
+            "label" => "CHINA",
+            "value" => "CHINA",
+          ),
+          array(
+            "label" => "HONG KONG",
+            "value" => "HONG KONG",
+          ),
+          array(
+            "label" => "INDONESIA",
+            "value" => "INDONESIA",
+          ),
+          array(
+            "label" => "MALAYSIA",
+            "value" => "MALAYSIA",
+          ),
+          array(
+            "label" => "SINGAPORE",
+            "value" => "SINGAPORE",
+          ),
+          array(
+            "label" => "TAIWAN",
+            "value" => "TAIWAN",
+          ),
+          array(
+            "label" => "THAILAND",
+            "value" => "THAILAND",
+          ),
+          array(
+            "label" => "CANADA",
+            "value" => "CANADA",
+          ),
+          array(
+            "label" => "USA",
+            "value" => "USA",
+          ),
+          array(
+            "label" => "MALDIVES",
+            "value" => "MALDIVES",
+          ),
+          array(
+            "label" => "RUSSIA",
+            "value" => "RUSSIA",
+          ),
+          array(
+            "label" => "EGYPT",
+            "value" => "EGYPT",
+          ),
+          array(
+            "label" => "ALGERIA",
+            "value" => "ALGERIA",
+          ),
+          array(
+            "label" => "MAURITIUS",
+            "value" => "MAURITIUS",
+          ),
+          array(
+            "label" => "ZIMBABWE",
+            "value" => "ZIMBABWE",
+          ),
+          array(
+            "label" => "SOUTH AFRICA",
+            "value" => "SOUTH AFRICA",
+          ),
+          array(
+            "label" => "NETHERLANDS",
+            "value" => "NETHERLANDS",
+          ),
+          array(
+            "label" => "BELGIUM",
+            "value" => "BELGIUM",
+          ),
+          array(
+            "label" => "FRANCE",
+            "value" => "FRANCE",
+          ),
+          array(
+            "label" => "SPAIN",
+            "value" => "SPAIN",
+          ),
+          array(
+            "label" => "MALTA",
+            "value" => "MALTA",
+          ),
+          array(
+            "label" => "HUNGARY",
+            "value" => "HUNGARY",
+          ),
+          array(
+            "label" => "ITALY",
+            "value" => "ITALY",
+          ),
+          array(
+            "label" => "ROMANIA",
+            "value" => "ROMANIA",
+          ),
+          array(
+            "label" => "SWITZERLAND",
+            "value" => "SWITZERLAND",
+          ),
+          array(
+            "label" => "AUSTRIA",
+            "value" => "AUSTRIA",
+          ),
+          array(
+            "label" => "UNITED KINGDOM",
+            "value" => "UNITED KINGDOM",
+          ),
+          array(
+            "label" => "DENMARK",
+            "value" => "DENMARK",
+          ),
+          array(
+            "label" => "SWEDEN",
+            "value" => "SWEDEN",
+          ),
+          array(
+            "label" => "NORWAY",
+            "value" => "NORWAY",
+          ),
+          array(
+            "label" => "POLAND",
+            "value" => "POLAND",
+          ),
+          array(
+            "label" => "GERMANY",
+            "value" => "GERMANY",
+          ),
+          array(
+            "label" => "HONDURAS",
+            "value" => "HONDURAS",
+          ),
+          array(
+            "label" => "PORTUGAL",
+            "value" => "PORTUGAL",
+          ),
+          array(
+            "label" => "MEXICO",
+            "value" => "MEXICO",
+          ),
+          array(
+            "label" => "MACAU SPECIAL ADMINISTRATIVE REGION",
+            "value" => "MACAU",
           ),
           array(
             "label" => "ARGENTINA",
@@ -517,12 +974,12 @@ class PageController extends Controller
         "placeholder" => "Select one",
         "options" => array(
           array(
-            "label" => "MAINLAND CHINA",
-            "value" => "MAINLAND CHINA",
+            "label" => "CHINA",
+            "value" => "CHINA",
           ),
           array(
-            "label" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
-            "value" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
+            "label" => "HONG KONG",
+            "value" => "HONG KONG",
           ),
           array(
             "label" => "INDONESIA",
@@ -658,7 +1115,7 @@ class PageController extends Controller
           ),
           array(
             "label" => "MACAU SPECIAL ADMINISTRATIVE REGION",
-            "value" => "MACAU SPECIAL ADMINISTRATIVE REGION",
+            "value" => "MACAU",
           ),
           array(
             "label" => "ARGENTINA",
@@ -898,247 +1355,247 @@ class PageController extends Controller
         "placeholder" => "Select one",
         "options" => array(
           array(
-            "label" => "MAINLAND CHINA",
+            "label" => "CHINA (86)",
             "value" => "86",
           ),
           array(
-            "label" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
+            "label" => "HONG KONG (852)",
             "value" => "852",
           ),
           array(
-            "label" => "INDONESIA",
+            "label" => "INDONESIA (62)",
             "value" => "62",
           ),
           array(
-            "label" => "MALAYSIA",
+            "label" => "MALAYSIA (60)",
             "value" => "60",
           ),
           array(
-            "label" => "SINGAPORE",
+            "label" => "SINGAPORE (65)",
             "value" => "65",
           ),
           array(
-            "label" => "TAIWAN",
+            "label" => "TAIWAN (886)",
             "value" => "886",
           ),
           array(
-            "label" => "THAILAND",
+            "label" => "THAILAND (66)",
             "value" => "66",
           ),
           array(
-            "label" => "CANADA",
+            "label" => "CANADA (00)",
             "value" => "00",
           ),
           array(
-            "label" => "USA",
+            "label" => "USA (01)",
             "value" => "01",
           ),
           array(
-            "label" => "MALDIVES",
+            "label" => "MALDIVES (06)",
             "value" => "06",
           ),
           array(
-            "label" => "RUSSIA",
+            "label" => "RUSSIA (07)",
             "value" => "07",
           ),
           array(
-            "label" => "EGYPT",
+            "label" => "EGYPT (20)",
             "value" => "20",
           ),
           array(
-            "label" => "ALGERIA",
+            "label" => "ALGERIA (21)",
             "value" => "21",
           ),
           array(
-            "label" => "MAURITIUS",
+            "label" => "MAURITIUS (23)",
             "value" => "23",
           ),
           array(
-            "label" => "ZIMBABWE",
+            "label" => "ZIMBABWE (26)",
             "value" => "26",
           ),
           array(
-            "label" => "SOUTH AFRICA",
+            "label" => "SOUTH AFRICA (27)",
             "value" => "27",
           ),
           array(
-            "label" => "NETHERLANDS",
+            "label" => "NETHERLANDS (31)",
             "value" => "31",
           ),
           array(
-            "label" => "BELGIUM",
+            "label" => "BELGIUM (32)",
             "value" => "32",
           ),
           array(
-            "label" => "FRANCE",
+            "label" => "FRANCE (33)",
             "value" => "33",
           ),
           array(
-            "label" => "SPAIN",
+            "label" => "SPAIN (34)",
             "value" => "34",
           ),
           array(
-            "label" => "MALTA",
+            "label" => "MALTA (35)",
             "value" => "35",
           ),
           array(
-            "label" => "HUNGARY",
+            "label" => "HUNGARY (36)",
             "value" => "36",
           ),
           array(
-            "label" => "ITALY",
+            "label" => "ITALY (39)",
             "value" => "39",
           ),
           array(
-            "label" => "ROMANIA",
+            "label" => "ROMANIA (40)",
             "value" => "40",
           ),
           array(
-            "label" => "SWITZERLAND",
+            "label" => "SWITZERLAND (41)",
             "value" => "41",
           ),
           array(
-            "label" => "AUSTRIA",
+            "label" => "AUSTRIA (43)",
             "value" => "43",
           ),
           array(
-            "label" => "UNITED KINGDOM",
+            "label" => "UNITED KINGDOM (44)",
             "value" => "44",
           ),
           array(
-            "label" => "DENMARK",
+            "label" => "DENMARK (45)",
             "value" => "45",
           ),
           array(
-            "label" => "SWEDEN",
+            "label" => "SWEDEN (46)",
             "value" => "46",
           ),
           array(
-            "label" => "NORWAY",
+            "label" => "NORWAY (47)",
             "value" => "47",
           ),
           array(
-            "label" => "POLAND",
+            "label" => "POLAND (48)",
             "value" => "48",
           ),
           array(
-            "label" => "GERMANY",
+            "label" => "GERMANY (49)",
             "value" => "49",
           ),
           array(
-            "label" => "HONDURAS",
+            "label" => "HONDURAS (50)",
             "value" => "50",
           ),
           array(
-            "label" => "PORTUGAL",
+            "label" => "PORTUGAL (51)",
             "value" => "51",
           ),
           array(
-            "label" => "MEXICO",
+            "label" => "MEXICO (52)",
             "value" => "52",
           ),
           array(
-            "label" => "MACAU SPECIAL ADMINISTRATIVE REGION",
+            "label" => "MACAU SPECIAL ADMINISTRATIVE REGION (53)",
             "value" => "53",
           ),
           array(
-            "label" => "ARGENTINA",
+            "label" => "ARGENTINA (54)",
             "value" => "54",
           ),
           array(
-            "label" => "BRAZIL",
+            "label" => "BRAZIL (55)",
             "value" => "55",
           ),
           array(
-            "label" => "CHILE",
+            "label" => "CHILE (56)",
             "value" => "56",
           ),
           array(
-            "label" => "FINLAND",
+            "label" => "FINLAND (58)",
             "value" => "58",
           ),
           array(
-            "label" => "AUSTRALIA",
+            "label" => "AUSTRALIA (61)",
             "value" => "61",
           ),
           array(
-            "label" => "PHILIPPINES",
+            "label" => "PHILIPPINES (63)",
             "value" => "63",
           ),
           array(
-            "label" => "NEW ZEALAND",
+            "label" => "NEW ZEALAND (64)",
             "value" => "64",
           ),
           array(
-            "label" => "THAILAND",
+            "label" => "THAILAND (66)",
             "value" => "66",
           ),
           array(
-            "label" => "BRUNEI",
+            "label" => "BRUNEI (67)",
             "value" => "67",
           ),
           array(
-            "label" => "IRELAND",
+            "label" => "IRELAND (72)",
             "value" => "72",
           ),
           array(
-            "label" => "PAPUA N. GUINEA",
+            "label" => "PAPUA N. GUINEA (75)",
             "value" => "75",
           ),
           array(
-            "label" => "PUERTO RICO",
+            "label" => "PUERTO RICO (78)",
             "value" => "78",
           ),
           array(
-            "label" => "KOREA",
+            "label" => "KOREA (80)",
             "value" => "80",
           ),
           array(
-            "label" => "JAPAN",
+            "label" => "JAPAN (81)",
             "value" => "81",
           ),
           array(
-            "label" => "VIETNAM",
+            "label" => "VIETNAM (84)",
             "value" => "84",
           ),
           array(
-            "label" => "BANGLADESH",
+            "label" => "BANGLADESH (89)",
             "value" => "89",
           ),
           array(
-            "label" => "NAURU",
+            "label" => "NAURU (90)",
             "value" => "90",
           ),
           array(
-            "label" => "INDIA",
+            "label" => "INDIA (91)",
             "value" => "91",
           ),
           array(
-            "label" => "PAKISTAN",
+            "label" => "PAKISTAN (92)",
             "value" => "92",
           ),
           array(
-            "label" => "SRI LANKA",
+            "label" => "SRI LANKA (94)",
             "value" => "94",
           ),
           array(
-            "label" => "MYANMAR",
+            "label" => "MYANMAR (95)",
             "value" => "95",
           ),
           array(
-            "label" => "SAUDI ARABIA AND KUWAIT",
+            "label" => "SAUDI ARABIA AND KUWAIT (96)",
             "value" => "96",
           ),
           array(
-            "label" => "UAE",
+            "label" => "UAE (97)",
             "value" => "97",
           ),
           array(
-            "label" => "IRAN",
+            "label" => "IRAN (98)",
             "value" => "98",
           ),
           array(
-            "label" => "CAMBODIA",
+            "label" => "CAMBODIA (855)",
             "value" => "855",
           ),
         ),
@@ -1159,12 +1616,12 @@ class PageController extends Controller
         "placeholder" => "Select one",
         "options" => array(
           array(
-            "label" => "MAINLAND CHINA",
-            "value" => "MAINLAND CHINA",
+            "label" => "CHINA",
+            "value" => "CHINA",
           ),
           array(
-            "label" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
-            "value" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
+            "label" => "HONG KONG",
+            "value" => "HONG KONG",
           ),
           array(
             "label" => "INDONESIA",
@@ -1300,7 +1757,7 @@ class PageController extends Controller
           ),
           array(
             "label" => "MACAU SPECIAL ADMINISTRATIVE REGION",
-            "value" => "MACAU SPECIAL ADMINISTRATIVE REGION",
+            "value" => "MACAU",
           ),
           array(
             "label" => "ARGENTINA",
@@ -1545,11 +2002,11 @@ class PageController extends Controller
         "options" => array(
           array(
             "label" => "中国内地",
-            "value" => "MAINLAND CHINA",
+            "value" => "CHINA",
           ),
           array(
             "label" => "香港特别行政区",
-            "value" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
+            "value" => "HONG KONG",
           ),
           array(
             "label" => "印度尼西亚",
@@ -1685,7 +2142,7 @@ class PageController extends Controller
           ),
           array(
             "label" => "澳门特别行政区",
-            "value" => "MACAU SPECIAL ADMINISTRATIVE REGION",
+            "value" => "MACAU",
           ),
           array(
             "label" => "阿根廷",
@@ -1816,11 +2273,11 @@ class PageController extends Controller
         "options" => array(
           array(
             "label" => "中国内地",
-            "value" => "MAINLAND CHINA",
+            "value" => "CHINA",
           ),
           array(
             "label" => "香港特别行政区",
-            "value" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
+            "value" => "HONG KONG",
           ),
           array(
             "label" => "印度尼西亚",
@@ -1956,7 +2413,7 @@ class PageController extends Controller
           ),
           array(
             "label" => "澳门特别行政区",
-            "value" => "MACAU SPECIAL ADMINISTRATIVE REGION",
+            "value" => "MACAU",
           ),
           array(
             "label" => "阿根廷",
@@ -2197,247 +2654,247 @@ class PageController extends Controller
         "placeholder" => "Select one",
         "options" => array(
           array(
-            "label" => "中国内地",
+            "label" => "中国内地 (86)",
             "value" => "86",
           ),
           array(
-            "label" => "香港特别行政区",
+            "label" => "香港特别行政区 (852)",
             "value" => "852",
           ),
           array(
-            "label" => "印度尼西亚",
+            "label" => "印度尼西亚 (62)",
             "value" => "62",
           ),
           array(
-            "label" => "马来西亚",
+            "label" => "马来西亚 (60)",
             "value" => "60",
           ),
           array(
-            "label" => "新加坡",
+            "label" => "新加坡 (65)",
             "value" => "65",
           ),
           array(
-            "label" => "台湾",
+            "label" => "台湾 (886)",
             "value" => "886",
           ),
           array(
-            "label" => "泰国",
+            "label" => "泰国 (66)",
             "value" => "66",
           ),
           array(
-            "label" => "加拿大",
+            "label" => "加拿大 (00)",
             "value" => "00",
           ),
           array(
-            "label" => "美国",
+            "label" => "美国 (01)",
             "value" => "01",
           ),
           array(
-            "label" => "马尔代夫",
+            "label" => "马尔代夫 (06)",
             "value" => "06",
           ),
           array(
-            "label" => "俄国",
+            "label" => "俄国 (07)",
             "value" => "07",
           ),
           array(
-            "label" => "埃及",
+            "label" => "埃及 (20)",
             "value" => "20",
           ),
           array(
-            "label" => "阿尔及利亚",
+            "label" => "阿尔及利亚 (21)",
             "value" => "21",
           ),
           array(
-            "label" => "毛里求斯",
+            "label" => "毛里求斯 (23)",
             "value" => "23",
           ),
           array(
-            "label" => "津巴布韦",
+            "label" => "津巴布韦 (26)",
             "value" => "26",
           ),
           array(
-            "label" => "南非",
+            "label" => "南非 (27)",
             "value" => "27",
           ),
           array(
-            "label" => "荷兰",
+            "label" => "荷兰 (31)",
             "value" => "31",
           ),
           array(
-            "label" => "比利时",
+            "label" => "比利时 (32)",
             "value" => "32",
           ),
           array(
-            "label" => "法国",
+            "label" => "法国 (33)",
             "value" => "33",
           ),
           array(
-            "label" => "西班牙",
+            "label" => "西班牙 (34)",
             "value" => "34",
           ),
           array(
-            "label" => "马耳他",
+            "label" => "马耳他 (35)",
             "value" => "35",
           ),
           array(
-            "label" => "匈牙利",
+            "label" => "匈牙利 (36)",
             "value" => "36",
           ),
           array(
-            "label" => "意大利",
+            "label" => "意大利 (39)",
             "value" => "39",
           ),
           array(
-            "label" => "罗马尼亚",
+            "label" => "罗马尼亚 (40)",
             "value" => "40",
           ),
           array(
-            "label" => "瑞士",
+            "label" => "瑞士 (41)",
             "value" => "41",
           ),
           array(
-            "label" => "奥地利",
+            "label" => "奥地利 (43)",
             "value" => "43",
           ),
           array(
-            "label" => "英国",
+            "label" => "英国 (44)",
             "value" => "44",
           ),
           array(
-            "label" => "丹麦",
+            "label" => "丹麦 (45)",
             "value" => "45",
           ),
           array(
-            "label" => "瑞典",
+            "label" => "瑞典 (46)",
             "value" => "46",
           ),
           array(
-            "label" => "挪威",
+            "label" => "挪威 (47)",
             "value" => "47",
           ),
           array(
-            "label" => "波兰",
+            "label" => "波兰 (48)",
             "value" => "48",
           ),
           array(
-            "label" => "德国",
+            "label" => "德国 (49)",
             "value" => "49",
           ),
           array(
-            "label" => "洪都拉斯",
+            "label" => "洪都拉斯 (50)",
             "value" => "50",
           ),
           array(
-            "label" => "葡萄牙",
+            "label" => "葡萄牙 (51)",
             "value" => "51",
           ),
           array(
-            "label" => "墨西哥",
+            "label" => "墨西哥 (52)",
             "value" => "52",
           ),
           array(
-            "label" => "澳门特别行政区",
+            "label" => "澳门特别行政区 (53)",
             "value" => "53",
           ),
           array(
-            "label" => "阿根廷",
+            "label" => "阿根廷 (54)",
             "value" => "54",
           ),
           array(
-            "label" => "巴西",
+            "label" => "巴西 (55)",
             "value" => "55",
           ),
           array(
-            "label" => "智利",
+            "label" => "智利 (56)",
             "value" => "56",
           ),
           array(
-            "label" => "芬兰",
+            "label" => "芬兰 (58)",
             "value" => "58",
           ),
           array(
-            "label" => "澳大利亚",
+            "label" => "澳大利亚 (61)",
             "value" => "61",
           ),
           array(
-            "label" => "菲律宾",
+            "label" => "菲律宾 (63)",
             "value" => "63",
           ),
           array(
-            "label" => "新西兰",
+            "label" => "新西兰 (64)",
             "value" => "64",
           ),
           array(
-            "label" => "泰国",
+            "label" => "泰国 (66)",
             "value" => "66",
           ),
           array(
-            "label" => "汶莱",
+            "label" => "汶莱 (67)",
             "value" => "67",
           ),
           array(
-            "label" => "爱尔兰",
+            "label" => "爱尔兰 (72)",
             "value" => "72",
           ),
           array(
-            "label" => "巴布亚新几内亚",
+            "label" => "巴布亚新几内亚 (75)",
             "value" => "75",
           ),
           array(
-            "label" => "波多黎各",
+            "label" => "波多黎各 (78)",
             "value" => "78",
           ),
           array(
-            "label" => "韩国",
+            "label" => "韩国 (80)",
             "value" => "80",
           ),
           array(
-            "label" => "日本",
+            "label" => "日本 (81)",
             "value" => "81",
           ),
           array(
-            "label" => "越南",
+            "label" => "越南 (84)",
             "value" => "84",
           ),
           array(
-            "label" => "孟加拉国",
+            "label" => "孟加拉国 (89)",
             "value" => "89",
           ),
           array(
-            "label" => "诺鲁",
+            "label" => "诺鲁 (90)",
             "value" => "90",
           ),
           array(
-            "label" => "印度",
+            "label" => "印度 (91)",
             "value" => "91",
           ),
           array(
-            "label" => "巴基斯坦",
+            "label" => "巴基斯坦 (92)",
             "value" => "92",
           ),
           array(
-            "label" => "斯里兰卡",
+            "label" => "斯里兰卡 (94)",
             "value" => "94",
           ),
           array(
-            "label" => "缅甸",
+            "label" => "缅甸 (95)",
             "value" => "95",
           ),
           array(
-            "label" => "沙特阿拉伯和科威特",
+            "label" => "沙特阿拉伯和科威特 (96)",
             "value" => "96",
           ),
           array(
-            "label" => "阿联酋",
+            "label" => "阿联酋 (97)",
             "value" => "97",
           ),
           array(
-            "label" => "伊朗",
+            "label" => "伊朗 (98)",
             "value" => "98",
           ),
           array(
-            "label" => "柬埔寨",
+            "label" => "柬埔寨 (855)",
             "value" => "855",
           ),
         ),
@@ -2459,11 +2916,11 @@ class PageController extends Controller
         "options" => array(
           array(
             "label" => "中国内地",
-            "value" => "MAINLAND CHINA",
+            "value" => "CHINA",
           ),
           array(
             "label" => "香港特别行政区",
-            "value" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
+            "value" => "HONG KONG",
           ),
           array(
             "label" => "印度尼西亚",
@@ -2599,7 +3056,7 @@ class PageController extends Controller
           ),
           array(
             "label" => "澳门特别行政区",
-            "value" => "MACAU SPECIAL ADMINISTRATIVE REGION",
+            "value" => "MACAU",
           ),
           array(
             "label" => "阿根廷",
@@ -2843,11 +3300,11 @@ class PageController extends Controller
         "options" => array(
           array(
             "label" => "中國內地",
-            "value" => "MAINLAND CHINA",
+            "value" => "CHINA",
           ),
           array(
             "label" => "香港特別行政區",
-            "value" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
+            "value" => "HONG KONG",
           ),
           array(
             "label" => "印度尼西亞",
@@ -2983,7 +3440,7 @@ class PageController extends Controller
           ),
           array(
             "label" => "澳門特別行政區",
-            "value" => "MACAU SPECIAL ADMINISTRATIVE REGION",
+            "value" => "MACAU",
           ),
           array(
             "label" => "阿根廷",
@@ -3114,11 +3571,11 @@ class PageController extends Controller
         "options" => array(
           array(
             "label" => "中國內地",
-            "value" => "MAINLAND CHINA",
+            "value" => "CHINA",
           ),
           array(
             "label" => "香港特別行政區",
-            "value" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
+            "value" => "HONG KONG",
           ),
           array(
             "label" => "印度尼西亞",
@@ -3254,7 +3711,7 @@ class PageController extends Controller
           ),
           array(
             "label" => "澳門特別行政區",
-            "value" => "MACAU SPECIAL ADMINISTRATIVE REGION",
+            "value" => "MACAU",
           ),
           array(
             "label" => "阿根廷",
@@ -3495,247 +3952,247 @@ class PageController extends Controller
         "placeholder" => "Select one",
         "options" => array(
           array(
-            "label" => "中國內地",
+            "label" => "中國內地 (86)",
             "value" => "86",
           ),
           array(
-            "label" => "香港特別行政區",
+            "label" => "香港特別行政區 (852)",
             "value" => "852",
           ),
           array(
-            "label" => "印度尼西亞",
+            "label" => "印度尼西亞 (62)",
             "value" => "62",
           ),
           array(
-            "label" => "馬來西亞",
+            "label" => "馬來西亞 (60)",
             "value" => "60",
           ),
           array(
-            "label" => "新加坡",
+            "label" => "新加坡 (65)",
             "value" => "65",
           ),
           array(
-            "label" => "台灣",
+            "label" => "台灣 (886)",
             "value" => "886",
           ),
           array(
-            "label" => "泰國",
+            "label" => "泰國 (66)",
             "value" => "66",
           ),
           array(
-            "label" => "加拿大",
+            "label" => "加拿大 (00)",
             "value" => "00",
           ),
           array(
-            "label" => "美國",
+            "label" => "美國 (01)",
             "value" => "01",
           ),
           array(
-            "label" => "馬爾代夫",
+            "label" => "馬爾代夫 (06)",
             "value" => "06",
           ),
           array(
-            "label" => "俄國",
+            "label" => "俄國 (07)",
             "value" => "07",
           ),
           array(
-            "label" => "埃及",
+            "label" => "埃及 (20)",
             "value" => "20",
           ),
           array(
-            "label" => "阿爾及利亞",
+            "label" => "阿爾及利亞 (21)",
             "value" => "21",
           ),
           array(
-            "label" => "毛里求斯",
+            "label" => "毛里求斯 (23)",
             "value" => "23",
           ),
           array(
-            "label" => "津巴布韋",
+            "label" => "津巴布韋 (26)",
             "value" => "26",
           ),
           array(
-            "label" => "南非",
+            "label" => "南非 (27)",
             "value" => "27",
           ),
           array(
-            "label" => "荷蘭",
+            "label" => "荷蘭 (31)",
             "value" => "31",
           ),
           array(
-            "label" => "比利時",
+            "label" => "比利時 (32)",
             "value" => "32",
           ),
           array(
-            "label" => "法國",
+            "label" => "法國 (33)",
             "value" => "33",
           ),
           array(
-            "label" => "西班牙",
+            "label" => "西班牙 (34)",
             "value" => "34",
           ),
           array(
-            "label" => "馬耳他",
+            "label" => "馬耳他 (35)",
             "value" => "35",
           ),
           array(
-            "label" => "匈牙利",
+            "label" => "匈牙利 (36)",
             "value" => "36",
           ),
           array(
-            "label" => "意大利",
+            "label" => "意大利 (39)",
             "value" => "39",
           ),
           array(
-            "label" => "羅馬尼亞",
+            "label" => "羅馬尼亞 (40)",
             "value" => "40",
           ),
           array(
-            "label" => "瑞士",
+            "label" => "瑞士 (41)",
             "value" => "41",
           ),
           array(
-            "label" => "奧地利",
+            "label" => "奧地利 (43)",
             "value" => "43",
           ),
           array(
-            "label" => "英國",
+            "label" => "英國 (44)",
             "value" => "44",
           ),
           array(
-            "label" => "丹麥",
+            "label" => "丹麥 (45)",
             "value" => "45",
           ),
           array(
-            "label" => "瑞典",
+            "label" => "瑞典 (46)",
             "value" => "46",
           ),
           array(
-            "label" => "挪威",
+            "label" => "挪威 (47)",
             "value" => "47",
           ),
           array(
-            "label" => "波蘭",
+            "label" => "波蘭 (48)",
             "value" => "48",
           ),
           array(
-            "label" => "德國",
+            "label" => "德國 (49)",
             "value" => "49",
           ),
           array(
-            "label" => "洪都拉斯",
+            "label" => "洪都拉斯 (50)",
             "value" => "50",
           ),
           array(
-            "label" => "葡萄牙",
+            "label" => "葡萄牙 (51)",
             "value" => "51",
           ),
           array(
-            "label" => "墨西哥",
+            "label" => "墨西哥 (52)",
             "value" => "52",
           ),
           array(
-            "label" => "澳門特別行政區",
+            "label" => "澳門特別行政區 (53)",
             "value" => "53",
           ),
           array(
-            "label" => "阿根廷",
+            "label" => "阿根廷 (54)",
             "value" => "54",
           ),
           array(
-            "label" => "巴西",
+            "label" => "巴西 (55)",
             "value" => "55",
           ),
           array(
-            "label" => "智利",
+            "label" => "智利 (56)",
             "value" => "56",
           ),
           array(
-            "label" => "芬蘭",
+            "label" => "芬蘭 (58)",
             "value" => "58",
           ),
           array(
-            "label" => "澳大利亞",
+            "label" => "澳大利亞 (61)",
             "value" => "61",
           ),
           array(
-            "label" => "菲律賓",
+            "label" => "菲律賓 (63)",
             "value" => "63",
           ),
           array(
-            "label" => "新西蘭",
+            "label" => "新西蘭 (64)",
             "value" => "64",
           ),
           array(
-            "label" => "泰國",
+            "label" => "泰國 (66)",
             "value" => "66",
           ),
           array(
-            "label" => "汶萊",
+            "label" => "汶萊 (67)",
             "value" => "67",
           ),
           array(
-            "label" => "愛爾蘭",
+            "label" => "愛爾蘭 (72)",
             "value" => "72",
           ),
           array(
-            "label" => "巴布亞新幾內亞",
+            "label" => "巴布亞新幾內亞 (75)",
             "value" => "75",
           ),
           array(
-            "label" => "波多黎各",
+            "label" => "波多黎各 (78)",
             "value" => "78",
           ),
           array(
-            "label" => "韓國",
+            "label" => "韓國 (80)",
             "value" => "80",
           ),
           array(
-            "label" => "日本",
+            "label" => "日本 (81)",
             "value" => "81",
           ),
           array(
-            "label" => "越南",
+            "label" => "越南 (84)",
             "value" => "84",
           ),
           array(
-            "label" => "孟加拉國",
+            "label" => "孟加拉國 (89)",
             "value" => "89",
           ),
           array(
-            "label" => "諾魯",
+            "label" => "諾魯 (90)",
             "value" => "90",
           ),
           array(
-            "label" => "印度",
+            "label" => "印度 (91)",
             "value" => "91",
           ),
           array(
-            "label" => "巴基斯坦",
+            "label" => "巴基斯坦 (92)",
             "value" => "92",
           ),
           array(
-            "label" => "斯里蘭卡",
+            "label" => "斯里蘭卡 (94)",
             "value" => "94",
           ),
           array(
-            "label" => "緬甸",
+            "label" => "緬甸 (95)",
             "value" => "95",
           ),
           array(
-            "label" => "沙特阿拉伯和科威特",
+            "label" => "沙特阿拉伯和科威特 (96)",
             "value" => "96",
           ),
           array(
-            "label" => "阿聯酋",
+            "label" => "阿聯酋 (97)",
             "value" => "97",
           ),
           array(
-            "label" => "伊朗",
+            "label" => "伊朗 (98)",
             "value" => "98",
           ),
           array(
-            "label" => "柬埔寨",
+            "label" => "柬埔寨 (855)",
             "value" => "855",
           ),
         ),
@@ -3757,11 +4214,11 @@ class PageController extends Controller
         "options" => array(
           array(
             "label" => "中國內地",
-            "value" => "MAINLAND CHINA",
+            "value" => "CHINA",
           ),
           array(
             "label" => "香港特別行政區",
-            "value" => "HONG KONG SPECIAL ADMINSTRATIVE REGION",
+            "value" => "HONG KONG",
           ),
           array(
             "label" => "印度尼西亞",
@@ -3897,7 +4354,7 @@ class PageController extends Controller
           ),
           array(
             "label" => "澳門特別行政區",
-            "value" => "MACAU SPECIAL ADMINISTRATIVE REGION",
+            "value" => "MACAU",
           ),
           array(
             "label" => "阿根廷",
