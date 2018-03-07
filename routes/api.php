@@ -21,6 +21,7 @@ Route::group(['prefix' => 'cruise'], function(){
     Route::get('get_valid_search_parameters', 'CruiseController@get_valid_search_parameters');
     Route::get('get_home_itineraries', 'CruiseController@get_home_itineraries');
     Route::get('get_itineraries', 'CruiseController@get_itineraries');
+    Route::get('get_cabin_prices', 'CruiseController@get_cabin_prices');
 });
 
 Route::group(['prefix' => 'user'], function(){

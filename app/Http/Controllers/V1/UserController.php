@@ -65,6 +65,7 @@ class UserController extends Controller
 
     public function editProfile(Request $request)
     {
+        app('App\Http\Controllers\V1\Api\UserController')->setPreferenceFlag($request, true);
         $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true);
         return view('pages/account/edit-profile')->withInfo($info['data']);
     }

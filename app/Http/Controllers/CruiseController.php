@@ -282,69 +282,42 @@ class CruiseController extends Controller
     // get price using (iten_code, ship, pax) and the xtopia parsed csv
     // arrange from lowest full cash price to highest
     
-    public function get_cabin_prices()
+    public function get_cabin_prices(Request $request)
     {
-        $output_data = array(
-        array(
-            "cabin_type_code" => "CB",                  // get the corresponding name in front end static variables (in english,traditional chinese & simplified chinese)
-            "price" => array(
-            "cc" => 5,
-            "cc_cash_added" => 0,
-            "gp" => 100,
-            "gp_cash_added" => 0,
-            "cash" => 100,
-            ),
-        ),
+        if(empty($request->input('cruise_id')) || is_null($request->input('cruise_id'))){
+            return response()->json([
+                'mesg' => 'Cruise id is required!'
+            ], 422);
+        }
 
-        array(
-            "cabin_type_code" => "CA",
-            "price" => array(
-            "cc" => 6,
-            "cc_cash_added" => 0,
-            "gp" => 120,
-            "gp_cash_added" => 0,
-            "cash" => 120,
-            ),
-        ),
+        $cruise = Cruise::select('id')->where('cruise_id', $request->input('cruise_id'))->with([
+            'cabins' => function($query) {
+                $query->select('id', 'cabin_category', 'cruise', 'pax_count');
+            }
+        ])->first();
 
-        array(
-            "cabin_type_code" => "BA",
-            "price" => array(
-            "cc" => 7,
-            "cc_cash_added" => 0,
-            "gp" => 140,
-            "gp_cash_added" => 0,
-            "cash" => 140,
-            ),
-        ),
+        if(empty($cruise)){
+            return response()->json([
+                'mesg' => 'Invalid cruise id!'
+            ], 422);
+        }
+        
+        $cabins = [];
+        
+        foreach($cruise->cabins as $cabin){
+            $cabins[] = [
+                'cabin_type_code' => $cabin->cabin_category,
+                'price' => array(
+                    'cc' => 5,
+                    'cc_cash_added' => 0,
+                    'gp' => 100,
+                    'gp_cash_added' => 0,
+                    'cash' => 100
+                ),
+            ];
+        }
 
-        array(
-            "cabin_type_code" => "AC",
-            "price" => array(
-            "cc" => 9,
-            "cc_cash_added" => 0,
-            "gp" => 180,
-            "gp_cash_added" => 0,
-            "cash" => 180,
-            ),
-        ),
-
-        array(
-            "cabin_type_code" => "AB",
-            "price" => array(
-            "cc" => 10,
-            "cc_cash_added" => 0,
-            "gp" => 200,
-            "gp_cash_added" => 0,
-            "cash" => 200,
-            ),
-        ),
-
-        );
-
-        $output_json = json_encode($output_data);
-
-        return $output_json;
+        return response()->json($cabins);
     }
 
 

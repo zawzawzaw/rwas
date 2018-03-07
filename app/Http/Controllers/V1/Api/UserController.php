@@ -60,6 +60,8 @@ class UserController extends Controller
 
         $occupation = "";
         $nature_of_business = "";
+        $head_of_state = "";
+        $subscribe_to_gra = "";
 
         foreach($result->PreferenceFlagList->WorkGroup->PreferenceFlag->PF as $pf){
             switch (strtolower($pf->Field)) {
@@ -69,6 +71,14 @@ class UserController extends Controller
                 
                 case 'biz2':
                     $nature_of_business = $pf->Value;
+                    break;
+
+                case 'gra':
+                    $subscribe_to_gra = $pf->Value;
+                    break;
+
+                case 'spep':
+                    $head_of_state = $pf->Value;
                     break;
                 
                 default:
@@ -102,6 +112,8 @@ class UserController extends Controller
                 
                 'occupation' => $occupation,
                 'nature_of_business' => $nature_of_business,
+                'head_of_state' => $head_of_state,
+                'subscribe_to_gra' => $subscribe_to_gra,
                 
                 'email' => $result->EmailAddress,
 
@@ -125,6 +137,12 @@ class UserController extends Controller
                 "tier_points_max" => 500,
             ),
             "current_bookings" => 2,
+            "preference_flags" => [
+                'occ' => $occupation,
+                'biz2' => $nature_of_business,
+                'spep' => $head_of_state,
+                'gra' => $subscribe_to_gra
+            ]
         );
         
         if($return){
@@ -133,8 +151,26 @@ class UserController extends Controller
                 'raw' => $result
             ];
         }
+                // return [
+                //     'data' => $output_data,
+                //     'raw' => $result
+                // ];
 
         return response()->json($result);
+    }
+
+    public function setPreferenceFlag(Request $request, $web=false)
+    {
+        $input = [
+            'paraDrsID' => 'MANIC',
+            'paraDrsPwd' => 'MANIC',
+            'paraCid' => $web ? $request->session()->get('drsUserID') : $request->input('paraCid'),
+            'paraWorkGroup' => urlencode('MEML'),
+            'paraPFField' => urlencode('COM'),
+            'paraPFValue' => urlencode('IN/180207/KIOSK')
+        ];
+
+        $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_SetPF', true);
     }
 
     public function login(Request $request)
@@ -316,11 +352,11 @@ class UserController extends Controller
             'PF2Field' => 'BIZ2',
             'PF2Value' => isset($input['nature_of_business'])==false || is_null($input['nature_of_business']) ? "" : (String) $input['nature_of_business'],
             'PF3Field' => 'SPEP',
-            'PF3Value' => isset($input['head_of_state '])==false || is_null($input['head_of_state']) ? "" : (String) strtoupper($input['head_of_state']),
+            'PF3Value' => isset($input['head_of_state'])==false || is_null($input['head_of_state']) ? "" : (String) strtoupper($input['head_of_state']),
             'PF4Field' => 'GRA',
-            'PF4Value' => date('ymd').'/'.(isset($input['subscribe_to_gra  '])==false || is_null($input['subscribe_to_gra ']) ? "" : (String) strtoupper($input['subscribe_to_gra '])==="YES" ? "IN" : "OUT"),
+            'PF4Value' => date('ymd').'/'.(isset($input['subscribe_to_gra'])==false || is_null($input['subscribe_to_gra']) ? "" : (String) strtoupper($input['subscribe_to_gra'])==="YES" ? "IN" : "OUT"),
             'PF5Field' => 'COM',
-            'PF5Value' => (isset($input['promo_permission '])==false || is_null($input['promo_permission']) ? "" : strtoupper($input['promo_permission'])==="YES" ? "IN" : "OUT").'/'.date('ymd').'/OF',
+            'PF5Value' => (isset($input['promo_permission'])==false || is_null($input['promo_permission']) ? "" : strtoupper($input['promo_permission'])==="YES" ? "IN" : "OUT").'/'.date('ymd').'/OF',
             'PF6Field' => 'OA',
             'PF6Value' => (String) 'OA_RWAS WEBSITE',
             'PF7Field' => 'CTLD',
@@ -369,6 +405,9 @@ class UserController extends Controller
             'address_city',
             'address_postal_code',
             'preferred_language',
+            'head_of_state',
+            'subscribe_to_gra',
+            'promo_permission',
             'occupation',
             'nature_of_business'
         );
@@ -402,18 +441,18 @@ class UserController extends Controller
             'PF1Value' => isset($input['occupation'])==false || is_null($input['occupation']) ? "" : (String) $input['occupation'],
             'PF2Field' => 'BIZ2',
             'PF2Value' => isset($input['nature_of_business'])==false || is_null($input['nature_of_business']) ? "" : (String) $input['nature_of_business'],
-            'PF3Field' => '',
-            'PF3Value' => '',
-            'PF4Field' => '',
-            'PF4Value' => '',
-            'PF5Field' => '',
-            'PF5Value' => '',
-            'PF6Field' => '',
-            'PF6Value' => '',
-            'PF7Field' => '',
-            'PF7Value' => '',
-            'PF8Field' => '',
-            'PF8Value' => '',
+            'PF3Field' => 'SPEP',
+            'PF3Value' => isset($input['head_of_state'])==false || is_null($input['head_of_state']) ? "" : (String) strtoupper($input['head_of_state']),
+            'PF4Field' => 'GRA',
+            'PF4Value' => date('ymd').'/'.(isset($input['subscribe_to_gra'])==false || is_null($input['subscribe_to_gra']) ? "" : (String) strtoupper($input['subscribe_to_gra'])==="YES" ? "IN" : "OUT"),
+            'PF5Field' => 'COM',
+            'PF5Value' => (isset($input['promo_permission'])==false || is_null($input['promo_permission']) ? "" : strtoupper($input['promo_permission'])==="YES" ? "IN" : "OUT").'/'.date('ymd').'/OF',
+            'PF6Field' => 'OA',
+            'PF6Value' => (String) 'OA_RWAS WEBSITE',
+            'PF7Field' => 'CTLD',
+            'PF7Value' => (String) date('Ymd'),
+            'PF8Field' => 'CTRP',
+            'PF8Value' => (String) date('Ymd', strtotime('+1 years')),
             'PF9Field' => '',
             'PF9Value' => '',
             'PF10Field' => '',
