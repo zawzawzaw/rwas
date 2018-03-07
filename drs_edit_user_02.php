@@ -8,20 +8,47 @@ $DRS_PWD = 'PASS';
 
 
 
-$url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_AutoUA_Get_CustomerProfile_Format_Long';
-
-
-
+$url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_EditCustomerV2';
 
 $fields = array(
   'paraDrsID' => 'MANIC',
   'paraDrsPwd' => 'MANIC',
+  'paraDRSWorkgroup' => 'MEML',
   'paraCid' => '1000044962',
-  'paraWorkGroup' => 'MEML',
-  'paraEnquiryCurrCode' => '',
-  'paraLoadDefaultDRSifNoUA' => '',
-  // 'paraEnquiryCurrCode' => 'US',
-  // 'paraLoadDefaultDRSifNoUA' => '0',
+  'paraCardTypeCode' => '99',
+  'paraEmail' => 'zaw@manic.com.sg',
+  'paraHOME' => '',
+  'paraBUSINESS' => '',
+  'paraMOBILE' => '+6591050491',
+  'paraSMS' => '',
+  'paraAdd1' => '114 Lavender Street',
+  'paraAdd2' => '',
+  'paraAdd3' => '',
+  'paraCity' => 'Singapore',
+  'paraState' => 'Singapore',
+  'paraCountry' => 'Singapore',
+  'paraPostcode' => '11141',
+  'paraPreLanguage' => 'EN',
+  'PF1Field' => '',
+  'PF1Value' => '',
+  'PF2Field' => '',
+  'PF2Value' => '',
+  'PF3Field' => '',
+  'PF3Value' => '',
+  'PF4Field' => '',
+  'PF4Value' => '',
+  'PF5Field' => '',
+  'PF5Value' => '',
+  'PF6Field' => '',
+  'PF6Value' => '',
+  'PF7Field' => '',
+  'PF7Value' => '',
+  'PF8Field' => '',
+  'PF8Value' => '',
+  'PF9Field' => '',
+  'PF9Value' => '',
+  'PF10Field' => '',
+  'PF10Value' => ''
 );
 
 // $url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_AutoUA_PINVerify';
