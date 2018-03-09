@@ -8,12 +8,12 @@ $DRS_PWD = 'PASS';
 
 
 
-$url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_AutoUA_PINCreate';
+$url = 'http://52.77.149.78/DRS_XMLV3/Service.asmx/API_AutoUA_PINCreate';
 
 $fields = array(
   'paraDrsID' => 'MANIC',
   'paraDrsPwd' => 'MANIC',
-  'paraCid' => '1000044962',
+  'paraCid' => '29',
   'paraPIN' => '222222'
 );
 

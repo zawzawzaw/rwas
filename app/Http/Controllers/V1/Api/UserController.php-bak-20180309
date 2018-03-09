@@ -22,8 +22,6 @@ class UserController extends Controller
         $input['paraDrsID'] = $this->drsID;
         $input['paraDrsPwd'] = $this->drsPwd;
 
-        // return $input;
-
         $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
 
         if(isset($result->errCode)){
@@ -39,12 +37,10 @@ class UserController extends Controller
             switch (strtolower($p->Type)) {
                 case 'sp':
                     $points['gp'] = floor($p->Balance);
-                    // $points['gp'] = '';
                     break;
                 
                 case 'lp':
                     $points['cc'] = floor($p->Balance);
-                    // $points['cc'] = '';
                     break;
                 
                 default:
@@ -55,16 +51,12 @@ class UserController extends Controller
 
         $mobile = "";
 
-        if(strtolower($result->Contact->ContactSection->Cust_Contact->Type)==="mobile") {
-            $mobile = $result->Contact->ContactSection->Cust_Contact->ContactNo;
+        foreach($result->Contact->ContactSection->Cust_Contact as $con){
+            if(strtolower($con->Type)==="mobile"){
+                $mobile = $con->ContactNo;
+                break;
+            }
         }
-
-        // foreach($result->Contact->ContactSection->Cust_Contact as $con){
-        //     if(strtolower($con->Type)==="mobile"){
-        //         $mobile = $con->ContactNo;
-        //         break;
-        //     }
-        // }
 
         $occupation = "";
         $nature_of_business = "";
@@ -174,8 +166,8 @@ class UserController extends Controller
             'paraDrsPwd' => 'MANIC',
             'paraCid' => $web ? $request->session()->get('drsUserID') : $request->input('paraCid'),
             'paraWorkGroup' => urlencode('MEML'),
-            'paraPFField' => urlencode('RWRC'),
-            'paraPFValue' => urlencode('10')
+            'paraPFField' => urlencode('COM'),
+            'paraPFValue' => urlencode('IN/180207/KIOSK')
         ];
 
         $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_SetPF', true);
@@ -200,7 +192,7 @@ class UserController extends Controller
             'paraPIN' => $input['password']
         ];
 
-        $result = $this->curlRequest($this->buildDrsXMLContent($parameter), $this->drsUrl.'API_AutoUA_eCashPINVerify', true);
+        $result = $this->curlRequest($this->buildDrsXMLContent($parameter), $this->drsUrl.'API_AutoUA_PINVerify', true);
 
         if(isset($result->errCode)){
             // if(isset($input['showErr']) && is_null($input['showErr'])==false){
@@ -390,7 +382,7 @@ class UserController extends Controller
             'paraPIN' => $input['pin']
         ];
     
-        $pinResult = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_eCashPINCreate', true);
+        $pinResult = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_PINCreate', true);
         
         if(isset($pinResult->errCode)){
             return response()->json($pinResult, 422);
@@ -470,44 +462,5 @@ class UserController extends Controller
         $result = $this->curlRequest($this->buildDrsXMLContent($update), $this->drsUrl.'API_EditCustomerV2', true);
 
         return response()->json($result);
-    }
-
-    public function deduct_gp(Request $request)
-    {        
-        $input = $request->only('paraCid', 'paraCashToAdjust', 'paraCashTypeToAdjust', 'paraCurrCode', 'paraProfitCenter', 'paraRemark');
-        // $validator = Validator::make($input, [
-        //     'id' => 'required',
-        //     'password' => 'required'
-        // ]);
-
-        // if($validator->fails()){
-        //    return redirect()->back()->withErrors($validator)->withInput();
-        // }
-
-        $parameter = [
-            'paraDrsID' => 'MANIC',
-            'paraDrsPwd' => 'MANIC',
-            'paraCid' => $input['paraCid'],
-            'paraCashToAdjust' => $input['paraCashToAdjust'],
-            'paraCashTypeToAdjust' => $input['paraCashTypeToAdjust'],
-            'paraCurrCode' => $input['paraCurrCode'],
-            'paraProfitCenter' => $input['paraProfitCenter'],
-            'paraRemark' => $input['paraRemark']
-        ];
-
-        $result = $this->curlRequest($this->buildDrsXMLContent($parameter), $this->drsUrl.'API_AutoUA_CEA_Currency', true);
-
-        if(isset($result->errCode)){
-            // if(isset($input['showErr']) && is_null($input['showErr'])==false){
-            //     echo "<pre>";
-            //     print_r($result);
-            //     echo "</pre>";
-            //     die();
-            // }
-            // $validator->errors()->add('customErr', 'Wrong id, password, cid or pin!');
-            return json_encode(array('message' => 'fail'));
-        }else{
-            return json_encode(array('message' => 'success'));
-        }
     }
 }

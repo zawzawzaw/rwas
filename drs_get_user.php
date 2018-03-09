@@ -3,19 +3,20 @@
 //extract data from the post
 //set POST variables
 
-$DRS_ID = 'YKS';
-$DRS_PWD = 'PASS';
+$DRS_ID = 'MANIC';
+$DRS_PWD = 'MANIC';
 
 
 
-$url = 'http://52.77.149.78/DRS_XMLV3/Service.asmx/API_AutoUA_Get_CustomerProfile';
+$url = 'http://52.77.149.78/DRS_XMLV3/Service.asmx/API_AutoUA_Get_CustomerProfile_Format_Long';
 
 $fields = array(
-  'paraDrsID' => urlencode('MANIC'),
-  'paraDrsPwd' => urlencode('MANIC'),
-  'paraCid' => urlencode('29'),
-  'paraEnquiryCurrCode' => urlencode('US'),
-  'paraLoadDefaultDRSifNoUA' => urlencode('0')
+  'paraCid' => '29',
+  'paraDrsID' => 'MANIC',
+  'paraDrsPwd' => 'MANIC',
+  'paraWorkGroup' => 'MEML',
+  'paraEnquiryCurrCode' => 'US',
+  'paraLoadDefaultDRSifNoUA' => '1'
 );
 
 // $url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_AutoUA_PINVerify';
@@ -48,5 +49,4 @@ var_dump($result);
 
 //close connection
 curl_close($ch);
-
 ?>
