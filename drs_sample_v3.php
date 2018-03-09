@@ -14,8 +14,8 @@ $url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_AutoUA_Get_CustomerProfi
 
 
 $fields = array(
-  'paraDrsID' => 'YKS',
-  'paraDrsPwd' => 'PASS',
+  'paraDrsID' => 'MANIC',
+  'paraDrsPwd' => 'MANIC',
   'paraCid' => '1000044962',
   'paraWorkGroup' => 'MEML',
   'paraEnquiryCurrCode' => '',

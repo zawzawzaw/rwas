@@ -8,7 +8,8 @@ $DRS_PWD = 'PASS';
 
 
 
-$url = 'http://52.77.149.78/DRS_XMLV3/Service.asmx/API_EditCustomerV2';
+// $url = 'http://52.77.149.78/DRS_XMLV3/Service.asmx/API_EditCustomerV2';
+$url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_EditCustomerV2';
 
 $fields = array(
   'paraDrsID' => 'MANIC',
