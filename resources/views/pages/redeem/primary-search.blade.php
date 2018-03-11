@@ -179,7 +179,8 @@
 
   <script type="text/template" id="redeem-search-result-item-date-template">
     <div class="col-md-2 col-sm-4 col-xs-6">
-      <div class="item-date" 
+      
+      <a href="{{url('/redeem/cabin')}}" class="item-date" 
         data-iten-code="{{ '{' . 'iten_code'. '}' }}"
         data-ship-code="{{ '{' . 'ship_code'. '}' }}"
         data-cruise-id="{{ '{' . 'cruise_id'. '}' }}"
@@ -193,7 +194,7 @@
             {{ '{' . 'price_str'. '}' }}
           </div>
         </div>
-      </div>
+      </a>
     </div>
   </script>
 

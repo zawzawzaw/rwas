@@ -54,7 +54,7 @@
 
                 <div class="form-group">
                   <label>First Name*</label>
-                  <input type="text" name="first_name" class="required">
+                  <input type="text" name="first_name" class="required only-alpha-and-space">
                 </div>
                 
               </div>
@@ -62,7 +62,7 @@
 
                 <div class="form-group">
                   <label>Last Name*</label>
-                  <input type="text" name="last_name" class="required">
+                  <input type="text" name="last_name" class="required only-alpha-and-space">
                 </div>
 
               </div>
@@ -203,9 +203,9 @@
               <div class="col-md-3">
 
                 <div class="form-group">
-                  <label>Identification type</label>
+                  <label>Identification type*</label>
                   <div class="manic-dropdown">
-                    <select name="doc_type">
+                    <select name="doc_type" class="required">
                       <option value="">Select one</option>
                       <option value="IC">Identification Card</option>
                       <option value="PP">Passport</option>
@@ -217,17 +217,17 @@
               <div class="col-md-4">
 
                 <div class="form-group">
-                  <label>ID or Passport number</label>
-                  <input type="text" name="doc_no">
+                  <label>ID or Passport number*</label>
+                  <input type="text" name="doc_no" class="required only-alphanumeric">
                 </div>
 
               </div>
               <div class="col-md-5">
 
                 <div class="form-group">
-                  <label>Travel document issued by</label>
+                  <label>Travel document issued by*</label>
                   <div class="manic-dropdown">
-                    <select name="doc_country">
+                    <select name="doc_country" class="required">
                       <option value="">Select one</option>
 
                       <option value="CHINA">CHINA</option>
@@ -314,16 +314,16 @@
               <div class="col-md-6">
 
                 <div class="form-group">
-                  <label>Travel document issue date</label>
-                  <input type="text" name="doc_issue_date" placeholder="DD/MM/YYYY">
+                  <label>Travel document issue date*</label>
+                  <input type="text" name="doc_issue_date" placeholder="DD/MM/YYYY" class="required">
                 </div>
 
               </div>
               <div class="col-md-6">
 
                 <div class="form-group">
-                  <label>Travel document expiry date</label>
-                  <input type="text" name="doc_expiry_date" placeholder="DD/MM/YYYY">
+                  <label>Travel document expiry date*</label>
+                  <input type="text" name="doc_expiry_date" placeholder="DD/MM/YYYY" class="required">
                 </div>
 
               </div>
@@ -344,9 +344,9 @@
               <div class="col-md-6">
 
                 <div class="form-group">
-                  <label>Occupation</label>
+                  <label>Occupation*</label>
                   <div class="manic-dropdown">
-                    <select name="occupation">
+                    <select name="occupation" class="required">
                       <option value="">Select one</option>
 
                       <option value="Business owner/Partner">Business owner/Partner</option>
@@ -364,9 +364,9 @@
               <div class="col-md-6">
 
                 <div class="form-group">
-                  <label>Nature of business</label>
+                  <label>Nature of business*</label>
                   <div class="manic-dropdown">
-                    <select name="nature_of_business">
+                    <select name="nature_of_business" class="required">
                       <option value="">Select one</option>
 
                       <!-- <option value="Agriculture, Mining & Forestry">Agriculture, Mining & Forestry</option> -->
@@ -429,67 +429,67 @@
                     <select name="mobile_country" class="required">
                       <option value="">Select one</option>
 
-                      <option value="86">CHINA</option>
-                      <option value="852">HONG KONG</option>
-                      <option value="62">INDONESIA</option>
-                      <option value="60">MALAYSIA</option>
-                      <option value="65">SINGAPORE</option>
-                      <option value="886">TAIWAN</option>
-                      <option value="66">THAILAND</option>
-                      <option value="00">CANADA</option>
-                      <option value="01">USA</option>
-                      <option value="06">MALDIVES</option>
-                      <option value="07">RUSSIA</option>
-                      <option value="20">EGYPT</option>
-                      <option value="21">ALGERIA</option>
-                      <option value="23">MAURITIUS</option>
-                      <option value="26">ZIMBABWE</option>
-                      <option value="27">SOUTH AFRICA</option>
-                      <option value="31">NETHERLANDS</option>
-                      <option value="32">BELGIUM</option>
-                      <option value="33">FRANCE</option>
-                      <option value="34">SPAIN</option>
-                      <option value="35">MALTA</option>
-                      <option value="36">HUNGARY</option>
-                      <option value="39">ITALY</option>
-                      <option value="40">ROMANIA</option>
-                      <option value="41">SWITZERLAND</option>
-                      <option value="43">AUSTRIA</option>
-                      <option value="44">UNITED KINGDOM</option>
-                      <option value="45">DENMARK</option>
-                      <option value="46">SWEDEN</option>
-                      <option value="47">NORWAY</option>
-                      <option value="48">POLAND</option>
-                      <option value="49">GERMANY</option>
-                      <option value="50">HONDURAS</option>
-                      <option value="51">PORTUGAL</option>
-                      <option value="52">MEXICO</option>
-                      <option value="53">MACAU SPECIAL ADMINISTRATIVE REGION</option>
-                      <option value="54">ARGENTINA</option>
-                      <option value="55">BRAZIL</option>
-                      <option value="56">CHILE</option>
-                      <option value="58">FINLAND</option>
-                      <option value="61">AUSTRALIA</option>
-                      <option value="63">PHILIPPINES</option>
-                      <option value="64">NEW ZEALAND</option>
-                      <option value="66">THAILAND</option>
-                      <option value="67">BRUNEI</option>
-                      <option value="72">IRELAND</option>
-                      <option value="75">PAPUA N. GUINEA</option>
-                      <option value="78">PUERTO RICO</option>
-                      <option value="80">KOREA</option>
-                      <option value="81">JAPAN</option>
-                      <option value="84">VIETNAM</option>
-                      <option value="89">BANGLADESH</option>
-                      <option value="90">NAURU</option>
-                      <option value="91">INDIA</option>
-                      <option value="92">PAKISTAN</option>
-                      <option value="94">SRI LANKA</option>
-                      <option value="95">MYANMAR</option>
-                      <option value="96">SAUDI ARABIA AND KUWAIT</option>
-                      <option value="97">UAE</option>
-                      <option value="98">IRAN</option>
-                      <option value="855">CAMBODIA</option>
+                      <option value="86">CHINA (86)</option>
+                      <option value="852">HONG KONG (852)</option>
+                      <option value="62">INDONESIA (62)</option>
+                      <option value="60">MALAYSIA (60)</option>
+                      <option value="65">SINGAPORE (65)</option>
+                      <option value="886">TAIWAN (886)</option>
+                      <option value="66">THAILAND (66)</option>
+                      <option value="00">CANADA (00)</option>
+                      <option value="01">USA (01)</option>
+                      <option value="06">MALDIVES (06)</option>
+                      <option value="07">RUSSIA (07)</option>
+                      <option value="20">EGYPT (20)</option>
+                      <option value="21">ALGERIA (21)</option>
+                      <option value="23">MAURITIUS (23)</option>
+                      <option value="26">ZIMBABWE (26)</option>
+                      <option value="27">SOUTH AFRICA (27)</option>
+                      <option value="31">NETHERLANDS (31)</option>
+                      <option value="32">BELGIUM (32)</option>
+                      <option value="33">FRANCE (33)</option>
+                      <option value="34">SPAIN (34)</option>
+                      <option value="35">MALTA (35)</option>
+                      <option value="36">HUNGARY (36)</option>
+                      <option value="39">ITALY (39)</option>
+                      <option value="40">ROMANIA (40)</option>
+                      <option value="41">SWITZERLAND (41)</option>
+                      <option value="43">AUSTRIA (43)</option>
+                      <option value="44">UNITED KINGDOM (44)</option>
+                      <option value="45">DENMARK (45)</option>
+                      <option value="46">SWEDEN (46)</option>
+                      <option value="47">NORWAY (47)</option>
+                      <option value="48">POLAND (48)</option>
+                      <option value="49">GERMANY (49)</option>
+                      <option value="50">HONDURAS (50)</option>
+                      <option value="51">PORTUGAL (51)</option>
+                      <option value="52">MEXICO (52)</option>
+                      <option value="53">MACAU SPECIAL ADMINISTRATIVE REGION (53)</option>
+                      <option value="54">ARGENTINA (54)</option>
+                      <option value="55">BRAZIL (55)</option>
+                      <option value="56">CHILE (56)</option>
+                      <option value="58">FINLAND (58)</option>
+                      <option value="61">AUSTRALIA (61)</option>
+                      <option value="63">PHILIPPINES (63)</option>
+                      <option value="64">NEW ZEALAND (64)</option>
+                      <option value="66">THAILAND (66)</option>
+                      <option value="67">BRUNEI (67)</option>
+                      <option value="72">IRELAND (72)</option>
+                      <option value="75">PAPUA N. GUINEA (75)</option>
+                      <option value="78">PUERTO RICO (78)</option>
+                      <option value="80">KOREA (80)</option>
+                      <option value="81">JAPAN (81)</option>
+                      <option value="84">VIETNAM (84)</option>
+                      <option value="89">BANGLADESH (89)</option>
+                      <option value="90">NAURU (90)</option>
+                      <option value="91">INDIA (91)</option>
+                      <option value="92">PAKISTAN (92)</option>
+                      <option value="94">SRI LANKA (94)</option>
+                      <option value="95">MYANMAR (95)</option>
+                      <option value="96">SAUDI ARABIA AND KUWAIT (96)</option>
+                      <option value="97">UAE (97)</option>
+                      <option value="98">IRAN (98)</option>
+                      <option value="855">CAMBODIA (855)</option>
                       
                     </select>
                   </div>
@@ -502,7 +502,7 @@
 
                 <div class="form-group">
                   <label>&nbsp;</label>
-                  <input type="text" name="mobile_number" class="required">
+                  <input type="text" name="mobile_number" class="required only-numbers">
                 </div>
 
               </div>
@@ -691,7 +691,7 @@
 
                 <div class="form-group">
                   <label>Pin</label>
-                  <input type="password" name="pin" class="required">
+                  <input type="password" name="pin" class="required only-string-length only-numbers" data-string-length="6">
                 </div>
 
               </div>
@@ -699,7 +699,7 @@
 
                 <div class="form-group">
                   <label>Confirm Pin</label>
-                  <input type="password" name="pin_confirm" class="required">
+                  <input type="password" name="pin_confirm" class="required only-string-length only-numbers" data-string-length="6">
                 </div>
 
               </div>

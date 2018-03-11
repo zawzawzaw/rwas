@@ -379,8 +379,7 @@
 
                 <div class="form-group">
                   <label>Preferred language</label>
-                  <p></p>
-                  <div class="manic-dropdown">
+                  <div class="manic-dropdown" data-initial-value="{{ $info['details']['preferred_language'] }}">
                     <select name="preferred_language">
                       <option value="">Select one</option>
                       <option value="EN">ENGLISH</option>

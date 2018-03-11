@@ -146,6 +146,15 @@
 
   
 
+  <!--
+     _   _ _____    _    ____  _____ ____
+    | | | | ____|  / \  |  _ \| ____|  _ \
+    | |_| |  _|   / _ \ | | | |  _| | |_) |
+    |  _  | |___ / ___ \| |_| | |___|  _ <
+    |_| |_|_____/_/   \_\____/|_____|_| \_\
+
+  -->
+
 
   <article id="redeem-cabin-type-header-section">
     <div class="container-fluid has-breakpoint">
@@ -247,7 +256,7 @@
 
             <div id="redeem-cabin-type-option-item-container">
               
-              <a href="{{url('/summary')}}" class="redeem-cabin-type-option-item">
+              <a href="{{url('/redeem/summary')}}" class="redeem-cabin-type-option-item">
                 <div class="row">
                   <div class="col-md-9">
                     <p>Standing</p>
@@ -258,7 +267,7 @@
                 </div>
               </a>
 
-              <a href="{{url('/summary')}}" class="redeem-cabin-type-option-item">
+              <a href="{{url('/redeem/summary')}}" class="redeem-cabin-type-option-item">
                 <div class="row">
                   <div class="col-md-9">
                     <p>Inside stateroom</p>
@@ -269,7 +278,7 @@
                 </div>
               </a>
 
-              <a href="{{url('/summary')}}" class="redeem-cabin-type-option-item">
+              <a href="{{url('/redeem/summary')}}" class="redeem-cabin-type-option-item">
                 <div class="row">
                   <div class="col-md-9">
                     <p>Oceanviews (window) stateroom</p>
@@ -280,7 +289,7 @@
                 </div>
               </a>
 
-              <a href="{{url('/summary')}}" class="redeem-cabin-type-option-item">
+              <a href="{{url('/redeem/summary')}}" class="redeem-cabin-type-option-item">
                 <div class="row">
                   <div class="col-md-9">
                     <p>Balcony stateroom</p>
@@ -291,7 +300,7 @@
                 </div>
               </a>
 
-              <a href="{{url('/summary')}}" class="redeem-cabin-type-option-item">
+              <a href="{{url('/redeem/summary')}}" class="redeem-cabin-type-option-item">
                 <div class="row">
                   <div class="col-md-9">
                     <p>Junior Suite</p>

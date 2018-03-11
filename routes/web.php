@@ -172,6 +172,7 @@ Route::get('/contact', function () { return view('pages/static/welcome'); });
 Route::get('/page/get_home_content', 'PageController@get_home_content');
 Route::get('/page/get_home_content_nonmember', 'PageController@get_home_content_nonmember');
 Route::get('/page/get_registration_content', 'PageController@get_registration_content');
+Route::get('/page/get_edit_content', 'PageController@get_edit_content');
 
 Route::get('/page/en/get_registration_content', 'PageController@get_registration_content');
 Route::get('/page/zh-hans/get_registration_content', 'PageController@get_registration_content_chinese_simplified');

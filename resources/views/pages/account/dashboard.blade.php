@@ -27,22 +27,22 @@
 
               <div class="row">
                 <div class="col-md-6">
+
+                  <!-- parsed account-dashboard-name-span in JS -->
                   <p>
-                    Name: {{ $info['details']['name'] }}<br/>
+                    Name: <span id="account-dashboard-name-span">{{ $info['details']['name'] }}</span><br/>
                     Membership ID: {{ $info['details']['membership_id'] }}<br/><br/>
 
-                    GP (Visible Point or SP): {{ $info['points']['gp'] }}<br/>
-                    CC (Loyalty Point): {{ $info['points']['cc'] }}<br/><br/>
+                    GP (Visible Point or SP): {{ number_format($info['points']['gp'], 0) }}<br/>
+                    CC (Loyalty Point): {{ number_format($info['points']['cc'], 0) }}<br/><br/>
 
-                    Country Name: {{ $info['details']['home_country_name'] }}<br/>
                     Preferred Language: {{ $info['details']['preferred_language'] }}<br/>
                   </p>
                 </div>
                 <div class="col-md-6">
                   <p>
-                    Tier Code: {{ $info['tier']['tier_code'] }}<br/>
                     Tier Name: {{ $info['tier']['tier_name'] }}<br/>
-                    Tier Points: {{ $info['tier']['tier_points'] }}
+                    Tier Points: {{ number_format($info['tier']['tier_points'], 0) }}
                   </p>
                   <div class="cta-container">
                     <a href="{{ url('/account/edit-profile') }}" class="square-cta">Edit Profile</a>

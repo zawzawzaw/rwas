@@ -32,6 +32,19 @@ Route::group(['prefix' => 'user'], function(){
     Route::group(['middleware' => 'encryptCookies'], function(){
         Route::any('update-profile', 'V1\\Api\\UserController@update');
     });
+    Route::post('deduct-gp', 'V1\\Api\\UserController@deduct_gp');
+    Route::get('deduct-cc', 'V1\\Api\\UserController@setPreferenceFlag');
+});
+
+Route::group(['prefix' => 'userv2'], function(){
+    Route::get('get', 'V2\\Api\\UserController@get_user');
+    Route::post('login_ajax', 'V2\\Api\\UserController@login');
+    Route::post('login_ajax_json', 'V2\\Api\\UserController@login_json_output');
+    Route::post('register', 'V2\\Api\\UserController@register');
+    Route::group(['middleware' => 'encryptCookies'], function(){
+        Route::any('update-profile', 'V2\\Api\\UserController@update');
+    });
+    Route::post('deduct-gp', 'V2\\Api\\UserController@deduct_gp');
 });
 
 Route::group(['prefix' => 'seaware/test'], function(){

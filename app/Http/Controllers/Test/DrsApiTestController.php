@@ -11,6 +11,7 @@ class DrsApiTestController extends Controller
     public function __construct()
     {
         $this->rootUrl = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/';
+        // $this->rootUrl = 'http://52.77.149.78/DRS_XMLV3/Service.asmx/';
     }
 
     public function acnillaryPointAdjustment(Request $request)

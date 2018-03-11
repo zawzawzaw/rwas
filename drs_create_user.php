@@ -8,14 +8,14 @@ $DRS_PWD = 'MANIC';
 
 
 
-$url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_NewCustomer_V3';
+$url = 'http://52.77.149.78/DRS_XMLV3/Service.asmx/API_NewCustomer_V3';
 
 $fields = array(
   'paraDrsID' => 'MANIC',
   'paraDrsPwd' => 'MANIC',
   'paraDRSWorkgroup' => 'MEML',
   'paraPreLang' => 'EN',
-  'paraCardTypeCode' => '99',
+  'paraCardTypeCode' => '5',
   'paraCurrCode' => 'US',
   'paraTitle' => 'MR',
   'paraLName' => 'AUNG',
@@ -25,44 +25,44 @@ $fields = array(
   'paraCLName' => '',
   'paraCFName' => '',
   'paraGender' => 'M',
-  'paraDOB' => '1986-07-29',
+  'paraDOB' => '1986-03-04',
   'paraNAT' => 'SINGAPORE',
-  'paraEmail' => 'zawzawzaw@gmail.com',
-  'paraTELMobile' => '6591050491',
+  'paraEmail' => 'zaw@manic.com.sg',
+  'paraTELMobile' => '+6523232323',
   'paraDoc_Type' => 'PP',
-  'paraDoc_No' => 'MA813807',
+  'paraDoc_No' => '298978594',
   'paraDoc_Country' => 'SINGAPORE',
-  'paraDoc_IssueDT' => '10-02-2015',
-  'paraDoc_ExpiryDT' => '10-02-2020',
+  'paraDoc_IssueDT' => '2015-03-04',
+  'paraDoc_ExpiryDT' => '2020-03-04',
   'paraAddressHomeLanguageCode' => 'EN',
-  'paraAddDescription' => '',
-  'paraAddressHomeLine1' => '114 LAVENDER STREET',
+  'paraAddDescription' => 'HOME',
+  'paraAddressHomeLine1' => '1 test road',
   'paraAddressHomeLine2' => '',
   'paraAddressHomeLine3' => '',
-  'paraAddCity' => 'SINGAPORE',
-  'paraAddState' => '',
-  'paraAddressHomeCountry' => 'SINGAPORE',
-  'paraAddPostCode' => '338729',
+  'paraAddCity' => 'Singapore',
+  'paraAddState' => 'Singapore',
+  'paraAddressHomeCountry' => 'Singapore',
+  'paraAddPostCode' => '232323',
   'PF1Field' => 'OCC',
   'PF1Value' => 'Professional / Technical',
   'PF2Field' => 'BIZ2',
   'PF2Value' => 'Professional Services:Others',
   'PF3Field' => 'SPEP',
-  'PF3Value' => 'No',
+  'PF3Value' => 'YES',
   'PF4Field' => 'GRA',
-  'PF4Value' => '180213/OUT',
+  'PF4Value' => '180307\/IN',
   'PF5Field' => 'COM',
-  'PF5Value' => 'IN/180213/OF',
-  'PF6Field' => 'GIFT',
-  'PF6Value' => '3_BA',
-  'PF7Field' => 'LUCK',
-  'PF7Value' => 'Y_051017',
-  'PF8Field' => 'PU',
-  'PF8Value' => '180213/KIOSK',
-  'PF9Field' => 'RWEC',
-  'PF9Value' => '400.89',
-  'PF10Field' => 'RWRC',
-  'PF10Value' => '251'
+  'PF5Value' => 'IN\/180307\/OF',
+  'PF6Field' => 'OA',
+  'PF6Value' => 'OA_RWAS WEBSITE',
+  'PF7Field' => 'CTLD',
+  'PF7Value' => '20180307',
+  'PF8Field' => 'CTRP',
+  'PF8Value' => '20190307',
+  'PF9Field' => '',
+  'PF9Value' => '',
+  'PF10Field' => '',
+  'PF10Value' => ''
 );
 
 // $url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_AutoUA_PINVerify';
@@ -95,5 +95,4 @@ var_dump($result);
 
 //close connection
 curl_close($ch);
-
 ?>

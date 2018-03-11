@@ -3,20 +3,29 @@
 //extract data from the post
 //set POST variables
 
-$DRS_ID = 'YKS';
-$DRS_PWD = 'PASS';
+$DRS_ID = 'MANIC';
+$DRS_PWD = 'MANIC';
 
 
 
-$url = 'http://52.77.149.78/DRS_XMLV3/Service.asmx/API_AutoUA_Get_CustomerProfile';
+// $url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_AutoUA_CEA';
+// to deduct the GP
+$url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_AutoUA_CEA_Currency';
 
 $fields = array(
-  'paraDrsID' => urlencode('MANIC'),
-  'paraDrsPwd' => urlencode('MANIC'),
-  'paraCid' => urlencode('29'),
-  'paraEnquiryCurrCode' => urlencode('US'),
-  'paraLoadDefaultDRSifNoUA' => urlencode('0')
+  'paraDrsID' => 'MANIC',
+  'paraDrsPwd' => 'MANIC',
+
+  'paraCid' => '29',
+  'paraCashToAdjust' => '-10',
+  // 'paraCashTypeToAdjust' => 'SP',
+  'paraCashTypeToAdjust' => '0',
+  'paraCurrCode' => 'US',
+
+  'paraProfitCenter' => 'TST1',
+  'paraRemark' => 'API Test',
 );
+
 
 // $url = 'http://52.77.149.78/DRSAPI_DEV/Service.asmx/API_AutoUA_PINVerify';
 // $fields = array(

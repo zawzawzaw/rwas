@@ -22,6 +22,7 @@ class Controller extends BaseController
     public function __construct()
     {
         $this->drsUrl = "http://52.77.149.78/DRSAPI_DEV/Service.asmx/";
+        $this->drsUrlV2 = "http://52.77.149.78/DRS_XMLV3/Service.asmx/";
         $this->drsID = "MANIC";
         $this->drsPwd = "MANIC";
         $this->DRSWORKGROUP = "MEML";
@@ -82,6 +83,45 @@ class Controller extends BaseController
         
         // $result = str_replace("\n", '', $result); // remove new lines
         // $result = str_replace("\r", '', $result); // remove carriage returns
+
+        // print_r($result); exit();
+        
+        
+        // return $this->SimpleXML2ArrayWithCDATASupport($result);
+
+        $result = simplexml_load_string($result);
+        return json_decode(json_encode($result));
+        
+        
+    }
+
+    public function curlRequestRawResponse($xmlContent, $url, $isPost=false, $parse=true)
+    {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, $isPost);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        if($xmlContent!=="") {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $xmlContent);
+        }
+
+        $result = curl_exec($ch);
+
+        if($parse===false){
+            return $result;
+        }
+
+        /*
+         "address_state": {
+            "0": "  "
+        },
+        */
+        
+        // $result = str_replace("\n", '', $result); // remove new lines
+        // $result = str_replace("\r", '', $result); // remove carriage returns
+
+        print_r($result); exit();
         
         
         // return $this->SimpleXML2ArrayWithCDATASupport($result);

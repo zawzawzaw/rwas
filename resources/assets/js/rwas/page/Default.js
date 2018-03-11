@@ -162,6 +162,7 @@ rwas.page.Default.prototype.init = function() {
   this.create_redeem_search_result();
 
   this.create_register_form();
+  this.create_dashboard();
   this.create_update_profile_form();
 
 
@@ -259,6 +260,29 @@ rwas.page.Default.prototype.create_register_form = function(){
     }, $('#account-register-form-section'));
 
   }
+};
+
+rwas.page.Default.prototype.create_dashboard = function(){
+
+
+  if ($('#account-dashboard-section').length != 0) {
+
+    if ($('#account-dashboard-name-span').length != 0) {
+
+      var name_str = $('#account-dashboard-name-span').text();
+
+      // name_str = name_str.replaceAll("\\[", '<span class="underline">');
+      // name_str = name_str.replaceAll("\\]", '</span>');
+      // 
+      name_str = name_str.split('[').join('<span class="underline">');
+      name_str = name_str.split(']').join('</span>');
+
+      $('#account-dashboard-name-span').html(name_str);
+
+    }
+  }
+  
+
 };
 
 rwas.page.Default.prototype.create_update_profile_form = function(){
