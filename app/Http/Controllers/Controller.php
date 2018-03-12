@@ -95,7 +95,7 @@ class Controller extends BaseController
         
     }
 
-    public function curlRequestRawResponse($xmlContent, $url, $isPost=false, $parse=true)
+    public function curlRequestRaw($xmlContent, $url, $isPost=false, $parse=true)
     {
         $ch = curl_init();
 

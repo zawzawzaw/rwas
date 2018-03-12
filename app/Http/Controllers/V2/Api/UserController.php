@@ -24,7 +24,7 @@ class UserController extends Controller
 
         // return $input;
 
-        $result = $this->curlRequestRawResponse($this->buildDrsXMLContent($input), $this->drsUrlV2.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
+        $result = $this->curlRequestRaw($this->buildDrsXMLContent($input), $this->drsUrlV2.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
 
         if(isset($result->errCode)){
             return response()->json($result);
@@ -172,7 +172,7 @@ class UserController extends Controller
             'paraPFValue' => urlencode('IN/180207/KIOSK')
         ];
 
-        $result = $this->curlRequestRawResponse($this->buildDrsXMLContent($input), $this->drsUrlV2.'API_AutoUA_SetPF', true);
+        $result = $this->curlRequestRaw($this->buildDrsXMLContent($input), $this->drsUrlV2.'API_AutoUA_SetPF', true);
     }
 
     public function login(Request $request)
@@ -194,7 +194,7 @@ class UserController extends Controller
             'paraPIN' => $input['password']
         ];
 
-        $result = $this->curlRequestRawResponse($this->buildDrsXMLContent($parameter), $this->drsUrlV2.'API_AutoUA_eCashPINVerify', true);
+        $result = $this->curlRequestRaw($this->buildDrsXMLContent($parameter), $this->drsUrlV2.'API_AutoUA_eCashPINVerify', true);
 
         if(isset($result->errCode)){
             // if(isset($input['showErr']) && is_null($input['showErr'])==false){
@@ -232,7 +232,7 @@ class UserController extends Controller
             'paraPIN' => $input['password']
         ];
 
-        $result = $this->curlRequestRawResponse($this->buildDrsXMLContent($parameter), $this->drsUrlV2.'API_AutoUA_eCashPINVerify', true);
+        $result = $this->curlRequestRaw($this->buildDrsXMLContent($parameter), $this->drsUrlV2.'API_AutoUA_eCashPINVerify', true);
 
         if(isset($result->errCode)){
             // if(isset($input['showErr']) && is_null($input['showErr'])==false){
@@ -371,7 +371,7 @@ class UserController extends Controller
             'PF10Value' => ''
         ];
 
-        $regResult = $this->curlRequestRawResponse($this->buildDrsXMLContent($register), $this->drsUrlV2.'API_NewCustomer_V3', true);
+        $regResult = $this->curlRequestRaw($this->buildDrsXMLContent($register), $this->drsUrlV2.'API_NewCustomer_V3', true);
         
         if(isset($regResult->errCode)){
             return response()->json($regResult, 422);
@@ -384,7 +384,7 @@ class UserController extends Controller
             'paraPIN' => $input['pin']
         ];
     
-        $pinResult = $this->curlRequestRawResponse($this->buildDrsXMLContent($input), $this->drsUrlV2.'API_AutoUA_eCashPINCreate', true);
+        $pinResult = $this->curlRequestRaw($this->buildDrsXMLContent($input), $this->drsUrlV2.'API_AutoUA_eCashPINCreate', true);
         
         if(isset($pinResult->errCode)){
             return response()->json($pinResult, 422);
@@ -461,7 +461,7 @@ class UserController extends Controller
             'PF10Value' => ''
         ];
 
-        $result = $this->curlRequestRawResponse($this->buildDrsXMLContent($update), $this->drsUrlV2.'API_EditCustomerV2', true);
+        $result = $this->curlRequestRaw($this->buildDrsXMLContent($update), $this->drsUrlV2.'API_EditCustomerV2', true);
 
         return response()->json($result);
     }
@@ -489,7 +489,7 @@ class UserController extends Controller
             'paraRemark' => $input['paraRemark']
         ];
 
-        $result = $this->curlRequestRawResponse($this->buildDrsXMLContent($parameter), $this->drsUrlV2.'API_AutoUA_CEA_Currency', true);
+        $result = $this->curlRequestRaw($this->buildDrsXMLContent($parameter), $this->drsUrlV2.'API_AutoUA_CEA_Currency', true);
 
         if(isset($result->errCode)){
             // if(isset($input['showErr']) && is_null($input['showErr'])==false){

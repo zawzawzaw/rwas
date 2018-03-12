@@ -24,7 +24,7 @@ class UserController extends Controller
 
         // return $input;
 
-        $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_Get_CustomerProfile_Format_Long', false, false);
+        $result = $this->curlRequestRaw($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
 
         return response()->json($result, 422);
         if(isset($result->errCode)){
@@ -510,5 +510,86 @@ class UserController extends Controller
         }else{
             return json_encode(array('message' => 'success'));
         }
+    }
+
+    public function deduct_cc(Request $request, $web=false)
+    {
+        $input = [
+            'paraDrsID' => 'MANIC',
+            'paraDrsPwd' => 'MANIC',
+            'paraCid' => $web ? $request->session()->get('drsUserID') : $request->input('paraCid'),
+            'paraWorkGroup' => urlencode('MEML'),
+            'paraLoadDefaultDRSifNoUA' => 0,
+            "paraPFFieldName" => 'RWRC'
+        ];        
+
+        $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_GetSelectedPF', true);
+
+        if(isset($result->errCode)){
+            return response()->json($result, 422);
+        }
+
+        $existing_rwrc_value = $result->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value;
+        $new_rwrc_value = $existing_rwrc_value + $request->input('deduct_value');
+
+        $update = [
+            'paraDrsID' => 'MANIC',
+            'paraDrsPwd' => 'MANIC',
+            'paraCid' => $web ? $request->session()->get('drsUserID') : $request->input('paraCid'),
+            'paraWorkGroup' => urlencode('MEML'),
+            "paraPFField" => 'RWRC',
+            "paraPFValue" => $new_rwrc_value
+        ];  
+
+        $updateResult = $this->curlRequest($this->buildDrsXMLContent($update), $this->drsUrl.'API_AutoUA_SetPF', true);
+
+        if(isset($updateResult->errCode)){
+            return response()->json($updateResult, 422);
+        } else {
+            return response()->json($updateResult);
+        }
+    }
+
+    public function get_cc(Request $request, $web=false)
+    {
+        $input = [
+            'paraDrsID' => 'MANIC',
+            'paraDrsPwd' => 'MANIC',
+            'paraCid' => $web ? $request->session()->get('drsUserID') : $request->input('paraCid'),
+            'paraWorkGroup' => urlencode('MEML'),
+            "paraLoadDefaultDRSifNoUA" => 0,
+            "paraPFFieldName" => 'RWRC'
+        ];        
+
+        $rwrc_result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_GetSelectedPF', true);
+
+        if(isset($rwrc_result->errCode)){
+            return response()->json($rwrc_result, 422);
+        }
+
+        $input = [
+            'paraDrsID' => 'MANIC',
+            'paraDrsPwd' => 'MANIC',
+            'paraCid' => $web ? $request->session()->get('drsUserID') : $request->input('paraCid'),
+            'paraWorkGroup' => urlencode('MEML'),
+            "paraLoadDefaultDRSifNoUA" => 0,
+            "paraPFFieldName" => 'RWEC'
+        ];        
+
+        $rwec_result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_GetSelectedPF', true);
+
+        if(isset($rwec_result->errCode)){
+            return response()->json($rwec_result, 422);
+        }
+
+        $rwrc_value = $rwrc_result->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value;
+        $rwec_value = $rwec_result->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value;
+
+        $rwcc_value = $rwec_value - $rwrc_value;
+
+        $rwrc_result = [ 'rwcc_balance' => $rwcc_value ];
+        
+        return response()->json($rwrc_result);
+        
     }
 }
