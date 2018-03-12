@@ -33,7 +33,8 @@ Route::group(['prefix' => 'user'], function(){
         Route::any('update-profile', 'V1\\Api\\UserController@update');
     });
     Route::post('deduct-gp', 'V1\\Api\\UserController@deduct_gp');
-    Route::get('deduct-cc', 'V1\\Api\\UserController@setPreferenceFlag');
+    Route::get('deduct-cc', 'V1\\Api\\UserController@deduct_cc');
+    Route::get('get-cc', 'V1\\Api\\UserController@get_cc');
 });
 
 Route::group(['prefix' => 'userv2'], function(){
