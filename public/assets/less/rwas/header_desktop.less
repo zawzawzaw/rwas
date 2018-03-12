@@ -1,0 +1,103 @@
+#header-desktop{
+  position: fixed;
+  z-index: 30000;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  height: 0;
+  .container-fluid,
+  .row{
+    height: 0;
+  }
+}
+
+
+#header-desktop-logo-container{
+  // padding-top: 66px;
+  padding-top: 40px;
+
+  // small laptop
+  @media only screen and (max-width: 1280px) {
+    // padding-top: 50px - 10px;
+
+    padding-top: 30px;
+    
+  }
+}
+
+
+#header-desktop-logo{
+  display: block;
+  position: relative;
+  // width: 70px;
+  // height: 100px;
+
+  // width: 84px;
+  // height: 120px;
+
+
+  width: 105px;
+  height: 53px;
+
+  margin-left: -7px;
+
+  &:before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    // .header-logo-white;
+    /// .header-logo-white-short;      // only for fion's screen
+    .header-logo-white-short-scaled;
+
+    .opacity(1);
+    .transition-in (0.3s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.1s);
+  }
+  &:after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    // .header-logo-grey;
+    /// .header-logo-grey-short;
+    .header-logo-grey-short-scaled;
+
+    .opacity(0);
+    .transition-in (0.3s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.1s);
+  }
+
+
+  
+
+  &.grey-version{
+
+    &:before{
+      .opacity(0);
+      .transition-in (0.2s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.0s);
+    }
+    &:after{
+      .opacity(1);
+      .transition-in (0.2s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.0s);
+    }
+  }
+
+
+  // small laptop
+  @media only screen and (max-width: 1280px) {
+    width: 84px;
+    height: 42px;
+
+    &:before{
+      .header-logo-white-short;
+    }
+    &:after{
+      .header-logo-grey-short;
+    }
+  }
+
+
+
+}

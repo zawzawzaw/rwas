@@ -1,0 +1,444 @@
+#footer-desktop{
+  position: relative;
+}
+
+
+#footer-desktop-part-a{
+
+  background: @light-grey-2;
+
+  padding-top: 28px;
+  padding-bottom: 30px;
+
+} // #footer-desktop-part-a
+
+#footer-desktop-part-b{
+
+  background: @dark-grey;
+
+  padding-top: 16px;
+  padding-bottom: 14px;
+
+} // #footer-desktop-part-b
+
+
+#footer-desktop-mailing-list-form-title{
+  text-align: center;
+
+  margin-bottom: 22px;
+
+  h3{
+
+  }
+} // #footer-desktop-mailing-list-form-title
+
+#footer-desktop-copyright{
+
+  p{
+    font-size: 13px;
+    line-height: 19px;
+    color: @white;
+
+    .opacity(0.8);
+
+    a{
+      color: @white;
+      .transition-in-single (color, 0.4s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.1s);
+
+      &:hover{
+        color: @light-grey;
+        .transition-in-single (color, 0.2s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.0s);
+        
+      }
+    }
+  }
+} // #footer-desktop-copyright
+
+
+
+
+
+
+//    _____ ___  ____  __  __
+//   |  ___/ _ \|  _ \|  \/  |
+//   | |_ | | | | |_) | |\/| |
+//   |  _|| |_| |  _ <| |  | |
+//   |_|   \___/|_| \_\_|  |_|
+//
+
+
+/*
+.footer-desktop-mailing-list-font{
+  .proxima-nova-regular;
+  font-size: 14px;
+  line-height: 25px;
+  color: @off-black;
+}
+
+#footer-desktop-mailing-list-form-container{
+  text-align: center;
+
+  font-size: 0;
+
+  form{
+    .display-inline-block;
+    .box-shadow (1px, 1px, 8px, @light-grey);
+  }
+
+
+
+  input[type=text],
+  input[type=submit]{
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    outline: none;
+    border: none;
+    .round(0px);
+
+
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  &::-webkit-input-placeholder{
+      .opacity(1);
+      color: @off-black;
+    }
+    &:-moz-placeholder{
+      .opacity(1);
+      color: @off-black;
+    }
+    &::-moz-placeholder{
+      .opacity(1);
+      color: @off-black;
+    }
+    &:-ms-input-placeholder{
+      .opacity(1);
+      color: @off-black;
+    }
+
+  // remove fill color from google autofill 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px @white inset !important;
+  }
+
+  input[type=text]{
+    width: 175px;
+    height: 36px;
+
+    .footer-desktop-mailing-list-font;
+    line-height: 36px;
+
+    background: @white;
+
+    
+  }
+  input[type=submit]{
+
+    // .proxima-nova-semibol;
+    .proxima-nova-regular;
+    font-size: 13px;
+    line-height: 36px;
+    text-transform: uppercase;
+
+    width: 140px;
+    height: 36px;
+
+    letter-spacing: 0.05em;
+
+    background: @dark-grey;
+    color: @white;
+
+  }
+
+  .has-line{
+    // border-right: 1px solid #cacaca !important;
+    border-right: 1px solid @light-grey-2 !important;
+  }
+
+
+  
+
+
+} // #footer-desktop-mailing-list-form-container
+
+
+*/
+
+
+
+
+
+
+@-webkit-keyframes footerRightFadeIn {
+  0% { .transform( translate3d(20px,0,0) ); .opacity(0.0); }
+  100% { .transform( translate3d(0,0,0) ); .opacity(1); }
+}
+@keyframes footerRightFadeIn {
+  0% { .transform( translate3d(20px,0,0) ); .opacity(0.0); }
+  100% { .transform( translate3d(0,0,0) ); .opacity(1); }
+}
+
+@-webkit-keyframes footerRightFadeOut {
+  0% { .transform( translate3d(0,0,0) ); .opacity(1); }
+  100% { .transform( translate3d(20px,0,0) ); .opacity(0.0); }
+}
+@keyframes footerRightFadeOut {
+  0% { .transform( translate3d(0,0,0) ); .opacity(1); }
+  100% { .transform( translate3d(20px,0,0) ); .opacity(0.0); }
+}
+
+
+
+
+.footer-right-fade-out{
+  -webkit-animation: footerRightFadeOut 0.2s both cubic-bezier(0.7,0,0.3,1);
+  animation: footerRightFadeOut 0.2s both cubic-bezier(0.7,0,0.3,1);
+}
+.footer-right-fade-in{
+  // -webkit-animation: footerRightFadeIn 0.4s both cubic-bezier(0.7,0,0.3,1);
+  // animation: footerRightFadeIn 0.4s both cubic-bezier(0.7,0,0.3,1);
+
+  -webkit-animation: footerRightFadeIn 0.5s both cubic-bezier(0.7,0,0.3,1);
+  animation: footerRightFadeIn 0.5s both cubic-bezier(0.7,0,0.3,1);
+}
+
+
+
+
+
+
+//    _____ ___  ____  __  __    ___ ____
+//   |  ___/ _ \|  _ \|  \/  |  / _ \___ \
+//   | |_ | | | | |_) | |\/| | | | | |__) |
+//   |  _|| |_| |  _ <| |  | | | |_| / __/
+//   |_|   \___/|_| \_\_|  |_|  \___/_____|
+//
+
+
+.footer-desktop-mailing-list-font{
+  .proxima-nova-regular;
+  font-size: 14px;
+  line-height: 25px;
+  // color: @off-black;
+  color: @white;
+}
+
+
+
+
+
+#footer-desktop-mailing-list-02-container{
+  // position: fixed;
+  // bottom: 49px;             // height of copywrite bar
+  
+  position: absolute;
+  top: -110px;
+  right: 0px;
+
+
+  width: 300px;
+  height: 110px;
+  overflow: hidden;
+  text-align: right;
+  
+
+  
+
+  h6{
+    .h2-style;
+    font-size: 17px;
+    line-height: 20px;
+
+    margin-bottom: 10px;
+    color: @white;
+  }
+
+  form{
+    .display-inline-block;
+    position: relative;
+    text-align: left;
+    
+
+    // background: @off-white;
+
+    height: 110px;
+
+    padding-top: 21px;
+    padding-left: 35px;
+    padding-right: 29px;
+
+    &:before{
+      content: '';
+      display: block;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      // right: -20px;
+      right: 0px;
+      bottom: 0px;
+      // background: @off-white;
+      background: @navy-blue;
+    }
+
+  }
+
+  h6, input{
+    position: relative;
+  }
+
+
+  input[type=text],
+  input[type=submit]{
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    outline: none;
+    border: none;
+    .round(0px);
+
+    padding-left: 20px;
+    padding-right: 20px;
+    
+    &::-webkit-input-placeholder{
+      .opacity(1);
+      color: @off-white;
+    }
+    &:-moz-placeholder{
+      .opacity(1);
+      color: @off-white;
+    }
+    &::-moz-placeholder{
+      .opacity(1);
+      color: @off-white;
+    }
+    &:-ms-input-placeholder{
+      .opacity(1);
+      color: @off-white;
+    }
+
+    
+  }
+
+  // remove fill color from google autofill 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    // remove text color from google autofill 
+    -webkit-text-fill-color: @white !important;
+    -webkit-box-shadow: 0 0 0px 1000px @navy-blue inset !important;
+  }
+  
+  
+  // remove firefox dotted outline on buttons
+  // https://stackoverflow.com/questions/71074/how-to-remove-firefoxs-dotted-outline-on-buttons-as-well-as-links
+  input[type=submit]::-moz-focus-inner {
+    border: 0;
+  }
+
+  
+  input[type=text]{
+    display: block;
+    width: 230px;
+    // width: 100%;
+    height: 38px;
+
+    // small laptop
+    @media only screen and (max-width: 1280px) {
+      width: 210px;
+    }
+
+
+    padding-top: 1px;
+    padding-left: 14px;
+    padding-right: 33px;
+
+    .footer-desktop-mailing-list-font;
+    line-height: 36px;
+
+    background: @navy-blue;
+    // border: 1px solid #9a9d9f;
+    border: 1px solid @white;
+  }
+
+  input[type=submit]{
+    position: absolute;
+    bottom: 25px;
+    right: 37px;
+
+    .fa;
+    font-size: 14px;
+    line-height: 20px;
+
+    width: 30px;
+    height: 30px;
+
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+    
+    // color: @off-black;
+    color: @white;
+    background: @navy-blue;
+    .transition-in-single (color, 0.3s, cubic-bezier(0.645, 0.045, 0.355, 1), 0.1s);
+
+    &:hover{
+
+      // color: @dark-grey;
+      /// color: @light-grey;
+      color: @off-white;
+      .transition-in-single (color, 0.2s, cubic-bezier(0.645, 0.045, 0.355, 1), 0s);
+
+    }
+
+  } // input[type=submit]
+
+
+} // #footer-desktop-mailing-list-02-container
+
+
+// ANIMATION
+
+
+#footer-desktop-mailing-list-02-container{
+
+  .footer-right-fade-out;
+  .opacity(0);
+
+  form{
+
+    &:before{
+      .right-fade-out;
+      .opacity(0);
+
+    }
+  }
+
+  &.animated-version{
+    .ddd3;
+    .footer-right-fade-in;
+
+    form{
+      &:before{
+        .ddd3;
+        .right-fade-in;
+      }
+    }
+  }
+}

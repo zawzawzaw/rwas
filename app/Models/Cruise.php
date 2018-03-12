@@ -10,6 +10,7 @@ class Cruise extends Model
     protected $fillable = [
         'itinerary',
         'departure_date',
+        'departure_date_end',
         'cruise_id',
         'week_day', 
     ];
