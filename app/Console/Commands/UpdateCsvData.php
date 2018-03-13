@@ -47,50 +47,50 @@ class UpdateCsvData extends Command
     public function handle()
     {
         set_time_limit(0);
-        $cabinCruise = Cruise::select('id', 'cruise_id', 'itinerary', 'departure_date', 'departure_date_end')->with('itinerary')->get();
-                $this->info("before cabin");
-                sleep(2);
+        // $cabinCruise = Cruise::select('id', 'cruise_id', 'itinerary', 'departure_date', 'departure_date_end')->with('itinerary')->get();
+        //         $this->info("before cabin");
+        //         sleep(2);
 
-                $counter = 0;
+        //         $counter = 0;
 
-                foreach($cabinCruise as $cc){
-                    if($counter>30){
-                        $counter = 0;
-                        sleep(2);
-                    }
-                    $this->info("Parsing seaware cabin ".$counter);
-                    $cabins = Cabin::where('cruise', $cc->id)->get();
-                    $cc = $cc->toArray();
+        //         foreach($cabinCruise as $cc){
+        //             if($counter>30){
+        //                 $counter = 0;
+        //                 sleep(2);
+        //             }
+        //             $this->info("Parsing seaware cabin ".$counter);
+        //             $cabins = Cabin::where('cruise', $cc->id)->get();
+        //             $cc = $cc->toArray();
                     
-                    $counter2 = 0;
-                    foreach($cabins as $ca) {
-                        if($counter2>30){
-                            $counter2 = 0;
-                            sleep(2);
-                        }
-                        $this->info("Parsing seaware cabin price ".$counter2.$cc['itinerary']['itin_code']);
-                        $xtopia = XtopiaCsv::select(
-                            DB::raw($ca->id." as cabin_id"),
-                            'card_type',
-                            'pax_type_code',
-                            'gp',
-                            'rwcc',
-                            'exec_pax',
-                            'holiday_charge',
-                            'promo_code'
-                        )
-                        ->where('itinerary_code', $cc['itinerary']['itin_code'])
-                        ->where('ship_code', $cc['itinerary']['ship_code'])
-                        // ->where('dep_start', str_replace("-", "", $cc['departure_date']))
-                        // ->where('dep_end', str_replace("-", "", $cc['departure_date_end']))
-                        ->where('cabin_code', $ca->cabin_category)
-                        ->get()->toArray();
+        //             $counter2 = 0;
+        //             foreach($cabins as $ca) {
+        //                 if($counter2>30){
+        //                     $counter2 = 0;
+        //                     sleep(2);
+        //                 }
+        //                 $this->info("Parsing seaware cabin price ".$counter2.$cc['itinerary']['itin_code']);
+        //                 $xtopia = XtopiaCsv::select(
+        //                     DB::raw($ca->id." as cabin_id"),
+        //                     'card_type',
+        //                     'pax_type_code',
+        //                     'gp',
+        //                     'rwcc',
+        //                     'exec_pax',
+        //                     'holiday_charge',
+        //                     'promo_code'
+        //                 )
+        //                 ->where('itinerary_code', $cc['itinerary']['itin_code'])
+        //                 ->where('ship_code', $cc['itinerary']['ship_code'])
+        //                 // ->where('dep_start', str_replace("-", "", $cc['departure_date']))
+        //                 // ->where('dep_end', str_replace("-", "", $cc['departure_date_end']))
+        //                 ->where('cabin_code', $ca->cabin_category)
+        //                 ->get()->toArray();
 
-                        CabinPrice::insert($xtopia);
-                    }
-                    $counter++;
-                }
-                die();
+        //                 CabinPrice::insert($xtopia);
+        //             }
+        //             $counter++;
+        //         }
+        //         die();
         $url = 'http://clients.manic.com.sg/rwas/resources/assets/csv/Seaware_Sample.CSV';
         $path = storage_path('csv/Seaware.CSV');
 
@@ -247,8 +247,8 @@ class UpdateCsvData extends Command
                         )
                         ->where('itinerary_code', $cc['itinerary']['itin_code'])
                         ->where('ship_code', $cc['itinerary']['ship_code'])
-                        ->where('dep_start', $cc['departure_date'])
-                        ->where('dep_end', $cc['departure_date_end'])
+                        // ->where('dep_start', $cc['departure_date'])
+                        // ->where('dep_end', $cc['departure_date_end'])
                         ->where('cabin_code', $ca->cabin_category)->get()->toArray();
                         CabinPrice::insert($xtopia);
                     }

@@ -355,12 +355,6 @@ rwas.model.API.prototype.cruise_get_itineraries = function(port_param, date_para
 
     }.bind(this)
   });
-
-  
-
-
-
-
 };
 
 

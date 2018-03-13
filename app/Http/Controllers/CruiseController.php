@@ -320,6 +320,29 @@ class CruiseController extends Controller
         return response()->json($cabins);
     }
 
+    public function get_cruise_info_for_cabin(Request $request)
+    {
+        if(empty($request->input('cruise_id')) || is_null($request->input('cruise_id'))){
+            return response()->json([
+                'mesg' => 'Cruise id is required!'
+            ], 422);
+        }
+        
+        $cruise = Cruise::select('id', 'itinerary', 'departure_date')->with(['itinerary' => function($query) {
+            $query->select('id', 'ship_code', 'day', 'night', 'departure_port', 'arrival_port');
+        }])->where('cruise_id', $request->input('cruise_id'))->first()->toArray();
+
+        $res = [
+            'ship_code' => $cruise['itinerary']['ship_code'],
+            'duration' => $cruise['itinerary']['day'].' Days '.$cruise['itinerary']['night'].' Nights',
+            'dep_port' => $cruise['itinerary']['departure_port'],
+            'arr_port' => $cruise['itinerary']['arrival_port'],
+            'dep_date' => date('d M Y', strtotime($cruise['departure_date']))
+        ];
+
+        return response()->json($res);
+    }
+
 
 
 
@@ -346,6 +369,122 @@ class CruiseController extends Controller
         $output_json = json_encode($output_data);
 
         return $output_json;
+    }
+
+    public function book_cruise_cabin(Request $request)
+    {
+        if(empty($request->input('cruise_id')) || is_null($request->input('cruise_id'))){
+            return response()->json([
+                'mesg' => 'Cruise id is required!'
+            ], 422);
+        }
+        
+        $cruise = Cruise::select('id', 'itinerary', 'departure_date')->with(['itinerary' => function($query) {
+            $query->select('id', 'ship_code', 'day', 'night', 'departure_port', 'arrival_port');
+        }])->where('cruise_id', $request->input('cruise_id'))->first()->toArray();
+
+        $input = $request->only(
+            'custom',
+            'posName',
+            'posType',
+            'posComName',
+            'sailInfoVoyageId',
+            'sailInfoShipCode',
+            'currency',
+            'fareCode',
+            'priceCatCode',
+            'waitList',
+            'guestExists',
+            'requestGuest',
+            'guestAge',
+            'guestBod',
+            'guestGender',
+            'guestRef',
+            'guestNat',
+            'guestName',
+            'guestMName',
+            'guestSName',
+            'guestDocId',
+            'guestDocType',
+            'guestEamil',
+            'guestCCode',
+            'guestPhone',
+            'guestAddType',
+            'guestAdd',
+            'guestCity',
+            'guestCountry',
+            'guestCountryCode',
+            'guestPostal',
+            'guestState',
+            'guestMemberId',
+            'guestProgramId',
+            'guestEFlag',
+            'gContactName',
+            'gContactMName',
+            'gContactSName',
+            'gContactEmail',
+            'gContactCCode',
+            'gContactPhone',
+            'gTravDocId',
+            'gTravDocIssuLoc',
+            'gTravDocType',
+            'gTravDocExpire'
+        );
+        $xml_input = '<?xml version="1.0" encoding="utf-8"?>
+        <OTA_CruiseBookRQ Version="1.0" xmlns="http://www.opentravel.org/OTA/2003/05">
+            <POS>
+                <Source>
+                <RequestorID Name="'.$input['posName'].'" Type="'.$input['posType'].'"/>
+                <BookingChannel Type="1">
+                    <CompanyName>'.$input['posComName'].'</CompanyName>
+                </BookingChannel>
+                </Source>
+            </POS>
+            <SailingInfo>
+                <SelectedSailing VoyageID="'.$input['sailInfoVoyageId'].'">
+                <CruiseLine ShipCode="'.$input['sailInfoShipCode'].'"/>
+                </SelectedSailing>
+                <Currency CurrencyCode="'.$input['currency'].'"/>
+                <SelectedCategory FareCode="'.$input['fareCode'].'" PricedCategoryCode="'.$input['priceCatCode'].'" WaitlistIndicator="'.$input['waitList'].'"/>
+            </SailingInfo>
+            <ReservationInfo>
+                <GuestDetails>
+                    <GuestDetail GuestExistsIndicator="'.$input['guestExists'].'" RepeatGuestIndicator="'.$input['requestGuest'].'">
+                        <ContactInfo Age="'.$input['guestAge'].'" BirthDate="'.$input['guestBod'].'" Gender="'.$input['guestGender'].'" GuestRefNumber="'.$input['guestRef'].'" Nationality="'.$input['guestNat'].'">
+                            <PersonName>
+                                <GivenName>'.$input['guestName'].'</GivenName>
+                                <MiddleName>'.$input['guestMName'].'</MiddleName>
+                                <Surname>'.$input['guestSName'].'</Surname>
+                                <Document DocID="'.$input['guestDocId'].'" DocType="'.$input['guestDocType'].'"/>
+                            </PersonName>
+                            <Email>'.$input['guestEamil'].'</Email>
+                            <Telephone CountryAccessCode="'.$input['guestCCode'].'" PhoneNumber="'.$input['guestPhone'].'"/>
+                            <Address Type="'.$input['guestAddType'].'">
+                                <AddressLine>'.$input['guestAdd'].'</AddressLine>
+                                <CityName>'.$input['guestCity'].'</CityName>
+                                <CountryName Code="'.$input['guestCountryCode'].'">'.$input['guestCountry'].'</CountryName>
+                                <PostalCode>'.$input['guestPostal'].'</PostalCode>
+                                <StateProv>'.$input['guestState'].'</StateProv>
+                            </Address>
+                        </ContactInfo>
+                        <LoyaltyInfo MembershipID="'.$input['guestMemberId'].'" ProgramID="'.$input['guestProgramId'].'"/>
+                        <ContactInfo EmergencyFlag="'.$input['guestEFlag'].'">
+                            <PersonName>
+                                <GivenName>'.$input['gContactName'].'</GivenName>
+                                <MiddleName>'.$input['gContactMName'].'</MiddleName>
+                                <Surname>'.$input['gContactSName'].'</Surname>
+                            </PersonName>
+                            <Email>'.$input['gContactEmail'].'</Email>
+                            <Telephone CountryAccessCode="'.$input['gContactCCode'].'" PhoneNumber="'.$input['gContactPhone'].'"/>
+                        </ContactInfo>
+                        <TravelDocument DocID="'.$input['gTravDocId'].'" DocIssueLocation="'.$input['gTravDocIssuLoc'].'" DocType="'.$input['gTravDocType'].'" ExpireDate="'.$input['gTravDocExpire'].'"/>
+                    </GuestDetail>
+                </GuestDetails>
+            </ReservationInfo>
+        </OTA_CruiseBookRQ>';
+
+        $res = $this->execCurl($xml_input, true, $this->rootUrl."rest/OTA_CruiseBookRQ", true);
+        return response()->json($res);
     }
 
 }

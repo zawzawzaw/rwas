@@ -12,13 +12,19 @@
     "devDependencies": {
         "axios": "^0.17",
         "bootstrap-sass": "^3.3.7",
-        "cross-env": "^5.1",
+        "cross-env": "^5.1.4",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
-        "lodash": "^4.17.4",
-        "vue": "^2.5.7"
+        "lodash": "^4.17.5",
+        "vue": "^2.5.15"
     },
     "dependencies": {
-        "vue-router": "^3.0.1"
+        "bootstrap": "^4.0.0",
+        "less": "^3.0.1",
+        "less-loader": "^4.1.0",
+        "popper.js": "^1.14.0",
+        "vue-loader": "^14.2.1",
+        "vue-router": "^3.0.1",
+        "vue-template-compiler": "^2.5.15"
     }
 }

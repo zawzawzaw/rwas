@@ -5,7 +5,7 @@ goog.require('goog.events.EventTarget');
 
 goog.require('rwas.model.Constants');
 
-// alert("ASD2");
+
 /**
  * The CLASSNAME constructor
  * @param {object} options The object extendable like jquery plugins
@@ -56,8 +56,7 @@ rwas.model.API.instance_ = null;
  * @const
  * @type {String}
  */
-// rwas.model.API.BASE_URL = 'http://52.77.205.209/api/public/'
-rwas.model.API.BASE_URL = 'http://localhost:8082/'
+rwas.model.API.BASE_URL = 'http://52.77.205.209/api/public/'
 
 
 
@@ -247,122 +246,122 @@ rwas.model.API.prototype.page_method_02 = function() {};
 //
 
 
-rwas.model.API.prototype.cruise_get_valid_search_parameters = function() {
+// rwas.model.API.prototype.cruise_get_valid_search_parameters = function() {
 
-  console.log('rwas.model.API: cruise_get_valid_search_parameters');
+//   console.log('rwas.model.API: cruise_get_valid_search_parameters');
 
-  // todo
-  // save data in cookies (cache)
-  // expires in 1 hr
+//   // todo
+//   // save data in cookies (cache)
+//   // expires in 1 hr
     
-  this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_VALID_SEARCH_PARAMETERS_START));
+//   this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_VALID_SEARCH_PARAMETERS_START));
 
-  var target_url = rwas.model.API.BASE_URL + 'cruise/get_valid_search_parameters';
+//   var target_url = rwas.model.API.BASE_URL + 'cruise/get_valid_search_parameters';
 
-  $.ajax({
-    'url': target_url,
-    'method': 'GET',
-    'dataType': 'json',
-    'success': function( result ) {
-      var data_array = result;
+//   $.ajax({
+//     'url': target_url,
+//     'method': 'GET',
+//     'dataType': 'json',
+//     'success': function( result ) {
+//       var data_array = result;
 
-      this.cruise_valid_search_parameters = data_array;
+//       this.cruise_valid_search_parameters = data_array;
 
-      // parse it a little
-      var item = null;
-      var port_data = null;
+//       // parse it a little
+//       var item = null;
+//       var port_data = null;
 
-      for (var i = 0, l=this.cruise_valid_search_parameters.length; i < l; i++) {
+//       for (var i = 0, l=this.cruise_valid_search_parameters.length; i < l; i++) {
 
-        item = this.cruise_valid_search_parameters[i];
+//         item = this.cruise_valid_search_parameters[i];
 
-        port_data = rwas.model.Constants.get_port_data(item['port']);
+//         port_data = rwas.model.Constants.get_port_data(item['port']);
 
-        if (port_data != null) {
-          item['port_name'] = port_data['en'];                // for english
-        }
+//         if (port_data != null) {
+//           item['port_name'] = port_data['en'];                // for english
+//         }
 
-      }
+//       }
 
-      this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_VALID_SEARCH_PARAMETERS_COMPLETE));
+//       this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_VALID_SEARCH_PARAMETERS_COMPLETE));
 
-    }.bind(this)
-  });
+//     }.bind(this)
+//   });
 
-};
+// };
 
 
-/**
- * @param  {String} port_param [description]
- * @param  {String} date_param [description]
- * @param  {String} pax_param  [description]
- */
-rwas.model.API.prototype.cruise_get_itineraries = function(port_param, date_param, pax_param) {
+// /**
+//  * @param  {String} port_param [description]
+//  * @param  {String} date_param [description]
+//  * @param  {String} pax_param  [description]
+//  */
+// rwas.model.API.prototype.cruise_get_itineraries = function(port_param, date_param, pax_param) {
 
-  console.log('rwas.model.API: cruise_get_itineraries');
+//   console.log('rwas.model.API: cruise_get_itineraries');
 
-  console.log(
-    {
-      'port': port_param,
-      'date': date_param,
-      'pax': pax_param
-    }
-  );
+//   console.log(
+//     {
+//       'port': port_param,
+//       'date': date_param,
+//       'pax': pax_param
+//     }
+//   );
 
-  // 'cruise/get_itineraries'
+//   // 'cruise/get_itineraries'
   
-  this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_ITINERARIES_START));
+//   this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_ITINERARIES_START));
 
-  var target_url = rwas.model.API.BASE_URL + 'cruise/get_itineraries';
+//   var target_url = rwas.model.API.BASE_URL + 'cruise/get_itineraries';
 
-  $.ajax({
-    'url': target_url,
-    'method': 'GET',
-    'data': {
-      'port': port_param,
-      'date': date_param,
-      'pax': pax_param
-    },
-    'dataType': 'json',
-    'success': function( result ) {
-      var data_array = result;
+//   $.ajax({
+//     'url': target_url,
+//     'method': 'GET',
+//     'data': {
+//       'port': port_param,
+//       'date': date_param,
+//       'pax': pax_param
+//     },
+//     'dataType': 'json',
+//     'success': function( result ) {
+//       var data_array = result;
 
-      this.cruise_itineraries = data_array;
+//       this.cruise_itineraries = data_array;
 
       
-      // parse it a little
-      var item = null;
-      var ship_data = null;
+//       // parse it a little
+//       var item = null;
+//       var ship_data = null;
 
-      for (var i = 0, l=this.cruise_itineraries['data'].length; i < l; i++) {
+//       for (var i = 0, l=this.cruise_itineraries['data'].length; i < l; i++) {
 
-        item = this.cruise_itineraries['data'][i];
+//         item = this.cruise_itineraries['data'][i];
 
-        ship_data = rwas.model.Constants.get_ship_data(item['ship_code']);
+//         ship_data = rwas.model.Constants.get_ship_data(item['ship_code']);
 
-        if (ship_data != null) {
-          item['ship_name'] = ship_data['en'];                // for english
-        } else {
-          console.log('this is the ship code ' + item['ship_code']);
-        }
+//         if (ship_data != null) {
+//           item['ship_name'] = ship_data['en'];                // for english
+//         } else {
+//           console.log('this is the ship code ' + item['ship_code']);
+//         }
 
-      }
+//       }
 
-      console.log('this.cruise_itineraries');
-      console.log(this.cruise_itineraries);
+//       console.log('this.cruise_itineraries');
+//       console.log(this.cruise_itineraries);
       
 
-      this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_ITINERARIES_COMPLETE));
+//       this.dispatchEvent(new goog.events.Event(rwas.model.API.CRUISE_GET_ITINERARIES_COMPLETE));
 
-    }.bind(this)
-  });
+//     }.bind(this)
+//   });
 
   
 
 
 
 
-};
+// };
 
 
 //    ____   ___   ___  _  _____ _   _  ____
