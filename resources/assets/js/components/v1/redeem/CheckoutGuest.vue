@@ -1257,7 +1257,7 @@
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input value="YES" type="checkbox" id="visaConfirm">
+                                        <input value="" type="checkbox" id="visaConfirm">
                                         <span></span>I understand that I am responsible for checking my own visa requirements
                                     </label>
                                 </div>
@@ -1301,7 +1301,7 @@
         methods: {
             confirmBooking: function(){
 
-                if($("#visaConfirm").val()!=="YES") {
+                if($("#visaConfirm").prop("checked")===false) {
                     alert("Please agreed our sevice before proceeding!");
                     return false;
                 }
