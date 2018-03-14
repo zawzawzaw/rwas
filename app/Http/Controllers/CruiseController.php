@@ -393,118 +393,72 @@ class CruiseController extends Controller
             $query->select('id', 'ship_code', 'day', 'night', 'departure_port', 'arrival_port');
         }])->where('cruise_id', $request->input('cruise_id'))->first()->toArray();
 
-        // $input = $request->only(
-        //     'posName',
-        //     'posType',
-        //     'posComName',
-        //     'sailInfoVoyageId',
-        //     'sailInfoShipCode',
-        //     'currency',
-        //     'fareCode',
-        //     'priceCatCode',
-        //     'waitList',
-        //     'guestExists',
-        //     'requestGuest',
-        //     'guestAge',
-        //     'guestBod',
-        //     'guestGender',
-        //     'guestRef',
-        //     'guestNat',
-        //     'guestName',
-        //     'guestMName',
-        //     'guestSName',
-        //     'guestDocId',
-        //     'guestDocType',
-        //     'guestEamil',
-        //     'guestCCode',
-        //     'guestPhone',
-        //     'guestAddType',
-        //     'guestAdd',
-        //     'guestCity',
-        //     'guestCountry',
-        //     'guestCountryCode',
-        //     'guestPostal',
-        //     'guestState',
-        //     'guestMemberId',
-        //     'guestProgramId',
-        //     'guestEFlag',
-        //     'gContactName',
-        //     'gContactMName',
-        //     'gContactSName',
-        //     'gContactEmail',
-        //     'gContactCCode',
-        //     'gContactPhone',
-        //     'gTravDocId',
-        //     'gTravDocIssuLoc',
-        //     'gTravDocType',
-        //     'gTravDocExpire'
-        // );
+        $input = $request->only(
+            'guestAge',
+            'guestBod',
+            'guestGender',
+            'guestRef',
+            'guestNat',
+            'guestName',
+            'guestMName',
+            'guestSName',
+            'guestDocId',
+            'guestDocType',
+            'guestEamil',
+            'guestCCode',
+            'guestPhone',
+            'guestAddType',
+            'guestAdd',
+            'guestCity',
+            'guestCountry',
+            'guestCountryCode',
+            'guestPostal',
+            'guestState',
+            'guestMemberId',
+            'guestProgramId',
+            'guestEFlag',
+            'gContactName',
+            'gContactMName',
+            'gContactSName',
+            'gContactEmail',
+            'gContactCCode',
+            'gContactPhone',
+            'gTravDocId',
+            'gTravDocIssuLoc',
+            'gTravDocType',
+            'gTravDocExpire'
+        );
 
-        $input = [
-            'custom' => 'true',
-            'posName' => 'CASINO ALLOTMENT',
-            'posType' => '39',
-            'posComName' => 'OPENTRAVEL',
-            'sailInfoVoyageId' => 'GD02180606',
-            'sailInfoShipCode' => 'WDR',
-            'currency' => 'USD',
-            'fareCode' => 'RWCC B2M',
-            'priceCatCode' => 'BDS',
-            'waitList' => 'false',
-            'guestExists' => 'false',
-            'requestGuest' => 'flase',
-            'guestAge' => '30',
-            'guestBod' => '1985-01-11',
-            'guestGender' => 'Male',
-            'guestRef' => '1',
-            'guestNat' => 'SG',
-            'guestName' => 'Zaw',
-            'guestMName' => 'Zaw',
-            'guestSName' => 'Aung',
-            'guestDocId' => '105983934',
-            'guestDocType' => '2',
-            'guestEamil' => 'zawzawzaw@gmail.com',
-            'guestCCode' => '1',
-            'guestPhone' => '91828392',
-            'guestAddType' => '1',
-            'guestAdd' => '1 test road',
-            'guestCity' => 'Singapore',
-            'guestCountry' => 'SG',
-            'guestCountryCode' => 'SG',
-            'guestPostal' => '11123',
-            'guestState' => 'Singapore',
-            'guestMemberId' => '29',
-            'guestProgramId' => 'PRINCIPLE CARD',
-            'guestEFlag' => 'true',
-            'gContactName' => 'Joshua',
-            'gContactMName' => '',
-            'gContactSName' => 'Didham',
-            'gContactEmail' => 'joshua@manic.com.sg',
-            'gContactCCode' => '1',
-            'gContactPhone' => '23232323',
-            'gTravDocId' => '4066601',
-            'gTravDocIssuLoc' => 'Location',
-            'gTravDocType' => '2',
-            'gTravDocExpire' => '2020-12-17'
-        ];
-// return response()->json($input);
+        $input['custom'] = 'true';
         $input['posName'] = 'CASINO ALLOTMENT';
-        $input['posType'] = 39;
-        $input['guestBod'] = explode("/", $input['guestBod']);
-        $input['guestAge'] = date("Y") - $input['guestBod'][2];
-        $input['guestBod'] = $input['guestBod'][2].'-'.$input['guestBod'][1].'-'.$input['guestBod'][0];
+        $input['posType'] = '39';
         $input['posComName'] = 'OPENTRAVEL';
-        $input['sailInfoShipCode'] = $cruise['itinerary']['ship_code'];
-        $input['sailInfoVoyageId'] = $request->input('cruise_id');
-        $input['currency'] = 'USD';
-        $input['guestCountryCode'] = 'SG';
-        $input['guestCountry'] = 'SG';
+        $input['sailInfoVoyageId'] = 'GD02180606';
+        $input['sailInfoShipCode'] = 'WDR';
         $input['currency'] = 'USD';
         $input['fareCode'] = 'RWCC B2M';
         $input['priceCatCode'] = 'BDS';
         $input['waitList'] = 'false';
         $input['guestExists'] = 'false';
         $input['requestGuest'] = 'flase';
+// return response()->json($input);
+        $input['posName'] = 'CASINO ALLOTMENT';
+        $input['posType'] = 39;
+        $input['posComName'] = 'OPENTRAVEL';
+        $input['sailInfoShipCode'] = $cruise['itinerary']['ship_code'];
+        $input['sailInfoVoyageId'] = $request->input('cruise_id');
+        $input['currency'] = 'USD';
+        $input['currency'] = 'USD';
+        $input['fareCode'] = 'RWCC B2M';
+        $input['priceCatCode'] = 'BDS';
+        $input['waitList'] = 'false';
+        $input['guestExists'] = 'false';
+        $input['requestGuest'] = 'flase';
+        $input['guestBod'] = explode("/", $input['guestBod']);
+        $input['guestAge'] = date("Y") - $input['guestBod'][2];
+        $input['guestBod'] = $input['guestBod'][2].'-'.$input['guestBod'][1].'-'.$input['guestBod'][0];
+        $input['guestCountryCode'] = 'SG';
+        $input['guestCountry'] = 'SG';
         $input['guestRef'] = '1';
         $input['guestDocId'] = 105983934;
         $input['guestDocType'] = 2;
@@ -531,42 +485,45 @@ class CruiseController extends Controller
                 <SelectedCategory FareCode="'.$input['fareCode'].'" PricedCategoryCode="'.$input['priceCatCode'].'" WaitlistIndicator="'.$input['waitList'].'"/>
             </SailingInfo>
             <ReservationInfo>
-                <GuestDetails>
-                    <GuestDetail GuestExistsIndicator="'.$input['guestExists'].'" RepeatGuestIndicator="'.$input['requestGuest'].'">
-                        <ContactInfo Age="'.$input['guestAge'].'" BirthDate="'.$input['guestBod'].'" Gender="'.$input['guestGender'].'" GuestRefNumber="'.$input['guestRef'].'" Nationality="'.$input['guestNat'].'">
-                            <PersonName>
-                                <GivenName>'.$input['guestName'].'</GivenName>
-                                <MiddleName>'.$input['guestMName'].'</MiddleName>
-                                <Surname>'.$input['guestSName'].'</Surname>
-                                <Document DocID="'.$input['guestDocId'].'" DocType="'.$input['guestDocType'].'"/>
-                            </PersonName>
-                            <Email>'.$input['guestEamil'].'</Email>
-                            <Telephone CountryAccessCode="'.$input['guestCCode'].'" PhoneNumber="'.$input['guestPhone'].'"/>
-                            <Address Type="'.$input['guestAddType'].'">
-                                <AddressLine>'.$input['guestAdd'].'</AddressLine>
-                                <CityName>'.$input['guestCity'].'</CityName>
-                                <CountryName Code="'.$input['guestCountryCode'].'">'.$input['guestCountry'].'</CountryName>
-                                <PostalCode>'.$input['guestPostal'].'</PostalCode>
-                                <StateProv>'.$input['guestState'].'</StateProv>
-                            </Address>
-                        </ContactInfo>
-                        <LoyaltyInfo MembershipID="'.$input['guestMemberId'].'" ProgramID="'.$input['guestProgramId'].'"/>
-                        <ContactInfo EmergencyFlag="'.$input['guestEFlag'].'">
-                            <PersonName>
-                                <GivenName>'.$input['gContactName'].'</GivenName>
-                                <MiddleName>'.$input['gContactMName'].'</MiddleName>
-                                <Surname>'.$input['gContactSName'].'</Surname>
-                            </PersonName>
-                            <Email>'.$input['gContactEmail'].'</Email>
-                            <Telephone CountryAccessCode="'.$input['gContactCCode'].'" PhoneNumber="'.$input['gContactPhone'].'"/>
-                        </ContactInfo>
-                        <TravelDocument DocID="'.$input['gTravDocId'].'" DocIssueLocation="'.$input['gTravDocIssuLoc'].'" DocType="'.$input['gTravDocType'].'" ExpireDate="'.$input['gTravDocExpire'].'"/>
-                    </GuestDetail>
-                </GuestDetails>
+                <GuestDetails>';
+        
+        $xml_input .= '<GuestDetail GuestExistsIndicator="'.$input['guestExists'].'" RepeatGuestIndicator="'.$input['requestGuest'].'">
+            <ContactInfo Age="'.$input['guestAge'].'" BirthDate="'.$input['guestBod'].'" Gender="'.$input['guestGender'].'" GuestRefNumber="'.$input['guestRef'].'" Nationality="'.$input['guestNat'].'">
+                <PersonName>
+                    <GivenName>'.$input['guestName'].'</GivenName>
+                    <MiddleName>'.$input['guestMName'].'</MiddleName>
+                    <Surname>'.$input['guestSName'].'</Surname>
+                    <Document DocID="'.$input['guestDocId'].'" DocType="'.$input['guestDocType'].'"/>
+                </PersonName>
+                <Email>'.$input['guestEamil'].'</Email>
+                <Telephone CountryAccessCode="'.$input['guestCCode'].'" PhoneNumber="'.$input['guestPhone'].'"/>
+                <Address Type="'.$input['guestAddType'].'">
+                    <AddressLine>'.$input['guestAdd'].'</AddressLine>
+                    <CityName>'.$input['guestCity'].'</CityName>
+                    <CountryName Code="'.$input['guestCountryCode'].'">'.$input['guestCountry'].'</CountryName>
+                    <PostalCode>'.$input['guestPostal'].'</PostalCode>
+                    <StateProv>'.$input['guestState'].'</StateProv>
+                </Address>
+            </ContactInfo>
+            <LoyaltyInfo MembershipID="'.$input['guestMemberId'].'" ProgramID="'.$input['guestProgramId'].'"/>
+            <ContactInfo EmergencyFlag="'.$input['guestEFlag'].'">
+                <PersonName>
+                    <GivenName>'.$input['gContactName'].'</GivenName>
+                    <MiddleName>'.$input['gContactMName'].'</MiddleName>
+                    <Surname>'.$input['gContactSName'].'</Surname>
+                </PersonName>
+                <Email>'.$input['gContactEmail'].'</Email>
+                <Telephone CountryAccessCode="'.$input['gContactCCode'].'" PhoneNumber="'.$input['gContactPhone'].'"/>
+            </ContactInfo>
+            <TravelDocument DocID="'.$input['gTravDocId'].'" DocIssueLocation="'.$input['gTravDocIssuLoc'].'" DocType="'.$input['gTravDocType'].'" ExpireDate="'.$input['gTravDocExpire'].'"/>
+        </GuestDetail>';
+
+        $xml_input .= '</GuestDetails>
             </ReservationInfo>
         </OTA_CruiseBookRQ>';
 
-        $res = $this->curlRequest($xml_input, true, $this->drsUrl."rest/OTA_CruiseBookRQ", true);
+        // $res = $this->curlRequest($xml_input, true, $this->drsUrl."rest/OTA_CruiseBookRQ", true);
+        $res = app('App\Http\Controllers\Test\SeawareApiTest')->otaCruiseBookRQ($request, $xml_input);
         $input = [
             'paraDrsID' => 'MANIC',
             'paraDrsPwd' => 'MANIC',
@@ -596,7 +553,11 @@ class CruiseController extends Controller
 
         $updateResult = $this->curlRequest($this->buildDrsXMLContent($update), $this->drsUrl.'API_AutoUA_SetPF', true);
 
-        return response()->json($res);
+        return response()->json([
+            'booking' => $res,
+            'beforeCC' => $existing_rwrc_value,
+            'afterCC' => $new_rwrc_value
+        ]);
     }
 
 }

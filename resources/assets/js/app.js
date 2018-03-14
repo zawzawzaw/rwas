@@ -95,6 +95,7 @@ const app = new Vue({
                 }
             },
             result: "",
+            refreshCheckout: false,
             portData: [{
                     'country': "Mainland China",
                     'en': "Port of Haikou, China",
