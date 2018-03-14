@@ -8,6 +8,7 @@ use DB;
 use App\Models\Cabin;
 use App\Models\Cruise;
 use App\Models\Itinerary;
+use App\Models\XtopiaCsv;
 
 class CruiseController extends Controller
 {
@@ -290,11 +291,12 @@ class CruiseController extends Controller
             ], 422);
         }
 
-        $cruise = Cruise::select('id')->where('cruise_id', $request->input('cruise_id'))->with([
+        $cruise = Cruise::select('id', 'itinerary')->where('cruise_id', $request->input('cruise_id'))->with([
             'cabins' => function($query) {
                 $query->select('id', 'cabin_category', 'cruise', 'pax_count');
-            }
-        ])->first();
+            },
+            'itinerary'
+        ])->first()->toArray();
 
         if(empty($cruise)){
             return response()->json([
@@ -303,21 +305,52 @@ class CruiseController extends Controller
         }
         
         $cabins = [];
-        
-        foreach($cruise->cabins as $cabin){
+        // return response()->json($cruise);
+        foreach($cruise['cabins'] as $cabin){
             $cabins[] = [
-                'cabin_type_code' => $cabin->cabin_category,
+                'cabin_type_code' => $cabin['cabin_category'],
                 'price' => array(
-                    'cc' => 5,
+                    'cc' => rand(8, 22),
                     'cc_cash_added' => 0,
                     'gp' => 100,
                     'gp_cash_added' => 0,
                     'cash' => 100
                 ),
+                'raw' => $cruise
             ];
         }
 
         return response()->json($cabins);
+    }
+
+    public function get_cruise_info_for_cabin(Request $request)
+    {
+        if(empty($request->input('cruise_id')) || is_null($request->input('cruise_id'))){
+            return response()->json([
+                'mesg' => 'Cruise id is required!'
+            ], 422);
+        }
+        
+        $cruise = Cruise::select('id', 'itinerary', 'departure_date')->with(['itinerary' => function($query) {
+            $query->select('id', 'ship_code', 'day', 'night', 'departure_port', 'arrival_port');
+        }])->where('cruise_id', $request->input('cruise_id'))->first()->toArray();
+
+        $res = [
+            'ship_code' => $cruise['itinerary']['ship_code'],
+            'duration' => $cruise['itinerary']['day'].' Days '.$cruise['itinerary']['night'].' Nights',
+            'dep_port' => $cruise['itinerary']['departure_port'],
+            'arr_port' => $cruise['itinerary']['arrival_port'],
+            'dep_date' => date('d M Y', strtotime($cruise['departure_date'])),
+            'price' => array(
+                'cc' => rand(8, 22),
+                'cc_cash_added' => 0,
+                'gp' => 100,
+                'gp_cash_added' => 0,
+                'cash' => 100
+            ),
+        ];
+
+        return response()->json($res);
     }
 
 
@@ -346,6 +379,224 @@ class CruiseController extends Controller
         $output_json = json_encode($output_data);
 
         return $output_json;
+    }
+
+    public function book_cruise_cabin(Request $request)
+    {
+        if(empty($request->input('cruise_id')) || is_null($request->input('cruise_id'))){
+            return response()->json([
+                'mesg' => 'Cruise id is required!'
+            ], 422);
+        }
+        
+        $cruise = Cruise::select('id', 'itinerary', 'departure_date')->with(['itinerary' => function($query) {
+            $query->select('id', 'ship_code', 'day', 'night', 'departure_port', 'arrival_port');
+        }])->where('cruise_id', $request->input('cruise_id'))->first()->toArray();
+
+        // $input = $request->only(
+        //     'posName',
+        //     'posType',
+        //     'posComName',
+        //     'sailInfoVoyageId',
+        //     'sailInfoShipCode',
+        //     'currency',
+        //     'fareCode',
+        //     'priceCatCode',
+        //     'waitList',
+        //     'guestExists',
+        //     'requestGuest',
+        //     'guestAge',
+        //     'guestBod',
+        //     'guestGender',
+        //     'guestRef',
+        //     'guestNat',
+        //     'guestName',
+        //     'guestMName',
+        //     'guestSName',
+        //     'guestDocId',
+        //     'guestDocType',
+        //     'guestEamil',
+        //     'guestCCode',
+        //     'guestPhone',
+        //     'guestAddType',
+        //     'guestAdd',
+        //     'guestCity',
+        //     'guestCountry',
+        //     'guestCountryCode',
+        //     'guestPostal',
+        //     'guestState',
+        //     'guestMemberId',
+        //     'guestProgramId',
+        //     'guestEFlag',
+        //     'gContactName',
+        //     'gContactMName',
+        //     'gContactSName',
+        //     'gContactEmail',
+        //     'gContactCCode',
+        //     'gContactPhone',
+        //     'gTravDocId',
+        //     'gTravDocIssuLoc',
+        //     'gTravDocType',
+        //     'gTravDocExpire'
+        // );
+
+        $input = [
+            'custom' => 'true',
+            'posName' => 'CASINO ALLOTMENT',
+            'posType' => '39',
+            'posComName' => 'OPENTRAVEL',
+            'sailInfoVoyageId' => 'GD02180606',
+            'sailInfoShipCode' => 'WDR',
+            'currency' => 'USD',
+            'fareCode' => 'RWCC B2M',
+            'priceCatCode' => 'BDS',
+            'waitList' => 'false',
+            'guestExists' => 'false',
+            'requestGuest' => 'flase',
+            'guestAge' => '30',
+            'guestBod' => '1985-01-11',
+            'guestGender' => 'Male',
+            'guestRef' => '1',
+            'guestNat' => 'SG',
+            'guestName' => 'Zaw',
+            'guestMName' => 'Zaw',
+            'guestSName' => 'Aung',
+            'guestDocId' => '105983934',
+            'guestDocType' => '2',
+            'guestEamil' => 'zawzawzaw@gmail.com',
+            'guestCCode' => '1',
+            'guestPhone' => '91828392',
+            'guestAddType' => '1',
+            'guestAdd' => '1 test road',
+            'guestCity' => 'Singapore',
+            'guestCountry' => 'SG',
+            'guestCountryCode' => 'SG',
+            'guestPostal' => '11123',
+            'guestState' => 'Singapore',
+            'guestMemberId' => '29',
+            'guestProgramId' => 'PRINCIPLE CARD',
+            'guestEFlag' => 'true',
+            'gContactName' => 'Joshua',
+            'gContactMName' => '',
+            'gContactSName' => 'Didham',
+            'gContactEmail' => 'joshua@manic.com.sg',
+            'gContactCCode' => '1',
+            'gContactPhone' => '23232323',
+            'gTravDocId' => '4066601',
+            'gTravDocIssuLoc' => 'Location',
+            'gTravDocType' => '2',
+            'gTravDocExpire' => '2020-12-17'
+        ];
+// return response()->json($input);
+        $input['posName'] = 'CASINO ALLOTMENT';
+        $input['posType'] = 39;
+        // $input['guestBod'] = explode("/", $input['guestBod']);
+        // $input['guestAge'] = date("Y") - $input['guestBod'][2];
+        // $input['guestBod'] = $input['guestBod'][2].'-'.$input['guestBod'][1].'-'.$input['guestBod'][0];
+        $input['posComName'] = 'OPENTRAVEL';
+        $input['sailInfoShipCode'] = $cruise['itinerary']['ship_code'];
+        $input['sailInfoVoyageId'] = $request->input('cruise_id');
+        $input['currency'] = 'USD';
+        $input['guestCountryCode'] = 'SG';
+        $input['guestCountry'] = 'SG';
+        $input['currency'] = 'USD';
+        $input['fareCode'] = 'RWCC B2M';
+        $input['priceCatCode'] = 'BDS';
+        $input['waitList'] = 'false';
+        $input['guestExists'] = 'false';
+        $input['requestGuest'] = 'flase';
+        $input['guestRef'] = '1';
+        $input['guestDocId'] = 105983934;
+        $input['guestDocType'] = 2;
+        $input['guestAddType'] = 1;
+        $input['guestMemberId'] = 29;
+        $input['guestProgramId'] = 'PRINCIPLE CARD';
+        $input['guestEFlag'] = true;
+        
+        $xml_input = '<?xml version="1.0" encoding="utf-8"?>
+        <OTA_CruiseBookRQ Version="1.0" xmlns="http://www.opentravel.org/OTA/2003/05">
+            <POS>
+                <Source>
+                <RequestorID Name="'.$input['posName'].'" Type="'.$input['posType'].'"/>
+                <BookingChannel Type="1">
+                    <CompanyName>'.$input['posComName'].'</CompanyName>
+                </BookingChannel>
+                </Source>
+            </POS>
+            <SailingInfo>
+                <SelectedSailing VoyageID="'.$input['sailInfoVoyageId'].'">
+                <CruiseLine ShipCode="'.$input['sailInfoShipCode'].'"/>
+                </SelectedSailing>
+                <Currency CurrencyCode="'.$input['currency'].'"/>
+                <SelectedCategory FareCode="'.$input['fareCode'].'" PricedCategoryCode="'.$input['priceCatCode'].'" WaitlistIndicator="'.$input['waitList'].'"/>
+            </SailingInfo>
+            <ReservationInfo>
+                <GuestDetails>
+                    <GuestDetail GuestExistsIndicator="'.$input['guestExists'].'" RepeatGuestIndicator="'.$input['requestGuest'].'">
+                        <ContactInfo Age="'.$input['guestAge'].'" BirthDate="'.$input['guestBod'].'" Gender="'.$input['guestGender'].'" GuestRefNumber="'.$input['guestRef'].'" Nationality="'.$input['guestNat'].'">
+                            <PersonName>
+                                <GivenName>'.$input['guestName'].'</GivenName>
+                                <MiddleName>'.$input['guestMName'].'</MiddleName>
+                                <Surname>'.$input['guestSName'].'</Surname>
+                                <Document DocID="'.$input['guestDocId'].'" DocType="'.$input['guestDocType'].'"/>
+                            </PersonName>
+                            <Email>'.$input['guestEamil'].'</Email>
+                            <Telephone CountryAccessCode="'.$input['guestCCode'].'" PhoneNumber="'.$input['guestPhone'].'"/>
+                            <Address Type="'.$input['guestAddType'].'">
+                                <AddressLine>'.$input['guestAdd'].'</AddressLine>
+                                <CityName>'.$input['guestCity'].'</CityName>
+                                <CountryName Code="'.$input['guestCountryCode'].'">'.$input['guestCountry'].'</CountryName>
+                                <PostalCode>'.$input['guestPostal'].'</PostalCode>
+                                <StateProv>'.$input['guestState'].'</StateProv>
+                            </Address>
+                        </ContactInfo>
+                        <LoyaltyInfo MembershipID="'.$input['guestMemberId'].'" ProgramID="'.$input['guestProgramId'].'"/>
+                        <ContactInfo EmergencyFlag="'.$input['guestEFlag'].'">
+                            <PersonName>
+                                <GivenName>'.$input['gContactName'].'</GivenName>
+                                <MiddleName>'.$input['gContactMName'].'</MiddleName>
+                                <Surname>'.$input['gContactSName'].'</Surname>
+                            </PersonName>
+                            <Email>'.$input['gContactEmail'].'</Email>
+                            <Telephone CountryAccessCode="'.$input['gContactCCode'].'" PhoneNumber="'.$input['gContactPhone'].'"/>
+                        </ContactInfo>
+                        <TravelDocument DocID="'.$input['gTravDocId'].'" DocIssueLocation="'.$input['gTravDocIssuLoc'].'" DocType="'.$input['gTravDocType'].'" ExpireDate="'.$input['gTravDocExpire'].'"/>
+                    </GuestDetail>
+                </GuestDetails>
+            </ReservationInfo>
+        </OTA_CruiseBookRQ>';
+
+        $res = $this->curlRequest($xml_input, true, $this->drsUrl."rest/OTA_CruiseBookRQ", true);
+        $input = [
+            'paraDrsID' => 'MANIC',
+            'paraDrsPwd' => 'MANIC',
+            'paraCid' => 29,
+            'paraWorkGroup' => urlencode('MEML'),
+            'paraLoadDefaultDRSifNoUA' => 0,
+            "paraPFFieldName" => 'RWRC'
+        ];        
+
+        $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_GetSelectedPF', true);
+
+        if(isset($result->errCode)){
+            return response()->json($result);
+        }
+
+        $existing_rwrc_value = $result->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value;
+        $new_rwrc_value = $existing_rwrc_value + rand(8, 22);
+
+        $update = [
+            'paraDrsID' => 'MANIC',
+            'paraDrsPwd' => 'MANIC',
+            'paraCid' => 29,
+            'paraWorkGroup' => urlencode('MEML'),
+            "paraPFField" => 'RWRC',
+            "paraPFValue" => $new_rwrc_value
+        ];  
+
+        $updateResult = $this->curlRequest($this->buildDrsXMLContent($update), $this->drsUrl.'API_AutoUA_SetPF', true);
+
+        return response()->json($res);
     }
 
 }

@@ -11,5 +11,9 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.js('resources/assets/js/app.js', 'public/js').sourceMaps().version();
+mix.sass('resources/assets/sass/style.scss', 'public/css/style2.css').sourceMaps().version();
+// mix.less('resources/assets/less/style.less', 'public/css/style.css');
+// mix.less('resources/assets/less/critical_style.less', 'public/css/critical_style.css');
+
+// mix.copy('resources/assets', 'public/assets');

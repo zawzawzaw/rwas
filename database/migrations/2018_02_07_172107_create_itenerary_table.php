@@ -34,6 +34,6 @@ class CreateIteneraryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('itenerary');
+        Schema::dropIfExists('itinerary');
     }
 }

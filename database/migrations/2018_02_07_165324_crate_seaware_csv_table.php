@@ -43,6 +43,6 @@ class CrateSeawareCsvTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seaweare_csv');
+        Schema::dropIfExists('seaware_csv');
     }
 }
