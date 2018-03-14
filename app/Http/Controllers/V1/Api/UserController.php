@@ -24,7 +24,7 @@ class UserController extends Controller
 
         // return $input;
 
-        $result = $this->curlRequestRaw($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
+        $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
 
         if(isset($result->errCode)){
             return response()->json($result);
