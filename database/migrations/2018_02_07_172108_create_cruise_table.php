@@ -17,6 +17,7 @@ class CreateCruiseTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('itinerary')->nullable();
             $table->date('departure_date')->nullable();
+            $table->date('departure_date_end')->nullable();
             $table->string('cruise_id')->nullable();
             $table->string('week_day')->nullable();
             $table->timestamps();

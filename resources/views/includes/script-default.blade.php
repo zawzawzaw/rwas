@@ -31,28 +31,28 @@
   <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
   
   <!-- INSERT JS HERE -->
-  <script type="text/javascript" src="{{url('../resources/assets/js/manic-polyfill.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/jquery-other/jquery-1.9.1.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/jquery-other/jquery.mousewheel.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/misc-js/mobile-detect.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/misc-js/preloadjs-0.4.0.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/gsap/src/minified/TweenMax.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/gsap/src/minified/jquery.gsap.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/gsap/src/minified/easing/EasePack.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/gsap/src/minified/utils/SplitText.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/gsap/src/minified/plugins/ScrollToPlugin.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/scrollmagic/scrollmagic/minified/ScrollMagic.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/slick-carousel/slick/slick.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/js/manic-polyfill.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/jquery-other/jquery-1.9.1.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/jquery-other/jquery.mousewheel.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/misc-js/mobile-detect.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/misc-js/preloadjs-0.4.0.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/gsap/src/minified/TweenMax.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/gsap/src/minified/jquery.gsap.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/gsap/src/minified/easing/EasePack.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/gsap/src/minified/utils/SplitText.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/gsap/src/minified/plugins/ScrollToPlugin.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/scrollmagic/scrollmagic/minified/ScrollMagic.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/slick-carousel/slick/slick.min.js')}}"></script>
 
   <!-- Date Picker -->
-  <script type="text/javascript" src="{{url('../resources/assets/libs/jquery-ui-multidatepicker/jquery-ui.min.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/libs/jquery-ui-multidatepicker/jquery-ui.multidatespicker.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/jquery-ui-multidatepicker/jquery-ui.min.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/jquery-ui-multidatepicker/jquery-ui.multidatespicker.js')}}"></script>
   
   <!-- Google Closure -->
-  <script type="text/javascript" src="{{url('../resources/assets/libs/google-closure/closure-library/closure/goog/base.js')}}"></script>
-  <script type="text/javascript" src="{{url('../resources/assets/js/google-closure-dependency-list.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/libs/google-closure/closure-library/closure/goog/base.js')}}"></script>
+  <script type="text/javascript" src="{{url('/assets/js/google-closure-dependency-list.js')}}"></script>
   <script type="text/javascript">
     goog.require('rwas.page.Default');
   </script>

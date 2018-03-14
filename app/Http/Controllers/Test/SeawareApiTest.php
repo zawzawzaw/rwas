@@ -475,7 +475,7 @@ class SeawareApiTest extends Controller
         }else{
             $xml_input = $this->otaCruiseBookBuildXML($input);
         }
-        return $this->rootUrl."rest/OTA_CruiseBookRQ";
+        // return $this->rootUrl."rest/OTA_CruiseBookRQ";
         $res = $this->execCurl($xml_input, true, $this->rootUrl."rest/OTA_CruiseBookRQ", true);
         return response()->json($res);
     }

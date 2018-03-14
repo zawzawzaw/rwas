@@ -1,0 +1,103 @@
+.space10{ height: 10px; }
+.space15{ height: 15px; }
+.space20{ height: 20px; }
+.space30{ height: 30px; }
+.space40{ height: 40px; }
+.space50{ height: 50px; }
+.space60{ height: 60px; }
+.space70{ height: 70px; }
+.space80{ height: 80px; }
+.space90{ height: 90px; }
+.space100{ height: 100px; }
+
+
+.under-construction-disclaimer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #3b3b3b;
+  color: #f1f2f2;
+  width: 140px;
+  height: 32px;
+  padding: 3px 8px;
+  font-size: 11px;
+  line-height: 13px;
+
+}
+
+hr{
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  border: none;
+  border-bottom: 1px solid @border-grey;
+}
+
+
+
+a{
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+input[type=submit],
+input[type=reset],
+button{
+  cursor: pointer;
+}
+
+.manic-image-container{
+  height: 200px;
+
+  img{
+    .opacity(0);
+  }
+
+  &.image-loaded-version{
+
+    img{
+      -webkit-animation: plainFadeIn 0.2s both cubic-bezier(0.7,0,0.3,1);
+      animation: plainFadeIn 0.2s both cubic-bezier(0.7,0,0.3,1);
+      .dd1;
+    }
+  }
+}
+
+
+
+
+
+
+
+.scroll-target{
+  position: relative;
+  top: 0px;
+
+  // border-bottom: 1px solid #ff0000;
+  /// border-bottom: 1px solid fade(@white, 0%);
+
+  
+  // top: -1 * @desktop-header-height;
+}
+
+// TABLET PORTRAIT
+@media only screen and (max-width: 991px) {
+  .scroll-target{
+    // top: -1 * @mobile-header-height;
+    
+    top: -1 * @mobile-header-height;
+  }  
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,2 @@
+call compile_libraries_about.bat
+call compile_page_about.bat

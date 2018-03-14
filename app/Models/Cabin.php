@@ -17,5 +17,5 @@ class Cabin extends Model
         'cabin_available',
         'pax_count'
     ];
-
+    
 }

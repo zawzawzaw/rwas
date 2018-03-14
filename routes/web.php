@@ -23,15 +23,9 @@ Route::get('/', function () {
   
 });
 
-
-
-
-
-Route::get('/redeem', function () { return view('pages/redeem/primary-search'); });
+// Route::get('/redeem', function () { return view('pages/redeem/primary-search'); });
 Route::get('/redeem/cabin', function () { return view('pages/redeem/cabin-type-rates'); });
 Route::get('/redeem/summary', function () { return view('pages/redeem/summary'); });
-
-
 
 Route::get('/checkout', function () { return view('pages/checkout/details-main'); });
 Route::get('/checkout/details-guest', function () { return view('pages/checkout/details-guest'); });
@@ -39,10 +33,6 @@ Route::get('/checkout/details-summary', function () { return view('pages/checkou
 
 Route::get('/checkout/payment', function () { return view('pages/checkout/payment'); });
 Route::get('/checkout/thank-you', function () { return view('pages/checkout/thank-you'); });
-
-
-
-
 
 Route::group(['middleware' => 'nonAuthDrs'], function() {
   Route::get('/register', function () { return view('pages/account/register'); });
@@ -52,14 +42,13 @@ Route::group(['middleware' => 'nonAuthDrs'], function() {
 
 // if user is logged in
 Route::group(['middleware' => 'authDrs'], function() {
-  Route::get('/account', 'V1\\UserController@account')->name('user.account');
-  Route::get('/account/edit-profile', 'V1\\UserController@editProfile');
-  Route::post('/account/edit-profile', 'V1\\Api\\UserController@update');
-  Route::get('/account/transaction-history', function () { return view('pages/account/transaction-history'); });
-  Route::get('/account/booking-history', function () { return view('pages/account/booking-history'); });
-  Route::any('/account/logout', 'V1\\UserController@logout');
+    Route::get('/account', 'V1\\UserController@account')->name('user.account');
+    Route::get('/account/edit-profile', 'V1\\UserController@editProfile');
+    Route::post('/account/edit-profile', 'V1\\Api\\UserController@update');
+    Route::get('/account/transaction-history', function () { return view('pages/account/transaction-history'); });
+    Route::get('/account/booking-history', function () { return view('pages/account/booking-history'); });
+    Route::any('/account/logout', 'V1\\UserController@logout');
 });
-
 
 //    ____ _____  _  _____ ___ ____
 //   / ___|_   _|/ \|_   _|_ _/ ___|
@@ -67,8 +56,6 @@ Route::group(['middleware' => 'authDrs'], function() {
 //    ___) || |/ ___ \| |  | | |___
 //   |____/ |_/_/   \_\_| |___\____|
 //
-
-
 
 Route::get('/membership', function () { return view('pages/static/membership'); });
 Route::get('/membership/overview', function () { return view('pages/static/membership-overview'); });
@@ -79,36 +66,6 @@ Route::get('/contact', function () { return view('pages/static/welcome'); });
 // Route::get('/ship-detail', function () { 
 //   return view('welcome');
 // });
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Route::get('xtopia', function () {
@@ -126,22 +83,6 @@ Route::get('/contact', function () { return view('pages/static/welcome'); });
 
 // Route::resource('cabin_inventory', 'CabinInventoryController');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //    _   _ ____  _____ ____
 //   | | | / ___|| ____|  _ \
 //   | | | \___ \|  _| | |_) |
@@ -155,8 +96,6 @@ Route::get('/contact', function () { return view('pages/static/welcome'); });
 // Route::get('/user/create', 'UserController@create_user');
 // Route::get('/user/edit', 'UserController@edit_user');
 // Route::get('/user/login', 'UserController@login_user');
-
-
 
 
 //    ____   _    ____ _____
@@ -178,8 +117,6 @@ Route::get('/page/en/get_registration_content', 'PageController@get_registration
 Route::get('/page/zh-hans/get_registration_content', 'PageController@get_registration_content_chinese_simplified');
 Route::get('/page/zh-hant/get_registration_content', 'PageController@get_registration_content_chinese_traditional');
 
-
-
 //     ____ ____  _   _ ___ ____  _____
 //    / ___|  _ \| | | |_ _/ ___|| ____|
 //   | |   | |_) | | | || |\___ \|  _|
@@ -196,9 +133,8 @@ Route::get('/cruise/get_home_itineraries_nonmember', 'CruiseController@get_home_
 Route::get('/cruise/get_best_redeemable_cruise', 'CruiseController@get_best_redeemable_cruise');
 Route::get('/cruise/get_cabin_prices', 'CruiseController@get_cabin_prices');
 Route::get('/cruise/get_home_cruise_details', 'CruiseController@get_home_cruise_details');
-
-
-
+Route::get('/cruise/get_cruise_info_for_cabin', 'CruiseController@get_cruise_info_for_cabin');
+Route::post('/cruise/book_cruise_cabin', 'CruiseController@book_cruise_cabin');
 
 //    ____   ___   ___  _  _____ _   _  ____
 //   | __ ) / _ \ / _ \| |/ /_ _| \ | |/ ___|
@@ -212,3 +148,6 @@ Route::get('/cruise/get_home_cruise_details', 'CruiseController@get_home_cruise_
 Route::get('/booking/book_cruise', 'BookingController@book_cruise');
 Route::get('/booking/get_booking_details', 'BookingController@get_booking_details');
 
+Route::get('/{any}', function(){
+  return view('spa');
+})->where('any', '.*');
