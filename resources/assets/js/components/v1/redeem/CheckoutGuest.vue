@@ -5,7 +5,7 @@
 
             <div class="row">
                 <div class="col-md-6 col-md-push-3">
-                    <h1>Guset Profile</h1>
+                    <h1>Guest Profile</h1>
                 </div>
             </div> <!-- row -->
 

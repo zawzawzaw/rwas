@@ -14,6 +14,9 @@
                 <div class="col-md-6">
 
                   <!-- parsed account-dashboard-name-span in JS -->
+                  <template>
+                    {{ $root.result }}
+                  </template>
                   <template v-if="$root.result===''">
                     <p>
                       Booking success<br/>
