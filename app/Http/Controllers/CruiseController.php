@@ -490,9 +490,9 @@ class CruiseController extends Controller
 // return response()->json($input);
         $input['posName'] = 'CASINO ALLOTMENT';
         $input['posType'] = 39;
-        $input['guestBod'] = explode("/", $input['guestBod']);
-        $input['guestAge'] = date("Y") - $input['guestBod'][2];
-        $input['guestBod'] = $input['guestBod'][2].'-'.$input['guestBod'][1].'-'.$input['guestBod'][0];
+        // $input['guestBod'] = explode("/", $input['guestBod']);
+        // $input['guestAge'] = date("Y") - $input['guestBod'][2];
+        // $input['guestBod'] = $input['guestBod'][2].'-'.$input['guestBod'][1].'-'.$input['guestBod'][0];
         $input['posComName'] = 'OPENTRAVEL';
         $input['sailInfoShipCode'] = $cruise['itinerary']['ship_code'];
         $input['sailInfoVoyageId'] = $request->input('cruise_id');
