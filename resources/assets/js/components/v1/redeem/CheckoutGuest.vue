@@ -770,10 +770,8 @@
                     guestAdd: $("#address").val(),
                     guestCity: $("#city").val(),
                     guestCountry: $("#country").val(),
-                    // guestCountryCode: 
                     guestPostal: $("#postal").val(),
                     guestState: $("#state").val(),
-                    // guestProgramId:PRINCIPLE CARD
                     gContactName: $("#cgName").val(),
                     gContactMName: $("#cmName").val(),
                     gContactSName: $("#csName").val(),
@@ -786,26 +784,55 @@
                     gTravDocExpire: $("#docExpire").val()
                 };
 
+                var data = new FormData();
+
                 for(var i in data){
                     if(data[i]==""){
                         alert("Fill all the input form!");
                         return null;
                     }
                 }
-                // axios({
-                //     url: "",
-                //     data: data
-                // }).then((res) => {
-
-                // }).catch((err) => {
-
-                // });
-                this.$router.push({ name: 'redeem.cabin.thankyou', params: {
-                        cruiseid: this.$route.params.cruiseid,
-                        date: this.$route.params.date,
-                        pax: this.$route.params.pax,
-                        cabin: this.$route.params.cabin
-                    } 
+                data.append('guestBod', $("#dob").val());
+                data.append('guestGender', $("#gender").val());
+                data.append('guestNat', $("#nat").val());
+                data.append('guestName', $("#gName").val());
+                data.append('guestMName', $("#mName").val());
+                data.append('guestSName', $("#sName").val());
+                data.append('guestEamil', $("#email").val());
+                data.append('guestCCode', $("#ccode").val());
+                data.append('guestPhone', $("#mobile").val());
+                data.append('guestAdd', $("#address").val());
+                data.append('guestCity', $("#city").val());
+                data.append('guestCountry', $("#country").val());
+                data.append('guestPostal', $("#postal").val());
+                data.append('guestState', $("#state").val());
+                data.append('gContactName', $("#cgName").val());
+                data.append('gContactMName', $("#cmName").val());
+                data.append('gContactSName', $("#csName").val());
+                data.append('gContactEmail', $("#cEmail").val());
+                data.append('gContactCCode', $("#cccode").val());
+                data.append('gContactPhone', $("#cmobile").val());
+                data.append('gTravDocId', $("#docNo").val());
+                data.append('gTravDocIssuLoc', $("#docLoc").val());
+                data.append('gTravDocType', $("#docType").val());
+                data.append('gTravDocExpire', $("#docExpire").val());
+                data.append('cruise_id', this.$route.params.cruiseid);
+                var ths = this;
+                axios({
+                    url: this.$root.apiEndpoint+ "/cruise/book_cruise_cabin",
+                    data: data,
+                    method: "post"
+                }).then((res) => {
+                    this.$router.push({ name: 'redeem.cabin.thankyou', params: {
+                            cruiseid: ths.$route.params.cruiseid,
+                            date: ths.$route.params.date,
+                            pax: ths.$route.params.pax,
+                            cabin: ths.$route.params.cabin,
+                            result: JSON.stringify(res.data)
+                        } 
+                    });
+                }).catch((err) => {
+                    alert("Failed to submit guest form!");
                 });
             }
         },

@@ -14,10 +14,15 @@
                 <div class="col-md-6">
 
                   <!-- parsed account-dashboard-name-span in JS -->
-                  <p>
-                    Booking success<br/>
-                    Thank you for using RWAS!
-                  </p>
+                  <template v-if="$root.result===''">
+                    <p>
+                      Booking success<br/>
+                      Thank you for using RWAS!
+                    </p>
+                  </template>
+                  <template v-else>
+                    {{ $root.result }}
+                  </template>
                 </div>
               </div>
             </div>

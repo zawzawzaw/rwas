@@ -17,7 +17,7 @@
                                         </div>
                                         <div class="row redeem-cabin-container-inner-section">
                                             <div class="col-md-7 col-md-offset-1">{{ $route.params.cabin }}</div>
-                                            <div class="col-md-4">5 cc</div>
+                                            <div class="col-md-4">{{ ccValue }} cc</div>
                                         </div>
                                     </div>
                                 </div>
@@ -34,7 +34,7 @@
                     <div class="col-md-12">
                         <div class="redeen-cabin-summery-checkout">
                             <div class="col-md-2 redeem-cabin-checkout-total">Total</div>
-                            <div class="col-md-6 redeem-cabin-checkout-amount">5 cc</div>
+                            <div class="col-md-6 redeem-cabin-checkout-amount">{{ ccValue }} cc</div>
                             <div class="col-md-4">
                                 <div id="redeem-cabin-type-checkout-cta-container">
                                     <router-link :to="{ name: 'redeem.cabin.checkout', params: {
@@ -57,8 +57,13 @@
 
 <script>
     export default {
+        data() {
+            return {
+                ccValue: 0
+            }
+        },
         created() {
-
+            this.ccValue = Math.floor((Math.random() * 22) + 8);
         }
     }
 </script>

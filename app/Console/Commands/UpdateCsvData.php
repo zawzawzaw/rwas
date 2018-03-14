@@ -228,30 +228,30 @@ class UpdateCsvData extends Command
                     $cabins = Cabin::where('cruise', $cc->id)->get();
                     $cc = $cc->toArray();
                     
-                    $counter2 = 0;
-                    foreach($cabins as $ca) {
-                        if($counter2>30){
-                            $counter2 = 0;
-                            sleep(2);
-                        }
-                        $this->info("Parsing seaware cabin price ".$counter2);
-                        $xtopia = XtopiaCsv::select(
-                            DB::raw($ca->id." as cabin_id"),
-                            'card_type',
-                            'pax_type_code',
-                            'gp',
-                            'rwcc',
-                            'exec_pax',
-                            'holiday_charge',
-                            'promo_code'
-                        )
-                        ->where('itinerary_code', $cc['itinerary']['itin_code'])
-                        ->where('ship_code', $cc['itinerary']['ship_code'])
-                        // ->where('dep_start', $cc['departure_date'])
-                        // ->where('dep_end', $cc['departure_date_end'])
-                        ->where('cabin_code', $ca->cabin_category)->get()->toArray();
-                        CabinPrice::insert($xtopia);
-                    }
+                    // $counter2 = 0;
+                    // foreach($cabins as $ca) {
+                    //     if($counter2>30){
+                    //         $counter2 = 0;
+                    //         sleep(2);
+                    //     }
+                    //     $this->info("Parsing seaware cabin price ".$counter2);
+                    //     $xtopia = XtopiaCsv::select(
+                    //         DB::raw($ca->id." as cabin_id"),
+                    //         'card_type',
+                    //         'pax_type_code',
+                    //         'gp',
+                    //         'rwcc',
+                    //         'exec_pax',
+                    //         'holiday_charge',
+                    //         'promo_code'
+                    //     )
+                    //     ->where('itinerary_code', $cc['itinerary']['itin_code'])
+                    //     ->where('ship_code', $cc['itinerary']['ship_code'])
+                    //     // ->where('dep_start', $cc['departure_date'])
+                    //     // ->where('dep_end', $cc['departure_date_end'])
+                    //     ->where('cabin_code', $ca->cabin_category)->get()->toArray();
+                    //     CabinPrice::insert($xtopia);
+                    // }
                     $counter++;
                 }
             }else{

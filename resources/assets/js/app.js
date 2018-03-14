@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -81,7 +80,10 @@ const app = new Vue({
     data() {
         return {
             urlPara: [],
+            // Server
             apiEndpoint: "http://52.77.205.209/api/public",
+            // Local
+            // apiEndpoint: "http://localhost:8082",
             redeemSearch: {
                 port: "",
                 time: "",
@@ -92,8 +94,8 @@ const app = new Vue({
                     total: ""
                 }
             },
-            portData: [
-                {
+            result: "",
+            portData: [{
                     'country': "Mainland China",
                     'en': "Port of Haikou, China",
                     'location_code': "CNHAK",
@@ -129,11 +131,11 @@ const app = new Vue({
                     'zh-Hant': "海南三亞港, 中國"
                 },
                 {
-                   'country': "Mainland China",
-                   'en': "Port of Taizhou, China",
-                   'location_code': "CNTZO",
-                   'zh-Hans': "台州市港, 中国",
-                   'zh-Hant': "台州市港, 中國"
+                    'country': "Mainland China",
+                    'en': "Port of Taizhou, China",
+                    'location_code': "CNTZO",
+                    'zh-Hans': "台州市港, 中国",
+                    'zh-Hant': "台州市港, 中國"
                 },
                 {
                     'country': "Mainland China",
@@ -430,8 +432,7 @@ const app = new Vue({
                     'zh-Hant': "台中港, 台灣"
                 }
             ],
-            shipData: [
-                {
+            shipData: [{
                     'ship_code': 'GDR',
                     'ship_code_drs': 'Genting Dream',
                     'en': 'Genting Dream',
@@ -451,8 +452,8 @@ const app = new Vue({
                     'en': 'Star Pisces',
                     'zh-Hans': '双鱼星号',
                     'zh-Hant': '雙魚星號'
-                    },
-                    {
+                },
+                {
                     'ship_code': 'SSQ',
                     'ship_code_drs': 'SSQ ex Taiwan',
                     'en': 'SuperStar Aquarius',
@@ -544,15 +545,15 @@ const app = new Vue({
         },
         retrivePortData: function(port) {
             var myport = null;
-            for(var i in this.portData){
-                if(this.portData[i].location_code!==port) continue;
+            for (var i in this.portData) {
+                if (this.portData[i].location_code !== port) continue;
                 myport = i;
             }
             return myport;
         },
         retriveShipData: function(shipcode) {
-            for(var i in this.shipData){
-                if(this.shipData[i].ship_code!==shipcode) continue;
+            for (var i in this.shipData) {
+                if (this.shipData[i].ship_code !== shipcode) continue;
                 return this.shipData[i].en;
             }
             return shipcode;
@@ -561,23 +562,23 @@ const app = new Vue({
             var date_arr = date.split('/');
             var month_number = parseInt(date_arr[0]);
             var month_year = date_arr[1];
-          
+
             var months = [
-              'Jan',
-              'Feb',
-              'Mar',
-              'Apr',
-              'May',
-              'Jun',
-              'Jul',
-              'Aug',
-              'Sep',
-              'Oct',
-              'Nov',
-              'Dec'
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
             ];
-            
-            return months[month_number-1] + ' ' + month_year;
+
+            return months[month_number - 1] + ' ' + month_year;
         }
     },
     created() {

@@ -134,6 +134,7 @@ Route::get('/cruise/get_best_redeemable_cruise', 'CruiseController@get_best_rede
 Route::get('/cruise/get_cabin_prices', 'CruiseController@get_cabin_prices');
 Route::get('/cruise/get_home_cruise_details', 'CruiseController@get_home_cruise_details');
 Route::get('/cruise/get_cruise_info_for_cabin', 'CruiseController@get_cruise_info_for_cabin');
+Route::post('/cruise/book_cruise_cabin', 'CruiseController@book_cruise_cabin');
 
 //    ____   ___   ___  _  _____ _   _  ____
 //   | __ ) / _ \ / _ \| |/ /_ _| \ | |/ ___|
