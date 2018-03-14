@@ -34,7 +34,7 @@
                                                     <p>{{ c.cabin_type_code }}</p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <p>{{ c.price.cc }} CC {{ c.price.gp }} GP</p>
+                                                    <p>{{ c.price.cc }} CC&nbsp;&nbsp;&nbsp;{{ c.price.gp }} GP</p>
                                                 </div>
                                             </div>
                                         </router-link>
