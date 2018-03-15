@@ -574,7 +574,7 @@ class CruiseController extends Controller
             }
 
             $existing_rwrc_value = $result->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value;
-            $new_rwrc_value = $existing_rwrc_value + rand(8, 22);
+            $new_rwrc_value = $existing_rwrc_value + $cc;
 
             $update = [
                 'paraDrsID' => 'MANIC',
@@ -599,7 +599,7 @@ class CruiseController extends Controller
             //     'paraDrsPwd' => 'MANIC',
             //     'paraCid' => 29,
             //     'paraCashToAdjust' => $input['paraCashToAdjust'],
-            //     'paraCashTypeToAdjust' => $input['paraCashTypeToAdjust'],
+            //     'paraCashTypeToAdjust' => 0,
             //     'paraCurrCode' => $input['paraCurrCode'],
             //     'paraProfitCenter' => $input['paraProfitCenter'],
             //     'paraRemark' => ''
