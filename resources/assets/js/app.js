@@ -17,6 +17,7 @@ import VueRouter from 'vue-router';
 import App from './components/v1/App';
 import RedeemSearch from './components/v1/redeem/SearchBox';
 import RedeemSearchList from './components/v1/redeem/SearchList';
+import SearchRoot from './components/v1/redeem/SearchRoot';
 import CabinList from './components/v1/redeem/CabinList';
 import CabinCruiseInfoHeader from './components/v1/redeem/cabin/CabinHeader';
 import CabinSummery from './components/v1/redeem/CabinSummery';
@@ -30,12 +31,16 @@ const router = new VueRouter({
     base: '/api/public',
     routes: [{
         path: '/redeem',
-        name: 'redeem',
-        component: RedeemSearchList
-    }, {
-        path: '/redeem/cabin/:cruiseid/:date/:pax',
-        name: 'redeem.cabin',
-        component: CabinList
+        component: SearchRoot,
+        children: [{
+            path: '',
+            name: 'redeem',
+            component: RedeemSearchList
+        }, {
+            path: 'cabin/:cruiseid/:date/:pax',
+            name: 'redeem.cabin',
+            component: CabinList
+        }]
     }, {
         path: '/redeem/cabin/:cruiseid/:date/:pax/:cabin',
         name: 'redeem.cabin.summery',

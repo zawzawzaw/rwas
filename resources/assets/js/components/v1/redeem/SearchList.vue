@@ -1,8 +1,5 @@
 <template>
     <div>
-        <redeem-search
-            @searchCruise="searchNow"
-        ></redeem-search>
         <article id="redeem-search-result-section">
             <div class="container-fluid has-breakpoint">
                 <div class="row">
@@ -97,7 +94,12 @@
             }
         },
         created() {
+            var ths = this;
             this.searchNow();
+
+            eventHub.$on('searchCruise', function(){
+                ths.searchNow();
+            });
         }
     }
 </script>

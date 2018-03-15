@@ -260,7 +260,7 @@ export default {
                 infant: infantC,
                 total: res
             };
-            this.$emit('searchCruise');    
+            eventHub.$emit('searchCruise');    
         },
         getParameter: function() {
             var ths = this;

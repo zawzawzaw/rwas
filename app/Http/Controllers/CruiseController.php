@@ -291,7 +291,7 @@ class CruiseController extends Controller
             ], 422);
         }
 
-        $cruise = Cruise::select('id', 'itinerary')->where('cruise_id', $request->input('cruise_id'))->with([
+        $cruise = Cruise::select('id', 'itinerary', 'departure_date')->where('cruise_id', $request->input('cruise_id'))->with([
             'cabins' => function($query) {
                 $query->select('id', 'cabin_category', 'cruise', 'pax_count');
             },
@@ -306,17 +306,33 @@ class CruiseController extends Controller
         
         $cabins = [];
         // return response()->json($cruise);
+        $pax = is_null($request->input('pax')) || $request->input('pax')==="" ? 'A' : $request->input('pax');
+
         foreach($cruise['cabins'] as $cabin){
+            $xtopia = DB::select("SELECT * FROM xtopia x WHERE 
+                                    x.itinerary_code='".$cruise['itinerary']['itin_code']."' AND 
+                                    x.ship_code='".$cruise['itinerary']['ship_code']."' AND 
+                                    x.dep_start<='".$cruise['departure_date']."' AND 
+                                    x.dep_end>='".$cruise['departure_date']."' AND 
+                                    x.cabin_code='".$cabin['cabin_category']."' AND 
+                                    x.pax_type_code='$pax' AND 
+                                    x.card_type='CLASSIC' LIMIT 3;");
+            
+            $cc = 0;
+
+            if(count($xtopia)>0) {
+                $cc = $xtopia[0]->rwcc;
+            }
+            
             $cabins[] = [
                 'cabin_type_code' => $cabin['cabin_category'],
                 'price' => array(
-                    'cc' => rand(8, 22),
+                    'cc' => $cc,
                     'cc_cash_added' => 0,
-                    'gp' => 100,
+                    'gp' => rand(100, 300),
                     'gp_cash_added' => 0,
                     'cash' => 100
-                ),
-                'raw' => $cruise
+                )
             ];
         }
 
@@ -344,7 +360,7 @@ class CruiseController extends Controller
             'price' => array(
                 'cc' => rand(8, 22),
                 'cc_cash_added' => 0,
-                'gp' => 100,
+                'gp' => rand(100, 300),
                 'gp_cash_added' => 0,
                 'cash' => 100
             ),
@@ -390,8 +406,23 @@ class CruiseController extends Controller
         }
         
         $cruise = Cruise::select('id', 'itinerary', 'departure_date')->with(['itinerary' => function($query) {
-            $query->select('id', 'ship_code', 'day', 'night', 'departure_port', 'arrival_port');
+            $query->select('id', 'ship_code', 'itin_code');
         }])->where('cruise_id', $request->input('cruise_id'))->first()->toArray();
+
+        $xtopia = DB::select("SELECT * FROM xtopia x WHERE 
+                                    x.itinerary_code='".$cruise['itinerary']['itin_code']."' AND 
+                                    x.ship_code='".$cruise['itinerary']['ship_code']."' AND 
+                                    x.dep_start<='".$cruise['departure_date']."' AND 
+                                    x.dep_end>='".$cruise['departure_date']."' AND 
+                                    x.cabin_code='".$request->input('cabin')."' AND 
+                                    x.pax_type_code='".$request->input('pax')."' AND 
+                                    x.card_type='CLASSIC' LIMIT 3;");
+
+        $cc = 0;
+
+        if(count($xtopia)>0) {
+            $cc = $xtopia[0]->rwcc;
+        }
 
         $input = $request->only(
             'guestAge',
@@ -522,41 +553,69 @@ class CruiseController extends Controller
             </ReservationInfo>
         </OTA_CruiseBookRQ>';
 
-        // $res = $this->curlRequest($xml_input, true, $this->drsUrl."rest/OTA_CruiseBookRQ", true);
         $res = app('App\Http\Controllers\Test\SeawareApiTest')->otaCruiseBookRQ($request, $xml_input);
-        $input = [
-            'paraDrsID' => 'MANIC',
-            'paraDrsPwd' => 'MANIC',
-            'paraCid' => 29,
-            'paraWorkGroup' => urlencode('MEML'),
-            'paraLoadDefaultDRSifNoUA' => 0,
-            "paraPFFieldName" => 'RWRC'
-        ];        
 
-        $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_GetSelectedPF', true);
+        $paymentProcess = [];
 
-        if(isset($result->errCode)){
-            return response()->json($result);
+        if($cc>0){
+            $input = [
+                'paraDrsID' => 'MANIC',
+                'paraDrsPwd' => 'MANIC',
+                'paraCid' => 29,
+                'paraWorkGroup' => urlencode('MEML'),
+                'paraLoadDefaultDRSifNoUA' => 0,
+                "paraPFFieldName" => 'RWRC'
+            ];        
+
+            $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_GetSelectedPF', true);
+
+            if(isset($result->errCode)){
+                return response()->json($result);
+            }
+
+            $existing_rwrc_value = $result->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value;
+            $new_rwrc_value = $existing_rwrc_value + rand(8, 22);
+
+            $update = [
+                'paraDrsID' => 'MANIC',
+                'paraDrsPwd' => 'MANIC',
+                'paraCid' => 29,
+                'paraWorkGroup' => urlencode('MEML'),
+                "paraPFField" => 'RWRC',
+                "paraPFValue" => $new_rwrc_value
+            ];  
+
+            $updateResult = $this->curlRequest($this->buildDrsXMLContent($update), $this->drsUrl.'API_AutoUA_SetPF', true);
+            if(isset($updateResult->errCode)){
+                return response()->json($updateResult);
+            }
+            $paymentProcess = [
+                'beforeCC' => $existing_rwrc_value,
+                'afterCC' => $new_rwrc_value
+            ];
+        } else {
+            // $parameter = [
+            //     'paraDrsID' => 'MANIC',
+            //     'paraDrsPwd' => 'MANIC',
+            //     'paraCid' => 29,
+            //     'paraCashToAdjust' => $input['paraCashToAdjust'],
+            //     'paraCashTypeToAdjust' => $input['paraCashTypeToAdjust'],
+            //     'paraCurrCode' => $input['paraCurrCode'],
+            //     'paraProfitCenter' => $input['paraProfitCenter'],
+            //     'paraRemark' => ''
+            // ];
+
+            // $result = $this->curlRequestRaw($this->buildDrsXMLContent($parameter), $this->drsUrlV2.'API_AutoUA_CEA_Currency', true);
+            // $paymentProcess = [
+            //     'beforeCC' => $existing_rwrc_value,
+            //     'afterCC' => $new_rwrc_value
+            // ];
+            $paymentProcess = "GP success";
         }
-
-        $existing_rwrc_value = $result->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value;
-        $new_rwrc_value = $existing_rwrc_value + rand(8, 22);
-
-        $update = [
-            'paraDrsID' => 'MANIC',
-            'paraDrsPwd' => 'MANIC',
-            'paraCid' => 29,
-            'paraWorkGroup' => urlencode('MEML'),
-            "paraPFField" => 'RWRC',
-            "paraPFValue" => $new_rwrc_value
-        ];  
-
-        $updateResult = $this->curlRequest($this->buildDrsXMLContent($update), $this->drsUrl.'API_AutoUA_SetPF', true);
 
         return response()->json([
             'booking' => $res,
-            'beforeCC' => $existing_rwrc_value,
-            'afterCC' => $new_rwrc_value
+            'payment' => $paymentProcess,
         ]);
     }
 

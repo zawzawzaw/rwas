@@ -1366,6 +1366,9 @@
                 data.append('gTravDocType', $("#docType").val());
                 data.append('gTravDocExpire', $("#docExpire").val());
                 data.append('cruise_id', this.$route.params.cruiseid);
+                data.append('cabin', this.$route.params.cabin);
+                data.append('pax', this.$route.params.pax);
+                data.append('date', this.$route.params.date);
                 var ths = this;
                 axios({
                     url: this.$root.apiEndpoint+ "/cruise/book_cruise_cabin",

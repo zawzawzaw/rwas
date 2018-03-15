@@ -23,10 +23,10 @@ class UserController extends Controller
         $input['paraDrsPwd'] = $this->drsPwd;
 
         // return $input;
-
+        // return response()->json("ASD");
         $result = $this->curlRequestRaw($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
 
-        return response()->json($result, 422);
+        // return response()->json($result, 422);
         if(isset($result->errCode)){
             return response()->json($result);
         }
@@ -165,6 +165,7 @@ class UserController extends Controller
                 //     'raw' => $result
                 // ];
 
+                
         return response()->json($result);
     }
 
