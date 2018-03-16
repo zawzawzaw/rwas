@@ -574,7 +574,7 @@ class CruiseController extends Controller
             }
 
             $existing_rwrc_value = $result->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value;
-            $new_rwrc_value = $existing_rwrc_value + $cc;
+            $new_rwrc_value = $existing_rwrc_value - $cc;
 
             $update = [
                 'paraDrsID' => 'MANIC',
@@ -594,23 +594,19 @@ class CruiseController extends Controller
                 'afterCC' => $new_rwrc_value
             ];
         } else {
-            // $parameter = [
-            //     'paraDrsID' => 'MANIC',
-            //     'paraDrsPwd' => 'MANIC',
-            //     'paraCid' => 29,
-            //     'paraCashToAdjust' => $input['paraCashToAdjust'],
-            //     'paraCashTypeToAdjust' => 0,
-            //     'paraCurrCode' => $input['paraCurrCode'],
-            //     'paraProfitCenter' => $input['paraProfitCenter'],
-            //     'paraRemark' => ''
-            // ];
+            $parameter = [
+                'paraDrsID' => 'MANIC',
+                'paraDrsPwd' => 'MANIC',
+                'paraCid' => 29,
+                'paraCashToAdjust' => rand(100, 300),
+                'paraCashTypeToAdjust' => 0,
+                'paraCurrCode' => 'US',
+                'paraProfitCenter' => 1,
+                'paraRemark' => 'test'
+            ];
 
-            // $result = $this->curlRequestRaw($this->buildDrsXMLContent($parameter), $this->drsUrlV2.'API_AutoUA_CEA_Currency', true);
-            // $paymentProcess = [
-            //     'beforeCC' => $existing_rwrc_value,
-            //     'afterCC' => $new_rwrc_value
-            // ];
-            $paymentProcess = "GP success";
+            $result = $this->curlRequestRaw($this->buildDrsXMLContent($parameter), $this->drsUrlV2.'API_AutoUA_CEA_Currency', true);
+            $paymentProcess = $result;
         }
 
         return response()->json([
