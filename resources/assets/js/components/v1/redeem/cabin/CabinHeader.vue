@@ -22,14 +22,14 @@
                             </div>
 
                         </div>
-                        <div class="col-md-2">
+                        <!-- <div class="col-md-2">
 
                             <div id="redeem-cabin-type-header-ship-logo">
                             <p>insert logo</p>
                             </div>
 
-                        </div>
-                        <div class="col-md-3">
+                        </div> -->
+                        <div class="col-md-3 col-md-offset-2">
                             
                             <div id="redeem-cabin-type-header-departure-date">
                             <p>Departure Date.</p>

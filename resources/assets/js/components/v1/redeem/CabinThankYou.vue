@@ -24,7 +24,10 @@
                     </p>
                   </template>
                   <template v-else>
-                    {{ $root.result }}
+                    <div class="space100"></div>
+                    <pre>
+                      {{ $root.result }}
+                    </pre>
                   </template>
                 </div>
               </div>

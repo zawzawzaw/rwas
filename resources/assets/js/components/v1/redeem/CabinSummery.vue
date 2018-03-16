@@ -17,7 +17,14 @@
                                         </div>
                                         <div class="row redeem-cabin-container-inner-section">
                                             <div class="col-md-7 col-md-offset-1">{{ $route.params.cabin }}</div>
-                                            <div class="col-md-4">{{ ccValue }} cc</div>
+                                            <div class="col-md-4">
+                                                <template v-if="$route.query.cc!==undefined && $route.query.cc>0">
+                                                    {{ $route.query.cc }} CC
+                                                </template>
+                                                <template v-else>
+                                                    {{ ccValue }} GP
+                                                </template>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -34,7 +41,14 @@
                     <div class="col-md-12">
                         <div class="redeen-cabin-summery-checkout">
                             <div class="col-md-2 redeem-cabin-checkout-total">Total</div>
-                            <div class="col-md-6 redeem-cabin-checkout-amount">{{ ccValue }} cc</div>
+                            <div class="col-md-6 redeem-cabin-checkout-amount">
+                                <template v-if="$route.query.cc!==undefined && $route.query.cc>0">
+                                    {{ $route.query.cc }} CC
+                                </template>
+                                <template v-else>
+                                    {{ ccValue }} GP
+                                </template>
+                            </div>
                             <div class="col-md-4">
                                 <div id="redeem-cabin-type-checkout-cta-container">
                                     <router-link :to="{ name: 'redeem.cabin.checkout', params: {
@@ -42,6 +56,8 @@
                                         date: $route.params.date,
                                         pax: $route.params.pax,
                                         cabin: $route.params.cabin
+                                    }, query: {
+                                        cc: $route.query.cc!==undefined && $route.query.cc>0 ? $route.query.cc : 0
                                     } }" class="square-cta large-version full-width-version" id="redeem-cabin-type-checkout-cta">
                                         Proceed To Checkout
                                     </router-link>
@@ -64,6 +80,7 @@
         },
         created() {
             this.ccValue = Math.floor((Math.random() * 22) + 8);
+            this.$root.refreshCheckout = true;
         }
     }
 </script>

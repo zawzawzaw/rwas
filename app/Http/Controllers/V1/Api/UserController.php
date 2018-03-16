@@ -25,13 +25,25 @@ class UserController extends Controller
         // return $input;
 
         $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_Get_CustomerProfile_Format_Long', true);
+        // return response()->json($result, 422);
 
         if(isset($result->errCode)){
             return response()->json($result);
         }
 
+        $ccinput = [
+            'paraDrsID' => 'MANIC',
+            'paraDrsPwd' => 'MANIC',
+            'paraCid' => 29,
+            'paraWorkGroup' => urlencode('MEML'),
+            'paraLoadDefaultDRSifNoUA' => 0,
+            "paraPFFieldName" => 'RWRC'
+        ];        
+
+        $cc = $this->curlRequest($this->buildDrsXMLContent($ccinput), $this->drsUrl.'API_AutoUA_GetSelectedPF', true);
+
         $points = [
-            'cc' => [],
+            'cc' => floor($cc->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value),
             'gp' => []
         ];
 
@@ -43,7 +55,7 @@ class UserController extends Controller
                     break;
                 
                 case 'lp':
-                    $points['cc'] = floor($p->Balance);
+                    // $points['cc'] = floor($p->Balance);
                     // $points['cc'] = '';
                     break;
                 
@@ -55,8 +67,11 @@ class UserController extends Controller
 
         $mobile = "";
 
-        if(strtolower($result->Contact->ContactSection->Cust_Contact->Type)==="mobile") {
-            $mobile = $result->Contact->ContactSection->Cust_Contact->ContactNo;
+        foreach($result->Contact->ContactSection->Cust_Contact as $con){
+            if(strtolower($con->Type)==="mobile"){
+                $mobile = $con->ContactNo;
+                break;
+            }
         }
 
         // foreach($result->Contact->ContactSection->Cust_Contact as $con){
@@ -164,6 +179,7 @@ class UserController extends Controller
                 //     'raw' => $result
                 // ];
 
+                
         return response()->json($result);
     }
 

@@ -1,2 +1,84 @@
-h2{font-family:Playfair Display,Palatino Linotype,Book Antiqua,Palatino,serif;font-style:normal;font-weight:400;font-size:53px;line-height:64px}#redeem-cabin-type-header-section{margin:30px 0}#redeem-cabin-type-header-section #redeem-cabin-type-header{background:#e2e2e2;padding:30px;line-height:30px}#redeem-cabin-type-option-header{line-height:30px;border-bottom:1px solid #999;padding:0 15px 10px;margin-bottom:10px}.redeem-cabin-type-option-item{padding:0 15px;width:100%;display:inline-block;line-height:40px}.redeem-cabin-type-option-item:hover{background:rgba(48,176,255,.815);border-radius:5px;color:#fff}.redeem-cabin-container{background:#e2e2e2;margin-bottom:30px;height:100px}.redeem-cabin-container .redeem-cabin-pax{height:100px;text-align:center;line-height:100px;border-right:1px solid #999}.redeem-cabin-container .redeem-cabin-info{height:100px}.redeem-cabin-container .redeem-cabin-info .redeem-cabin-container-inner-section{height:50px;line-height:50px}.redeem-cabin-container .redeem-cabin-info .redeem-cabin-container-inner-section.has-border-bottom{border-bottom:1px solid #999}#redeem-cabin-summery-section{margin-top:80px}.redeen-cabin-summery-checkout{border-top:1px solid #999;padding-top:30px}.redeem-cabin-checkout-amount,.redeem-cabin-checkout-total{font-weight:700;line-height:63px}
-/*# sourceMappingURL=style2.css.map*/
+h2 {
+  font-family: 'Playfair Display',"Palatino Linotype","Book Antiqua",Palatino,serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 53px;
+  line-height: 64px;
+}
+
+#redeem-cabin-type-header-section {
+  margin: 30px 0;
+}
+
+#redeem-cabin-type-header-section #redeem-cabin-type-header {
+  background: #e2e2e2;
+  padding: 30px;
+  line-height: 30px;
+}
+
+#redeem-cabin-type-option-header {
+  line-height: 30px;
+  border-bottom: 1px solid #999;
+  padding: 0 15px 10px 15px;
+  margin-bottom: 10px;
+}
+
+.redeem-cabin-type-option-item {
+  padding: 0 15px;
+  width: 100%;
+  display: inline-block;
+  line-height: 40px;
+}
+
+.redeem-cabin-type-option-item:hover {
+  background: rgba(48, 176, 255, 0.815);
+  border-radius: 5px;
+  color: #fff;
+}
+
+.redeem-cabin-container {
+  background: #e2e2e2;
+  margin-bottom: 30px;
+  height: 100px;
+}
+
+.redeem-cabin-container .redeem-cabin-pax {
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  border-right: 1px solid #999;
+}
+
+.redeem-cabin-container .redeem-cabin-info {
+  height: 100px;
+}
+
+.redeem-cabin-container .redeem-cabin-info .redeem-cabin-container-inner-section {
+  height: 50px;
+  line-height: 50px;
+}
+
+.redeem-cabin-container .redeem-cabin-info .redeem-cabin-container-inner-section.has-border-bottom {
+  border-bottom: 1px solid #999;
+}
+
+#redeem-cabin-summery-section {
+  margin-top: 80px;
+}
+
+.redeen-cabin-summery-checkout {
+  border-top: 1px solid #999;
+  padding-top: 30px;
+}
+
+.redeem-cabin-checkout-total,
+.redeem-cabin-checkout-amount {
+  font-weight: bold;
+  line-height: 63px;
+}
+
+.booking-detail-title {
+  font-size: 50px;
+}
+
+>>>>>>> e6791d82fb37c6c7488de8a4a26c082202f5c8b4

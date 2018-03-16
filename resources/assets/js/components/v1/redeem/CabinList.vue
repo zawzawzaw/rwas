@@ -1,8 +1,5 @@
 <template>
     <div>
-        <redeem-search
-            @searchCruise="searchNow"
-        ></redeem-search>
         <div>
             <cabin-cruise-info></cabin-cruise-info>
             <article id="redeem-cabin-type-option-section">
@@ -28,13 +25,20 @@
                                     
                                     <template v-for="(c, index) in cabins">
                                   
-                                        <router-link :to="{ name: 'redeem.cabin.summery', params: {cruiseid: $route.params.cruiseid, date: $route.params.date, pax: $route.params.pax, cabin: c.cabin_type_code} }" v-bind:key="index" class="redeem-cabin-type-option-item">
+                                        <router-link :to="{ name: 'redeem.cabin.summery', params: {cruiseid: $route.params.cruiseid, date: $route.params.date, pax: $route.params.pax, cabin: c.cabin_type_code}, query: {cc: c.price.cc} }" v-bind:key="index" class="redeem-cabin-type-option-item">
                                             <div class="row">
                                                 <div class="col-md-9">
                                                     <p>{{ c.cabin_type_code }}</p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <p>{{ c.price.cc }} CC</p>
+                                                    <p>
+                                                        <template v-if="c.price.cc>0">
+                                                            {{ c.price.cc }} CC
+                                                        </template>
+                                                        <template v-else>
+                                                            {{ c.price.gp }} GP
+                                                        </template>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </router-link>
@@ -67,7 +71,7 @@
             loadCabin: function() {
                 var ths = this;
                 axios({
-                    url: this.$root.apiEndpoint+'/cruise/get_cabin_prices?cruise_id='+this.$route.params.cruiseid,
+                    url: this.$root.apiEndpoint+'/cruise/get_cabin_prices?cruise_id='+this.$route.params.cruiseid+'&pax='+this.$route.params.pax,
                     method: 'get'
                 }).then((res) => {
                     ths.cabins = res.data;
@@ -78,6 +82,12 @@
         },
         created() {
             this.loadCabin();
+
+            var ths = this;
+
+            eventHub.$on('searchCruise', function() {
+                ths.searchNow();
+            });
         }
     }
 </script>

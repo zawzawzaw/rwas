@@ -420,7 +420,7 @@ class SeawareApiTest extends Controller
         </OTA_CruisePriceBookingRQ>';
     }
     
-    public function otaCruiseBookRQ(Request $request)
+    public function otaCruiseBookRQ(Request $request, $xml=false)
     {
         $input = $request->only(
             'custom',
@@ -469,11 +469,17 @@ class SeawareApiTest extends Controller
             'gTravDocType',
             'gTravDocExpire'
         );
+        
         $xml_input = '';
-        if(!isset($input['custom']) || is_null($input['custom']) || $input['custom']=="false"){
-            $xml_input = $this->otaCruiseBookDefaultXML();
+
+        if($xml===false) {
+            if(!isset($input['custom']) || is_null($input['custom']) || $input['custom']=="false"){
+                $xml_input = $this->otaCruiseBookDefaultXML();
+            }else{
+                $xml_input = $this->otaCruiseBookBuildXML($input);
+            }
         }else{
-            $xml_input = $this->otaCruiseBookBuildXML($input);
+            $xml_input = $xml;   
         }
         // return $this->rootUrl."rest/OTA_CruiseBookRQ";
         $res = $this->execCurl($xml_input, true, $this->rootUrl."rest/OTA_CruiseBookRQ", true);
