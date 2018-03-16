@@ -23,6 +23,7 @@ Route::group(['prefix' => 'cruise'], function(){
     Route::get('get_itineraries', 'CruiseController@get_itineraries');
     Route::get('get_cabin_prices', 'CruiseController@get_cabin_prices');
     Route::get('get_cruise_info_for_cabin', 'CruiseController@get_cruise_info_for_cabin');
+    Route::post('book_cruise_cabin', 'CruiseController@book_cruise_cabin');
 });
 
 Route::group(['prefix' => 'user'], function(){
