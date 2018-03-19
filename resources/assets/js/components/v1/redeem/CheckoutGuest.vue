@@ -32,7 +32,7 @@
 
                             <div class="form-group">
                                 <label>Given Name*</label>
-                                <input type="text" name="first_name" id="gName" class="required only-alpha-and-space">
+                                <input type="text" name="first_name" id="gName1" class="required only-alpha-and-space">
                             </div>
 
                         </div>
@@ -40,7 +40,7 @@
 
                             <div class="form-group">
                                 <label>SurName*</label>
-                                <input type="text" name="last_name" id="slName" class="required only-alpha-and-space">
+                                <input type="text" name="last_name" id="sName0" class="required only-alpha-and-space">
                             </div>
 
                         </div>
@@ -63,7 +63,7 @@
                         <div class="form-group">
                         <label>Gender*</label>
                         <div class="manic-dropdown" id="register-gender-dropdown">
-                            <select name="gender" class="required" id="gender">
+                            <select name="gender" class="required" id="gender0">
                             <option value="">Select one</option>
                             <option value="M">M</option>
                             <option value="F">F</option>
@@ -79,7 +79,7 @@
                         <div class="page-default-calendar-bg"></div>
                         <label>Date of Birth*</label>
                         <div class="manic-calendar">
-                            <input name="date_of_birth" type="text" class="required form-control page-default-calendar" placeholder="DD/MM/YYYY" id="dob">
+                            <input name="date_of_birth" type="text" class="required form-control page-default-calendar" placeholder="DD/MM/YYYY" id="dob0">
                             <div class="calendar-icon"></div>
                             <div class="page-default-calendar-container">
                             <div class="page-default-calendar-datepicker"></div>
@@ -94,7 +94,7 @@
                         <div class="form-group">
                         <label>Nationality*</label>
                         <div class="manic-dropdown">
-                            <select name="nationality" class="required" id="nat">
+                            <select name="nationality" class="required" id="nat0">
                             <option value="">Select one</option>
 
                             <option value="CHINA">CHINA</option>
@@ -183,7 +183,7 @@
                         <div class="form-group">
                         <label>Identification type*</label>
                         <div class="manic-dropdown">
-                            <select name="doc_type" class="required" id="docType">
+                            <select name="doc_type" class="required" id="docType0">
                             <option value="">Select one</option>
                             <option value="IC">Identification Card</option>
                             <option value="PP">Passport</option>
@@ -196,7 +196,7 @@
 
                         <div class="form-group">
                         <label>ID or Passport number*</label>
-                        <input type="text" name="doc_no" class="required only-alphanumeric" id="docNo">
+                        <input type="text" name="doc_no" class="required only-alphanumeric" id="docNo0">
                         </div>
 
                     </div>
@@ -205,7 +205,7 @@
                         <div class="form-group">
                         <label>Travel document issued by*</label>
                         <div class="manic-dropdown">
-                            <select name="doc_country" class="required" id="docLoc">
+                            <select name="doc_country" class="required" id="docLoc0">
                             <option value="">Select one</option>
 
                             <option value="CHINA">CHINA</option>
@@ -301,7 +301,7 @@
 
                         <div class="form-group">
                         <label>Travel document expiry date*</label>
-                        <input type="text" name="doc_expiry_date" placeholder="DD/MM/YYYY" class="required" id="docExpire">
+                        <input type="text" name="doc_expiry_date" placeholder="DD/MM/YYYY" class="required" id="docExpire0">
                         </div>
 
                     </div>
@@ -321,7 +321,7 @@
 
                         <div class="form-group">
                         <label>Email address*</label>
-                        <input type="text" name="email" class="required only-email" id="email">
+                        <input type="text" name="email" class="required only-email" id="email0">
                         </div>
                         
                     </div>
@@ -332,7 +332,7 @@
 
 
                         <div class="manic-dropdown">
-                            <select name="mobile_country" class="required" id="ccode">
+                            <select name="mobile_country" class="required" id="ccode0">
                             <option value="">Select one</option>
 
                             <option value="86">CHINA (86)</option>
@@ -408,7 +408,7 @@
 
                         <div class="form-group">
                         <label>&nbsp;</label>
-                        <input type="text" name="mobile_number" class="required only-numbers" id="mobile">
+                        <input type="text" name="mobile_number" class="required only-numbers" id="mobile0">
                         </div>
 
                     </div>
@@ -432,7 +432,7 @@
 
                         <div class="form-group">
                         <label>Address*</label>
-                        <input type="text" name="address_line_01" class="required" id="address">
+                        <input type="text" name="address_line_01" class="required" id="address0">
                         </div>
                         
                     </div>
@@ -455,7 +455,7 @@
                         <div class="form-group">
                         <label>Country*</label>
                         <div class="manic-dropdown">
-                            <select name="address_country" class="required" id="country">
+                            <select name="address_country" class="required" id="country0">
                             <option value="">Select one</option>
 
                             <option value="CHINA">CHINA</option>
@@ -529,7 +529,7 @@
 
                         <div class="form-group">
                         <label>State / Province*</label>
-                        <input type="text" name="address_state" class="required" id="state">
+                        <input type="text" name="address_state" class="required" id="state0">
                         </div>
                         
                     </div>
@@ -551,7 +551,7 @@
 
                         <div class="form-group">
                         <label>City*</label>
-                        <input type="text" name="address_city" class="required" id="city">
+                        <input type="text" name="address_city" class="required" id="city0">
                         </div>
 
                     </div>
@@ -559,7 +559,7 @@
 
                         <div class="form-group">
                         <label>Post code*</label>
-                        <input type="text" name="address_postal_code" class="required only-numbers" id="postCode">
+                        <input type="text" name="address_postal_code" class="required only-numbers" id="postCode0">
                         </div>
 
                     </div>
@@ -586,7 +586,7 @@
 
                             <div class="form-group">
                                 <label>SurName*</label>
-                                <input type="text" name="last_name" :id="'slName'+n" class="required only-alpha-and-space">
+                                <input type="text" name="last_name" :id="'sName'+n" class="required only-alpha-and-space">
                             </div>
 
                         </div>
@@ -978,7 +978,7 @@
 
                         <div class="form-group">
                         <label>Address*</label>
-                        <input type="text" name="address_line_01" class="required" id="address">
+                        <input type="text" name="address_line_01" class="required" :id="'address'+n">
                         </div>
                         
                     </div>
@@ -1001,7 +1001,7 @@
                         <div class="form-group">
                         <label>Country*</label>
                         <div class="manic-dropdown">
-                            <select name="address_country" class="required" id="country">
+                            <select name="address_country" class="required" :id="'country'+n">
                             <option value="">Select one</option>
 
                             <option value="CHINA">CHINA</option>
@@ -1075,7 +1075,7 @@
 
                         <div class="form-group">
                         <label>State / Province*</label>
-                        <input type="text" name="address_state" class="required" id="state">
+                        <input type="text" name="address_state" class="required" :id="'state'+n">
                         </div>
                         
                     </div>
@@ -1097,7 +1097,7 @@
 
                         <div class="form-group">
                         <label>City*</label>
-                        <input type="text" name="address_city" class="required" id="city">
+                        <input type="text" name="address_city" class="required" :id="'city'+n">
                         </div>
 
                     </div>
@@ -1105,7 +1105,7 @@
 
                         <div class="form-group">
                         <label>Post code*</label>
-                        <input type="text" name="address_postal_code" class="required only-numbers" id="postCode">
+                        <input type="text" name="address_postal_code" class="required only-numbers" :id="'postCode'+n">
                         </div>
 
                     </div>
@@ -1295,7 +1295,7 @@
     export default {
         data() {
             return {
-
+                totalPax: 1
             }
         },
         methods: {
@@ -1306,69 +1306,76 @@
                     return false;
                 }
 
-                var data = {
-                    guestBod: $("#dob").val(),
-                    guestGender: $("#gender").val(),
-                    guestNat: $("#nat").val(),
-                    guestName: $("#gName").val(),
-                    guestMName: $("#mName").val(),
-                    guestSName: $("#sName").val(),
-                    guestEamil: $("#email").val(),
-                    guestCCode: $("#ccode").val(),
-                    guestPhone: $("#mobile").val(),
-                    guestAdd: $("#address").val(),
-                    guestCity: $("#city").val(),
-                    guestCountry: $("#country").val(),
-                    guestPostal: $("#postal").val(),
-                    guestState: $("#state").val(),
-                    gContactName: $("#cgName").val(),
-                    gContactMName: $("#cmName").val(),
-                    gContactSName: $("#csName").val(),
-                    gContactEmail: $("#cEmail").val(),
-                    gContactCCode: $("#cccode").val(),
-                    gContactPhone: $("#cmobile").val(),
-                    gTravDocId: $("#docNo").val(),
-                    gTravDocIssuLoc: $("#docLoc").val(),
-                    gTravDocType: $("#docType").val(),
-                    gTravDocExpire: $("#docExpire").val()
-                };
+                for(var i=0; i<this.totalPax; i++) {
+                    var data = {
+                        guestBod: $("#dob"+i).val(),
+                        guestGender: $("#gender"+i).val(),
+                        guestNat: $("#nat"+i).val(),
+                        guestName: $("#gName"+i).val(),
+                        guestMName: $("#mName"+i).val(),
+                        guestSName: $("#sName"+i).val(),
+                        guestEamil: $("#email"+i).val(),
+                        guestCCode: $("#ccode"+i).val(),
+                        guestPhone: $("#mobile"+i).val(),
+                        guestAdd: $("#address"+i).val(),
+                        guestCity: $("#city"+i).val(),
+                        guestCountry: $("#country"+i).val(),
+                        guestPostal: $("#postal"+i).val(),
+                        guestState: $("#state"+i).val(),
+                        gContactName: $("#cgName").val(),
+                        gContactMName: $("#cmName").val(),
+                        gContactSName: $("#csName").val(),
+                        gContactEmail: $("#cEmail").val(),
+                        gContactCCode: $("#cccode").val(),
+                        gContactPhone: $("#cmobile").val(),
+                        gTravDocId: $("#docNo"+i).val(),
+                        gTravDocIssuLoc: $("#docLoc"+i).val(),
+                        gTravDocType: $("#docType"+i).val(),
+                        gTravDocExpire: $("#docExpire"+i).val()
+                    };
 
-                var data = new FormData();
+                    var data = new FormData();
 
-                for(var i in data){
-                    if(data[i]==""){
-                        alert("Fill all the input form!");
-                        return null;
+                    for(var i in data){
+                        if(data[i]==""){
+                            alert("Fill all the input form!");
+                            return null;
+                        }
                     }
                 }
-                data.append('guestBod', $("#dob").val());
-                data.append('guestGender', $("#gender").val());
-                data.append('guestNat', $("#nat").val());
-                data.append('guestName', $("#gName").val());
-                data.append('guestMName', $("#mName").val());
-                data.append('guestSName', $("#sName").val());
-                data.append('guestEamil', $("#email").val());
-                data.append('guestCCode', $("#ccode").val());
-                data.append('guestPhone', $("#mobile").val());
-                data.append('guestAdd', $("#address").val());
-                data.append('guestCity', $("#city").val());
-                data.append('guestCountry', $("#country").val());
-                data.append('guestPostal', $("#postal").val());
-                data.append('guestState', $("#state").val());
+
+                for(var i=0; i<this.totalPax; i++) {
+                    data.append('guest['+i+'][guestBod]', $("#dob"+i).val());
+                    data.append('guest['+i+'][guestGender]', $("#gender"+i).val());
+                    data.append('guest['+i+'][guestNat]', $("#nat"+i).val());
+                    data.append('guest['+i+'][guestName]', $("#gName"+i).val());
+                    data.append('guest['+i+'][guestMName]', $("#mName"+i).val());
+                    data.append('guest['+i+'][guestSName]', $("#sName"+i).val());
+                    data.append('guest['+i+'][guestEamil]', $("#email"+i).val());
+                    data.append('guest['+i+'][guestCCode]', $("#ccode"+i).val());
+                    data.append('guest['+i+'][guestPhone]', $("#mobile"+i).val());
+                    data.append('guest['+i+'][guestAdd]', $("#address"+i).val());
+                    data.append('guest['+i+'][guestCity]', $("#city"+i).val());
+                    data.append('guest['+i+'][guestCountry]', $("#country"+i).val());
+                    data.append('guest['+i+'][guestPostal]', $("#postCode"+i).val());
+                    data.append('guest['+i+'][guestState]', $("#state"+i).val());
+                    data.append('guest['+i+'][gTravDocId]', $("#docNo"+i).val());
+                    data.append('guest['+i+'][gTravDocIssuLoc]', $("#docLoc"+i).val());
+                    data.append('guest['+i+'][gTravDocType]', $("#docType"+i).val());
+                    data.append('guest['+i+'][gTravDocExpire]', $("#docExpire"+i).val());
+                }
+                
                 data.append('gContactName', $("#cgName").val());
                 data.append('gContactMName', $("#cmName").val());
                 data.append('gContactSName', $("#csName").val());
                 data.append('gContactEmail', $("#cEmail").val());
                 data.append('gContactCCode', $("#cccode").val());
                 data.append('gContactPhone', $("#cmobile").val());
-                data.append('gTravDocId', $("#docNo").val());
-                data.append('gTravDocIssuLoc', $("#docLoc").val());
-                data.append('gTravDocType', $("#docType").val());
-                data.append('gTravDocExpire', $("#docExpire").val());
                 data.append('cruise_id', this.$route.params.cruiseid);
                 data.append('cabin', this.$route.params.cabin);
                 data.append('pax', this.$route.params.pax);
                 data.append('date', this.$route.params.date);
+
                 var ths = this;
                 axios({
                     url: this.$root.apiEndpoint+ "/cruise/book_cruise_cabin",
@@ -1393,6 +1400,7 @@
             if(this.$root.refreshCheckout){
                 window.location.reload();
             }
+            this.totalPax = this.$route.params.pax.length;
         }
     }
 </script>

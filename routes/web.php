@@ -125,17 +125,17 @@ Route::get('/page/zh-hant/get_registration_content', 'PageController@get_registr
 //
 
 // calls related to the cruises
-
-Route::get('/cruise/get_itineraries', 'CruiseController@get_itineraries');
-Route::get('/cruise/get_valid_search_parameters', 'CruiseController@get_valid_search_parameters');
-Route::get('/cruise/get_home_itineraries', 'CruiseController@get_home_itineraries');
-Route::get('/cruise/get_home_itineraries_nonmember', 'CruiseController@get_home_itineraries_nonmember');
-Route::get('/cruise/get_best_redeemable_cruise', 'CruiseController@get_best_redeemable_cruise');
-Route::get('/cruise/get_cabin_prices', 'CruiseController@get_cabin_prices');
-Route::get('/cruise/get_home_cruise_details', 'CruiseController@get_home_cruise_details');
-Route::get('/cruise/get_cruise_info_for_cabin', 'CruiseController@get_cruise_info_for_cabin');
-Route::post('/cruise/book_cruise_cabin', 'CruiseController@book_cruise_cabin');
-
+Route::group(['middleware' => 'TempAuthCheck'], function(){
+  Route::get('/cruise/get_itineraries', 'CruiseController@get_itineraries');
+  Route::get('/cruise/get_valid_search_parameters', 'CruiseController@get_valid_search_parameters');
+  Route::get('/cruise/get_home_itineraries', 'CruiseController@get_home_itineraries');
+  Route::get('/cruise/get_home_itineraries_nonmember', 'CruiseController@get_home_itineraries_nonmember');
+  Route::get('/cruise/get_best_redeemable_cruise', 'CruiseController@get_best_redeemable_cruise');
+  Route::get('/cruise/get_cabin_prices', 'CruiseController@get_cabin_prices');
+  Route::get('/cruise/get_home_cruise_details', 'CruiseController@get_home_cruise_details');
+  Route::get('/cruise/get_cruise_info_for_cabin', 'CruiseController@get_cruise_info_for_cabin');
+  Route::post('/cruise/book_cruise_cabin', 'CruiseController@book_cruise_cabin');
+});
 //    ____   ___   ___  _  _____ _   _  ____
 //   | __ ) / _ \ / _ \| |/ /_ _| \ | |/ ___|
 //   |  _ \| | | | | | | ' / | ||  \| | |  _
