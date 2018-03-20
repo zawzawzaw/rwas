@@ -42,7 +42,7 @@ Vue.use(VCalendar, {
 
 const router = new VueRouter({
     mode: 'history',
-    base: '/api/public',
+    // base: '/api/public',
     routes: [{
         path: '/redeem',
         component: SearchRoot,
@@ -104,9 +104,9 @@ const app = new Vue({
         return {
             urlPara: [],
             // Server
-            apiEndpoint: "http://52.77.205.209/api/public",
+            // apiEndpoint: "http://52.77.205.209/api/public",
             // Local
-            // apiEndpoint: "http://localhost:8082",
+            apiEndpoint: "http://localhost:8082",
             redeemSearch: {
                 port: "",
                 time: "",

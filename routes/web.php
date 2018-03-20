@@ -134,6 +134,7 @@ Route::group(['middleware' => 'TempAuthCheck'], function(){
   Route::get('/cruise/get_cabin_prices', 'CruiseController@get_cabin_prices');
   Route::get('/cruise/get_home_cruise_details', 'CruiseController@get_home_cruise_details');
   Route::get('/cruise/get_cruise_info_for_cabin', 'CruiseController@get_cruise_info_for_cabin');
+  Route::get('/cruise/generate_payment_requirement', 'CruiseController@generate_payment_requirement');
   Route::post('/cruise/book_cruise_cabin', 'CruiseController@book_cruise_cabin');
 });
 //    ____   ___   ___  _  _____ _   _  ____

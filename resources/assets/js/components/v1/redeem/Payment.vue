@@ -14,7 +14,10 @@
                     <div class="col-md-10 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
 
                         <form id="payment-register-form" method='POST' action='https://epgdev.starcruises.com/payment/PaymentInterface.jsp' class="default-form ajax-version api-version">
-
+                            <template v-if="loading">
+                                Loading payment information...
+                            </template>
+                            
                             <div class="row">
                                 <div class="col-md-6">
 
@@ -71,8 +74,8 @@
                             <input name='PYMT_IND' type='hidden' value=''>
                             <input name='PAYMENT_CRITERIA' type='hidden' value=''>
                             <input name='CURRENCYCODE' type='hidden' value='HKD'>
-                            <input name='AMOUNT' type='hidden' value='100.00'>
-                            <input name='SIGNATURE' type='hidden' value='ADABF35344EE55C27754E4F35A4957917F9331BF'>
+                            <input name='AMOUNT' type='hidden' v-model='amount'>
+                            <input name='SIGNATURE' type='hidden' v-model='signature'>
                             <input name='CUSTNAME' type='hidden' value='Test Payment'>
                             <input name='CUSTEMAIL' type='hidden' value='test.payment@starcruises.com'>
                             <input name='SHOPPER_IP' type='hidden' value='::1'>
@@ -92,6 +95,7 @@
                                     </div>
                                 </div>
                             </div> <!-- row -->
+                        
                         </form>
                     </div>
                 </div>
@@ -120,14 +124,27 @@
         data() {
             return {
                 selectedDate: new Date(),
-                tranid: 0
+                tranid: 0,
+                signature: 0,
+                amount: 0,
+                loading: true,
             }
         },
         mounted() {
             if(this.$root.refreshPayment){
                 window.location.reload();
             }
-            this.tranid = Math.floor((Math.random() * 63656474255869314200) + 636564742558693142);
+            var ths = this;
+            this.amount = this.$route.query.cash===undefined ? 0 : this.$route.query.cash;
+            axios({
+                url: this.$root.apiEndpoint+"/cruise/generate_payment_requirement?amount="+this.amount
+            }).then((res) => {
+                ths.signature = res.data.signature;
+                ths.tranid = res.data.tranid;
+                ths.loading = false;
+            }).catch((err) => {
+                alert('Failed to load payment information!');
+            });
         }
     }
 </script>

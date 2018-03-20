@@ -410,6 +410,33 @@ class CruiseController extends Controller
         return $output_json;
     }
 
+    public function generate_payment_requirement(Request $request)
+    {
+        $tranid = 636564742;
+        $amount = is_null($request->input('amount')) ? 0 : $request->input('amount');
+        
+        if(!file_exists(public_path()."/tranid.json")){
+            $fp = fopen(public_path()."/tranid.json", 'w');
+            fclose($fp);
+        }else{
+            $fp = fopen(public_path()."/tranid.json", 'r');
+            $tranid = fread($fp, filesize(public_path()."/tranid.json"));
+            $tranid = json_decode($tranid);
+            $tranid = (int) $tranid;
+            fclose($fp);
+            $fp = fopen(public_path()."/tranid.json", 'w');
+            fwrite($fp, json_encode($tranid+1));
+            fclose($fp);
+        }
+
+        $signature = "##SCM_UAT##LHYQV##" . $tranid . "##" . $amount . "##0##";
+
+        return response()->json([
+            'tranid' => $tranid,
+            'signature' => sha1($signature)
+        ]);
+    }
+
     public function book_cruise_cabin(Request $request)
     {
         if(empty($request->input('cruise_id')) || is_null($request->input('cruise_id'))){
@@ -507,7 +534,7 @@ class CruiseController extends Controller
             $v['guestDocId'] = 105983934;
             $v['guestDocType'] = 2;
             $v['guestAddType'] = 1;
-            $v['guestMemberId'] = 29;
+            $v['guestMemberId'] = $v['memberid'];
             $v['guestProgramId'] = 'PRINCIPLE CARD';
             $v['guestEFlag'] = true;
             

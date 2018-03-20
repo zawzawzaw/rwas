@@ -547,22 +547,34 @@
                     -->
 
                     <div class="row">
-                    <div class="col-md-6">
+                        <div class="col-md-6">
 
-                        <div class="form-group">
-                        <label>City*</label>
-                        <input type="text" name="address_city" class="required" id="city0" value="City 1">
+                            <div class="form-group">
+                            <label>City*</label>
+                            <input type="text" name="address_city" class="required" id="city0" value="City 1">
+                            </div>
+
                         </div>
+                        <div class="col-md-6">
 
-                    </div>
-                    <div class="col-md-6">
+                            <div class="form-group">
+                            <label>Post code*</label>
+                            <input type="text" name="address_postal_code" class="required only-numbers" id="postCode0" value="11111">
+                            </div>
 
-                        <div class="form-group">
-                        <label>Post code*</label>
-                        <input type="text" name="address_postal_code" class="required only-numbers" id="postCode0" value="11111">
                         </div>
-
                     </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                            <label>Member ID *</label>
+                            <input type="text" name="address_city" class="required" id="memberid0" value="29">
+                            </div>
+
+                        </div>
+                    
                     </div>
 
                 <template v-if="$route.params.pax.length>1" v-for="n in ($route.params.pax.length-1)">
@@ -1111,7 +1123,19 @@
                         </div>
                         </div>
                       
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label>Member ID *</label>
+                                    <input type="text" name="address_city" class="required" :id="'memberid'+n" value="">
+                                </div>
+
+                            </div>
+                        
+                        </div>
                     </div>
+
                 </template>
 
                     <!--
@@ -1359,6 +1383,7 @@
                     data.append('guest['+i+'][guestAdd]', $("#address"+i).val());
                     data.append('guest['+i+'][guestCity]', $("#city"+i).val());
                     data.append('guest['+i+'][guestCountry]', $("#country"+i).val());
+                    data.append('guest['+i+'][memberid]', $("#memberid"+i).val());
                     data.append('guest['+i+'][guestPostal]', $("#postCode"+i).val());
                     data.append('guest['+i+'][guestState]', $("#state"+i).val());
                     data.append('guest['+i+'][gTravDocId]', $("#docNo"+i).val());
