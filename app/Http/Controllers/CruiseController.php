@@ -309,6 +309,8 @@ class CruiseController extends Controller
         // return response()->json($cruise);
         $pax = is_null($request->input('pax')) || $request->input('pax')==="" ? 'A' : $request->input('pax');
 
+        $gp = 0;
+
         foreach($cruise['cabins'] as $cabin){
             $xtopia = DB::select("SELECT * FROM xtopia x WHERE 
                                     x.itinerary_code='".$cruise['itinerary']['itin_code']."' AND 
@@ -320,9 +322,17 @@ class CruiseController extends Controller
                                     x.card_type='CLASSIC' LIMIT 3;");
             
             $cc = 0;
+            $cash = 0;
+
+            if($gp>1){
+                $gp = 0;
+                $cash = rand(100,300);
+            }
 
             if(count($xtopia)>0) {
                 $cc = $xtopia[0]->rwcc;
+            }else{
+                $gp++;
             }
 
             $cabins[] = [
@@ -332,7 +342,7 @@ class CruiseController extends Controller
                     'cc_cash_added' => 0,
                     'gp' => rand(100, 300),
                     'gp_cash_added' => 0,
-                    'cash' => $cc>$ownCC ? rand(100,300) : 0,
+                    'cash' => $cash,
                     'ownCC' => $ownCC
                 ),
                 $request->attributes->get('loginuser')
@@ -567,7 +577,8 @@ class CruiseController extends Controller
             $parameter = [
                 'paraDrsID' => 'MANIC',
                 'paraDrsPwd' => 'MANIC',
-                'paraCid' => $request->attributes->get('loginuser'),
+                'paraCid' => 29,
+                'paraWorkGroup' => urlencode('MEML'),
                 'paraCashToAdjust' => rand(100, 300),
                 'paraCashTypeToAdjust' => 0,
                 'paraCurrCode' => 'US',
@@ -575,13 +586,14 @@ class CruiseController extends Controller
                 'paraRemark' => 'test'
             ];
 
-            $result = $this->curlRequestRaw($this->buildDrsXMLContent($parameter), $this->drsUrlV2.'API_AutoUA_CEA_Currency', true);
+            $result = $this->curlRequest($this->buildDrsXMLContent($parameter), $this->drsUrl.'API_AutoUA_CEA_Currency', true);
             $paymentProcess = $result;
         }
 
         return response()->json([
             'booking' => $res,
             'payment' => $paymentProcess,
+            
         ]);
     }
 
@@ -593,8 +605,8 @@ class CruiseController extends Controller
             'paraCid' => $request->attributes->get('loginuser'),
             'paraWorkGroup' => urlencode('MEML'),
             'paraLoadDefaultDRSifNoUA' => 0,
-            "paraPFFieldName" => 'RWRC'
-        ];        
+            'paraPFFieldName' => 'RWRC'
+        ];
 
         $result = $this->curlRequest($this->buildDrsXMLContent($input), $this->drsUrl.'API_AutoUA_GetSelectedPF', true);
 

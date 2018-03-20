@@ -9,6 +9,9 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
+import VCalendar from 'v-calendar';
+import 'v-calendar/lib/v-calendar.min.css';
+import VueCookie from 'vue-cookie';
 
 /*
  * Vue component list
@@ -22,9 +25,20 @@ import CabinList from './components/v1/redeem/CabinList';
 import CabinCruiseInfoHeader from './components/v1/redeem/cabin/CabinHeader';
 import CabinSummery from './components/v1/redeem/CabinSummery';
 import CheckoutGuest from './components/v1/redeem/CheckoutGuest';
+import Payment from './components/v1/redeem/Payment';
 import CabinThankYou from './components/v1/redeem/CabinThankYou';
 
 Vue.use(VueRouter);
+Vue.use(VueCookie);
+Vue.use(VCalendar, {
+    format: {
+        title: 'MMMM YYYY',
+        weekdays: 'W',
+        navMonths: 'MMM',
+        input: ['L', 'YYYY-MM-DD', 'YYYY/MM/DD'],
+        dayPopover: 'L',
+    }
+});
 
 const router = new VueRouter({
     mode: 'history',
@@ -49,6 +63,10 @@ const router = new VueRouter({
         path: '/redeem/cabin/:cruiseid/:date/:pax/:cabin/checkout',
         name: 'redeem.cabin.checkout',
         component: CheckoutGuest
+    }, {
+        path: '/redeem/cabin/:cruiseid/:date/:pax/:cabin/payment',
+        name: 'redeem.cabin.payment',
+        component: Payment
     }, {
         path: '/redeem/cabin/:cruiseid/:date/:pax/:cabin/thankyou',
         name: 'redeem.cabin.thankyou',
@@ -101,6 +119,7 @@ const app = new Vue({
             },
             result: "",
             refreshCheckout: false,
+            refreshPayment: false,
             portData: [{
                     'country': "Mainland China",
                     'en': "Port of Haikou, China",

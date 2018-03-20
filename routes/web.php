@@ -148,6 +148,14 @@ Route::group(['middleware' => 'TempAuthCheck'], function(){
 Route::get('/booking/book_cruise', 'BookingController@book_cruise');
 Route::get('/booking/get_booking_details', 'BookingController@get_booking_details');
 
+Route::post('/redeem/cabin/{cruise}/{date}/{pax}/{cabin}/thankyou', function() {
+  // echo "<pre>";
+  // print_r($_POST);
+  // echo "</pre>";
+  setcookie('test', json_encode($_POST), time() + (86400 * 30), "/");
+  return view('spa');
+});
+
 Route::get('/{any}', function(){
   return view('spa');
 })->where('any', '.*');

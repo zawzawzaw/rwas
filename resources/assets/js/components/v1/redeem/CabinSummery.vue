@@ -67,7 +67,8 @@
                                         pax: $route.params.pax,
                                         cabin: $route.params.cabin
                                     }, query: {
-                                        cc: $route.query.cc!==undefined && $route.query.cc>0 ? $route.query.cc : 0
+                                        cc: $route.query.cc!==undefined && $route.query.cc>0 ? $route.query.cc : 0,
+                                        cash: $route.query.cash!==undefined && $route.query.cash>0 ? $route.query.cash : 0
                                     } }" class="square-cta large-version full-width-version" id="redeem-cabin-type-checkout-cta">
                                         Proceed To Checkout
                                     </router-link>
