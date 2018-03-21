@@ -296,13 +296,15 @@ class CruiseController extends Controller
                 $query->select('id', 'cabin_category', 'cruise', 'pax_count');
             },
             'itinerary'
-        ])->first()->toArray();
+        ])->first();
 
         if(empty($cruise)){
             return response()->json([
                 'mesg' => 'Invalid cruise id!'
             ], 422);
         }
+
+        $cruise = $cruise->toArray();
         
         $cabins = [];
         $ownCC = $this->getCCValue($request, false);
