@@ -326,15 +326,15 @@ class CruiseController extends Controller
             $cc = 0;
             $cash = 0;
 
-            if($gp>1){
-                $gp = 0;
-                $cash = rand(100,300);
-            }
+            $gp = 0;
+            // if($gp>1){
+            //     $cash = rand(100,300);
+            // }
 
             if(count($xtopia)>0) {
                 $cc = $xtopia[0]->rwcc;
             }else{
-                $gp++;
+                // $gp++;
             }
 
             $cabins[] = [
