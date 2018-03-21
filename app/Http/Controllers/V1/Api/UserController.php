@@ -10,10 +10,14 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function get_user(Request $request, $return=false, $web=false)
+    public function get_user(Request $request, $return=false, $web=false, $cid=false)
     {
+        if($cid===false) {
+            $cid = $web ? $request->session()->get('drsUserID') : $request->input('paraCid');
+        }
+
         $input = [
-            'paraCid' => $web ? $request->session()->get('drsUserID') : $request->input('paraCid'),
+            'paraCid' => $cid,
             'paraWorkGroup' => "MEML",
             'paraEnquiryCurrCode' => "US",
             'paraLoadDefaultDRSifNoUA' => "1"
@@ -28,7 +32,14 @@ class UserController extends Controller
         // return response()->json($result, 422);
 
         if(isset($result->errCode)){
-            return response()->json($result);
+            if($cid===false){
+                return response()->json($result);
+            } else {
+                return [
+                    'status' => false,
+                    'mesg' => json_encode($result)
+                ];
+            }
         }
 
         $ccinput = [
@@ -169,10 +180,20 @@ class UserController extends Controller
         );
         
         if($return){
-            return [
-                'data' => $output_data,
-                'raw' => $result
-            ];
+            if($cid===false){
+                return [
+                    'data' => $output_data,
+                    'raw' => $result
+                ];
+            } else {
+                return [
+                    'status' => true,
+                    'res' => [
+                        'data' => $output_data,
+                        'raw' => $result
+                    ]
+                ];
+            }
         }
                 // return [
                 //     'data' => $output_data,

@@ -1432,7 +1432,11 @@
                     }
                     ths.$root.result = JSON.stringify(res.data, undefined, 2);
                 }).catch((err) => {
-                    alert("Failed to submit guest form!");
+                    var mesg = "Failed to submit guest form!";
+                    if(err.response.status!==undefined && err.response.status===422) {
+                        mesg = err.response.data.mesg.toString();
+                    }
+                    alert(mesg);
                 });
             }
         },

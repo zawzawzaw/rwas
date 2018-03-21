@@ -324,17 +324,12 @@ class CruiseController extends Controller
                                     x.card_type='CLASSIC' LIMIT 3;");
             
             $cc = 0;
-            $cash = 0;
-
-            $gp = 0;
-            // if($gp>1){
-            //     $cash = rand(100,300);
-            // }
+            $gp = rand(100, 300);
+            $cash = rand(100, 300);
 
             if(count($xtopia)>0) {
                 $cc = $xtopia[0]->rwcc;
-            }else{
-                // $gp++;
+                $gp = $xtopia[0]->gp;
             }
 
             $cabins[] = [
@@ -342,7 +337,7 @@ class CruiseController extends Controller
                 'price' => array(
                     'cc' => $cc,
                     'cc_cash_added' => 0,
-                    'gp' => rand(100, 300),
+                    'gp' => $gp,
                     'gp_cash_added' => 0,
                     'cash' => $cash,
                     'ownCC' => $ownCC
@@ -417,7 +412,7 @@ class CruiseController extends Controller
         $tranid = 636564742;
         $amount = is_null($request->input('amount')) ? 0 : $request->input('amount');
         
-        if(!file_exists(public_path()."/tranid.json")){
+        if(!file_exists(public_path()."/tranid.json") || filesize(public_path()."/tranid.json")===0){
             $fp = fopen(public_path()."/tranid.json", 'w');
             fclose($fp);
         }else{
@@ -539,7 +534,21 @@ class CruiseController extends Controller
             $v['guestMemberId'] = $v['memberid'];
             $v['guestProgramId'] = 'PRINCIPLE CARD';
             $v['guestEFlag'] = true;
+
+            $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true, $v['memberid']);
             
+            if($info['status']===false) {
+                return response()->json([
+                    'mesg' => $info['mesg']
+                ], 422);
+            }
+
+            if($info['res']['data']['profile']['email']!==$v['guestEamil']){
+                return response()->json([
+                    'mesg' => 'Guest email and registered email are not matched!\n Registered email is '.$info['res']['data']['profile']['email']
+                ], 422);
+            }
+
             $xml_input .= '<GuestDetail GuestExistsIndicator="'.$input['guestExists'].'" RepeatGuestIndicator="'.$input['requestGuest'].'">
                 <ContactInfo Age="'.$v['guestAge'].'" BirthDate="'.$v['guestBod'].'" Gender="'.$v['guestGender'].'" GuestRefNumber="'.$v['guestRef'].'" Nationality="'.$v['guestNat'].'">
                     <PersonName>
