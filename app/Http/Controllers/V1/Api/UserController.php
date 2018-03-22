@@ -12,12 +12,13 @@ class UserController extends Controller
 {
     public function get_user(Request $request, $return=false, $web=false, $cid=false)
     {
+        $userid = $cid;
         if($cid===false) {
-            $cid = $web ? $request->session()->get('drsUserID') : $request->input('paraCid');
+            $userid = $web ? $request->session()->get('drsUserID') : $request->input('paraCid');
         }
 
         $input = [
-            'paraCid' => $cid,
+            'paraCid' => $userid,
             'paraWorkGroup' => "MEML",
             'paraEnquiryCurrCode' => "US",
             'paraLoadDefaultDRSifNoUA' => "1"
@@ -45,7 +46,7 @@ class UserController extends Controller
         $ccinput = [
             'paraDrsID' => 'MANIC',
             'paraDrsPwd' => 'MANIC',
-            'paraCid' => 29,
+            'paraCid' => $userid,
             'paraWorkGroup' => urlencode('MEML'),
             'paraLoadDefaultDRSifNoUA' => 0,
             "paraPFFieldName" => 'RWRC'
