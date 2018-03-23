@@ -12,12 +12,13 @@ class UserController extends Controller
 {
     public function get_user(Request $request, $return=false, $web=false, $cid=false)
     {
+        $userid = $cid;
         if($cid===false) {
-            $cid = $web ? $request->session()->get('drsUserID') : $request->input('paraCid');
+            $userid = $web ? $request->session()->get('drsUserID') : $request->input('paraCid');
         }
 
         $input = [
-            'paraCid' => $cid,
+            'paraCid' => $userid,
             'paraWorkGroup' => "MEML",
             'paraEnquiryCurrCode' => "US",
             'paraLoadDefaultDRSifNoUA' => "1"
@@ -45,7 +46,7 @@ class UserController extends Controller
         $ccinput = [
             'paraDrsID' => 'MANIC',
             'paraDrsPwd' => 'MANIC',
-            'paraCid' => 29,
+            'paraCid' => $userid,
             'paraWorkGroup' => urlencode('MEML'),
             'paraLoadDefaultDRSifNoUA' => 0,
             "paraPFFieldName" => 'RWRC'
@@ -78,12 +79,25 @@ class UserController extends Controller
 
         $mobile = "";
 
-        foreach($result->Contact->ContactSection->Cust_Contact as $con){
-            if(strtolower($con->Type)==="mobile"){
-                $mobile = $con->ContactNo;
-                break;
+        if(is_array($result->Contact->ContactSection->Cust_Contact)) {
+            foreach($result->Contact->ContactSection->Cust_Contact as $con){
+                if(strtolower($con->Type)==="mobile"){
+                    $mobile = $con->ContactNo;
+                    break;
+                }
+            }
+        } else {
+            if(strtolower($result->Contact->ContactSection->Cust_Contact->Type)==="mobile"){
+                $mobile = $result->Contact->ContactSection->Cust_Contact->ContactNo;
             }
         }
+
+        // foreach($result->Contact->ContactSection->Cust_Contact as $con){
+        //     if(strtolower($con->Type)==="mobile"){
+        //         $mobile = $con->ContactNo;
+        //         break;
+        //     }
+        // }
 
         $occupation = "";
         $nature_of_business = "";
