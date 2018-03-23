@@ -74,13 +74,6 @@ class UserController extends Controller
             }
         }
 
-        // foreach($result->Contact->ContactSection->Cust_Contact as $con){
-        //     if(strtolower($con->Type)==="mobile"){
-        //         $mobile = $con->ContactNo;
-        //         break;
-        //     }
-        // }
-
         $occupation = "";
         $nature_of_business = "";
         $head_of_state = "";
