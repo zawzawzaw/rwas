@@ -446,7 +446,15 @@ class CruiseController extends Controller
         
         $cruise = Cruise::select('id', 'itinerary', 'departure_date')->with(['itinerary' => function($query) {
             $query->select('id', 'ship_code', 'itin_code');
-        }])->where('cruise_id', $request->input('cruise_id'))->first()->toArray();
+        }])->where('cruise_id', $request->input('cruise_id'))->first();
+        
+        if(empty($cruise)) {
+            return response()->json([
+                'mesg' => 'Invalid cruise id!'
+            ], 422);
+        }
+
+        $cruise = $cruise->toArray();
 
         $xtopia = DB::select("SELECT * FROM xtopia x WHERE 
                                     x.itinerary_code='".$cruise['itinerary']['itin_code']."' AND 
@@ -521,21 +529,13 @@ class CruiseController extends Controller
                 </SailingInfo>
                 <ReservationInfo>
                     <GuestDetails>';
-
+        $count = 0;
         foreach($input['guest'] as $g){
             $v = $g;
+            $v['guestMemberId'] = $v['memberid'];
             $v['guestBod'] = explode("/", $v['guestBod']);
             $v['guestAge'] = date("Y") - (int) $v['guestBod'][2];
             $v['guestBod'] = $v['guestBod'][2].'-'.$v['guestBod'][1].'-'.$v['guestBod'][0];
-            $v['guestCountryCode'] = 'SG';
-            $v['guestCountry'] = 'SG';
-            $v['guestRef'] = '1';
-            $v['guestDocId'] = 105983934;
-            $v['guestDocType'] = 2;
-            $v['guestAddType'] = 1;
-            $v['guestMemberId'] = $v['memberid'];
-            $v['guestProgramId'] = 'PRINCIPLE CARD';
-            $v['guestEFlag'] = true;
 
             $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true, $v['memberid']);
             
@@ -545,42 +545,83 @@ class CruiseController extends Controller
                 ], 422);
             }
 
-            if($info['res']['data']['profile']['email']!==$v['guestEamil']){
-                return response()->json([
-                    'mesg' => 'Guest email and registered email are not matched!\n Registered email is '.$info['res']['data']['profile']['email']
-                ], 422);
+            if($count===0){
+                if($info['res']['data']['profile']['email']!==$v['guestEamil']){
+                    return response()->json([
+                        'mesg' => 'Guest email and registered email are not matched!\n Registered email is '.$info['res']['data']['profile']['email']
+                    ], 422);
+                }
+                $v['guestCountryCode'] = 'SG';
+                $v['guestCountry'] = 'SG';
+                $v['guestRef'] = '1';
+                $v['guestDocId'] = 105983934;
+                $v['guestDocType'] = 2;
+                $v['guestAddType'] = 1;
+                $v['guestProgramId'] = 'PRINCIPLE CARD';
+                $v['guestEFlag'] = true;
+                $xml_input .= '<GuestDetail GuestExistsIndicator="'.$input['guestExists'].'" RepeatGuestIndicator="'.$input['requestGuest'].'">
+                    <ContactInfo Age="'.$v['guestAge'].'" BirthDate="'.$v['guestBod'].'" Gender="'.$v['guestGender'].'" GuestRefNumber="'.$v['guestRef'].'" Nationality="'.$v['guestNat'].'">
+                        <PersonName>
+                            <GivenName>'.$v['guestName'].'</GivenName>
+                            <MiddleName>'.$v['guestMName'].'</MiddleName>
+                            <Surname>'.$v['guestSName'].'</Surname>
+                            <Document DocID="'.$v['guestDocId'].'" DocType="'.$v['guestDocType'].'"/>
+                        </PersonName>
+                        <Email>'.$v['guestEamil'].'</Email>
+                        <Telephone CountryAccessCode="'.$v['guestCCode'].'" PhoneNumber="'.$v['guestPhone'].'"/>
+                        <Address Type="'.$v['guestAddType'].'">
+                            <AddressLine>'.$v['guestAdd'].'</AddressLine>
+                            <CityName>'.$v['guestCity'].'</CityName>
+                            <CountryName Code="'.$v['guestCountryCode'].'">'.$v['guestCountry'].'</CountryName>
+                            <PostalCode>'.$v['guestPostal'].'</PostalCode>
+                            <StateProv>'.$v['guestState'].'</StateProv>
+                        </Address>
+                    </ContactInfo>
+                    <LoyaltyInfo MembershipID="'.$v['guestMemberId'].'" ProgramID="'.$v['guestProgramId'].'"/>
+                    <ContactInfo EmergencyFlag="'.$v['guestEFlag'].'">
+                        <PersonName>
+                            <GivenName>'.$input['gContactName'].'</GivenName>
+                            <MiddleName>'.$input['gContactMName'].'</MiddleName>
+                            <Surname>'.$input['gContactSName'].'</Surname>
+                        </PersonName>
+                        <Email>'.$input['gContactEmail'].'</Email>
+                        <Telephone CountryAccessCode="'.$input['gContactCCode'].'" PhoneNumber="'.$input['gContactPhone'].'"/>
+                    </ContactInfo>
+                    <TravelDocument DocID="'.$v['gTravDocId'].'" DocIssueLocation="'.$v['gTravDocIssuLoc'].'" DocType="'.$v['gTravDocType'].'" ExpireDate="'.$v['gTravDocExpire'].'"/>
+                </GuestDetail>';
+                $count++;
+            }else{
+                $xml_input .= '<GuestDetail GuestExistsIndicator="'.$input['guestExists'].'" RepeatGuestIndicator="'.$input['requestGuest'].'">
+                    <ContactInfo Age="'.$input['guest'][0]['guestAge'].'" BirthDate="'.$input['guest'][0]['guestBod'].'" Gender="'.$input['guest'][0]['guestGender'].'" GuestRefNumber="'.$input['guest'][0]['guestRef'].'" Nationality="'.$input['guest'][0]['guestNat'].'">
+                        <PersonName>
+                            <GivenName>'.$input['guest'][0]['guestName'].'</GivenName>
+                            <MiddleName>'.$input['guest'][0]['guestMName'].'</MiddleName>
+                            <Surname>'.$input['guest'][0]['guestSName'].'</Surname>
+                            <Document DocID="'.$input['guest'][0]['guestDocId'].'" DocType="'.$input['guest'][0]['guestDocType'].'"/>
+                        </PersonName>
+                        <Email>'.$input['guest'][0]['guestEamil'].'</Email>
+                        <Telephone CountryAccessCode="'.$input['guest'][0]['guestCCode'].'" PhoneNumber="'.$input['guest'][0]['guestPhone'].'"/>
+                        <Address Type="'.$input['guest'][0]['guestAddType'].'">
+                            <AddressLine>'.$input['guest'][0]['guestAdd'].'</AddressLine>
+                            <CityName>'.$input['guest'][0]['guestCity'].'</CityName>
+                            <CountryName Code="'.$input['guest'][0]['guestCountryCode'].'">'.$input['guest'][0]['guestCountry'].'</CountryName>
+                            <PostalCode>'.$input['guest'][0]['guestPostal'].'</PostalCode>
+                            <StateProv>'.$input['guest'][0]['guestState'].'</StateProv>
+                        </Address>
+                    </ContactInfo>
+                    <LoyaltyInfo MembershipID="'.$input['guest'][0]['guestMemberId'].'" ProgramID="'.$input['guest'][0]['guestProgramId'].'"/>
+                    <ContactInfo EmergencyFlag="'.$input['guest'][0]['guestEFlag'].'">
+                        <PersonName>
+                            <GivenName>'.$input['gContactName'].'</GivenName>
+                            <MiddleName>'.$input['gContactMName'].'</MiddleName>
+                            <Surname>'.$input['gContactSName'].'</Surname>
+                        </PersonName>
+                        <Email>'.$input['gContactEmail'].'</Email>
+                        <Telephone CountryAccessCode="'.$input['gContactCCode'].'" PhoneNumber="'.$input['gContactPhone'].'"/>
+                    </ContactInfo>
+                    <TravelDocument DocID="'.$input['guest'][0]['gTravDocId'].'" DocIssueLocation="'.$input['guest'][0]['gTravDocIssuLoc'].'" DocType="'.$input['guest'][0]['gTravDocType'].'" ExpireDate="'.$input['guest'][0]['gTravDocExpire'].'"/>
+                </GuestDetail>';
             }
-
-            $xml_input .= '<GuestDetail GuestExistsIndicator="'.$input['guestExists'].'" RepeatGuestIndicator="'.$input['requestGuest'].'">
-                <ContactInfo Age="'.$v['guestAge'].'" BirthDate="'.$v['guestBod'].'" Gender="'.$v['guestGender'].'" GuestRefNumber="'.$v['guestRef'].'" Nationality="'.$v['guestNat'].'">
-                    <PersonName>
-                        <GivenName>'.$v['guestName'].'</GivenName>
-                        <MiddleName>'.$v['guestMName'].'</MiddleName>
-                        <Surname>'.$v['guestSName'].'</Surname>
-                        <Document DocID="'.$v['guestDocId'].'" DocType="'.$v['guestDocType'].'"/>
-                    </PersonName>
-                    <Email>'.$v['guestEamil'].'</Email>
-                    <Telephone CountryAccessCode="'.$v['guestCCode'].'" PhoneNumber="'.$v['guestPhone'].'"/>
-                    <Address Type="'.$v['guestAddType'].'">
-                        <AddressLine>'.$v['guestAdd'].'</AddressLine>
-                        <CityName>'.$v['guestCity'].'</CityName>
-                        <CountryName Code="'.$v['guestCountryCode'].'">'.$v['guestCountry'].'</CountryName>
-                        <PostalCode>'.$v['guestPostal'].'</PostalCode>
-                        <StateProv>'.$v['guestState'].'</StateProv>
-                    </Address>
-                </ContactInfo>
-                <LoyaltyInfo MembershipID="'.$v['guestMemberId'].'" ProgramID="'.$v['guestProgramId'].'"/>
-                <ContactInfo EmergencyFlag="'.$v['guestEFlag'].'">
-                    <PersonName>
-                        <GivenName>'.$input['gContactName'].'</GivenName>
-                        <MiddleName>'.$input['gContactMName'].'</MiddleName>
-                        <Surname>'.$input['gContactSName'].'</Surname>
-                    </PersonName>
-                    <Email>'.$input['gContactEmail'].'</Email>
-                    <Telephone CountryAccessCode="'.$input['gContactCCode'].'" PhoneNumber="'.$input['gContactPhone'].'"/>
-                </ContactInfo>
-                <TravelDocument DocID="'.$v['gTravDocId'].'" DocIssueLocation="'.$v['gTravDocIssuLoc'].'" DocType="'.$v['gTravDocType'].'" ExpireDate="'.$v['gTravDocExpire'].'"/>
-            </GuestDetail>';
         }
 
         $xml_input .= '</GuestDetails>

@@ -589,7 +589,7 @@
                             <div class="col-md-6">
 
                                 <div class="form-group">
-                                    <label>Given Name*</label>
+                                    <label>First Name*</label>
                                     <input type="text" name="first_name" :id="'gName'+n" class="required only-alpha-and-space" value="Jame">
                                 </div>
 
@@ -597,7 +597,7 @@
                             <div class="col-md-6">
 
                                 <div class="form-group">
-                                    <label>SurName*</label>
+                                    <label>Last Name*</label>
                                     <input type="text" name="last_name" :id="'sName'+n" class="required only-alpha-and-space" value="Doe">
                                 </div>
 
@@ -616,7 +616,7 @@
                         -->
 
                         <div class="row">
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
 
                             <div class="form-group">
                             <label>Gender*</label>
@@ -629,7 +629,7 @@
                             </div>
                             </div>
 
-                        </div>
+                        </div> -->
                         <div class="col-md-4">
 
                             <!-- pending -->
@@ -647,7 +647,16 @@
 
                         </div>
 
-                        <div class="col-md-5">
+                        <div class="col-md-8">
+
+                            <div class="form-group">
+                                <label>Member ID *</label>
+                                <input type="text" name="address_city" class="required" :id="'memberid'+n" value="">
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="col-md-5">
 
                             <div class="form-group">
                             <label>Nationality*</label>
@@ -722,7 +731,8 @@
                             </div>
 
                         </div>
-                        </div> <!-- row -->
+                        </div> -->
+                        <!-- row -->
 
 
 
@@ -735,7 +745,7 @@
 
                         -->
 
-                        <div class="row">
+                        <!-- <div class="row">
                         <div class="col-md-3">
 
                             <div class="form-group">
@@ -833,7 +843,8 @@
                             </div>
 
                         </div>
-                        </div> <!-- row -->
+                        </div>  -->
+                        <!-- row -->
 
 
 
@@ -846,7 +857,7 @@
 
                         -->
 
-                        <div class="row">
+                        <!-- <div class="row"> -->
                         <!-- <div class="col-md-6">
 
                             <div class="form-group">
@@ -855,7 +866,7 @@
                             </div>
 
                         </div> -->
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
 
                             <div class="form-group">
                             <label>Travel document expiry date*</label>
@@ -863,7 +874,8 @@
                             </div>
 
                         </div>
-                        </div> <!-- row -->
+                        </div>  -->
+                        <!-- row -->
 
                         <!--
                             ___   __
@@ -874,7 +886,7 @@
 
                         -->
 
-                        <div class="row">
+                        <!-- <div class="row">
                         <div class="col-md-6">
 
                             <div class="form-group">
@@ -971,7 +983,8 @@
 
                         </div>
             
-                        </div> <!-- row -->
+                        </div> -->
+                        <!-- row -->
 
 
 
@@ -984,7 +997,7 @@
 
                         -->
                         
-                        <div class="row">
+                        <!-- <div class="row">
 
                         <div class="col-md-12">
 
@@ -994,7 +1007,7 @@
                             </div>
                             
                         </div>
-                        </div>
+                        </div> -->
 
 
                         <!--
@@ -1006,7 +1019,7 @@
 
                         -->
 
-                        <div class="row">
+                        <!-- <div class="row">
 
                         <div class="col-md-6">
 
@@ -1091,7 +1104,8 @@
                             </div>
                             
                         </div>
-                        </div> <!-- row -->
+                        </div>  -->
+                        <!-- row -->
 
 
 
@@ -1104,7 +1118,7 @@
 
                         -->
 
-                        <div class="row">
+                        <!-- <div class="row">
                         <div class="col-md-6">
 
                             <div class="form-group">
@@ -1121,9 +1135,9 @@
                             </div>
 
                         </div>
-                        </div>
+                        </div> -->
                       
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-6">
 
                                 <div class="form-group">
@@ -1132,7 +1146,7 @@
                                 </div>
 
                             </div>
-                        
+                         -->
                         </div>
                     </div>
 
@@ -1333,34 +1347,43 @@
                 }
 
                 for(var i=0; i<this.totalPax; i++) {
-                    var data = {
-                        guestBod: $("#dob"+i).val(),
-                        guestGender: $("#gender"+i).val(),
-                        guestNat: $("#nat"+i).val(),
-                        guestName: $("#gName"+i).val(),
-                        guestMName: $("#mName"+i).val(),
-                        guestSName: $("#sName"+i).val(),
-                        guestEamil: $("#email"+i).val(),
-                        guestCCode: $("#ccode"+i).val(),
-                        guestPhone: $("#mobile"+i).val(),
-                        guestAdd: $("#address"+i).val(),
-                        guestCity: $("#city"+i).val(),
-                        guestCountry: $("#country"+i).val(),
-                        guestPostal: $("#postal"+i).val(),
-                        guestState: $("#state"+i).val(),
-                        gContactName: $("#cgName").val(),
-                        gContactMName: $("#cmName").val(),
-                        gContactSName: $("#csName").val(),
-                        gContactEmail: $("#cEmail").val(),
-                        gContactCCode: $("#cccode").val(),
-                        gContactPhone: $("#cmobile").val(),
-                        gTravDocId: $("#docNo"+i).val(),
-                        gTravDocIssuLoc: $("#docLoc"+i).val(),
-                        gTravDocType: $("#docType"+i).val(),
-                        gTravDocExpire: $("#docExpire"+i).val()
-                    };
+                    var data = {};
+                    if(i===0){
+                        data = {
+                            guestBod: $("#dob"+i).val(),
+                            guestGender: $("#gender"+i).val(),
+                            guestNat: $("#nat"+i).val(),
+                            guestName: $("#gName"+i).val(),
+                            guestSName: $("#sName"+i).val(),
+                            guestEamil: $("#email"+i).val(),
+                            guestCCode: $("#ccode"+i).val(),
+                            guestPhone: $("#mobile"+i).val(),
+                            guestAdd: $("#address"+i).val(),
+                            guestCity: $("#city"+i).val(),
+                            guestCountry: $("#country"+i).val(),
+                            guestPostal: $("#postal"+i).val(),
+                            guestState: $("#state"+i).val(),
+                            gContactName: $("#cgName").val(),
+                            gContactMName: $("#cmName").val(),
+                            gContactSName: $("#csName").val(),
+                            gContactEmail: $("#cEmail").val(),
+                            gContactCCode: $("#cccode").val(),
+                            gContactPhone: $("#cmobile").val(),
+                            gTravDocId: $("#docNo"+i).val(),
+                            gTravDocIssuLoc: $("#docLoc"+i).val(),
+                            gTravDocType: $("#docType"+i).val(),
+                            gTravDocExpire: $("#docExpire"+i).val(),
+                            memberid: $("#memberid"+i).val()
+                        };
+                    }else{
+                        data = {
+                            guestBod: $("#dob"+i).val(),
+                            guestName: $("#gName"+i).val(),
+                            guestSName: $("#sName"+i).val(),
+                            memberid: $("#memberid"+i).val()
+                        };
+                    }
 
-                    var data = new FormData();
 
                     for(var i in data){
                         if(data[i]==""){
@@ -1370,26 +1393,35 @@
                     }
                 }
 
+                var data = new FormData();
+
                 for(var i=0; i<this.totalPax; i++) {
-                    data.append('guest['+i+'][guestBod]', $("#dob"+i).val());
-                    data.append('guest['+i+'][guestGender]', $("#gender"+i).val());
-                    data.append('guest['+i+'][guestNat]', $("#nat"+i).val());
-                    data.append('guest['+i+'][guestName]', $("#gName"+i).val());
-                    data.append('guest['+i+'][guestMName]', $("#mName"+i).val());
-                    data.append('guest['+i+'][guestSName]', $("#sName"+i).val());
-                    data.append('guest['+i+'][guestEamil]', $("#email"+i).val());
-                    data.append('guest['+i+'][guestCCode]', $("#ccode"+i).val());
-                    data.append('guest['+i+'][guestPhone]', $("#mobile"+i).val());
-                    data.append('guest['+i+'][guestAdd]', $("#address"+i).val());
-                    data.append('guest['+i+'][guestCity]', $("#city"+i).val());
-                    data.append('guest['+i+'][guestCountry]', $("#country"+i).val());
-                    data.append('guest['+i+'][memberid]', $("#memberid"+i).val());
-                    data.append('guest['+i+'][guestPostal]', $("#postCode"+i).val());
-                    data.append('guest['+i+'][guestState]', $("#state"+i).val());
-                    data.append('guest['+i+'][gTravDocId]', $("#docNo"+i).val());
-                    data.append('guest['+i+'][gTravDocIssuLoc]', $("#docLoc"+i).val());
-                    data.append('guest['+i+'][gTravDocType]', $("#docType"+i).val());
-                    data.append('guest['+i+'][gTravDocExpire]', $("#docExpire"+i).val());
+                    if(i===0){
+                        data.append('guest['+i+'][guestBod]', $("#dob"+i).val());
+                        data.append('guest['+i+'][guestGender]', $("#gender"+i).val());
+                        data.append('guest['+i+'][guestNat]', $("#nat"+i).val());
+                        data.append('guest['+i+'][guestName]', $("#gName"+i).val());
+                        data.append('guest['+i+'][guestMName]', $("#mName"+i).val());
+                        data.append('guest['+i+'][guestSName]', $("#sName"+i).val());
+                        data.append('guest['+i+'][guestEamil]', $("#email"+i).val());
+                        data.append('guest['+i+'][guestCCode]', $("#ccode"+i).val());
+                        data.append('guest['+i+'][guestPhone]', $("#mobile"+i).val());
+                        data.append('guest['+i+'][guestAdd]', $("#address"+i).val());
+                        data.append('guest['+i+'][guestCity]', $("#city"+i).val());
+                        data.append('guest['+i+'][guestCountry]', $("#country"+i).val());
+                        data.append('guest['+i+'][memberid]', $("#memberid"+i).val());
+                        data.append('guest['+i+'][guestPostal]', $("#postCode"+i).val());
+                        data.append('guest['+i+'][guestState]', $("#state"+i).val());
+                        data.append('guest['+i+'][gTravDocId]', $("#docNo"+i).val());
+                        data.append('guest['+i+'][gTravDocIssuLoc]', $("#docLoc"+i).val());
+                        data.append('guest['+i+'][gTravDocType]', $("#docType"+i).val());
+                        data.append('guest['+i+'][gTravDocExpire]', $("#docExpire"+i).val());
+                    }else{
+                        data.append('guest['+i+'][guestBod]', $("#dob"+i).val());
+                        data.append('guest['+i+'][guestName]', $("#gName"+i).val());
+                        data.append('guest['+i+'][guestSName]', $("#sName"+i).val());
+                        data.append('guest['+i+'][memberid]', $("#memberid"+i).val());
+                    }
                 }
                 
                 data.append('gContactName', $("#cgName").val());
