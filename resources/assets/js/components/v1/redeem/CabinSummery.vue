@@ -16,13 +16,16 @@
                                             <div class="col-md-4">Redemption Rate</div>
                                         </div>
                                         <div class="row redeem-cabin-container-inner-section">
-                                            <div class="col-md-7 col-md-offset-1">{{ $route.params.cabin }}</div>
+                                            <div class="col-md-7 col-md-offset-1">{{ $root.retriveCabinData($route.params.cabin) }}</div>
                                             <div class="col-md-4">
                                                 <template v-if="$route.query.cc!==undefined && $route.query.cc>0">
                                                     {{ $route.query.cc }} CC
                                                 </template>
+                                                <template v-else-if="$route.query.gp!==undefined && $route.query.gp>0">
+                                                    {{ $route.query.gp }} GP
+                                                </template>
                                                 <template v-else>
-                                                    {{ ccValue }} GP
+                                                    {{ $route.query.cash!==undefined && $route.query.cash>0 ? $route.query.cash : 0 }} SGD
                                                 </template>
                                             </div>
                                         </div>
@@ -42,12 +45,16 @@
                         <div class="redeen-cabin-summery-checkout">
                             <div class="col-md-2 redeem-cabin-checkout-total">Total</div>
                             <div class="col-md-6 redeem-cabin-checkout-amount">
-                                <template v-if="$route.query.cc!==undefined && $route.query.cc>0">
-                                    {{ $route.query.cc }} CC
-                                </template>
-                                <template v-else>
-                                    {{ ccValue }} GP
-                                </template>
+                                
+                                    <template v-if="$route.query.cc!==undefined && $route.query.cc>0">
+                                        {{ $route.query.cc }} CC
+                                    </template>
+                                    <template v-else-if="$route.query.gp!==undefined && $route.query.gp>0">
+                                        {{ $route.query.gp }} GP
+                                    </template>
+                                    <template v-else>
+                                        {{ $route.query.cash!==undefined && $route.query.cash>0 ? $route.query.cash : 0 }} SGD
+                                    </template>
                             </div>
                             <div class="col-md-4">
                                 <div id="redeem-cabin-type-checkout-cta-container">
@@ -57,7 +64,9 @@
                                         pax: $route.params.pax,
                                         cabin: $route.params.cabin
                                     }, query: {
-                                        cc: $route.query.cc!==undefined && $route.query.cc>0 ? $route.query.cc : 0
+                                        cc: $route.query.cc!==undefined && $route.query.cc>0 ? $route.query.cc : 0,
+                                        cash: $route.query.cash!==undefined && $route.query.cash>0 ? $route.query.cash : 0,
+                                        gp: $route.query.gp!==undefined && $route.query.gp>0 ? $route.query.gp : 0
                                     } }" class="square-cta large-version full-width-version" id="redeem-cabin-type-checkout-cta">
                                         Proceed To Checkout
                                     </router-link>

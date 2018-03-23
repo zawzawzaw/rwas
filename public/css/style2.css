@@ -81,4 +81,10 @@ h2 {
   font-size: 50px;
 }
 
->>>>>>> e6791d82fb37c6c7488de8a4a26c082202f5c8b4
+#payment-dashboard-section h1,
+#payment-register-form-section h1 {
+  text-align: center;
+  margin-bottom: 60px;
+  padding-top: 50px;
+}
+

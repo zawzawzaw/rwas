@@ -91,13 +91,13 @@ class UpdateCsvData extends Command
         //             $counter++;
         //         }
         //         die();
-        $url = 'http://clients.manic.com.sg/rwas/resources/assets/csv/Seaware_Sample.CSV';
-        $path = storage_path('csv/Seaware.CSV');
+        // $url = 'http://clients.manic.com.sg/rwas/resources/assets/csv/Seaware_Sample.CSV';
+        // $path = storage_path('csv/Seaware.CSV');
 
-        $headers = getHeaders($url);
+        // $headers = getHeaders($url);
 
-        if ($headers['http_code'] === 200 and $headers['download_content_length'] < 1024*1024) {
-            if (download($url, $path)){
+        // if ($headers['http_code'] === 200 and $headers['download_content_length'] < 1024*1024) {
+            // if (download($url, $path)){
                 
                 DB::statement('SET FOREIGN_KEY_CHECKS=0;');
                 SeawareCsv::truncate();
@@ -131,9 +131,9 @@ class UpdateCsvData extends Command
                         'cabin_sold' => $csvLine[8],
                         'cabin_available' => $csvLine[9],
                         'pax_count' => $csvLine[10],
-                        'day' => $night+1,
-                        'night' => $night,
-                        'itenerary_name' => ($night+1)."Days ".((int) $night)."Night ".$csvLine[4],
+                        'day' => (int) $night+1,
+                        'night' => (int) $night,
+                        'itenerary_name' => ((int) $night+1)."Days ".((int) $night)."Night ".$csvLine[4],
                         'itinerary_code' => $night."N ".$csvLine[4],
                         'departure_port' => $port[0],
                         'arrival_port' => $port[1]
@@ -160,7 +160,8 @@ class UpdateCsvData extends Command
                         'card_type' => $csvLine[1],
                         'cabin_code' => $csvLine[2],
                         'pax_type_code' => $csvLine[3],
-                        'gp' => $csvLine[4],
+                        // 'gp' => $csvLine[4],
+                        'gp' => rand(100, 300),
                         'rwcc' => $csvLine[5],
                         'exec_pax' => $csvLine[6],
                         'holiday_charge' => $csvLine[7],
@@ -254,10 +255,10 @@ class UpdateCsvData extends Command
                     // }
                     $counter++;
                 }
-            }else{
-                $this->info("Faild to download csv");
-            }
-        }
+            // }else{
+            //     $this->info("Faild to download csv");
+            // }
+        // }
 
         $this->info('Fetched and imported the seaware CSV');
     }

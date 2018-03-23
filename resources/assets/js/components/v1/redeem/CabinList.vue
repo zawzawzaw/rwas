@@ -25,23 +25,32 @@
                                     
                                     <template v-for="(c, index) in cabins">
                                   
-                                        <router-link :to="{ name: 'redeem.cabin.summery', params: {cruiseid: $route.params.cruiseid, date: $route.params.date, pax: $route.params.pax, cabin: c.cabin_type_code}, query: {cc: c.price.cc} }" v-bind:key="index" class="redeem-cabin-type-option-item">
+                                        <div v-bind:key="index" class="redeem-cabin-type-option-item">
                                             <div class="row">
                                                 <div class="col-md-9">
-                                                    <p>{{ c.cabin_type_code }}</p>
+                                                    <p>{{ $root.retriveCabinData(c.cabin_type_code) }}</p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <p>
+                                                    <p>                                             
                                                         <template v-if="c.price.cc>0">
-                                                            {{ c.price.cc }} CC
+                                                            <router-link :to="{ name: 'redeem.cabin.summery', params: {cruiseid: $route.params.cruiseid, date: $route.params.date, pax: $route.params.pax, cabin: c.cabin_type_code}, query: {cc: c.price.cc} }">
+                                                                {{ c.price.cc }} CC
+                                                            </router-link>
+                                                            &nbsp;&nbsp;
                                                         </template>
                                                         <template v-else>
-                                                            {{ c.price.gp }} GP
+                                                            <router-link :to="{ name: 'redeem.cabin.summery', params: {cruiseid: $route.params.cruiseid, date: $route.params.date, pax: $route.params.pax, cabin: c.cabin_type_code}, query: {gp: c.price.gp} }">
+                                                                {{ c.price.gp }} GP
+                                                            </router-link>
+                                                            &nbsp;&nbsp;
                                                         </template>
+                                                        <router-link :to="{ name: 'redeem.cabin.summery', params: {cruiseid: $route.params.cruiseid, date: $route.params.date, pax: $route.params.pax, cabin: c.cabin_type_code}, query: {cash: c.price.cash} }">
+                                                            {{ c.price.cash }} SGD
+                                                        </router-link>
                                                     </p>
                                                 </div>
                                             </div>
-                                        </router-link>
+                                        </div>
 
                                     </template>
 

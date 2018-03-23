@@ -63,7 +63,7 @@
 
                                         <div id="redeem-search-valid-departure-ports" class="redeem-search-options">
                                             <template  v-for="(po, index) in port">
-                                                <p v-bind:key="index" :class="{'selected' : po.checked===true }" v-on:click.prevent="selectFilterPort(index)">
+                                                <p v-bind:key="index" :class="{'selected' : po.checked===true, 'disabled' : po.disabled}" v-on:click.prevent="selectFilterPort(index)">
                                                     {{ $root.portData[po.data].en }}
                                                 </p>
                                             </template>
@@ -74,7 +74,7 @@
 
                                         <div id="redeem-search-valid-departure-dates" class="redeem-search-options">
                                             <template v-for="(d, index) in date">
-                                                <p v-bind:key="index" :class="{'selected' : d.checked===true }" v-on:click.prevent="selectFilterDate(index)">{{ d.placeHolder }}</p>
+                                                <p v-bind:key="index" :class="{'selected' : d.checked===true, 'disabled' : d.disabled}" v-on:click.prevent="selectFilterDate(index)">{{ d.placeHolder }}</p>
                                             </template>
                                         </div> <!-- redeem-search-valid-departure-dates -->
 
@@ -200,22 +200,53 @@ export default {
             }
         },
         selectFilterPort: function(index) {
+            if(this.port[index].disabled) {
+                return false;
+            }
             this.port[index].checked = true;
-            console.log(index);
+            // console.log(index);
             for(var i in this.port){
                 if(i.toString()!=index){
                     this.port[i].checked = false;
-                    console.log("no Matched");
+                    // console.log("no Matched");
                 }else{
-                    console.log("I'm matched!");
+                    // console.log("I'm matched!");
+                }
+            }
+            var d = [];
+            for(var da in this.port[index].date){
+                d.push(this.port[index].date[da].value);
+            }
+            console.log(d);
+            for(var i in this.date){
+                this.date[i].disabled = false;
+                // console.log(this.date[i].value);
+                // console.log(d.indexOf(this.date[i].value));
+                if(d.indexOf(this.date[i].value)>-1){
+                    this.date[i].disabled = false;
+                }else{
+                    this.date[i].disabled = true;
                 }
             }
         },
         selectFilterDate: function(index) {
+            if(this.date[index].disabled){
+                return false;
+            }
             this.date[index].checked = true;
             for(var i in this.date){
                 if(i!=index){
                     this.date[i].checked = false;
+                }
+            }
+
+            for(var p in this.port){
+                this.port[p].disabled = true;
+                for(var d in this.port[p].date){
+                    if(this.port[p].date[d].value===this.date[index].value) {
+                        this.port[p].disabled = false;
+                        break;
+                    }
                 }
             }
         },
@@ -293,7 +324,8 @@ export default {
                         portCon[res.data[i].port] = {
                             data: check,
                             date: [],
-                            checked: selected
+                            checked: selected,
+                            disabled: false
                         };
                     }
                     
@@ -321,6 +353,7 @@ export default {
                         }
 
                         date.checked = selected;
+                        date.disabled = false;
                         ths.date.push(date);
                     }
                 }

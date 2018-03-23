@@ -17,7 +17,7 @@
                   <template>
                     {{ $root.result }}
                   </template>
-                  <template v-if="$root.result===''">
+                  <template v-if="$root.result==='' || $root.result===null || $root.result==='null'">
                     <p>
                       Booking success<br/>
                       Thank you for using RWAS!
@@ -48,6 +48,10 @@
     export default {
         mounted() {
             console.log("Booking successful");
+            if(this.$root.result==="" && this.$route.params.cc===undefined && this.$route.params.cash===undefined) {
+              this.$root.result = JSON.stringify(JSON.parse(this.$cookie.get('test')), undefined, 2);
+              this.$cookie.delete('test');
+            }
         }
     }
 </script>
