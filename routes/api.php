@@ -17,6 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['prefix' => 'info'], function(){
+    Route::get('port', 'V1\\Api\\MetaController@getPortData');
+    Route::get('ship', 'V1\\Api\\MetaController@getShipData');
+    Route::get('cabin', 'V1\\Api\\MetaController@getCabinData');
+});
+
 Route::group(['prefix' => 'cruise'], function(){
     Route::get('get_valid_search_parameters', 'CruiseController@get_valid_search_parameters');
     Route::get('get_home_itineraries', 'CruiseController@get_home_itineraries');

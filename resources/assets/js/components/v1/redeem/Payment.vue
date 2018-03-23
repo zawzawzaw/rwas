@@ -43,6 +43,26 @@
                                 </div>
 
                             </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label>CUSTNAME</label>
+                                         <input name='CUSTNAME' type='hidden' value='Test Payment'>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label>Card No *</label>
+                                        <input name='CARDNO' type='text' value='' class="required only-numeric" required>
+                                    </div>
+                            
+                                </div>
+
+                            </div>
 
                             <input name='CARDNAME' type='hidden' value='asd'>
                             <div class="row">
@@ -52,6 +72,7 @@
                                         <label>Card Expired Date*</label>
                                         <v-date-picker
                                             :min-date='new Date()'
+                                            :format='format'
                                             v-model='selectedDate'>
                                         </v-date-picker>
                                     </div>
@@ -76,7 +97,6 @@
                             <input name='CURRENCYCODE' type='hidden' value='HKD'>
                             <input name='AMOUNT' type='hidden' v-model='amount'>
                             <input name='SIGNATURE' type='hidden' v-model='signature'>
-                            <input name='CUSTNAME' type='hidden' value='Test Payment'>
                             <input name='CUSTEMAIL' type='hidden' value='test.payment@starcruises.com'>
                             <input name='SHOPPER_IP' type='hidden' value='::1'>
                             <input name='DESCRIPTION' type='hidden' value=''>
@@ -128,6 +148,13 @@
                 signature: 0,
                 amount: 0,
                 loading: true,
+                format: {
+                    title: 'MMMM YYYY',
+                    weekdays: 'W',
+                    navMonths: 'MMM',
+                    input: ['L', 'YYYY-MM-DD', 'MM/YY'],
+                    dayPopover: 'L',
+                }
             }
         },
         mounted() {
