@@ -79,10 +79,16 @@ class UserController extends Controller
 
         $mobile = "";
 
-        foreach($result->Contact->ContactSection->Cust_Contact as $con){
-            if(strtolower($con->Type)==="mobile"){
-                $mobile = $con->ContactNo;
-                break;
+        if(is_array($result->Contact->ContactSection->Cust_Contact)) {
+            foreach($result->Contact->ContactSection->Cust_Contact as $con){
+                if(strtolower($con->Type)==="mobile"){
+                    $mobile = $con->ContactNo;
+                    break;
+                }
+            }
+        } else {
+            if(strtolower($result->Contact->ContactSection->Cust_Contact->Type)==="mobile"){
+                $mobile = $result->Contact->ContactSection->Cust_Contact->ContactNo;
             }
         }
 
