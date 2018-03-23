@@ -308,6 +308,7 @@ class CruiseController extends Controller
         
         $cabins = [];
         $ownCC = $this->getCCValue($request, false);
+        $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true, is_null($request->input('cid')) ? $request->attributes->get('loginuser') : $request->input('cid'));
         // return response()->json($cruise);
         $pax = is_null($request->input('pax')) || $request->input('pax')==="" ? 'A' : $request->input('pax');
 
@@ -340,7 +341,8 @@ class CruiseController extends Controller
                     'gp' => $gp,
                     'gp_cash_added' => 0,
                     'cash' => $cash,
-                    'ownCC' => $ownCC
+                    'ownCC' => $ownCC,
+                    'ownGP' => $info['res']['data']['points']['gp'],
                 ),
                 $request->attributes->get('loginuser')
             ];
@@ -640,7 +642,7 @@ class CruiseController extends Controller
         $input = [
             'paraDrsID' => 'MANIC',
             'paraDrsPwd' => 'MANIC',
-            'paraCid' => $request->attributes->get('loginuser'),
+            'paraCid' => is_null($request->input('cid')) ? $request->attributes->get('loginuser') : $request->input('cid'),
             'paraWorkGroup' => urlencode('MEML'),
             'paraLoadDefaultDRSifNoUA' => 0,
             'paraPFFieldName' => 'RWRC'

@@ -56,7 +56,7 @@ class UserController extends Controller
 
         $points = [
             'cc' => floor($cc->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value),
-            'gp' => []
+            'gp' => 0
         ];
 
         foreach($result->Point->Item as $p) {
