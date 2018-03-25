@@ -1,7 +1,11 @@
 <template>
     <div>
         <div>
-            <cabin-cruise-info></cabin-cruise-info>
+            <template v-if="cruise.cruiseid!==undefined && cruise.cruiseid!==''">
+                <cabin-cruise-info
+                    :cruiseid="cruise.cruiseid"
+                ></cabin-cruise-info>
+            </template>
             <article id="redeem-cabin-type-option-section">
                 <div class="container-fluid has-breakpoint">
                     <div class="row">
@@ -33,20 +37,20 @@
                                                 <div class="col-md-3">
                                                     <p>                                             
                                                         <template v-if="c.price.cc>0">
-                                                            <router-link :to="{ name: 'redeem.cabin.summery', params: {cruiseid: $route.params.cruiseid, date: $route.params.date, pax: $route.params.pax, cabin: c.cabin_type_code}, query: {cc: c.price.cc} }">
+                                                            <a href="javascript:void(0);" v-on:click="useCC(index)">
                                                                 {{ c.price.cc }} CC
-                                                            </router-link>
+                                                            </a>
                                                             &nbsp;&nbsp;
                                                         </template>
                                                         <template v-else>
-                                                            <router-link :to="{ name: 'redeem.cabin.summery', params: {cruiseid: $route.params.cruiseid, date: $route.params.date, pax: $route.params.pax, cabin: c.cabin_type_code}, query: {gp: c.price.gp} }">
+                                                            <a href="javascript:void(0);" v-on:click="useGP(index)">
                                                                 {{ c.price.gp }} GP
-                                                            </router-link>
+                                                            </a>
                                                             &nbsp;&nbsp;
                                                         </template>
-                                                        <router-link :to="{ name: 'redeem.cabin.summery', params: {cruiseid: $route.params.cruiseid, date: $route.params.date, pax: $route.params.pax, cabin: c.cabin_type_code}, query: {cash: c.price.cash} }">
+                                                        <a href="javascript:void(0);" v-on:click="useCash(index)">
                                                             {{ c.price.cash }} SGD
-                                                        </router-link>
+                                                        </a>
                                                     </p>
                                                 </div>
                                             </div>
@@ -70,7 +74,8 @@
     export default {
         data() {
             return {
-                cabins: []
+                cabins: [],
+                cruise: {}
             }
         },
         methods: {
@@ -80,23 +85,59 @@
             loadCabin: function() {
                 var ths = this;
                 axios({
-                    url: this.$root.apiEndpoint+'/cruise/get_cabin_prices?cruise_id='+this.$route.params.cruiseid+'&pax='+this.$route.params.pax,
+                    url: this.$root.apiEndpoint+'/cruise/get_cabin_prices?cruise_id='+this.cruise.cruiseid+'&pax='+this.cruise.pax,
                     method: 'get'
                 }).then((res) => {
                     ths.cabins = res.data;
                 }).catch((err) => {
-
+                    if(err.response.status!== undefined) {
+                        if(err.response.status===422) {
+                            if(err.response.data.status="404") {
+                                alert("Invalid cruise id! You will redirect to search page in a few second!");
+                                setTimeout(function() {
+                                    ths.$router.push({ name: 'redeem' });
+                                }, 500);
+                            }
+                        }
+                    }
                 });
+            },
+            useCC: function(index) {
+                this.selectPayment(index, "cc");
+            },
+            useGP: function(index) {
+                this.selectPayment(index, "gp");
+            },
+            useCash: function(index) {
+                this.selectPayment(index, "cash");
+            },
+            selectPayment: function(index, type) {
+                this.cruise.ptype = type;
+                this.cruise.cabin = this.cabins[index].cabin_type_code;
+
+                this.$cookie.set('cruise', JSON.stringify(this.cruise), 1);
+                this.$router.push({ name: 'redeem.cabin.subsequence'});
             }
         },
         created() {
-            this.loadCabin();
-
             var ths = this;
 
             eventHub.$on('searchCruise', function() {
                 ths.searchNow();
             });
+        },
+        mounted() {
+            var cruise = this.$cookie.get('cruise');
+
+            if(cruise===null) {
+                this.$router.push({ name: 'redeem' });
+                return false;
+            }
+
+            cruise = JSON.parse(cruise);
+            this.cruise = cruise;
+
+            this.loadCabin();
         }
     }
 </script>

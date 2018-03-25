@@ -50,6 +50,12 @@
 
 <script>
     export default {
+        props: {
+            cruiseid: {
+                type: String,
+                default: ""
+            }
+        },
         data() {
             return {
                 ship: []
@@ -59,7 +65,7 @@
             loadCruiseInfo: function(){
                 var ths = this;
                 axios({
-                    url: this.$root.apiEndpoint+'/cruise/get_cruise_info_for_cabin?cruise_id='+this.$route.params.cruiseid,
+                    url: this.$root.apiEndpoint+'/cruise/get_cruise_info_for_cabin?cruise_id='+this.cruiseid,
                     method: 'get'
                 }).then((res) => {
                     var data = res.data;
@@ -72,7 +78,7 @@
                 });
             },
         },
-        created() {
+        mounted() {
             this.loadCruiseInfo();
         }
     }

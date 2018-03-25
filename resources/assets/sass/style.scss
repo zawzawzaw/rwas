@@ -81,3 +81,63 @@ h2{
     margin-bottom: 60px;
     padding-top: 50px;
 }
+
+.redeem-subsequence-cabin-search{
+    background: #e2e2e2;
+    padding: 20px;
+    .subpax-selector {
+        display: inline-block;
+        float: left;
+        margin-left: 10px;
+        text-align: center;
+        position: relative;
+        margin-top: 14px;
+        background: #fff;
+        line-height: 45px;
+        width: 180px;
+        border: 1px solid #aaa;
+        label {
+            height: inherit;
+            display: block;
+            font-size: 13px;
+            color: #aaa;
+            padding-right: 20px;
+        }
+        input {
+            position: absolute;
+            top: -1px;
+            width: calc(50% - 15px);
+            right: 0;
+            height: 100%;
+            font-size: 14px;
+            border: none;
+            background: transparent;
+            padding-bottom: 1px;
+        }
+    }
+    .subpax-btn {
+        margin-top: 14px;
+        height: 47px;
+        border: 1px solid #aaa;
+        margin-left: 10px;
+        width: 100px;
+        background: #ffffff;
+        color: #4a4a4a;
+    }
+}
+
+.proceedCheckOut{
+    margin-top: 14px;
+    height: 47px;
+    border: 1px solid #aaa;
+    margin-left: 10px;
+    width: 170px;
+    background: #ffffff;
+    color: #4a4a4a;
+    float: right;
+}
+
+.pretend-text{
+    color: #a4a4a4;
+    padding-bottom: 15px;
+}

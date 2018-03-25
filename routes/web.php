@@ -24,15 +24,15 @@ Route::get('/', function () {
 });
 
 // Route::get('/redeem', function () { return view('pages/redeem/primary-search'); });
-Route::get('/redeem/cabin', function () { return view('pages/redeem/cabin-type-rates'); });
-Route::get('/redeem/summary', function () { return view('pages/redeem/summary'); });
+// Route::get('/redeem/cabin', function () { return view('pages/redeem/cabin-type-rates'); });
+// Route::get('/redeem/summary', function () { return view('pages/redeem/summary'); });
 
-Route::get('/checkout', function () { return view('pages/checkout/details-main'); });
-Route::get('/checkout/details-guest', function () { return view('pages/checkout/details-guest'); });
-Route::get('/checkout/details-summary', function () { return view('pages/checkout/details-summary'); });
+// Route::get('/checkout', function () { return view('pages/checkout/details-main'); });
+// Route::get('/checkout/details-guest', function () { return view('pages/checkout/details-guest'); });
+// Route::get('/checkout/details-summary', function () { return view('pages/checkout/details-summary'); });
 
-Route::get('/checkout/payment', function () { return view('pages/checkout/payment'); });
-Route::get('/checkout/thank-you', function () { return view('pages/checkout/thank-you'); });
+// Route::get('/checkout/payment', function () { return view('pages/checkout/payment'); });
+// Route::get('/checkout/thank-you', function () { return view('pages/checkout/thank-you'); });
 
 Route::group(['middleware' => 'nonAuthDrs'], function() {
   Route::get('/register', function () { return view('pages/account/register'); });
@@ -132,6 +132,7 @@ Route::group(['middleware' => 'TempAuthCheck'], function(){
   Route::get('/cruise/get_home_itineraries_nonmember', 'CruiseController@get_home_itineraries_nonmember');
   Route::get('/cruise/get_best_redeemable_cruise', 'CruiseController@get_best_redeemable_cruise');
   Route::get('/cruise/get_cabin_prices', 'CruiseController@get_cabin_prices');
+  Route::get('/cruise/get_single_cabin_prices', 'CruiseController@get_single_cabin_prices');
   Route::get('/cruise/get_home_cruise_details', 'CruiseController@get_home_cruise_details');
   Route::get('/cruise/get_cruise_info_for_cabin', 'CruiseController@get_cruise_info_for_cabin');
   Route::get('/cruise/generate_payment_requirement', 'CruiseController@generate_payment_requirement');

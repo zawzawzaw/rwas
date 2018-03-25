@@ -24,7 +24,7 @@
                                         <div class="row">
                                             <div class="col-md-2 col-sm-4 col-xs-6" v-for="(c, cindex) in i.cruise_array" v-bind:key="cindex">
                                                 
-                                                <router-link :to="{ name: 'redeem.cabin', params: {cruiseid: c.cruise_id, date: c.departure_date.replace(/\//g, '-'), pax: $root.redeemSearch.pax.total} }" class="item-date" >
+                                                <div class="item-date" v-on:click="selectCruise(index, cindex)">
                                                     <div class="item-date-header">
                                                     <h6>{{ parseDate(index, cindex) }}</h6>
                                                     </div>
@@ -35,7 +35,7 @@
                                                             <span class="currency">GP</span>
                                                         </div>
                                                     </div>
-                                                </router-link>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -91,6 +91,17 @@
                 ];
                 
                 return date_arr[0] + ' ' + months[month_number-1] + ' ' + month_year;
+            },
+            selectCruise: function(index, cindex) {
+
+                var cruiseData = {
+                    cruiseid: this.itinerary[index].cruise_array[cindex].cruise_id,
+                    date: this.itinerary[index].cruise_array[cindex].departure_date.replace(/\//g, '-'),
+                    pax: this.$root.redeemSearch.pax.total
+                };
+
+                this.$cookie.set('cruise', JSON.stringify(cruiseData), 1);
+                this.$router.push({ name: 'redeem.cabin' });
             }
         },
         created() {

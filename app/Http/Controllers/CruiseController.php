@@ -109,6 +109,7 @@ class CruiseController extends Controller
             if(is_null($request->input('date'))==false){
                 $query->whereRaw("DATE_FORMAT(departure_date, '%m/%Y')='".$request->input('date')."'");
             }
+            $query->where('departure_date', '>=', date("Y-m-d"));
             $query->orderBy('departure_date', 'ASC');
         }]);
 
@@ -189,6 +190,7 @@ class CruiseController extends Controller
         $list->whereHas('cabins', function($query){
             $query->where('cabin_available', '>', 0);
         });
+        $list->where('departure_date', '>=', date("Y-m-d"));
         $list->groupBy('itinerary.itin_code', 'mon_year');
         $list->orderBy('cruise.departure_date', 'ASC');
         $list = $list->get()->toArray();
@@ -350,6 +352,81 @@ class CruiseController extends Controller
 
         return response()->json($cabins);
     }
+    
+    public function get_single_cabin_prices(Request $request)
+    {
+        if(empty($request->input('cruise_id')) || is_null($request->input('cruise_id'))){
+            return response()->json([
+                'mesg' => 'Cruise id is required!'
+            ], 422);
+        }
+
+        if(empty($request->input('cabin_code')) || is_null($request->input('cabin_code'))){
+            return response()->json([
+                'mesg' => 'Cabin code is required!'
+            ], 422);
+        }
+
+        $cruise = Cruise::select('id', 'itinerary', 'departure_date')->where('cruise_id', $request->input('cruise_id'))->with([
+            'cabins' => function($query) use ($request){
+                $query->select('id', 'cabin_category', 'cruise', 'pax_count');
+                $query->where('cabin_category', $request->input('cabin_code'));
+            },
+            'itinerary'
+        ])->first();
+
+        if(empty($cruise)){
+            return response()->json([
+                'mesg' => 'Invalid cruise id!'
+            ], 422);
+        }
+
+        $cruise = $cruise->toArray();
+        
+        $cabins = [];
+        $ownCC = $this->getCCValue($request, false);
+        $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true, is_null($request->input('cid')) ? $request->attributes->get('loginuser') : $request->input('cid'));
+        // return response()->json($cruise);
+        $pax = is_null($request->input('pax')) || $request->input('pax')==="" ? 'A' : $request->input('pax');
+
+        $gp = 0;
+
+        foreach($cruise['cabins'] as $cabin){
+            $xtopia = DB::select("SELECT * FROM xtopia x WHERE 
+                                    x.itinerary_code='".$cruise['itinerary']['itin_code']."' AND 
+                                    x.ship_code='".$cruise['itinerary']['ship_code']."' AND 
+                                    x.dep_start<='".$cruise['departure_date']."' AND 
+                                    x.dep_end>='".$cruise['departure_date']."' AND 
+                                    x.cabin_code='".$cabin['cabin_category']."' AND 
+                                    x.pax_type_code='$pax' AND 
+                                    x.card_type='CLASSIC' LIMIT 3;");
+            
+            $cc = 0;
+            $gp = rand(100, 300);
+            $cash = rand(100, 300);
+
+            if(count($xtopia)>0) {
+                $cc = $xtopia[0]->rwcc;
+                $gp = $xtopia[0]->gp;
+            }
+
+            $cabins[] = [
+                'cabin_type_code' => $cabin['cabin_category'],
+                'price' => array(
+                    'cc' => $cc,
+                    'cc_cash_added' => 0,
+                    'gp' => $gp,
+                    'gp_cash_added' => 0,
+                    'cash' => $cash,
+                    'ownCC' => $ownCC,
+                    'ownGP' => $info['res']['data']['points']['gp'],
+                ),
+                $request->attributes->get('loginuser')
+            ];
+        }
+
+        return response()->json($cabins[0]);
+    }
 
     public function get_cruise_info_for_cabin(Request $request)
     {
@@ -361,7 +438,15 @@ class CruiseController extends Controller
         
         $cruise = Cruise::select('id', 'itinerary', 'departure_date')->with(['itinerary' => function($query) {
             $query->select('id', 'ship_code', 'day', 'night', 'departure_port', 'arrival_port');
-        }])->where('cruise_id', $request->input('cruise_id'))->first()->toArray();
+        }])->where('cruise_id', $request->input('cruise_id'))->first();
+        
+        if(empty($cruise)) {
+            return response()->json([
+                'mesg' => 'Cruise didn\'t exists!'
+            ], 422);
+        }
+
+        $cruise = $cruise->toArray();
 
         $res = [
             'ship_code' => $cruise['itinerary']['ship_code'],

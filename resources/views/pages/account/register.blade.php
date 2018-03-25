@@ -691,7 +691,7 @@
 
                 <div class="form-group">
                   <label>Pin</label>
-                  <input type="password" name="pin" class="required only-string-length only-numbers" data-string-length="6">
+                  <input type="password" name="pin" class="required only-string-length only-numbers" data-string-length="6" maxlength="6" pattern=".{6,6}" required title="Pin need to be 6 character long"/>
                 </div>
 
               </div>
@@ -699,7 +699,7 @@
 
                 <div class="form-group">
                   <label>Confirm Pin</label>
-                  <input type="password" name="pin_confirm" class="required only-string-length only-numbers" data-string-length="6">
+                  <input type="password" name="pin_confirm" class="required only-string-length only-numbers" data-string-length="6" maxlength="6" pattern=".{6,6}" required title="Pin need to be 6 character long"/>
                 </div>
 
               </div>
