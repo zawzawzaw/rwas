@@ -42,6 +42,68 @@
     @section('script')
       @include('includes.script-default')
     @show
+
+    <script>
+      $(window).load(function(){
+      console.log("Regexer loaded");
+      $(document).on("keypress", ".alphaRegex", function(e) {
+        console.log("Alpha regex loaded");
+        var key = e.key;
+        if(key.toLowerCase()==="backspace" || key.toLowerCase()==="delete") {
+            return true;
+        }
+
+        var te = /^[a-z]+$/i;
+
+        var tt = te.test(key);
+
+        if(tt===false){
+            e.preventDefault();
+        }
+
+        return tt;
+      }); 
+      $(document).on("keypress", ".alphaNumericRegex", function(e) {
+        console.log("Alpha numeric regex loaded");
+        var key = e.key;
+        if(key.toLowerCase()==="backspace" || key.toLowerCase()==="delete") {
+            return true;
+        }
+
+        var te = /^[a-z\d\ ]+$/i;
+        
+        var tt = te.test(key);
+
+        if(tt===false){
+            e.preventDefault();
+        }
+
+        return tt;
+      }); 
+      $(document).on("keypress", ".numericRegex", function(e) {
+        console.log("Numeric regex loaded");
+        var key = e.key;
+        if(key.toLowerCase()==="backspace" || key.toLowerCase()==="delete") {
+            return true;
+        }
+
+        var te = /^[\d]+$/i;
+
+        var tt = te.test(key);
+
+        if(tt===false){
+            e.preventDefault();
+        }
+
+        return tt;
+      }); 
+      $(".noTypeInput").on("keypress", function(e){
+        console.log("No input load");
+        e.preventDefault();
+      return true;
+    });
+    });
+    </script>
     
   </body>
 </html>

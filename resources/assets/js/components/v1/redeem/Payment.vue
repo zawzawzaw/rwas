@@ -266,11 +266,7 @@
                 return this.selectedDate.getMonth()+1;
             },
             redirectLink: function(){
-                return this.$root.apiEndpoint+"/redeem/cabin/"+this.$route.params.cruiseid+"/"+this.$route.params.date+"/"+this.$route.params.pax+"/"+this.$route.params.cabin+"/thankyou";
-                // cruiseid: ths.$route.params.cruiseid,
-                //             date: ths.$route.params.date,
-                //             pax: ths.$route.params.pax,
-                //             cabin: ths.$route.params.cabin,
+                return this.$root.apiEndpoint+"/redeem/cabin/thankyou";
             },
             custname: function() {
                 return this.fname + " " + this.lname;

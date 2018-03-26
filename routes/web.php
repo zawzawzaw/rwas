@@ -150,7 +150,7 @@ Route::group(['middleware' => 'TempAuthCheck'], function(){
 Route::get('/booking/book_cruise', 'BookingController@book_cruise');
 Route::get('/booking/get_booking_details', 'BookingController@get_booking_details');
 
-Route::post('/redeem/cabin/{cruise}/{date}/{pax}/{cabin}/thankyou', function() {
+Route::post('/redeem/cabin/thankyou', function() {
   // echo "<pre>";
   // print_r($_POST);
   // echo "</pre>";

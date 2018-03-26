@@ -861,60 +861,7 @@
   </article>
 
 <script>
-  $(document).ready(function(){
-    $(".alphaRegex").on("keypress", function(e) {
-      var key = e.key;
-      if(key.toLowerCase()==="backspace" || key.toLowerCase()==="delete") {
-          return true;
-      }
-
-      var te = /^[a-z]+$/i;
-
-      var tt = te.test(key);
-
-      if(tt===false){
-          e.preventDefault();
-      }
-
-      return tt;
-    }); 
-    $(".alphaNumericRegex").on("keypress", function(e) {
-      var key = e.key;
-      if(key.toLowerCase()==="backspace" || key.toLowerCase()==="delete") {
-          return true;
-      }
-
-      var te = /^[a-z\d\ ]+$/i;
-      
-      var tt = te.test(key);
-
-      if(tt===false){
-          e.preventDefault();
-      }
-
-      return tt;
-    }); 
-    $(".numericRegex").on("keypress", function(e) {
-      var key = e.key;
-      if(key.toLowerCase()==="backspace" || key.toLowerCase()==="delete") {
-          return true;
-      }
-
-      var te = /^[\d]+$/i;
-
-      var tt = te.test(key);
-
-      if(tt===false){
-          e.preventDefault();
-      }
-
-      return tt;
-    }); 
-    $(".noTypeInput").on("keypress", function(e){
-      e.preventDefault();
-      return true;
-    })
-  });
+  
 </script>
 
 {{-- content --}}

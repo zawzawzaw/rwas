@@ -36,7 +36,7 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <p>                                             
-                                                        <template v-if="c.price.cc>0">
+                                                        <template v-if="c.price.cc>0 && c.price.cc<c.price.ownCC">
                                                             <a href="javascript:void(0);" v-on:click="useCC(index)">
                                                                 {{ c.price.cc }} CC
                                                             </a>

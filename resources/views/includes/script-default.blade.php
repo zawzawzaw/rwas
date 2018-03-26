@@ -104,7 +104,6 @@
         window.page = new rwas.page.About({});
       });
     });
-    
   </script>
 
 @endif
