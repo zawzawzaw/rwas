@@ -54,7 +54,7 @@
 
                 <div class="form-group">
                   <label>First Name*</label>
-                  <input type="text" name="first_name" class="required only-alpha-and-space">
+                  <input type="text" name="first_name" class="required only-alpha-and-space alphaRegex">
                 </div>
                 
               </div>
@@ -62,7 +62,7 @@
 
                 <div class="form-group">
                   <label>Last Name*</label>
-                  <input type="text" name="last_name" class="required only-alpha-and-space">
+                  <input type="text" name="last_name" class="required only-alpha-and-space alphaRegex">
                 </div>
 
               </div>
@@ -101,7 +101,7 @@
                   <div class="page-default-calendar-bg"></div>
                   <label>Date of Birth*</label>
                   <div class="manic-calendar">
-                    <input name="date_of_birth" type="text" class="required form-control page-default-calendar" placeholder="DD/MM/YYYY">
+                    <input name="date_of_birth" type="text" class="required form-control page-default-calendar noTypeInput" placeholder="DD/MM/YYYY">
                     <div class="calendar-icon"></div>
                     <div class="page-default-calendar-container">
                       <div class="page-default-calendar-datepicker"></div>
@@ -218,7 +218,7 @@
 
                 <div class="form-group">
                   <label>ID or Passport number*</label>
-                  <input type="text" name="doc_no" class="required only-alphanumeric">
+                  <input type="text" name="doc_no" class="required only-alphanumeric alphaNumericRegex">
                 </div>
 
               </div>
@@ -315,7 +315,7 @@
 
                 <div class="form-group">
                   <label>Travel document issue date*</label>
-                  <input type="text" name="doc_issue_date" placeholder="DD/MM/YYYY" class="required">
+                  <input type="text" name="doc_issue_date" placeholder="DD/MM/YYYY" class="required noTypeInput">
                 </div>
 
               </div>
@@ -323,7 +323,7 @@
 
                 <div class="form-group">
                   <label>Travel document expiry date*</label>
-                  <input type="text" name="doc_expiry_date" placeholder="DD/MM/YYYY" class="required">
+                  <input type="text" name="doc_expiry_date" placeholder="DD/MM/YYYY" class="required noTypeInput">
                 </div>
 
               </div>
@@ -502,7 +502,7 @@
 
                 <div class="form-group">
                   <label>&nbsp;</label>
-                  <input type="text" name="mobile_number" class="required only-numbers">
+                  <input type="text" name="mobile_number" class="required only-numbers numericRegex">
                 </div>
 
               </div>
@@ -625,7 +625,7 @@
 
                 <div class="form-group">
                   <label>State / Province*</label>
-                  <input type="text" name="address_state" class="required">
+                  <input type="text" name="address_state" class="required alphaNumericRegex">
                 </div>
                 
               </div>
@@ -647,7 +647,7 @@
 
                 <div class="form-group">
                   <label>City*</label>
-                  <input type="text" name="address_city" class="required">
+                  <input type="text" name="address_city" class="required alphaNumericRegex">
                 </div>
 
               </div>
@@ -655,7 +655,7 @@
 
                 <div class="form-group">
                   <label>Post code*</label>
-                  <input type="text" name="address_postal_code" class="required only-numbers">
+                  <input type="text" name="address_postal_code" class="required only-numbers numericRegex">
                 </div>
 
               </div>
@@ -691,7 +691,7 @@
 
                 <div class="form-group">
                   <label>Pin</label>
-                  <input type="password" name="pin" class="required only-string-length only-numbers" data-string-length="6" maxlength="6" pattern=".{6,6}" required title="Pin need to be 6 character long"/>
+                  <input type="password" name="pin" class="required only-string-length only-numbers numericRegex" data-string-length="6" maxlength="6" pattern=".{6,6}" required title="Pin need to be 6 character long"/>
                 </div>
 
               </div>
@@ -699,7 +699,7 @@
 
                 <div class="form-group">
                   <label>Confirm Pin</label>
-                  <input type="password" name="pin_confirm" class="required only-string-length only-numbers" data-string-length="6" maxlength="6" pattern=".{6,6}" required title="Pin need to be 6 character long"/>
+                  <input type="password" name="pin_confirm" class="required only-string-length only-numbers numericRegex" data-string-length="6" maxlength="6" pattern=".{6,6}" required title="Pin need to be 6 character long"/>
                 </div>
 
               </div>
@@ -860,7 +860,62 @@
     </div> <!-- container-fluid -->
   </article>
 
+<script>
+  $(document).ready(function(){
+    $(".alphaRegex").on("keypress", function(e) {
+      var key = e.key;
+      if(key.toLowerCase()==="backspace" || key.toLowerCase()==="delete") {
+          return true;
+      }
 
+      var te = /^[a-z]+$/i;
+
+      var tt = te.test(key);
+
+      if(tt===false){
+          e.preventDefault();
+      }
+
+      return tt;
+    }); 
+    $(".alphaNumericRegex").on("keypress", function(e) {
+      var key = e.key;
+      if(key.toLowerCase()==="backspace" || key.toLowerCase()==="delete") {
+          return true;
+      }
+
+      var te = /^[a-z\d\ ]+$/i;
+      
+      var tt = te.test(key);
+
+      if(tt===false){
+          e.preventDefault();
+      }
+
+      return tt;
+    }); 
+    $(".numericRegex").on("keypress", function(e) {
+      var key = e.key;
+      if(key.toLowerCase()==="backspace" || key.toLowerCase()==="delete") {
+          return true;
+      }
+
+      var te = /^[\d]+$/i;
+
+      var tt = te.test(key);
+
+      if(tt===false){
+          e.preventDefault();
+      }
+
+      return tt;
+    }); 
+    $(".noTypeInput").on("keypress", function(e){
+      e.preventDefault();
+      return true;
+    })
+  });
+</script>
 
 {{-- content --}}
 

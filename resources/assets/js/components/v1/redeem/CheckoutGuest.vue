@@ -571,7 +571,7 @@
 
                                 <div class="form-group">
                                 <label>Member ID *</label>
-                                <input type="text" name="address_city" class="required" id="memberid0 memberid" value="29" v-on:keypress="$root.inputValidate($event, 'numeric')">
+                                <input type="text" name="address_city" class="required memberid" id="memberid0" value="29" v-on:keypress="$root.inputValidate($event, 'numeric')">
                                 </div>
 
                             </div>
@@ -644,7 +644,7 @@
                             <div v-bind:key="n">
                                 <div class="row">
                                     <div class="col-md-6 col-md-push-3">
-                                        <h1>Cabin 0{{ n }} Guest {{ n }}</h1>
+                                        <h1>Cabin 0{{ sindex+2 }} Guest {{ n }}</h1>
                                     </div>
                                 </div> <!-- row -->
 
@@ -653,7 +653,7 @@
 
                                         <div class="form-group">
                                             <label>First Name*</label>
-                                            <input type="text" name="first_name" :id="'subgName'+n" class="required only-alpha-and-space" value="Jame" v-on:keypress="$root.inputValidate($event, 'alpha')">
+                                            <input type="text" name="first_name" :id="'sub'+sindex+'gName'+n" class="required only-alpha-and-space" value="Jame" v-on:keypress="$root.inputValidate($event, 'alpha')">
                                         </div>
 
                                     </div>
@@ -661,7 +661,7 @@
 
                                         <div class="form-group">
                                             <label>Last Name*</label>
-                                            <input type="text" name="last_name" :id="'subsName'+n" class="required only-alpha-and-space" value="Doe" v-on:keypress="$root.inputValidate($event, 'alpha')">
+                                            <input type="text" name="last_name" :id="'sub'+sindex+'sName'+n" class="required only-alpha-and-space" value="Doe" v-on:keypress="$root.inputValidate($event, 'alpha')">
                                         </div>
 
                                     </div>
@@ -676,7 +676,7 @@
                                         <div class="page-default-calendar-bg"></div>
                                         <label>Date of Birth*</label>
                                         <div class="manic-calendar">
-                                            <input name="date_of_birth" type="text" class="required form-control page-default-calendar" placeholder="DD/MM/YYYY" :id="'subdob'+n" value="21/02/1995" v-on:keypress.prevent>
+                                            <input name="date_of_birth" type="text" class="required form-control page-default-calendar" placeholder="DD/MM/YYYY" :id="'sub'+sindex+'dob'+n" value="21/02/1995" v-on:keypress.prevent>
                                             <div class="calendar-icon"></div>
                                             <div class="page-default-calendar-container">
                                             <div class="page-default-calendar-datepicker"></div>
@@ -690,7 +690,7 @@
 
                                         <div class="form-group">
                                             <label>Member ID *</label>
-                                            <input type="text" name="address_city" class="required memberid" :id="'submemberid'+n" value="" v-on:keypress="$root.inputValidate($event, 'numeric')">
+                                            <input type="text" name="address_city" class="required memberid" :id="'sub'+sindex+'memberid'+n" value="" v-on:keypress="$root.inputValidate($event, 'numeric')">
                                         </div>
 
                                     </div>
@@ -900,16 +900,22 @@
                 }
 
                 var memberid = [];
+                var memid = false;
                 
                 $(".memberid").each(function(){
                     var id = parseInt($(this).val());
-                    if(member.indexOf(id)===-1){
+                    if(memberid.indexOf(id)===-1){
                         memberid.push(id);
                     }else{
+                        memid = true;
                         alert("Cannot use same member id!");
                         return false;
                     }
                 });
+
+                if(memid){
+                    return false;
+                }
 
                 for(var i=0; i<this.totalPax; i++) {
                     var data = {};
@@ -949,11 +955,38 @@
                         };
                     }
 
+                    var udate = data.guestBod;
+                    udate = udate.split("/");
+                    var age = this.$root.getAge(udate[2]+"-"+udate[1]+"-"+udate[0]);
 
                     for(var i in data){
+                        if(i==="memberid" && age<18) continue;
                         if(data[i]==""){
                             alert("Fill all the input form!");
                             return null;
+                        }
+                    }
+                }
+
+                for(var i in this.cruise.subsequence) {
+                    for(var c=0; c<this.cruise.subsequence[i].pax.length; c++){
+
+                        var data = {
+                            guestBod: $("#sub"+i+"dob"+(c+1)).val(),
+                            guestName: $("#sub"+i+"gName"+(c+1)).val(),
+                            guestSName: $("#sub"+i+"sName"+(c+1)).val(),
+                            memberid: $("#sub"+i+"memberid"+(c+1)).val()
+                        };
+                        var udate = data.guestBod;
+                        udate = udate.split("/");
+                        var age = this.$root.getAge(udate[2]+"-"+udate[1]+"-"+udate[0]);
+
+                        for(var e in data){
+                            if(e==="memberid" && age<18) continue;
+                            if(data[e]==""){
+                                alert("Fill all the input form!");
+                                return null;
+                            }
                         }
                     }
                 }
@@ -995,10 +1028,10 @@
                 data.append('gContactEmail', $("#cEmail").val());
                 data.append('gContactCCode', $("#cccode").val());
                 data.append('gContactPhone', $("#cmobile").val());
-                data.append('cruise_id', this.$route.params.cruiseid);
-                data.append('cabin', this.$route.params.cabin);
-                data.append('pax', this.$route.params.pax);
-                data.append('date', this.$route.params.date);
+                data.append('cruise_id', this.cruise.cruiseid);
+                data.append('cabin', this.cruise.cabin);
+                data.append('pax', this.cruise.pax);
+                data.append('date', this.cruise.date);
 
                 var ths = this;
                 axios({
