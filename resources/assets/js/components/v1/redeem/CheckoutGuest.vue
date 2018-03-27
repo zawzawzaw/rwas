@@ -33,7 +33,7 @@
 
                                 <div class="form-group">
                                     <label>Given Name*</label>
-                                    <input type="text" name="first_name" id="gName1" class="required only-alpha-and-space" v-on:keypress="$root.inputValidate($event, 'alpha')" value="John">
+                                    <input type="text" name="first_name" id="gName0" class="required only-alpha-and-space" v-on:keypress="$root.inputValidate($event, 'alpha')" value="John">
                                 </div>
 
                             </div>
@@ -892,6 +892,38 @@
             }
         },
         methods: {
+            loadUserInfo: function() {
+                var ths = this;
+                axios({
+                    url: this.$root.apiEndpoint+'/user/info'
+                }).then((res) => {
+                    var dob = res.data.raw.CustomerDateOfBirth;
+                    $("#dob0").val(dob.substring(6,8)+"/"+dob.substring(4,6)+"/"+dob.substring(0,4));
+                    $("#gender0").val(res.data.raw.CustomerGender);
+                    $("#nat0").val(res.data.raw.CustomerNAT);
+                    var name = res.data.data.details.name;
+                    name = name.replace("[", "");
+                    name = name.replace("]", "");
+                    $("#gName0").val(name);
+                    $("#email0").val(res.data.data.profile.email);
+                    $("#ccode0").val(res.data.raw.CustomerRegionCode);
+                    $("#mobile0").val(res.data.data.profile.mobile);
+                    $("#address0").val(res.data.data.profile.address_line_01);
+                    $("#city0").val(res.data.data.profile.address_city);
+                    $("#country0").val(res.data.raw.CustomerAddressCountry);
+                    $("#memberid0").val(res.data.data.details.membership_id);
+                    $("#postCode0").val(res.data.data.profile.address_postal_code);
+                    $("#state0").val(res.data.data.profile.address_state);
+                    $("#docNo0").val(res.data.raw.CustomerICPassportNo);
+                    if(res.data.raw.CustomerICPassportType=="P"){
+                        $("#docType0").val("PP");
+                    }
+                    $("#docLoc0").val(res.data.raw.CustomerAddressCountry);
+                    // $("#docExpire    "+i).val()
+                }).catch((err) => {
+
+                });
+            },
             confirmBooking: function(){
 
                 if($("#visaConfirm").prop("checked")===false) {
@@ -1032,6 +1064,21 @@
                 data.append('cabin', this.cruise.cabin);
                 data.append('pax', this.cruise.pax);
                 data.append('date', this.cruise.date);
+                data.append('ptype', this.cruise.ptype);
+
+                if(this.cruise.subsequence.length>0){
+                    for(var i=0; i<this.cruise.subsequence.length; i++) {
+                        data.append('subsequent['+i+'][cabin]', this.cruise.subsequence[i].cabin);
+                        data.append('subsequent['+i+'][pax]', this.cruise.subsequence[i].pax);
+                        data.append('subsequent['+i+'][ptype]', this.cruise.subsequence[i].ptype);
+                        for(var g=0; g<this.cruise.subsequence[i].pax.length; g++){
+                            data.append('subsequent['+i+'][guest]['+g+'][guestBod]', $("#sub"+i+"dob"+(g+1)).val());
+                            data.append('subsequent['+i+'][guest]['+g+'][guestName]', $("#sub"+i+"gName"+(g+1)).val());
+                            data.append('subsequent['+i+'][guest]['+g+'][guestSName]', $("#sub"+i+"sName"+(g+1)).val());
+                            data.append('subsequent['+i+'][guest]['+g+'][memberid]', $("#sub"+i+"memberid"+(g+1)).val());
+                        }
+                    }
+                }
 
                 var ths = this;
                 axios({
@@ -1046,6 +1093,7 @@
                         ths.$router.push({ name: 'redeem.cabin.thankyou' });
                     }
                     ths.$root.result = JSON.stringify(res.data, undefined, 2);
+                    this.$cookie.set("checkoutResult", JSON.stringify(res.data, undefined, 2), 1);
                 }).catch((err) => {
                     var mesg = "Failed to submit guest form!";
                     if(err.response.status!==undefined && err.response.status===422) {
@@ -1088,6 +1136,7 @@
             }
 
             this.totalPax = this.cruise.pax.length;
+            this.loadUserInfo();
         }
     }
 </script>

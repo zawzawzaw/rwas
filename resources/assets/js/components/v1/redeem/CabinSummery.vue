@@ -22,12 +22,12 @@
                                             <div class="row redeem-cabin-container-inner-section">
                                                 <div class="col-md-7 col-md-offset-1">{{ $root.retriveCabinData(c.cabin) }}</div>
                                                 <div class="col-md-4">
-                                                    <template v-if="c.priceLoad!==-1">
+                                                    <!-- <template v-if="c.priceLoad!==-1"> -->
                                                         {{ showPrice(index) }}
-                                                    </template>
+                                                    <!-- </template>
                                                     <template v-else>
                                                         Loading...
-                                                    </template>
+                                                    </template> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -82,15 +82,15 @@
                 for(var index in this.cabins){
                     switch (this.cabins[index].ptype) {
                         case "cc":
-                            cc = cc+parseInt(this.cabins[index].price.cc);
+                            cc = cc+parseInt(this.cabins[index].dprice);
                             break;
 
                         case "gp":
-                            gp = gp+parseInt(this.cabins[index].price.gp);
+                            gp = gp+parseInt(this.cabins[index].dprice);
                             break;
                     
                         default:
-                            cash = cash+parseInt(this.cabins[index].price.cash);
+                            cash = cash+parseInt(this.cabins[index].dprice);
                             break;
                     }
                 }
@@ -112,6 +112,44 @@
                 return price==="" ? "Loading" : price;
             }  
         },
+        //     showTotalPrice: function() {
+        //         var price = "";
+        //         var cc = 0;
+        //         var gp = 0;
+        //         var cash = 0;
+        //         for(var index in this.cabins){
+        //             switch (this.cabins[index].ptype) {
+        //                 case "cc":
+        //                     cc = cc+parseInt(this.cabins[index].price.cc);
+        //                     break;
+
+        //                 case "gp":
+        //                     gp = gp+parseInt(this.cabins[index].price.gp);
+        //                     break;
+                    
+        //                 default:
+        //                     cash = cash+parseInt(this.cabins[index].price.cash);
+        //                     break;
+        //             }
+        //         }
+
+        //         if(cc>0) {
+        //             price = cc + " CC";
+        //         }
+
+        //         if(gp>0){
+        //             if(price!=="") price = price + " + ";
+        //             price = price + gp + " GP";
+        //         }
+
+        //         if(cash>0){
+        //             if(price!=="") price = price + " + ";
+        //             price = price + cash + " SGD";
+        //         }
+
+        //         return price==="" ? "Loading" : price;
+        //     }  
+        // },
         methods: {
             loadCabinInfo: function() {
                 var sec = -1;
@@ -147,20 +185,38 @@
                 });
             },
             showPrice: function(index) {
-                var price = "";
+                // var price = "";
+                // switch (this.cabins[index].ptype) {
+                //     case "cc":
+                //         price = this.cabins[index].price.cc+ " CC";
+                //         break;
+
+                //     case "gp":
+                //         price = this.cabins[index].price.gp+ " GP";
+                //         break;
+                
+                //     default:
+                //         price = this.cabins[index].price.cash+ " SGD";
+                //         break;
+                // }
+                // return price;
+                
+                var price = this.cabins[index].dprice;
+
                 switch (this.cabins[index].ptype) {
                     case "cc":
-                        price = this.cabins[index].price.cc+ " CC";
+                        price = price+ " CC";
                         break;
 
                     case "gp":
-                        price = this.cabins[index].price.gp+ " GP";
+                        price = price+ " GP";
                         break;
                 
                     default:
-                        price = this.cabins[index].price.cash+ " SGD";
+                        price = price+ " SGD";
                         break;
                 }
+
                 return price;
             }
         },
@@ -191,6 +247,7 @@
                 ptype: cruise.ptype,
                 pax: cruise.pax,
                 price: {},
+                dprice: cruise.dprice,
                 priceLoad: -1
             });
 
@@ -201,6 +258,7 @@
                         ptype: cruise.subsequence[i].ptype,
                         pax: cruise.subsequence[i].pax,
                         price: {},
+                        dprice: cruise.subsequence[i].dprice,
                         priceLoad: -1
                     });
                 }

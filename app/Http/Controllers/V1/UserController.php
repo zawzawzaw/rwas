@@ -64,6 +64,70 @@ class UserController extends Controller
         return response()->json("ASD");
     }
 
+    public function getInfo(Request $request)
+    {
+        $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true, $request->attributes->get('loginuser'));
+        return response()->json($info['res']);
+    }
+
+    public function getSubSequent(Request $request)
+    {
+        $user = is_null($request->input('cid'))==false && $request->input('cid')!=="" ? $request->input('cid') : $request->attributes->get('loginuser');
+        $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true, $user);
+        
+        $res = [
+            'tire' => 'Black',
+            'subsequent' => 5
+        ];
+        
+        switch($info['res']['raw']->CustomerTypeCode) {
+            case(71):
+            case(99):
+                $res = [
+                    'tire' => 'classic',
+                    'subsequent' => 1
+                ];
+                break;
+
+            case(21):
+            case(29):
+                $res = [
+                    'tire' => 'silver',
+                    'subsequent' => 2
+                ];
+                break;
+
+            case(31):
+            case(39):
+                $res = [
+                    'tire' => 'gold',
+                    'subsequent' => 3
+                ];
+                break;
+
+            case(61):
+            case(69):
+                $res = [
+                    'tire' => 'platinum',
+                    'subsequent' => 4
+                ];
+
+            default:
+                $res = [
+                    'tire' => 'Black',
+                    'subsequent' => 5
+                ];
+                break;
+        }
+
+        $res['rawinfo'] = [
+            $info['res']['raw']->CustomerTypeCode,
+            $info['res']['raw']->CustomerTypeDescription
+        ];
+
+        return response()->json($res);
+    }
+
     public function editProfile(Request $request)
     {
         app('App\Http\Controllers\V1\Api\UserController')->setPreferenceFlag($request, true);

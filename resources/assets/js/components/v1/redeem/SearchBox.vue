@@ -140,7 +140,7 @@ export default {
             var res = "";
             for(var i in this.port) {
                 if(this.port[i].checked===false) continue;
-                res = this.$root.portData[this.port[i].data].location_code;
+                res = this.$root.portData[this.port[i].data].en;
                 break;
             }  
             return res;

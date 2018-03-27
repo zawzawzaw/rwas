@@ -103,17 +103,18 @@
                 });
             },
             useCC: function(index) {
-                this.selectPayment(index, "cc");
+                this.selectPayment(index, "cc", this.cabins[index].price.cc);
             },
             useGP: function(index) {
-                this.selectPayment(index, "gp");
+                this.selectPayment(index, "gp", this.cabins[index].price.gp);
             },
             useCash: function(index) {
-                this.selectPayment(index, "cash");
+                this.selectPayment(index, "cash", this.cabins[index].price.cash);
             },
-            selectPayment: function(index, type) {
+            selectPayment: function(index, type, price) {
                 this.cruise.ptype = type;
                 this.cruise.cabin = this.cabins[index].cabin_type_code;
+                this.cruise.dprice = price;
 
                 this.$cookie.set('cruise', JSON.stringify(this.cruise), 1);
                 this.$router.push({ name: 'redeem.cabin.subsequence'});

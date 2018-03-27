@@ -60,7 +60,7 @@
 
                 <div class="form-group">
                   <label>Name</label>
-                  <p>{{ $info['details']['name'] }}</p>
+                  <p>{{ str_replace(['[', ']'], '', $info['details']['name']) }}</p>
                 </div>
                 
               </div>
@@ -68,7 +68,7 @@
 
                 <div class="form-group">
                   <label>Date of Birth</label>
-                  <p>{{ $info['profile']['date_of_birth'] }}</p>
+                  <p>{{ substr($info['profile']['date_of_birth'], 6, 8) . "/" . substr($info['profile']['date_of_birth'], 4, 2) . "/" . substr($info['profile']['date_of_birth'], 0, 4) }}</p>
                 </div>
 
               </div>

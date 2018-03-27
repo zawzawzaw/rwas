@@ -67,19 +67,24 @@
                                 <div class="col-md-12">
                                     <div id="redeem-cabin-type-subsequent-cabin-form-container">
                                         <div id="redeem-cabin-type-subsequent-cabin-form">
-                                            <template v-if="(3-subCabin.length)>0">
-                                                <p class="pretend-text">Your are eligable for {{ 3-subCabin.length }} subsequent cabin redemption</p>
-                                                <p>No of pax for the subsequent cabin</p>
+                                            <template v-if="subsequenceCheck">
+                                                <p>Checking eligible subsequent cabin</p>
                                             </template>
                                             <template v-else>
-                                                <p class="pretend-text">You have used all subsequent cabin</p>
+                                                <template v-if="(subNum-subCabin.length)>0">
+                                                    <p class="pretend-text">Your are eligible for {{ subNum-subCabin.length }} subsequent cabin redemption</p>
+                                                    <p>No of pax for the subsequent cabin</p>
+                                                </template>
+                                                <template v-else>
+                                                    <p class="pretend-text">You have used all subsequent cabin</p>
+                                                </template>
                                             </template>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <template v-if="subCabinList.length===0">  
+                                        <template v-if="subsequenceCheck===false && subCabinList.length===0 && subNum>0">  
                                             <div class="subpax-selector">
                                                 <label>PAX</label>
                                                 <input type="text" :value="showPax" disabled/>
@@ -176,27 +181,33 @@
                 cabin: {},
                 cruise: {},
                 subCabinList: [],
-                subCabin: []
+                subCabin: [],
+                subsequenceCheck: true,
+                subNum: 0
             }
         },
         computed: {
             showPrice: function() {
-                if(this.cabin.price===undefined) {
-                    return "";
-                }
+                // if(this.cabin.price===undefined) {
+                //     return "";
+                // }
 
-                var price = "";
+                var price = this.cruise.dprice;
 
                 switch (this.cruise.ptype) {
                     case "cc":
-                        price = this.cabin.price.cc + " CC";
+                        // price = this.cabin.price.cc + " CC";
+                        price = price + " CC";
                         break;
                 
-                    case "GP":
-                        price = this.cabin.price.gp + " GP";
+                    case "gp":
+                        // price = this.cabin.price.gp + " GP";
+                        price = price + " GP";
+                        break;
 
                     default:
-                        price = this.cabin.price.cash + " SGD";
+                        // price = this.cabin.price.cash + " SGD";
+                        price = price + " SGD";
                         break;
                 }
 
@@ -225,6 +236,17 @@
                     //         }
                     //     }
                     // }
+                });
+            },
+            checkSubsequent: function(){
+                var ths = this;
+                axios({
+                    url: this.$root.apiEndpoint+'/user/available-subsequent'
+                }).then((res) => {
+                    ths.subNum = res.data.subsequent;
+                    ths.subsequenceCheck = false;
+                }).catch((err) => {
+                    alert("Failed to load eligible subsequent cabin! Refresh the browser and try again!");
                 });
             },
             loadCabin: function() {
@@ -273,12 +295,16 @@
                     this.cruise.subsequence.push({
                         cabin: this.subCabin[i].cabin,
                         ptype: this.subCabin[i].ptype,
+                        dprice: this.subCabin[i].value,
                         pax: this.subCabin[i].pax
                     });
                 }
 
                 this.$cookie.set('cruise', JSON.stringify(this.cruise), 1);
                 this.$router.push({ name: 'redeem.cabin.summery' });
+            },
+            loadUserInfo: function() {
+
             }
         },
         created() {
@@ -301,6 +327,7 @@
 
             this.cruise = cruise;
             this.cruise.subsequence = [];
+            this.checkSubsequent();
             this.loadCabinInfo(this.cruise.cabin);
 
         }

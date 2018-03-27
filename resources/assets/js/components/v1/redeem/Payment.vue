@@ -19,25 +19,16 @@
                             </template>
                             
                             <div class="row">
-                                <div class="col-md-6">
+
+                                <div class="col-md-12">
 
                                     <div class="form-group">
-                                        <label>First name</label>
-                                         <input type='text' class='required' value='Test Payment' v-model="fname">
+                                        <label>Customer name</label>
+                                        <input name='CUSTNAME' type="text" v-model="custname" v-on:keypress="$root.inputValidate($event, 'alpha')">
                                     </div>
 
                                 </div>
 
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label>Last name</label>
-                                         <input type='text' class='required' value='Test Payment' v-model="lname">
-                                    </div>
-
-                                </div>
-
-                                <input name='CUSTNAME' type='hidden' v-model="custname">
                             </div>
 
                             <div class="row">
@@ -127,7 +118,7 @@
 
                                     <div class="form-group">
                                         <label>State / Province*</label>
-                                        <input type="text" name="BILLING_ADDRESS_STATE" class="required" value="state">
+                                        <input type="text" id="state" name="BILLING_ADDRESS_STATE" class="required" value="state">
                                     </div>
                                     
                                 </div>
@@ -268,9 +259,6 @@
             redirectLink: function(){
                 return this.$root.apiEndpoint+"/redeem/cabin/thankyou";
             },
-            custname: function() {
-                return this.fname + " " + this.lname;
-            }
         },
         data() {
             return {
@@ -286,8 +274,7 @@
                     input: ['YYYY-MM-DD', 'YYYY-MM-DD', 'MM/YY'],
                     dayPopover: 'L',
                 },
-                fname: "",
-                lname: ""
+                custname: ""
             }
         },
         mounted() {
@@ -295,7 +282,50 @@
                 window.location.reload();
             }
             var ths = this;
-            this.amount = this.$route.query.cash===undefined ? 0 : this.$route.query.cash;
+            var cruise = this.$cookie.get('cruise');
+
+            if(cruise===null) {
+                this.$router.push({ name: 'redeem' });
+                return false;
+            }
+
+            if(cruise.cabin===null || cruise.ptype===null) {
+                this.$router.push({ name: 'redeem.cabin' });
+                return false;
+            }
+
+            cruise = JSON.parse(cruise);
+
+            if(cruise.ptype==="cash"){
+                this.amount = cruise.dprice;
+            }else{
+                for(var i in cruise.subsequence) {
+                    if(cruise.subsequence[i].ptype==="cash"){
+                        this.amount = this.amount + cruise.subsequence[i].dprice;
+                    }   
+                }
+            }
+            
+            this.amount = parseFloat(this.amount).toFixed(2);
+            
+            var ths = this;
+
+            axios({
+                url: this.$root.apiEndpoint+'/user/info'
+            }).then((res) => {
+                var dob = res.data.raw.CustomerDateOfBirth;
+                var name = res.data.data.details.name;
+                name = name.replace("[", "");
+                name = name.replace("]", "");
+                ths.custname = name;
+                $("#address0").val(res.data.data.profile.address_line_01);
+                $("#city").val(res.data.data.profile.address_city);
+                $("#postCode").val(res.data.data.profile.address_postal_code);
+                $("#state").val(res.data.data.profile.address_state);
+            }).catch((err) => {
+
+            });
+
             axios({
                 url: this.$root.apiEndpoint+"/cruise/generate_payment_requirement?amount="+this.amount
             }).then((res) => {

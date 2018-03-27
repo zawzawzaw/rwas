@@ -33,8 +33,8 @@
                     Name: <span id="account-dashboard-name-span">{{ $info['details']['name'] }}</span><br/>
                     Membership ID: {{ $info['details']['membership_id'] }}<br/><br/>
 
-                    GP (Visible Point or SP): {{ number_format($info['points']['gp'], 0) }}<br/>
-                    CC (Loyalty Point): {{ number_format($info['points']['cc'], 0) }}<br/><br/>
+                    GP (Genting Rewards Points): {{ number_format($info['points']['gp'], 0) }}<br/>
+                    CC (Cruise Credit): {{ number_format($info['points']['cc'], 0) }}<br/><br/>
 
                     Preferred Language: {{ $info['details']['preferred_language'] }}<br/>
                   </p>

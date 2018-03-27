@@ -52,6 +52,11 @@
               this.$root.result = JSON.stringify(JSON.parse(this.$cookie.get('test')), undefined, 2);
               this.$cookie.delete('test');
             }
+            
+            if(this.$cookie.get('checkoutResult')!==null) {
+              this.$root.result = this.$root.result+JSON.stringify(JSON.parse(this.$cookie.get('checkoutResult')), undefined, 2);
+              this.$cookie.delete('checkoutResult');
+            }
         }
     }
 </script>

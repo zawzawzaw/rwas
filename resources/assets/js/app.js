@@ -63,7 +63,7 @@ const router = new VueRouter({
         name: 'redeem.cabin.subsequence',
         component: CabinSubsequence
     }, {
-        path: '/redeem/cabin/summery',
+        path: '/redeem/cabin/summary',
         name: 'redeem.cabin.summery',
         component: CabinSummery
     }, {

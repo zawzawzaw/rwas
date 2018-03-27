@@ -338,13 +338,13 @@ class CruiseController extends Controller
             $cabins[] = [
                 'cabin_type_code' => $cabin['cabin_category'],
                 'price' => array(
-                    'cc' => $cc,
+                    'cc' => $cc<$ownCC ? (int) $cc : 0,
                     'cc_cash_added' => 0,
-                    'gp' => $gp,
+                    'gp' => (int) $gp,
                     'gp_cash_added' => 0,
-                    'cash' => $cash,
-                    'ownCC' => $ownCC,
-                    'ownGP' => $info['res']['data']['points']['gp'],
+                    'cash' => (int) $cash,
+                    'ownCC' => (int) $ownCC,
+                    'ownGP' => (int) $info['res']['data']['points']['gp'],
                 ),
                 $request->attributes->get('loginuser')
             ];
@@ -413,7 +413,7 @@ class CruiseController extends Controller
             $cabins[] = [
                 'cabin_type_code' => $cabin['cabin_category'],
                 'price' => array(
-                    'cc' => $cc,
+                    'cc' => $cc<$ownCC ? $cc : 0,
                     'cc_cash_added' => 0,
                     'gp' => $gp,
                     'gp_cash_added' => 0,
@@ -570,37 +570,31 @@ class CruiseController extends Controller
             'date'
         );
 
+        $cab = Cabin::select('cabin_group')->where('cruise', $cruise['id'])->where('cabin_category', $request->input('cabin'))->first();
+
         $input['custom'] = 'true';
         $input['posName'] = 'CASINO ALLOTMENT';
         $input['posType'] = '39';
         $input['posComName'] = 'OPENTRAVEL';
-        $input['sailInfoVoyageId'] = 'GD02180606';
-        $input['sailInfoShipCode'] = 'WDR';
-        $input['currency'] = 'USD';
-        $input['fareCode'] = 'RWCC B2M';
-        $input['priceCatCode'] = 'BDS';
-        $input['waitList'] = 'false';
-        $input['guestExists'] = 'false';
-        $input['requestGuest'] = 'flase';
-// return response()->json($input);
-        $input['posName'] = 'CASINO ALLOTMENT';
-        $input['posType'] = 39;
-        $input['posComName'] = 'OPENTRAVEL';
         $input['sailInfoShipCode'] = $cruise['itinerary']['ship_code'];
         $input['sailInfoVoyageId'] = $request->input('cruise_id');
         $input['currency'] = 'USD';
-        $input['currency'] = 'USD';
         $input['fareCode'] = 'RWCC B2M';
-        $input['priceCatCode'] = 'BDS';
+        $input['priceCatCode'] = $request->input('cabin');
         $input['waitList'] = 'false';
         $input['guestExists'] = 'false';
         $input['requestGuest'] = 'flase';
+
         $xml_input = '<?xml version="1.0" encoding="utf-8"?>
             <OTA_CruiseBookRQ Version="1.0" xmlns="http://www.opentravel.org/OTA/2003/05">
                 <POS>
-                    <Source>
-                    <RequestorID Name="'.$input['posName'].'" Type="'.$input['posType'].'"/>
-                    <BookingChannel Type="1">
+                    <Source>';
+
+        if($cab->cabin_group!=="FP"){
+            $xml_input .= '<RequestorID Name="'.$input['posName'].'" Type="'.$input['posType'].'"/>';
+        }
+
+        $xml_input .= '<BookingChannel Type="1">
                         <CompanyName>'.$input['posComName'].'</CompanyName>
                     </BookingChannel>
                     </Source>
@@ -622,7 +616,7 @@ class CruiseController extends Controller
             $v['guestAge'] = date("Y") - (int) $v['guestBod'][2];
             $v['guestBod'] = $v['guestBod'][2].'-'.$v['guestBod'][1].'-'.$v['guestBod'][0];
 
-            $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true, $v['memberid']);
+            $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true, (int) $v['memberid']);
             
             if($info['status']===false) {
                 return response()->json([
@@ -717,7 +711,7 @@ class CruiseController extends Controller
 
         $paymentProcess = [];
 
-        if($cc>0){
+        if($request->input('ptype')==='cc'){
 
             $existing_rwrc_value = $this->getCCValue($request, false);
             $new_rwrc_value = $existing_rwrc_value - $cc;
@@ -735,11 +729,11 @@ class CruiseController extends Controller
             if(isset($updateResult->errCode)){
                 return response()->json($updateResult);
             }
-            $paymentProcess = [
+            $paymentProcess['maincabin'] = [
                 'beforeCC' => $existing_rwrc_value,
                 'afterCC' => $new_rwrc_value
             ];
-        } else {
+        } else if($request->input('ptype')=='gp'){
             $parameter = [
                 'paraDrsID' => 'MANIC',
                 'paraDrsPwd' => 'MANIC',
@@ -753,13 +747,69 @@ class CruiseController extends Controller
             ];
 
             $result = $this->curlRequest($this->buildDrsXMLContent($parameter), $this->drsUrl.'API_AutoUA_CEA_Currency', true);
-            $paymentProcess = $result;
+            $paymentProcess['maincabin'] = $result;
+        }
+
+        if($request->input('subsequent')){
+            foreach($request->input('subsequent') as $subCab){
+                $xtopia = DB::select("SELECT * FROM xtopia x WHERE 
+                                    x.itinerary_code='".$cruise['itinerary']['itin_code']."' AND 
+                                    x.ship_code='".$cruise['itinerary']['ship_code']."' AND 
+                                    x.dep_start<='".$cruise['departure_date']."' AND 
+                                    x.dep_end>='".$cruise['departure_date']."' AND 
+                                    x.cabin_code='".$subCab['cabin']."' AND 
+                                    x.pax_type_code='".$subCab['pax']."' AND 
+                                    x.card_type='CLASSIC' LIMIT 3;");
+                $cc = 0;
+
+                if(count($xtopia)>0) {
+                    $cc = $xtopia[0]->rwcc;
+                }
+
+                if($subCab['ptype']==='cc'){
+
+                    $existing_rwrc_value = $this->getCCValue($request, false);
+                    $new_rwrc_value = $existing_rwrc_value - $cc;
+        
+                    $update = [
+                        'paraDrsID' => 'MANIC',
+                        'paraDrsPwd' => 'MANIC',
+                        'paraCid' => $request->attributes->get('loginuser'),
+                        'paraWorkGroup' => urlencode('MEML'),
+                        "paraPFField" => 'RWRC',
+                        "paraPFValue" => $new_rwrc_value
+                    ];  
+        
+                    $updateResult = $this->curlRequest($this->buildDrsXMLContent($update), $this->drsUrl.'API_AutoUA_SetPF', true);
+                    if(isset($updateResult->errCode)){
+                        return response()->json($updateResult);
+                    }
+                    $paymentProcess['subcabin'][] = [
+                        'beforeCC' => $existing_rwrc_value,
+                        'afterCC' => $new_rwrc_value
+                    ];
+                } else if($subCab['ptype']==='gp') {
+                    $parameter = [
+                        'paraDrsID' => 'MANIC',
+                        'paraDrsPwd' => 'MANIC',
+                        'paraCid' => 29,
+                        'paraWorkGroup' => urlencode('MEML'),
+                        'paraCashToAdjust' => rand(100, 300),
+                        'paraCashTypeToAdjust' => 0,
+                        'paraCurrCode' => 'US',
+                        'paraProfitCenter' => 1,
+                        'paraRemark' => 'test'
+                    ];
+        
+                    $result = $this->curlRequest($this->buildDrsXMLContent($parameter), $this->drsUrl.'API_AutoUA_CEA_Currency', true);
+                    $paymentProcess['subcabin'][] = $result;
+                }
+            }
         }
 
         return response()->json([
             'booking' => $res,
             'payment' => $paymentProcess,
-            
         ]);
     }
 

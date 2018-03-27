@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/user/available-subsequent', 'V1\\UserController@getSubSequent');
+
 Route::group(['prefix' => 'info'], function(){
     Route::get('port', 'V1\\Api\\MetaController@getPortData');
     Route::get('ship', 'V1\\Api\\MetaController@getShipData');

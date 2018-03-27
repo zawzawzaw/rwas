@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui"/>
 
 
+  <link rel="stylesheet" type="text/css" href="{{asset('css/style2.css')}}">
 @if( config('rwas.is_debug') )
   <link rel="stylesheet" type="text/css" href="{{asset('css/critical_style.css')}}">
 
