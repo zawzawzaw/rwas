@@ -34,7 +34,7 @@ class UserController extends Controller
         // return response()->json($result, 422);
 
         if(isset($result->errCode)){
-            if($cid===false){
+            if($cid===false) {
                 return response()->json($result);
             } else {
                 return [
