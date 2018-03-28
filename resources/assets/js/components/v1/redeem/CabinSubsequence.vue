@@ -87,7 +87,37 @@
                                         <template v-if="subsequenceCheck===false && subCabinList.length===0 && subNum>0">  
                                             <div class="subpax-selector">
                                                 <label>PAX</label>
-                                                <input type="text" :value="showPax" disabled/>
+                                                <input type="text" :value="paxCount.length" disabled/>
+
+                                                <div id="redeem-search-valid-pax customPaxCounter">
+                                                    <div class="form-group">
+                                                        <label>Adult</label>
+                                                        <div class="number-plus-minus" id="redeem-search-valid-pax-adult">
+                                                            <div class="number-minus" v-on:click="removeAdult"></div>
+                                                            <div class="number-value">{{ subPax.adult }}</div>
+                                                            <div class="number-add" v-on:click="addAdult"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Child</label>
+                                                        <div class="number-plus-minus" id="redeem-search-valid-pax-child">
+                                                            <div class="number-minus" v-on:click="removeChild"></div>
+                                                            <div class="number-value">{{ subPax.child }}</div>
+                                                            <div class="number-add" v-on:click="addChild"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Infant</label>
+                                                        <div class="number-plus-minus" id="redeem-search-valid-pax-infant">
+                                                            <div class="number-minus" v-on:click="removeInfant"></div>
+                                                            <div class="number-value">{{ subPax.infant }}</div>
+                                                            <div class="number-add" v-on:click="addInfant"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <button class="subpax-btn" v-on:click="loadCabin">Search</button>
                                         </template>
@@ -183,7 +213,12 @@
                 subCabinList: [],
                 subCabin: [],
                 subsequenceCheck: true,
-                subNum: 0
+                subNum: 0,
+                subPax: {
+                    adult: 1,
+                    child: 0,
+                    infant: 0
+                }
             }
         },
         computed: {
@@ -215,13 +250,56 @@
             },
             showPax: function() {
                 return this.cruise.pax.length;
+            },
+            paxCount: function() {
+                var res = "";
+                for(var i=0; i<this.subPax.adult; i++) {
+                    res = res +"A";
+                }
+                for(var i=0; i<this.subPax.child; i++) {
+                    res = res +"C";
+                }
+                for(var i=0; i<this.subPax.infant; i++) {
+                    res = res +"J";
+                }
+                return res;
             }
         },
         methods: {
+            addAdult: function() {
+                if((this.subPax.adult+this.subPax.child+this.subPax.infant)<4){
+                    this.subPax.adult++;
+                }
+            },
+            removeAdult: function() {
+                if(this.subPax.adult>1){
+                    this.subPax.adult--;
+                }
+            },
+            addChild: function() {
+                if((this.subPax.adult+this.subPax.child+this.subPax.infant)<4){
+                    this.subPax.child++;
+                }
+            },
+            removeChild: function() {
+                if(this.subPax.child>0){
+                    this.subPax.child--;
+                }
+            },
+            addInfant: function() {
+                if((this.subPax.adult+this.subPax.child+this.subPax.infant)<4){
+                    this.infant++;
+                }
+            },
+            removeInfant: function() {
+                if(this.subPax.infant>0){
+                    this.subPax.infant--;
+                }
+            },
             loadCabinInfo: function(cabin){
                 var ths = this;
                 axios({
-                    url: this.$root.apiEndpoint+'/cruise/get_single_cabin_prices?cruise_id='+this.cruise.cruiseid+'&pax='+this.cruise.pax+'&cabin_code='+cabin,
+                    url: this.$root.apiEndpoint+'/cruise/get_single_cabin_prices?cruise_id='+this.cruise.cruiseid+'&pax='+this.paxCount+'&cabin_code='+cabin,
                     method: 'get'
                 }).then((res) => {
                     ths.cabin = res.data;

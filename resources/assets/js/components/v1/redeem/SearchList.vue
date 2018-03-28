@@ -7,7 +7,7 @@
 
                         <div id="redeem-search-result">
 
-                            <div class="redeem-search-result-item" v-for="(i, index) in itinerary" v-bind:key="index">
+                            <div class="redeem-search-result-item" v-for="(i, index) in itinerary" v-if="i.cruise_array.length>0" v-bind:key="index">
                                 <div class="item-header">
                                     <div class="row">
                                         <div class="col-md-6">
