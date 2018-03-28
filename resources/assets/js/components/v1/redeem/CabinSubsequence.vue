@@ -84,12 +84,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <template v-if="subsequenceCheck===false && subCabinList.length===0 && subNum>0">  
+                                        <template v-if="subsequenceCheck===false && subCabinList.length===0 && subNum>0 && (subNum-subCabin.length)>0">  
                                             <div class="subpax-selector">
                                                 <label>PAX</label>
                                                 <input type="text" :value="paxCount.length" disabled/>
 
-                                                <div id="redeem-search-valid-pax customPaxCounter">
+                                                <div id="redeem-search-valid-pax" class="customPaxCounter">
                                                     <div class="form-group">
                                                         <label>Adult</label>
                                                         <div class="number-plus-minus" id="redeem-search-valid-pax-adult">
@@ -120,6 +120,10 @@
 
                                             </div>
                                             <button class="subpax-btn" v-on:click="loadCabin">Search</button>
+                                        </template>
+
+                                        <template v-if="subCabinList.length>0">
+                                            <button class="subpax-btn" v-on:click="closeCabin">Close Search</button>
                                         </template>
                                     </div>
                                     <div class="col-md-4">
@@ -197,6 +201,17 @@
                     </div>
                 </article>
             </template>
+            <template v-else-if="loadingCabin">
+                <article id="redeem-cabin-type-option-section">
+                    <div class="container-fluid has-breakpoint">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Searching cabins...
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </template>
 
         </template>
         <div class="space100"></div>
@@ -218,7 +233,8 @@
                     adult: 1,
                     child: 0,
                     infant: 0
-                }
+                },
+                loadingCabin: false
             }
         },
         computed: {
@@ -288,7 +304,7 @@
             },
             addInfant: function() {
                 if((this.subPax.adult+this.subPax.child+this.subPax.infant)<4){
-                    this.infant++;
+                    this.subPax.infant++;
                 }
             },
             removeInfant: function() {
@@ -299,7 +315,7 @@
             loadCabinInfo: function(cabin){
                 var ths = this;
                 axios({
-                    url: this.$root.apiEndpoint+'/cruise/get_single_cabin_prices?cruise_id='+this.cruise.cruiseid+'&pax='+this.paxCount+'&cabin_code='+cabin,
+                    url: this.$root.apiEndpoint+'/cruise/get_single_cabin_prices?cruise_id='+this.cruise.cruiseid+'&pax='+this.cruise.pax+'&cabin_code='+cabin,
                     method: 'get'
                 }).then((res) => {
                     ths.cabin = res.data;
@@ -329,11 +345,13 @@
             },
             loadCabin: function() {
                 var ths = this;
+                this.loadingCabin = true;
                 axios({
-                    url: this.$root.apiEndpoint+'/cruise/get_cabin_prices?cruise_id='+this.cruise.cruiseid+'&pax='+this.cruise.pax,
+                    url: this.$root.apiEndpoint+'/cruise/get_cabin_prices?cruise_id='+this.cruise.cruiseid+'&pax='+this.paxCount,
                     method: 'get'
                 }).then((res) => {
                     ths.subCabinList = res.data;
+                    ths.loadingCabin = false;
                 }).catch((err) => {
                     if(err.response.status!== undefined) {
                         if(err.response.status===422) {
@@ -345,7 +363,11 @@
                             }
                         }
                     }
+                    ths.loadingCabin = false;
                 });
+            },
+            closeCabin: function() {
+                this.subCabinList = [];
             },
             useCC: function(index) {
                 this.selectPayment(index, "cc", this.subCabinList[index].price.cc, "CC");
@@ -363,7 +385,7 @@
                     ptype: type,
                     suffix: suffix.toUpperCase(),
                     value: value,
-                    pax: this.cruise.pax
+                    pax: this.paxCount
                 });
 
                 this.subCabinList = [];
