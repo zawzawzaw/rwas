@@ -54,9 +54,12 @@ class UserController extends Controller
         ];        
 
         $cc = $this->curlRequest($this->buildDrsXMLContent($ccinput), $this->drsUrl.'API_AutoUA_GetSelectedPF', true);
-
+// return [
+//     'status' => false,
+//     'mesg' => $cc
+// ];
         $points = [
-            'cc' => floor($cc->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value),
+            'cc' => isset($cc->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value) ? floor($cc->WorkgroupResult->WorkGroup->PreferenceFlag->PF->Value) : 0,
             'gp' => 0
         ];
 

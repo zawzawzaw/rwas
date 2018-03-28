@@ -338,7 +338,7 @@ class CruiseController extends Controller
             $cabins[] = [
                 'cabin_type_code' => $cabin['cabin_category'],
                 'price' => array(
-                    'cc' => $cc<$ownCC ? (int) $cc : 0,
+                    'cc' => $cc<=$ownCC ? (int) $cc : 0,
                     'cc_cash_added' => 0,
                     'gp' => (int) $gp,
                     'gp_cash_added' => 0,
@@ -413,7 +413,7 @@ class CruiseController extends Controller
             $cabins[] = [
                 'cabin_type_code' => $cabin['cabin_category'],
                 'price' => array(
-                    'cc' => $cc<$ownCC ? $cc : 0,
+                    'cc' => $cc<=$ownCC ? $cc : 0,
                     'cc_cash_added' => 0,
                     'gp' => $gp,
                     'gp_cash_added' => 0,
@@ -618,6 +618,19 @@ class CruiseController extends Controller
 
             $info = app('App\Http\Controllers\V1\Api\UserController')->get_user($request, true, true, (int) $v['memberid']);
             
+            if($count===0){
+                $count++;
+                continue;
+            }
+            $input['guest'][0]['guestCountryCode'] = 'SG';
+            $input['guest'][0]['guestCountry'] = 'SG';
+            $input['guest'][0]['guestRef'] = '1';
+            $input['guest'][0]['guestDocId'] = 105983934;
+            $input['guest'][0]['guestDocType'] = 2;
+            $input['guest'][0]['guestAddType'] = 1;
+            $input['guest'][0]['guestProgramId'] = 'PRINCIPLE CARD';
+            $input['guest'][0]['guestEFlag'] = true;
+
             if($info['status']===false) {
                 return response()->json([
                     'mesg' => $info['mesg']
@@ -627,22 +640,15 @@ class CruiseController extends Controller
             if($count===0){
                 if($info['res']['data']['profile']['email']!==$v['guestEamil']){
                     return response()->json([
-                        'mesg' => 'Guest email and registered email are not matched!\n Registered email is '.$info['res']['data']['profile']['email']
+                        'mesg' => 'Guest email and registered email are not matched!\n Registered email is '.$info['res']['data']['profile']['email'].' and guest email is '.$v['guestEamil'],
+                        'rawResource' => $info
                     ], 422);
                 }
-                $v['guestCountryCode'] = 'SG';
-                $v['guestCountry'] = 'SG';
-                $v['guestRef'] = '1';
-                $v['guestDocId'] = 105983934;
-                $v['guestDocType'] = 2;
-                $v['guestAddType'] = 1;
-                $v['guestProgramId'] = 'PRINCIPLE CARD';
-                $v['guestEFlag'] = true;
                 $xml_input .= '<GuestDetail GuestExistsIndicator="'.$input['guestExists'].'" RepeatGuestIndicator="'.$input['requestGuest'].'">
                     <ContactInfo Age="'.$v['guestAge'].'" BirthDate="'.$v['guestBod'].'" Gender="'.$v['guestGender'].'" GuestRefNumber="'.$v['guestRef'].'" Nationality="'.$v['guestNat'].'">
                         <PersonName>
                             <GivenName>'.$v['guestName'].'</GivenName>
-                            <MiddleName>'.$v['guestMName'].'</MiddleName>
+                            <MiddleName></MiddleName>
                             <Surname>'.$v['guestSName'].'</Surname>
                             <Document DocID="'.$v['guestDocId'].'" DocType="'.$v['guestDocType'].'"/>
                         </PersonName>
@@ -671,11 +677,11 @@ class CruiseController extends Controller
                 $count++;
             }else{
                 $xml_input .= '<GuestDetail GuestExistsIndicator="'.$input['guestExists'].'" RepeatGuestIndicator="'.$input['requestGuest'].'">
-                    <ContactInfo Age="'.$input['guest'][0]['guestAge'].'" BirthDate="'.$input['guest'][0]['guestBod'].'" Gender="'.$input['guest'][0]['guestGender'].'" GuestRefNumber="'.$input['guest'][0]['guestRef'].'" Nationality="'.$input['guest'][0]['guestNat'].'">
+                    <ContactInfo Age="'.$v['guestAge'].'" BirthDate="'.$v['guestBod'].'" Gender="'.$input['guest'][0]['guestGender'].'" GuestRefNumber="'.$input['guest'][0]['guestRef'].'" Nationality="'.$input['guest'][0]['guestNat'].'">
                         <PersonName>
-                            <GivenName>'.$input['guest'][0]['guestName'].'</GivenName>
-                            <MiddleName>'.$input['guest'][0]['guestMName'].'</MiddleName>
-                            <Surname>'.$input['guest'][0]['guestSName'].'</Surname>
+                            <GivenName>'.$v['guestName'].'</GivenName>
+                            <MiddleName></MiddleName>
+                            <Surname>'.$v['guestSName'].'</Surname>
                             <Document DocID="'.$input['guest'][0]['guestDocId'].'" DocType="'.$input['guest'][0]['guestDocType'].'"/>
                         </PersonName>
                         <Email>'.$input['guest'][0]['guestEamil'].'</Email>
@@ -688,7 +694,7 @@ class CruiseController extends Controller
                             <StateProv>'.$input['guest'][0]['guestState'].'</StateProv>
                         </Address>
                     </ContactInfo>
-                    <LoyaltyInfo MembershipID="'.$input['guest'][0]['guestMemberId'].'" ProgramID="'.$input['guest'][0]['guestProgramId'].'"/>
+                    <LoyaltyInfo MembershipID="'.$v['guestMemberId'].'" ProgramID="'.$input['guest'][0]['guestProgramId'].'"/>
                     <ContactInfo EmergencyFlag="'.$input['guest'][0]['guestEFlag'].'">
                         <PersonName>
                             <GivenName>'.$input['gContactName'].'</GivenName>
