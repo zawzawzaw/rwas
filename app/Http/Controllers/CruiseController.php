@@ -813,6 +813,14 @@ class CruiseController extends Controller
             }
         }
 
+        if(isset($res->original->Errors->Error)){
+            if(isset($res->original->Errors->Error[0])){
+                $res = $res->original->Errors->Error[0];
+            }else{
+                $res = $res->original->Errors->Error;
+            }
+        }
+
         return response()->json([
             'booking' => $res,
             'payment' => $paymentProcess,

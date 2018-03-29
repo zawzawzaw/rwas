@@ -108,27 +108,31 @@ class UserController extends Controller
         $head_of_state = "";
         $subscribe_to_gra = "";
 
-        foreach($result->PreferenceFlagList->WorkGroup->PreferenceFlag->PF as $pf){
-            switch (strtolower($pf->Field)) {
-                case 'occ':
-                    $occupation = $pf->Value;
-                    break;
-                
-                case 'biz2':
-                    $nature_of_business = $pf->Value;
-                    break;
+        if(isset($result->PreferenceFlagList->WorkGroup->PreferenceFlag->PF)) {
+            foreach($result->PreferenceFlagList->WorkGroup->PreferenceFlag->PF as $pf){
+                if(isset($pf->Field) && isset($pf->Value)){
+                    switch (strtolower($pf->Field)) {
+                        case 'occ':
+                            $occupation = $pf->Value;
+                            break;
+                        
+                        case 'biz2':
+                            $nature_of_business = $pf->Value;
+                            break;
 
-                case 'gra':
-                    $subscribe_to_gra = $pf->Value;
-                    break;
+                        case 'gra':
+                            $subscribe_to_gra = $pf->Value;
+                            break;
 
-                case 'spep':
-                    $head_of_state = $pf->Value;
-                    break;
-                
-                default:
-                    # code...
-                    break;
+                        case 'spep':
+                            $head_of_state = $pf->Value;
+                            break;
+                        
+                        default:
+                            # code...
+                            break;
+                    }
+                }
             }
         }
 
