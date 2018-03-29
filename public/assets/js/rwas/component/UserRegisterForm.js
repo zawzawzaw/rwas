@@ -188,7 +188,7 @@ rwas.component.UserRegisterForm.prototype.create_temporary_date_pickers = functi
       'changeMonth': true,
       'changeYear': true,
 
-      'maxDate': 0,
+      'maxDate': new Date(),
       'yearRange': "c-30:c",
 
       'dateFormat': 'dd/mm/yy',
@@ -196,7 +196,8 @@ rwas.component.UserRegisterForm.prototype.create_temporary_date_pickers = functi
       'dayNamesMin': [ "S", "M", "T", "W", "T", "F", "S" ],
       'altField': this.item_txt,
       'onSelect': function(event){
-
+        var doc_issue_date_txt = this.element.find('#account-register-form input[name="doc_issue_date"]');
+        doc_issue_date_txt.trigger('blur');
       }.bind(this)
     });
 
@@ -208,7 +209,7 @@ rwas.component.UserRegisterForm.prototype.create_temporary_date_pickers = functi
       'changeMonth': true,
       'changeYear': true,
 
-      'minDate': 0,
+      'minDate': new Date(),
       'yearRange': "c:c+30",
 
       // 'maxDate': '-18Y',
@@ -220,7 +221,8 @@ rwas.component.UserRegisterForm.prototype.create_temporary_date_pickers = functi
       'dayNamesMin': [ "S", "M", "T", "W", "T", "F", "S" ],
       'altField': this.item_txt,
       'onSelect': function(event){
-
+        var doc_expiry_date_txt = this.element.find('#account-register-form input[name="doc_expiry_date"]');
+        doc_expiry_date_txt.trigger('blur');
       }.bind(this)
     });
 

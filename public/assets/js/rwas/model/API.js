@@ -162,7 +162,8 @@ rwas.model.API.prototype.user_register = function(data_param) {
     'dataType': 'json',
     'error': function( result ) {
       
-      alert(JSON.stringify(result));
+      // alert(JSON.stringify(result));
+      alert(result.responseText);
 
     },
     'success': function( result ) {

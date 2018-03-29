@@ -723,21 +723,85 @@
             <div class="row">
               <div class="col-md-10 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
 
-                <div class="form-group">
+                <div class="row" style="margin-bottom: 30px">
+                  <div class="form-group">
+                    <div class="col-xs-2">
+                      <div class="manic-dropdown">
+                        <select name="head_of_state">
+                          <option value="">Select</option>
+                          <option value="YES">YES</option>
+                          <option value="NO">NO</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-xs-10">
+                      <div class="checkbox">
+                        <!-- <label> -->
+                          <!-- <input value="YES" type="checkbox" name="head_of_state">
+                          <span></span> -->
+                          Head of state, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <!-- </label> -->
+                      </div>
+                    </div>
+                  </div>
+                  <br/>
+                  <br/>
+                </div>
+
+                <!-- <div class="form-group">
                   <div class="checkbox">
                     <label>
                       <input value="YES" type="checkbox" name="head_of_state">
                       <span></span>Head of state, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </label>
                   </div>
+                </div> -->
+
+                <div class="row" style="margin-bottom: 30px">
+                  <div class="form-group">
+                    <div class="col-xs-2">
+                      <div class="manic-dropdown">
+                        <select name="subscribe_to_gra">
+                          <option value="">Select</option>
+                          <option value="YES">YES</option>
+                          <option value="NO">NO</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-xs-10">
+                      <div class="checkbox">
+                        <!-- <label> -->
+                          <!-- <input value="YES" type="checkbox" name="subscribe_to_gra">
+                          <span></span> -->
+                          Subscribe to Genting Rewards Alliance updates, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <!-- </label> -->
+                      </div>
+                    </div>
+                  </div>
+                  <br/>
+                  <br/>
                 </div>
 
-                <div class="form-group">
-                  <div class="checkbox">
-                    <label>
-                      <input value="YES" type="checkbox" name="subscribe_to_gra">
-                      <span></span>Subscribe to Genting Rewards Alliance updates, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </label>
+                <div class="row" style="margin-bottom: 30px">
+                  <div class="form-group">
+                    <div class="col-xs-2">
+                      <div class="manic-dropdown">
+                        <select name="promo_permission">
+                          <option value="">Select</option>
+                          <option value="YES">YES</option>
+                          <option value="NO">NO</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-xs-10">
+                      <div class="checkbox">
+                        <!-- <label> -->
+                          <!-- <input value="YES" type="checkbox" name="promo_permission">
+                          <span></span> -->
+                          Promo permission, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <!-- </label> -->
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -746,15 +810,6 @@
                     <label>
                       <input value="YES" type="checkbox" name="privacy_policy">
                       <span></span>Privacy policy, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </label>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="checkbox">
-                    <label>
-                      <input value="YES" type="checkbox" name="promo_permission">
-                      <span></span>Promo permission, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </label>
                   </div>
                 </div>

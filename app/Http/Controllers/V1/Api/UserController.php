@@ -428,7 +428,11 @@ class UserController extends Controller
         $regResult = $this->curlRequest($this->buildDrsXMLContent($register), $this->drsUrl.'API_NewCustomer_V3', true);
         
         if(isset($regResult->errCode)){
-            return response()->json($regResult, 422);
+            if(isset($regResult->errMsg)){
+                return response()->json($regResult->errMsg, 422);
+            }else{
+                return response()->json($regResult, 422);
+            }
         }
 
         $input = [
