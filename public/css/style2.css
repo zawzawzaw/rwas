@@ -162,3 +162,53 @@ fieldset legend {
   padding: 0 10px !important;
 }
 
+.customPaxCounter {
+  display: none;
+  position: absolute;
+  top: 46px;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #aaa;
+  margin: 0;
+  padding: 0;
+}
+
+.customPaxCounter label {
+  padding-right: 0;
+  line-height: 20px;
+  padding-bottom: 8px;
+  color: #3b3b3b !important;
+  font-size: 16px !important;
+}
+
+.customPaxCounter .number-plus-minus {
+  height: 36px;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  float: left;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.customPaxCounter .number-minus,
+.customPaxCounter .number-add {
+  top: -14px;
+  height: 38px;
+}
+
+.customPaxCounter .number-minus {
+  right: 60%;
+  left: initial;
+}
+
+.customPaxCounter .number-add {
+  left: 60%;
+  right: initial;
+}
+
+.subpax-selector:hover .customPaxCounter {
+  display: block;
+}
+

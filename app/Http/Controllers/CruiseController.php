@@ -141,13 +141,14 @@ class CruiseController extends Controller
                     ),
                 ];
             }
-            // if(!empty())
-            $res[] = [
-                'iten_code' => $fl['iten_code'],
-                'iten_name' => $fl['iten_name'],
-                'ship_code' => $fl['ship_code'],
-                'cruise_array' => $cruise,
-            ];
+            if(!empty($cruise)){
+                $res[] = [
+                    'iten_code' => $fl['iten_code'],
+                    'iten_name' => $fl['iten_name'],
+                    'ship_code' => $fl['ship_code'],
+                    'cruise_array' => $cruise,
+                ];
+            }
         }
         return response()->json([
             'pagination' => [

@@ -10,7 +10,12 @@
 
                             <div id="redeem-cabin-type-header-itinerary-info">
                             <p>{{ ship.duration }}</p>
-                            <p>{{ ship.dep_port }} - {{ ship.arr_port }}</p>
+                            <p>
+                                {{ ship.dep_port }}
+                                <template v-if="ship.dep_port!==ship.arr_port">
+                                 - {{ ship.arr_port }}
+                                </template>
+                            </p>
                             </div>
 
                         </div>
