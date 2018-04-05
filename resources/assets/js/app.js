@@ -30,6 +30,10 @@ import CheckoutGuest from './components/v1/redeem/CheckoutGuest';
 import Payment from './components/v1/redeem/Payment';
 import CabinThankYou from './components/v1/redeem/CabinThankYou';
 
+import DropDown from './components/v1/assets/Dropdown';
+
+import DDTest from './components/v1/DropDownTest';
+
 Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(VueCookie);
@@ -58,6 +62,9 @@ const router = new VueRouter({
             name: 'redeem.cabin',
             component: CabinList
         }]
+    }, {
+       path: '/test',
+       component: DDTest
     }, {
         path: '/redeem/cabin/subsequence',
         name: 'redeem.cabin.subsequence',
@@ -118,6 +125,7 @@ window.eventHub = new Vue();
 Vue.component('app', App);
 Vue.component('redeem-search', RedeemSearch);
 Vue.component('cabin-cruise-info', CabinCruiseInfoHeader);
+Vue.component('drop-down', DropDown);
 
 const app = new Vue({
     el: '#app',

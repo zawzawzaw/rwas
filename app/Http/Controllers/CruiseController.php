@@ -502,6 +502,7 @@ class CruiseController extends Controller
         
         if(!file_exists(public_path()."/tranid.json") || filesize(public_path()."/tranid.json")===0){
             $fp = fopen(public_path()."/tranid.json", 'w');
+            fwrite($fp, json_encode($tranid+1));
             fclose($fp);
         }else{
             $fp = fopen(public_path()."/tranid.json", 'r');
@@ -518,7 +519,9 @@ class CruiseController extends Controller
 
         return response()->json([
             'tranid' => $tranid,
-            'signature' => sha1($signature)
+            'signature' => strtoupper(sha1($signature)),
+            file_exists(public_path()."/tranid.json"),
+            public_path()."/tranid.json"
         ]);
     }
 
@@ -649,7 +652,7 @@ class CruiseController extends Controller
                     <ContactInfo Age="'.$v['guestAge'].'" BirthDate="'.$v['guestBod'].'" Gender="'.$v['guestGender'].'" GuestRefNumber="'.$v['guestRef'].'" Nationality="'.$v['guestNat'].'">
                         <PersonName>
                             <GivenName>'.$v['guestName'].'</GivenName>
-                            <MiddleName></MiddleName>
+                            <MiddleName>s</MiddleName>
                             <Surname>'.$v['guestSName'].'</Surname>
                             <Document DocID="'.$v['guestDocId'].'" DocType="'.$v['guestDocType'].'"/>
                         </PersonName>
@@ -681,7 +684,7 @@ class CruiseController extends Controller
                     <ContactInfo Age="'.$v['guestAge'].'" BirthDate="'.$v['guestBod'].'" Gender="'.$input['guest'][0]['guestGender'].'" GuestRefNumber="'.$input['guest'][0]['guestRef'].'" Nationality="'.$input['guest'][0]['guestNat'].'">
                         <PersonName>
                             <GivenName>'.$v['guestName'].'</GivenName>
-                            <MiddleName></MiddleName>
+                            <MiddleName>s</MiddleName>
                             <Surname>'.$v['guestSName'].'</Surname>
                             <Document DocID="'.$input['guest'][0]['guestDocId'].'" DocType="'.$input['guest'][0]['guestDocType'].'"/>
                         </PersonName>
