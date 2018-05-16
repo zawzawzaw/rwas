@@ -229,8 +229,8 @@
                 <div class="form-group">
                   <label>Address*</label>
                   <input type="text" name="address_line_01" class="required" value="{{ $info['profile']['address_line_01'] }}">
-                  <input type="text" name="address_line_02" value="">
-                  <input type="text" name="address_line_03" value="">
+                  <input type="text" name="address_line_02" value="{{ $info['profile']['address_line_02'] }}">
+                  <input type="text" name="address_line_03" value="{{ $info['profile']['address_line_03'] }}">
                 </div>
                 
               </div>
@@ -328,7 +328,7 @@
 
                 <div class="form-group">
                   <label>State / Province*</label>
-                  <input type="text" name="address_state" class="required" value=""><!-- {{ $info['profile']['address_state'] }} -->
+                  <input type="text" name="address_state" class="required" value="{{ $info['profile']['address_state'] }}"><!-- {{ $info['profile']['address_state'] }} -->
                 </div>
                 
               </div>
@@ -350,7 +350,7 @@
 
                 <div class="form-group">
                   <label>City*</label>
-                  <input type="text" name="address_city" class="required" value=""><!-- {{ $info['profile']['address_city'] }} -->
+                  <input type="text" name="address_city" class="required" value="{{ $info['profile']['address_city'] }}"><!-- {{ $info['profile']['address_city'] }} -->
                 </div>
 
               </div>

@@ -717,6 +717,8 @@ class CruiseController extends Controller
             </ReservationInfo>
         </OTA_CruiseBookRQ>';
 
+        // return $xml_input;
+
         $res = app('App\Http\Controllers\Test\SeawareApiTest')->otaCruiseBookRQ($request, $xml_input);
 
         $paymentProcess = [];

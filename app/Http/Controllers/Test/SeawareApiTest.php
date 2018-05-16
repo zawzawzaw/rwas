@@ -481,6 +481,8 @@ class SeawareApiTest extends Controller
         }else{
             $xml_input = $xml;   
         }
+
+        // return $xml_input;
         // return $this->rootUrl."rest/OTA_CruiseBookRQ";
         $res = $this->execCurl($xml_input, true, $this->rootUrl."rest/OTA_CruiseBookRQ", true);
         return response()->json($res);
@@ -492,7 +494,6 @@ class SeawareApiTest extends Controller
         <OTA_CruiseBookRQ Version="1.0" xmlns="http://www.opentravel.org/OTA/2003/05">
             <POS>
                 <Source>
-                <RequestorID Name="'.$input['posName'].'" Type="'.$input['posType'].'"/>
                 <BookingChannel Type="1">
                     <CompanyName>'.$input['posComName'].'</CompanyName>
                 </BookingChannel>
